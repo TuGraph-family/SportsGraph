@@ -1,0 +1,61 @@
+.team-team {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 40px;
+  position: relative;
+  width: 100%;
+  .team-flag {
+    width: 40px;
+    height: 40px;
+  }
+  .team-left,
+  .team-right {
+    height: 30px;
+    position: relative;
+    width: calc(50% - 20px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 14px;
+  }
+  .team-left {
+    background-image: linear-gradient(to bottom, #e5888c, #c04147);
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 50px;
+
+    border-top: 2px solid #d14047;
+    .team-flag {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+    }
+  }
+  .team-right {
+    background-image: linear-gradient(to bottom, #7fc6ef, #2498d9);
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 50px;
+    border-top: 2px solid #2190cf;
+    .team-flag {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+    }
+  }
+  .team-center {
+    width: 94px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 16px;
+    background-image: url("../../assets/home/time.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    z-index: 1;
+    bottom: -2px;
+  }
+}
