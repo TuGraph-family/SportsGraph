@@ -1,0 +1,43 @@
+@font-face {
+  font-family: "euro-iconfont"; /* Project id 4528397 */
+  src: url('iconfont.woff2?t=1715935670929') format('woff2'),
+       url('iconfont.woff?t=1715935670929') format('woff'),
+       url('iconfont.ttf?t=1715935670929') format('truetype');
+}
+
+.euro-iconfont {
+  font-family: "euro-iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.euro-icon-xiayiye1:before {
+  content: "\e604";
+}
+
+.euro-icon-a-jiantoubai:before {
+  content: "\e609";
+}
+
+.euro-icon-a-jiantoulan:before {
+  content: "\e608";
+}
+
+.euro-icon-a-jiantouhong:before {
+  content: "\e60a";
+}
+
+.euro-icon-zhuanfa:before {
+  content: "\e606";
+}
+
+.euro-icon-xiayiye:before {
+  content: "\e607";
+}
+
+.euro-icon-fanhui:before {
+  content: "\e605";
+}
+
