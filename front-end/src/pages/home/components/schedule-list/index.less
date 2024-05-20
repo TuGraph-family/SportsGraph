@@ -1,0 +1,120 @@
+.schedule-list {
+  .adm-list-item {
+    background-color: #010e2d;
+    padding: 0;
+  }
+  .adm-list-item-content {
+    padding: 0;
+  }
+  .game-card {
+    color: #fff;
+    padding: 16px;
+    border-radius: 12px;
+    margin: 0 16px;
+    background-image: radial-gradient(circle at 50% 0%, #1541a8, #0b286c);
+
+    .title {
+      display: flex;
+      font-size: 12px;
+      margin-bottom: 10px;
+      &-class {
+        color: #ffffffa6;
+        display: flex;
+        align-items: center;
+        &::after {
+          content: "";
+          display: block;
+          height: 10px;
+          width: 1px;
+          background-color: #ffffffa6;
+          margin: 0 6px;
+        }
+      }
+    }
+    .game {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 13px;
+      width: 100%;
+      overflow: hidden;
+      &-left,
+      &-right {
+        display: flex;
+        align-items: center;
+        flex: 1;
+        overflow: hidden;
+      }
+      &-right {
+        justify-content: flex-end;
+        .game-country {
+          text-align: right;
+        }
+      }
+      &-flag {
+        width: 32px;
+      }
+      &-time {
+        background-color: #001444;
+        border-radius: 13px;
+        height: 26px;
+        padding: 0 8px;
+        font-family: DingTalk-JinBuTi;
+        font-size: 12px;
+        line-height: 26px;
+      }
+      &-country {
+        margin: 0 10px;
+        font-size: 12px;
+        flex: 1;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
+    .predict {
+      margin-bottom: 12px;
+      &-text {
+        display: flex;
+        align-items: flex-end;
+        font-size: 12px;
+        background-color: #001444;
+        padding: 12px 28px;
+
+        border-radius: 10px;
+        .predict-percent {
+          font-family: DingTalk-JinBuTi;
+        }
+        &-left,
+        &-right {
+          display: flex;
+          flex: 1;
+          align-items: center;
+        }
+        &-left {
+          color: #fc4951;
+        }
+        &-right {
+          color: #34b4fc;
+          justify-content: flex-end;
+        }
+        &-result {
+          color: #ffffffd9;
+        }
+      }
+      &-bar {
+        border-radius: 2px;
+        overflow: hidden;
+        flex: 1;
+        margin: 0 8px;
+      }
+    }
+    .to-progress {
+      text-align: center;
+      margin-top: -18px;
+      .adm-button {
+        font-size: 12px;
+      }
+    }
+  }
+}

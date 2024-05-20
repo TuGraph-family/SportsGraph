@@ -1,27 +1,25 @@
 .home {
   background-color: #1e1e20;
+  width: 100vw;
   min-height: 100vh;
-
+  background-image: url("https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*vLZQRY8V5kIAAAAAAAAAAAAADsvfAQ/original");
+  background-size: contain;
+  background-repeat: no-repeat;
   &-top {
     display: flex;
     align-items: center;
     flex-direction: column;
     padding-top: 92px;
     position: relative;
-    padding-bottom: 30px;
     &::before {
       position: absolute;
       left: 0;
       top: 0;
       width: 100%;
       height: 100%;
-      background-image: url("../../assets/home/field.png");
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: 0 center;
+
       display: block;
       content: "";
-      filter: brightness(50%);
     }
     &::after {
       content: "";
@@ -29,7 +27,6 @@
       left: 0;
       height: 100px;
       position: absolute;
-      background-image: linear-gradient(180deg, #1e1e2000 21.4%, #1e1e20 91.3%);
       width: 100%;
       display: block;
     }
@@ -38,105 +35,53 @@
       align-items: center;
       width: 100%;
       flex-direction: column;
-      padding-bottom: 20px;
+      padding-bottom: 70px;
+      margin-top: 37px;
+      position: relative;
+
+      .center-bg {
+        position: absolute;
+        top: 15px;
+      }
       .center-predict,
       .center-vote {
         color: #fff;
+        z-index: 1;
       }
       .center-team {
         width: 100%;
-        margin-top: 37px;
+        margin-bottom: 30px;
       }
-    }
-  }
-  &-list {
-    .adm-list-item {
-      background-color: #1e1e20;
-    }
-    .game-card {
-      background-color: #2b2b2d;
-      color: #fff;
-      padding: 16px;
-      border-radius: 12px;
-      .title {
+      .center-predict {
         display: flex;
-        font-size: 12px;
-        margin-bottom: 10px;
-        &-class {
-          color: #ffffffa6;
-          display: flex;
-          align-items: center;
-          &::after {
-            content: "";
-            display: block;
-            height: 10px;
-            width: 1px;
-            background-color: #ffffffa6;
-            margin: 0 6px;
-          }
-        }
-      }
-      .game {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 13px;
-        &-left,
-        &-right {
-          display: flex;
-          align-items: center;
-          width: 33%;
-        }
-        &-right {
-          justify-content: flex-end;
-        }
-        &-flag {
-          width: 32px;
-        }
-        &-time {
-          background-image: linear-gradient(
-            90deg,
-            #1e1e20ff 0%,
-            #1e1e20ff 50%,
-            #1e1e20ff 100%
-          );
-          border-radius: 13px;
-          padding: 4px 12px;
-        }
-        &-country {
-          margin: 0 10px;
-        }
-      }
-      .predict {
-        margin-bottom: 12px;
-        &-text {
+        margin-bottom: 20px;
+        .predict-left,
+        .predict-right {
           display: flex;
           align-items: flex-end;
-          justify-content: space-between;
-          font-size: 12px;
-
-          &-left {
-            color: #fc4951;
-          }
-          &-right {
-            color: #34b4fc;
-          }
-          &-result {
-            color: #ffffffd9;
-            margin-bottom: 4px;
-          }
         }
-        &-bar {
-          border-radius: 2px;
-          overflow: hidden;
+        .predict-number {
+          min-width: 48px;
+          font-family: "DingTalk-JinBuTi";
+          font-size: 48px;
+        }
+        .predict-left {
+          color: #fc4951;
+        }
+        .predict-right {
+          color: #34b4fc;
+        }
+        .percent {
+          font-size: 10px;
+          margin-bottom: 10px;
+        }
+        .predict-vs {
+          display: flex;
+          align-items: center;
         }
       }
-      .to-progress {
-        text-align: center;
-
-        .adm-button {
-          font-size: 12px;
-        }
+      .center-to-analysis {
+        margin-bottom: 16px;
       }
     }
   }

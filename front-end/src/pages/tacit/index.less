@@ -2,23 +2,50 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  overflow: hidden;
   height: 100vh;
-  background-color: #000000;
   width: 100vw;
   position: relative;
+  background-image: url("https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*wW61RJ5rKvYAAAAAAAAAAAAADsvfAQ/original");
+  background-size: contain;
+  background-color: #020d2e;
+  background-position: top center;
+  background-repeat: no-repeat;
   &-title {
     margin-top: 57px;
-    margin-bottom: 8px;
+    margin-bottom: 25px;
   }
   &-team {
     width: 100%;
   }
   .footer {
+    z-index: 100;
+
     position: fixed;
     bottom: 0;
     padding-bottom: 33px;
-    .adm-button + .adm-button {
+    font-weight: 600;
+    .sg-btn + .sg-btn {
       margin-left: 20px;
+    }
+    .adm-button {
+      width: 130px;
+      height: 42px;
+    }
+    .anticon {
+      font-size: 10px;
+    }
+  }
+  .tacit-playground {
+    position: relative;
+    flex: 1;
+    .tacit-graph {
+      position: absolute;
+      width: 100%;
+      top: 30px;
+      height: calc(100% - 100px);
+      z-index: 9;
+      left: 0;
     }
   }
 }
