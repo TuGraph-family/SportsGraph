@@ -1,0 +1,99 @@
+.sg-loading {
+  .mask {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 99;
+  }
+  .loading {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.9);
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 8px;
+  }
+
+  @green: #8aff51;
+  @green-lt: lighten(@green, 30%);
+  @green-shadow: darken(@green, 30%);
+  .title {
+    font-family: "DingTalk-JinBuTi";
+    font-size: 14px;
+    color: #fff;
+    letter-spacing: -0.67;
+    background-image: linear-gradient(0deg, #ffffffff 0%, #ffffff 100%);
+    display: inline-block;
+    background-clip: text;
+  }
+
+  .animation
+    (@name, @duration:1s, @delay:0, @ease:linear, @iterations:infinite, @endState:normal) {
+    -webkit-animation: @name @duration @ease @iterations @endState;
+    -moz-animation: @name @duration @ease @iterations @endState;
+    -ms-animation: @name @duration @ease @iterations @endState;
+    animation: @name @duration @ease @iterations @endState;
+    .delay(@delay);
+  }
+
+  .delay (@delay) {
+    -webkit-animation-delay: @delay;
+    -moz-animation-delay: @delay;
+    -o-animation-delay: @delay;
+    animation-delay: @delay;
+  }
+
+  .square (@xy:30px) {
+    width: @xy;
+    height: @xy;
+  }
+
+  .gradient (@deg:90deg, @color1:#161616, @color2:#000) {
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@color1', endColorstr='@color2');
+    background-image: -webkit-linear-gradient(@deg, @color1 25%, @color2);
+    background-image: -moz-linear-gradient(@deg, @color1 25%, @color2);
+  }
+  .arrow {
+    opacity: 1;
+    .animation(pulse);
+  }
+  #red1 {
+    .delay(0.3s);
+  }
+  #red2 {
+    .delay(0.2s);
+  }
+  #red3 {
+    .delay(0.1s);
+  }
+  #blue1 {
+    .delay(0.3s);
+  }
+  #blue2 {
+    .delay(0.2s);
+  }
+  #blue3 {
+    .delay(0.1s);
+  }
+
+  @keyframes pulse {
+    from {
+      opacity: 0.1;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}

@@ -1,0 +1,98 @@
+.colorful-team-team {
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  z-index: 1;
+  height: 70px;
+  .colorful-button-wrapper {
+    margin-top: 8px;
+  }
+  &.active {
+    .left,
+    .right {
+      filter: brightness(50%);
+    }
+    .left.active,
+    .right.active {
+      filter: brightness(100%);
+    }
+  }
+  .left,
+  .right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    .info {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: relative;
+      justify-content: space-around;
+      height: 46px;
+      .flag {
+        height: 100%;
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        img {
+          height: 100%;
+          border-radius: 50%;
+        }
+      }
+    }
+    .name {
+      color: #fff;
+      font-size: 13px;
+      margin: 4px 0;
+    }
+    .arrow {
+      font-size: 10px;
+    }
+  }
+
+  .left {
+    .info {
+      background-image: url("https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*l5ceTbZ89-gAAAAAAAAAAAAADsvfAQ/original");
+
+      margin-right: 23px;
+      .flag {
+        right: -23px;
+      }
+    }
+    .name {
+      text-align: right;
+    }
+  }
+  .right {
+    .info {
+      background-image: url("https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*CiIUS7FZEUcAAAAAAAAAAAAADsvfAQ/original");
+      margin-left: 23px;
+
+      .flag {
+        left: -23px;
+      }
+    }
+  }
+  .circle {
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.8);
+    font-family: "DingTalk-JinBuTi";
+    height: 36px;
+    width: 36px;
+    .adm-progress-circle {
+      height: 36px;
+      width: 36px;
+    }
+    .adm-progress-circle-track,
+    .adm-progress-circle-fill {
+      cx: 18px;
+      cy: 18px;
+      r: 16px;
+      stroke-width: 3px;
+    }
+  }
+}

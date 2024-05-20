@@ -3,23 +3,45 @@ import React from "react";
 import { useImmer } from "use-immer";
 import "./index.less";
 
-interface AsyncListProps {
-  service: (params?: any) => Promise<any>;
-  renderItem: (row: any) => React.ReactNode;
+export interface AsyncListProps {
+  service: (params: { pageNum: number; pageSize: number }) => Promise<any>;
+  renderItem?: (row: any) => React.ReactNode;
+  recordTransformer?: (record: any) => any;
 }
 
-const AsyncList: React.FC<AsyncListProps> = ({ service, renderItem }) => {
-  const [state, setState] = useImmer<{ data: any[]; hasMore: boolean }>({
+const AsyncList: React.FC<AsyncListProps> = ({
+  service,
+  renderItem,
+  recordTransformer
+}) => {
+  const [state, setState] = useImmer<{
+    data: any[];
+    hasMore: boolean;
+    pageNum: number;
+    pageSize: number;
+  }>({
     data: [],
-    hasMore: true
+    hasMore: true,
+    pageNum: 1,
+    pageSize: 10
   });
-  const { data, hasMore } = state;
+  const { data, hasMore, pageNum, pageSize } = state;
 
   async function loadMore() {
-    const append = await service();
+    if (!hasMore) {
+      return;
+    }
+
+    let append = await service({ pageNum, pageSize });
+    const result = append.data.resultSet;
+    if (recordTransformer) {
+      append = recordTransformer(recordTransformer);
+    }
+
     setState((draft) => {
-      draft.data = [...data, ...append];
-      draft.hasMore = append.length > 0;
+      draft.data = [...data, ...result];
+      draft.hasMore = result.length > 0;
+      draft.pageNum++;
     });
   }
 
@@ -27,13 +49,13 @@ const AsyncList: React.FC<AsyncListProps> = ({ service, renderItem }) => {
     <div className="sg-async-list">
       <List>
         {data.map((item, index) => (
-          <List.Item key={index}>{renderItem(item)}</List.Item>
+          <List.Item key={index}>{renderItem?.(item)}</List.Item>
         ))}
       </List>
       <InfiniteScroll loadMore={loadMore} hasMore={hasMore}>
         {hasMore ? (
           <>
-            <span>加载中...</span>
+            <span>加载中</span>
             <DotLoading />
           </>
         ) : (

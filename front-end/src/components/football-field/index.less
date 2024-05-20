@@ -1,13 +1,14 @@
 .football-field {
-  height: 640px;
+  height: 100%;
   position: relative;
   width: 100vw;
+  margin-top: -10px;
+
   .stage {
     width: 100%;
     height: 100%;
-    perspective-origin: 50% -500px;
-    perspective: 1000px;
-    z-index: 1;
+    perspective-origin: 50% -90vh;
+    perspective: 130vh;
     backface-visibility: hidden;
   }
   .world {
@@ -19,7 +20,6 @@
     height: 100%;
     transform: translateZ(-210px);
     transform-style: preserve-3d;
-    z-index: 1;
     backface-visibility: hidden;
   }
 
@@ -30,11 +30,22 @@
     width: 100%;
     height: 100%;
     background-color: #eee;
-    z-index: 2;
     transform: rotateX(90deg) translateZ(0);
     transform-origin: 50% 50%;
     box-sizing: content-box;
     backface-visibility: hidden;
+    filter: brightness(50%) contrast(140%);
+  }
+  .field.ground::after {
+    content: "";
+    display: block;
+    background-image: url("https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*6lljRajAyHwAAAAAAAAAAAAADsvfAQ/original");
+    background-repeat: repeat;
+    height: 10px;
+    position: absolute;
+    bottom: -8px;
+    width: 100%;
+    filter: brightness(300%);
   }
   .field--alt {
     display: block;
@@ -49,11 +60,15 @@
     width: 100%;
     height: 100%;
     position: absolute;
-    z-index: 3;
   }
   .field__texture.field__texture--gradient {
-    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.2), transparent);
-    z-index: 4;
+    // background-image: radial-gradient(
+    //   circle at center,
+    //   rgba(255, 191, 0, 0.547) 0%,
+    //   rgba(27, 27, 27, 0.6) 50%
+    // );
+
+    z-index: 1;
   }
   .flipped .field__texture.field__texture--gradient {
     opacity: 0;
@@ -66,17 +81,17 @@
       rgba(0, 0, 0, 0.2),
       transparent
     );
-    z-index: 4;
   }
   .flipped .field__texture.field__texture--gradient-b {
     opacity: 1;
   }
   .texture .field__texture.field__texture--grass {
-    background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/215059/grass2.png");
+    background-image: url("https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*8KKxRJAy1boAAAAAAAAAAAAADsvfAQ/original");
     background-repeat: repeat;
     background-size: 75px 75px;
     background-position: -20px -20px;
   }
+
   .field__side {
     position: absolute;
     top: 420px;
@@ -86,7 +101,6 @@
     transform: rotateX(180deg) translateZ(-420px);
     transform-origin: 50% 50%;
     background-color: #f7f7f7;
-    z-index: 9;
   }
   .texture .field__side {
     background-color: #000;
@@ -108,11 +122,11 @@
   .field__side.field__side--back {
     transform: rotateX(180deg) translateZ(420px);
   }
+
   .field__line {
     position: absolute;
     width: 100%;
     height: 3px;
-    z-index: 4;
   }
   .field__line--goal {
     width: 16%;

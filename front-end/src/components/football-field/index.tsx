@@ -24,6 +24,7 @@ const FootballField: React.FC = () => {
           <div className="field__side field__side--left"></div>
           <div className="field__side field__side--right"></div>
           <div className="field__side field__side--back"></div>
+          <div className="field__side field__side--front"></div>
         </div>
       </div>
     </div>
