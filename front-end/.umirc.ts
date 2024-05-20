@@ -1,13 +1,14 @@
+import { defineConfig } from "@umijs/max";
 // @ts-ignore
 import px2vw from "postcss-px-to-viewport";
-import { defineConfig } from "umi";
 
 export default defineConfig({
   routes: [
     { path: "/", component: "home/" },
     { path: "/tacit", component: "tacit/" },
     { path: "/compete", component: "compete/" },
-    { path: "/result", component: "result/" }
+    { path: "/result", component: "result/" },
+    { path: "*", redirect: "/" }
   ],
   npmClient: "npm",
   mfsu: {},
@@ -27,5 +28,17 @@ export default defineConfig({
       exclude: [/node_modules/], // 设置忽略文件，用正则做目录名匹配
       landscape: false // 是否处理横屏情况
     })
-  ]
+  ],
+  request: {
+    dataField: "data"
+  },
+  proxy: {
+    "/tugraph/api": {
+      target: "http://football.tugraph.tech",
+      changeOrigin: true
+    }
+  },
+  initialState: {},
+  model: {},
+  jsMinifier: "terser"
 });

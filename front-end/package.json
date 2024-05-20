@@ -2,17 +2,21 @@
   "private": true,
   "author": "Seventysevendays <867789352@qq.com>",
   "scripts": {
-    "dev": "umi dev",
-    "build": "umi build",
-    "postinstall": "umi setup",
+    "dev": "max dev",
+    "build": "max build",
+    "postinstall": "max setup",
     "setup": "umi setup",
-    "start": "npm run dev"
+    "start": "max dev"
   },
   "dependencies": {
+    "@antv/g-svg": "^2.0.5",
+    "@antv/g6": "^5.0.0-beta.37",
+    "@antv/g6-extension-react": "^0.1.0",
+    "@umijs/max": "^4.2.1",
     "amfe-flexible": "^2.2.1",
     "antd-mobile": "^5.36.0",
+    "html2canvas": "^1.4.1",
     "immer": "^10.1.1",
-    "umi": "^4.1.10",
     "use-immer": "^0.9.0"
   },
   "devDependencies": {
