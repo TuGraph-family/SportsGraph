@@ -45,14 +45,17 @@ export const getVoteInfoTranslator = (res: any) => {
   if (!res) {
     return {};
   }
-
+  const teamAVote = Number(res?.data?.resultSet?.[0]["n.teamAVote"]);
+  const teamBVote = Number(res?.data?.resultSet?.[0]["n.teamBVote"]);
+  const totalVote = teamAVote + teamBVote;
   return {
     ...res,
     data: {
       ...res?.data,
       voteInfo: {
-        teamAVote: Number(res?.data?.resultSet?.[0]["n.teamAVote"]),
-        teamBVote: Number(res?.data?.resultSet?.[0]["n.teamBVote"])
+        teamAVote,
+        teamBVote,
+        totalVote
       }
     }
   };

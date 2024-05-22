@@ -77,6 +77,13 @@ export const getGameVoteInfoById = (params: { id: string }) => {
   }).then((res) => getVoteInfoTranslator(res));
 };
 
+export const voteTeam = (params: { matchId: string; isHome: boolean }) => {
+  return request<VoteInfo>("tugraph/api/graph/uefa/vote", {
+    method: "PUT",
+    params: params
+  });
+};
+
 export const getTeamTacitInfo = (params: {
   id: string;
   isteama: "0" | "1";

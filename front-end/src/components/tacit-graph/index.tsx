@@ -39,7 +39,7 @@ const TacitGraph: React.FC<TacitGraphProps> = ({
           component: (data: PlayersInfoResult) => (
             <PlayerNode playerInfo={data} />
           ),
-          size: [10, 60]
+          size: [10, 45]
         }
       },
       edge: {

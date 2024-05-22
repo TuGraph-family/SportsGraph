@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 
-let startTimestamp: number | null = null;
-
 interface AnimateNumberProps {
   count: number;
   id: string;
@@ -21,10 +19,11 @@ const AnimateNumber: React.FC<AnimateNumberProps> = ({
     end: number,
     duration: number
   ) => {
+    let startTimestamp: number | null = null;
     const step = (timestamp: number) => {
       if (!startTimestamp) startTimestamp = timestamp;
       const progress = Math.min(
-        (timestamp - startTimestamp) / duration || 1,
+        (timestamp - startTimestamp) / (duration || 1),
         1
       );
       obj.innerHTML = String(Math.floor(progress * (end - start) + start));

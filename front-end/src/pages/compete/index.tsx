@@ -110,8 +110,8 @@ const CompetePage: React.FC = () => {
           ...playerCompeteInfo,
           nodeSize,
           y: !isWin
-            ? mapY - container?.clientHeight! * 1.5
-            : container?.clientHeight! - mapY + container?.clientHeight!,
+            ? mapY - container?.clientHeight! * 2
+            : container?.clientHeight! - mapY + container?.clientHeight! * 2,
           x: isWin ? mapX : mapX + 50
         }
       };

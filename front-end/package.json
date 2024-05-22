@@ -15,7 +15,6 @@
     "@umijs/max": "^4.2.1",
     "amfe-flexible": "^2.2.1",
     "antd-mobile": "^5.36.0",
-    "html2canvas": "^1.4.1",
     "immer": "^10.1.1",
     "use-immer": "^0.9.0"
   },

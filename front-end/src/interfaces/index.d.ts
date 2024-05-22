@@ -77,6 +77,7 @@ export interface VoteInfoResult {
   "n.isEnd": string;
   teamAVote: number;
   teamBVote: number;
+  totalVote: number;
 }
 
 export interface VoteInfo extends CommonResponseResult {

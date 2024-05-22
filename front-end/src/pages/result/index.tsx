@@ -16,13 +16,16 @@ import { history } from "umi";
 import { useImmer } from "use-immer";
 import "./index.less";
 
-const resultPage: React.FC = () => {
+const ResultPage: React.FC = () => {
   const [state, setState] = useImmer<{
     gameInfo?: GameInfoResult;
     voteInfo?: VoteInfoResult;
-  }>({});
-  const { gameInfo, voteInfo } = state;
-  const { teamAVote = 0, teamBVote = 0 } = voteInfo || {};
+    isDownloading: boolean;
+  }>({
+    isDownloading: false
+  });
+  const { gameInfo, voteInfo, isDownloading } = state;
+  const { teamAVote = 0, teamBVote = 0, totalVote = 0 } = voteInfo || {};
   const voteCount = teamAVote + teamAVote;
   const votePercent = teamAVote / voteCount;
   const { id } = parseSearch(location.search) as any;
@@ -48,7 +51,14 @@ const resultPage: React.FC = () => {
     history.push("/");
   };
   const onSavePic = () => {
-    // takeScreenshot("result");
+    // setState((draft) => {
+    //   draft.isDownloading = true;
+    // });
+    // takeScreenshot("result").then(() => {
+    //   setState((draft) => {
+    //     draft.isDownloading = false;
+    //   });
+    // });
     history.push(`/compete?id=${id}`);
   };
   useEffect(() => {
@@ -66,55 +76,69 @@ const resultPage: React.FC = () => {
     });
   }, [id]);
   return (
-    <div className="result" id="result">
-      <Loading loading={loadingGetGameInfo || loadingGetGameVoteInfoById} />
-      <div className="result-title">
-        <TitleDesc
-          title="这场比赛 AI 更看好"
-          desc="综合历史比赛、AI、大数据得出"
-        />
-      </div>
-      <div className="result-team">
-        <div className="team-bg">
-          <TopBg />
-        </div>
-        <div className="win-flag">
-          <img src={isHomeWin ? team_a_national_flag : team_b_national_flag} />
-        </div>
-        <div className="center-predict">
-          <div className="predict-left">
-            <AnimateNumber
-              count={parseInt(homeWinProbability)}
-              id="left"
-              className="predict-number"
-            />
-            <div className="percent">%</div>
-          </div>
-          <div className="predict-vs">
-            <ColorfulButton>实力分析</ColorfulButton>
-          </div>
-          <div className="predict-right">
-            <AnimateNumber
-              count={parseInt(awayWinProbability)}
-              id="right"
-              className="predict-number"
-            />
-            <div className="percent">%</div>
-          </div>
-        </div>
-        <div className="center-vote">
-          <Vote
-            team1={{ name: team_a_country || "", id: "" }}
-            team2={{ name: team_b_country || "", id: "" }}
-            percent={votePercent}
-            count={teamAVote}
+    <div className="result-page">
+      <Loading
+        loading={
+          loadingGetGameInfo || loadingGetGameVoteInfoById || isDownloading
+        }
+      />
+      <div className="result" id="result">
+        <div className="result-title">
+          <TitleDesc
+            title="这场比赛 AI 更看好"
+            desc="综合历史比赛、AI、大数据得出"
           />
         </div>
+        <div className="result-team">
+          <div className="team-bg">
+            <TopBg />
+          </div>
+          <div className="win-flag">
+            <img
+              src={isHomeWin ? team_a_national_flag : team_b_national_flag}
+            />
+          </div>
+          <div className="win-name">
+            {isHomeWin ? team_a_country : team_b_country}
+          </div>
+          <div className="center-predict">
+            <div className="predict-left">
+              <AnimateNumber
+                count={parseInt(homeWinProbability)}
+                id="result-left"
+                className="predict-number"
+              />
+              <div className="percent">%</div>
+            </div>
+            <div className="predict-vs">
+              <ColorfulButton>实力分析</ColorfulButton>
+            </div>
+            <div className="predict-right">
+              <AnimateNumber
+                count={parseInt(awayWinProbability)}
+                id="result-right"
+                className="predict-number"
+              />
+              <div className="percent">%</div>
+            </div>
+          </div>
+          <div className="center-vote">
+            <Vote
+              team1={{ name: team_a_country || "", isHome: true }}
+              team2={{ name: team_b_country || "", isHome: false }}
+              percent={votePercent}
+              count={totalVote}
+            />
+          </div>
+          <div className="qrcode">
+            <img src="https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*90-3SpclRKcAAAAAAAAAAAAADsvfAQ/original" />
+          </div>
+          <div className="qrcode-text">截图分享给好友,一起猜猜猜~</div>
+        </div>
+        <div className="result-playground">
+          <FootballField />
+        </div>
       </div>
-      <div className="result-playground">
-        <FootballField />
-      </div>
-
       <div className="footer">
         <Button onClick={onSavePic}>
           上一页 <IconFont type="euro-icon-xiayiye1" />
@@ -127,4 +151,4 @@ const resultPage: React.FC = () => {
   );
 };
 
-export default resultPage;
+export default ResultPage;

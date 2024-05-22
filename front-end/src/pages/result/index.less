@@ -1,50 +1,13 @@
-.result {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  overflow: hidden;
-  height: 100vh;
+.result-page {
   width: 100vw;
-  position: relative;
-  background-image: url("https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*wW61RJ5rKvYAAAAAAAAAAAAADsvfAQ/original");
-  background-size: contain;
-  background-color: #020d2e;
-  background-position: top center;
-  background-repeat: no-repeat;
-  &-title {
-    margin-top: 100px;
-    margin-bottom: 100px;
-  }
-  &-team {
-    width: 100%;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    flex-direction: column;
-
-    .team-bg {
-      position: absolute;
-      top: 0;
-    }
-    .win-flag {
-      img {
-        width: 90px;
-        position: absolute;
-        top: -45px;
-        left: 50%;
-        margin-left: -45px;
-      }
-    }
-  }
   .footer {
     z-index: 100;
-
+    width: 100%;
     position: fixed;
     bottom: 0;
     padding-bottom: 33px;
     font-weight: 600;
+    text-align: center;
     .sg-btn + .sg-btn {
       margin-left: 20px;
     }
@@ -56,42 +19,112 @@
       font-size: 10px;
     }
   }
-  &-playground {
-    position: absolute;
-    bottom: -10px;
-    height: 70vh;
-  }
-  .center-predict {
+  .result {
     display: flex;
-    margin-bottom: 20px;
-    z-index: 1;
-    margin-top: 70px;
-    .predict-left,
-    .predict-right {
-      display: flex;
-      align-items: flex-end;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    background-image: url("https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*wW61RJ5rKvYAAAAAAAAAAAAADsvfAQ/original");
+    background-size: contain;
+    background-color: #020d2e;
+    background-position: top center;
+    background-repeat: no-repeat;
+    #download {
+      width: 100%;
     }
-    .predict-number {
-      min-width: 48px;
-      font-family: "DingTalk-JinBuTi";
-      font-size: 48px;
+    &-title {
+      margin-top: 10vh;
+      margin-bottom: 12vh;
     }
-    .predict-left {
-      color: #fc4951;
-    }
-    .predict-right {
-      color: #34b4fc;
-    }
-    .percent {
-      font-size: 10px;
-      margin-bottom: 10px;
-    }
-    .predict-vs {
+    &-team {
+      width: 100%;
+      z-index: 1;
       display: flex;
       align-items: center;
+      justify-content: center;
+      position: relative;
+      flex-direction: column;
+
+      .team-bg {
+        position: absolute;
+        top: 0;
+      }
+      .win-flag {
+        img {
+          width: 90px;
+          position: absolute;
+          top: -45px;
+          left: 50%;
+          margin-left: -45px;
+        }
+      }
+      .win-name {
+        z-index: 1;
+        font-family: "DingTalk-JinBuTi";
+        color: #fff;
+        font-size: 16px;
+        margin-top: 54px;
+      }
+      .qrcode {
+        width: 74px;
+        height: 74px;
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 10px;
+        z-index: 1;
+        margin-top: 20px;
+        img {
+          width: 100%;
+        }
+        &-text {
+          font-family: "DingTalk-JinBuTi";
+          color: #fff;
+          font-size: 16px;
+          margin-top: 12px;
+        }
+      }
     }
-  }
-  .center-vote {
-    z-index: 1;
+
+    &-playground {
+      position: absolute;
+      bottom: -10px;
+      height: 70vh;
+    }
+    .center-predict {
+      display: flex;
+      margin-bottom: 20px;
+      z-index: 1;
+      margin-top: 20px;
+      .predict-left,
+      .predict-right {
+        display: flex;
+        align-items: flex-end;
+      }
+      .predict-number {
+        width: 62px;
+        font-family: "DingTalk-JinBuTi";
+        font-size: 48px;
+      }
+      .predict-left {
+        color: #fc4951;
+      }
+      .predict-right {
+        color: #34b4fc;
+      }
+      .percent {
+        font-size: 10px;
+        margin-bottom: 10px;
+      }
+      .predict-vs {
+        display: flex;
+        align-items: center;
+      }
+    }
+    .center-vote {
+      z-index: 1;
+    }
   }
 }
