@@ -18,7 +18,7 @@ const COMMOM_BODY = {
 
 export const getHistoryGameList = (params: { skip: string; limit: string }) => {
   const { skip, limit } = params;
-  return request("/tugraph/api/template/19/executeQueryTemplate", {
+  return request("/tugraph/api/graph/uefa/19/executeQueryTemplate", {
     method: "POST",
     data: {
       templateParameterList: [
@@ -40,7 +40,7 @@ export const getHistoryGameList = (params: { skip: string; limit: string }) => {
 
 export const getFutureGameList = (params: { skip: string; limit: string }) => {
   const { skip, limit } = params;
-  return request("/tugraph/api/template/20/executeQueryTemplate", {
+  return request("/tugraph/api/graph/uefa/20/executeQueryTemplate", {
     method: "POST",
     data: {
       templateParameterList: [
@@ -62,7 +62,7 @@ export const getFutureGameList = (params: { skip: string; limit: string }) => {
 
 export const getGameVoteInfoById = (params: { id: string }) => {
   const { id } = params;
-  return request<VoteInfo>("/tugraph/api/template/21/executeQueryTemplate", {
+  return request<VoteInfo>("/tugraph/api/graph/uefa/21/executeQueryTemplate", {
     method: "POST",
     data: {
       templateParameterList: [
@@ -83,7 +83,7 @@ export const getTeamTacitInfo = (params: {
 }) => {
   const { id, isteama } = params;
   return request<TeamTacitInfo>(
-    "/tugraph/api/template/22/executeQueryTemplate",
+    "/tugraph/api/graph/uefa/22/executeQueryTemplate",
     {
       method: "POST",
       data: {
@@ -112,7 +112,7 @@ export const getTeamCompeteInfo = (params: {
   const { id, teamType } = params;
   const isHome = teamType === "home";
   return request<TeamCompeteInfo>(
-    "/tugraph/api/template/32/executeQueryTemplate",
+    "/tugraph/api/graph/uefa/32/executeQueryTemplate",
     {
       method: "POST",
       data: {
@@ -140,7 +140,7 @@ export const getTeamCompeteInfo = (params: {
 };
 export const getPlayerTacitInfo = (params: { id: string }) => {
   const { id } = params;
-  return request("/tugraph/api/template/23/executeQueryTemplate", {
+  return request("/tugraph/api/graph/uefa/23/executeQueryTemplate", {
     method: "POST",
     data: {
       templateParameterList: [
@@ -171,7 +171,7 @@ export const login = () => {
 
 export const getGameInfo = (params: { id: string }) => {
   const { id } = params;
-  return request<GameInfo>("/tugraph/api/template/26/executeQueryTemplate", {
+  return request<GameInfo>("/tugraph/api/graph/uefa/26/executeQueryTemplate", {
     method: "POST",
     data: {
       templateParameterList: [
@@ -188,17 +188,20 @@ export const getGameInfo = (params: { id: string }) => {
 
 export const getPlayersInfo = (params: { id: string }) => {
   const { id } = params;
-  return request<PlayersInfo>("/tugraph/api/template/28/executeQueryTemplate", {
-    method: "POST",
-    data: {
-      templateParameterList: [
-        {
-          parameterName: "id",
-          parameterValue: id,
-          valueType: "LONG"
-        }
-      ],
-      ...COMMOM_BODY
+  return request<PlayersInfo>(
+    "/tugraph/api/graph/uefa/28/executeQueryTemplate",
+    {
+      method: "POST",
+      data: {
+        templateParameterList: [
+          {
+            parameterName: "id",
+            parameterValue: id,
+            valueType: "LONG"
+          }
+        ],
+        ...COMMOM_BODY
+      }
     }
-  });
+  );
 };
