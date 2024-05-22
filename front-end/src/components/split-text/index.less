@@ -1,0 +1,16 @@
+.sg-split-text {
+  width: 100%;
+  color: transparent;
+  span {
+    opacity: 0;
+    transition: all 0.5s ease;
+    transform: translateX(10px);
+    display: inline-block;
+    color: rgba(255, 255, 255, 0.64);
+  }
+
+  span.fade {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}

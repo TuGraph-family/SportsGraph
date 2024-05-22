@@ -5,11 +5,12 @@ import React from "react";
 import "./index.less";
 
 register(ExtensionCategory.NODE, "react", ReactNode);
-const minWidth = 40;
-const maxWidth = 70;
+const minWidth = 30;
+const maxWidth = 60;
 const ratio = 0.2;
 const maxFontSize = 10;
 const fontSizeRatio = 0.2;
+const maxShirtNumberFontSize = 18;
 
 interface PlayerNodeProps {
   playerInfo: PlayersInfoResult;
@@ -24,13 +25,14 @@ const PlayerNode: React.FC<PlayerNodeProps> = React.memo(({ playerInfo }) => {
   } = playerInfo;
   const mapWidth = nodeSize * ratio;
   const width =
-    mapWidth < minWidth ? minWidth : mapWidth > maxWidth ? mapWidth : mapWidth;
+    mapWidth < minWidth ? minWidth : mapWidth > maxWidth ? maxWidth : mapWidth;
   const mapFontSize = width * fontSizeRatio;
   const fontSize = mapFontSize < maxFontSize ? mapFontSize : maxFontSize;
-
+  const shirtFontSize =
+    mapFontSize < maxShirtNumberFontSize ? mapFontSize : maxShirtNumberFontSize;
   return (
     <div className="player-node">
-      <div className={`shirt`} style={{ width, height: width }}>
+      <div className={`shirt`} style={{ width, height: width - 3 }}>
         <img
           style={{ width }}
           src={
@@ -39,7 +41,7 @@ const PlayerNode: React.FC<PlayerNodeProps> = React.memo(({ playerInfo }) => {
               : "https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*BYH5SauBNecAAAAAAAAAAAAADsvfAQ/original"
           }
         />
-        <div className="shirt-number" style={{ fontSize }}>
+        <div className="shirt-number" style={{ fontSize: shirtFontSize }}>
           {player_shirtnumber}
         </div>
       </div>

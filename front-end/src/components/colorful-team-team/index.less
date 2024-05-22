@@ -16,6 +16,14 @@
     .right.active {
       filter: brightness(100%);
     }
+    .arrow {
+      animation: arrow 1.5s ease infinite;
+    }
+  }
+  .inactive {
+    .arrow {
+      animation: none;
+    }
   }
   .left,
   .right {
@@ -51,6 +59,18 @@
     }
     .arrow {
       font-size: 10px;
+      opacity: 1;
+    }
+    @keyframes arrow {
+      0% {
+        opacity: 0.5;
+      }
+      50% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
     }
   }
 

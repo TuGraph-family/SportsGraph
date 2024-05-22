@@ -2,14 +2,36 @@
   height: 100%;
   position: relative;
   width: 100vw;
-  margin-top: -10px;
+  margin-top: -20px;
+
+  @keyframes stage {
+    0% {
+      perspective-origin: 50% -80vh;
+      perspective: 130vh;
+    }
+
+    100% {
+      perspective-origin: 50% -90vh;
+      perspective: 130vh;
+    }
+  }
+  @keyframes world {
+    0% {
+      transform: translateZ(-150px);
+    }
+
+    100% {
+      transform: translateZ(-210px);
+    }
+  }
 
   .stage {
     width: 100%;
     height: 100%;
-    perspective-origin: 50% -90vh;
+    perspective-origin: 50% -80vh;
     perspective: 130vh;
     backface-visibility: hidden;
+    animation: stage 1s ease-in forwards;
   }
   .world {
     position: absolute;
@@ -18,8 +40,9 @@
     margin-left: -65vw;
     width: 130vw;
     height: 100%;
-    transform: translateZ(-210px);
+    transform: translateZ(-150px);
     transform-style: preserve-3d;
+    animation: world 1s ease forwards;
     backface-visibility: hidden;
   }
 
@@ -34,7 +57,7 @@
     transform-origin: 50% 50%;
     box-sizing: content-box;
     backface-visibility: hidden;
-    filter: brightness(50%) contrast(140%);
+    filter: brightness(60%) contrast(130%);
   }
   .field.ground::after {
     content: "";
@@ -45,7 +68,7 @@
     position: absolute;
     bottom: -8px;
     width: 100%;
-    filter: brightness(300%);
+    filter: brightness(200%);
   }
   .field--alt {
     display: block;
@@ -62,26 +85,46 @@
     position: absolute;
   }
   .field__texture.field__texture--gradient {
-    // background-image: radial-gradient(
-    //   circle at center,
-    //   rgba(255, 191, 0, 0.547) 0%,
-    //   rgba(27, 27, 27, 0.6) 50%
-    // );
-
+    background: rgba(62, 113, 0, 0.2);
     z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
   }
+  .field__texture--gradient-b {
+    z-index: 2;
+    width: 300px;
+    height: 250px;
+    border-radius: 150px;
+    filter: blur(50px) brightness(200%);
+    background-color: rgba(255, 183, 0, 0.6);
+    transform: scale(0.1);
+    opacity: 0;
+    animation: light 1s ease-in forwards;
+    animation-delay: 0.5s;
+  }
+  .field__texture--gradient-b.small {
+    width: 200px;
+    height: 150px;
+    border-radius: 100px;
+    background-color: rgba(255, 183, 0, 0.8);
+  }
+  @keyframes light {
+    0% {
+      transform: scale(0.1);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
   .flipped .field__texture.field__texture--gradient {
     opacity: 0;
   }
-  .field__texture.field__texture--gradient-b {
-    opacity: 0;
 
-    background-image: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.2),
-      transparent
-    );
-  }
   .flipped .field__texture.field__texture--gradient-b {
     opacity: 1;
   }
@@ -126,22 +169,22 @@
   .field__line {
     position: absolute;
     width: 100%;
-    height: 3px;
+    height: 5px;
   }
   .field__line--goal {
     width: 16%;
     height: 6%;
-    border: solid 3px rgba(255, 255, 255, 0.5);
+    border: solid 5px rgba(255, 255, 255, 0.5);
     border-bottom: none;
     left: 0;
     right: 0;
     margin: auto;
-    bottom: 4%;
+    bottom: 3%;
   }
   .field__line--goal--far {
     top: 4%;
     bottom: auto;
-    border: solid 3px rgba(255, 255, 255, 0.5);
+    border: solid 5px rgba(255, 255, 255, 0.5);
     border-top: none;
   }
   .field__line--penalty-arc {
@@ -162,35 +205,35 @@
     content: " ";
     display: block;
     border-radius: 50% 50% 0 0;
-    border: solid 3px rgba(255, 255, 255, 0.5);
+    border: solid 5px rgba(255, 255, 255, 0.5);
     border-bottom: none;
     box-sizing: border-box;
   }
   .field__line--penalty-arc--far {
     bottom: auto;
-    top: 20%;
+    top: 21%;
   }
   .field__line--penalty-arc--far:after {
     bottom: 75%;
     top: auto;
-    border: solid 3px rgba(255, 255, 255, 0.5);
+    border: solid 5px rgba(255, 255, 255, 0.5);
     border-top: none;
     border-radius: 0 0 50% 50%;
   }
   .field__line--penalty {
     width: 44%;
     height: 16%;
-    border: solid 3px rgba(255, 255, 255, 0.5);
+    border: solid 5px rgba(255, 255, 255, 0.5);
     border-bottom: none;
     left: 0;
     right: 0;
     margin: auto;
-    bottom: 4%;
+    bottom: 3%;
   }
   .field__line--penalty--far {
     top: 4%;
     bottom: auto;
-    border: solid 3px rgba(255, 255, 255, 0.5);
+    border: solid 5px rgba(255, 255, 255, 0.5);
     border-top: none;
   }
   .field__line--outline {
@@ -198,7 +241,7 @@
     height: 92%;
     top: 4%;
     left: 4%;
-    border: solid 3px rgba(255, 255, 255, 0.5);
+    border: solid 5px rgba(255, 255, 255, 0.5);
   }
   .field__line--mid {
     top: 50%;
@@ -207,14 +250,14 @@
     background-color: rgba(255, 255, 255, 0.5);
   }
   .field__line--circle {
-    width: 20%;
+    width: 30%;
     height: 20%;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     margin: auto;
-    border: solid 3px rgba(255, 255, 255, 0.5);
+    border: solid 5px rgba(255, 255, 255, 0.5);
     border-radius: 50%;
   }
 }

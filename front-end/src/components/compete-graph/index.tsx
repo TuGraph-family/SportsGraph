@@ -9,7 +9,6 @@ import "./index.less";
 interface CompeteGraphProps {
   containerId: string;
   graphData: GraphData;
-  teamType?: "home" | "away";
 }
 
 const nodeSizeRatio = 0.3;
@@ -36,6 +35,8 @@ const CompeteGraph: React.FC<CompeteGraphProps> = ({
       node: {
         type: "react",
         style: {
+          x: (d: any) => d.data.x,
+          y: (d: any) => d.data.y,
           component: (data: { data: PlayersInfoResult }) => (
             <PlayerNode playerInfo={data.data} />
           ),
@@ -49,44 +50,46 @@ const CompeteGraph: React.FC<CompeteGraphProps> = ({
             return [nodeSize, nodeSize * 2];
           }
         }
-      },
-      layout: {
-        type: "d3force",
-        center: { x: 180, y: 70 },
-        x: {
-          strength: 0.3
-        },
-        y: {
-          strength: 1
-        },
-        collide: {
-          iterations: 2,
-          radius: (d) => {
-            let nodeSize = d.data.nodeSize * nodeSizeRatio;
-            if (nodeSize < minNodeSize) {
-              nodeSize = minNodeSize;
-            } else if (nodeSize > maxNodeSize) {
-              nodeSize = maxNodeSize;
-            }
-            return nodeSize * 0.6;
-          }
-        },
-        nodeSize: (d) => {
-          let nodeSize = d.data.nodeSize * nodeSizeRatio;
-          if (nodeSize < minNodeSize) {
-            nodeSize = minNodeSize;
-          } else if (nodeSize > maxNodeSize) {
-            nodeSize = maxNodeSize;
-          }
-
-          return nodeSize * 1;
-        }
       }
+      // layout: {
+      //   type: "d3force",
+      //   center: { x: 180, y: 70 },
+      //   x: {
+      //     strength: 0.3
+      //   },
+      //   y: {
+      //     strength: 1
+      //   },
+      //   collide: {
+      //     iterations: 2,
+      //     radius: (d) => {
+      //       let nodeSize = d.data.nodeSize * nodeSizeRatio;
+      //       if (nodeSize < minNodeSize) {
+      //         nodeSize = minNodeSize;
+      //       } else if (nodeSize > maxNodeSize) {
+      //         nodeSize = maxNodeSize;
+      //       }
+      //       return nodeSize * 0.6;
+      //     }
+      //   },
+      //   nodeSize: (d) => {
+      //     let nodeSize = d.data.nodeSize * nodeSizeRatio;
+      //     if (nodeSize < minNodeSize) {
+      //       nodeSize = minNodeSize;
+      //     } else if (nodeSize > maxNodeSize) {
+      //       nodeSize = maxNodeSize;
+      //     }
+
+      //     return nodeSize * 1;
+      //   }
+      // }
     });
     setState((draft) => {
       draft.graph = graph;
     });
   }, []);
+
+  console.log(graphData);
   useEffect(() => {
     if (graphData.nodes?.length) {
       graph?.setData(graphData);

@@ -38,9 +38,9 @@ const ColorfulTeamTeam: React.FC<ColorfulTeamteamProps> = ({
     });
   };
   return (
-    <div className={`colorful-team-team ${showActive ? "active" : ""}`}>
+    <div className={`colorful-team-team ${showActive ? "active" : "inactive"}`}>
       <div
-        className={`left ${activeTeam === "left" ? "active" : ""}`}
+        className={`left ${activeTeam === "left" ? "active" : "inactive"}`}
         onClick={onLeftClick}
       >
         <div className="info">
@@ -72,7 +72,7 @@ const ColorfulTeamTeam: React.FC<ColorfulTeamteamProps> = ({
         <ColorfulButton>{title}</ColorfulButton>
       </div>
       <div
-        className={`right ${activeTeam === "right" ? "active" : ""}`}
+        className={`right ${activeTeam === "right" ? "active" : "inactive"}`}
         onClick={onRightClick}
       >
         <div className="info">
