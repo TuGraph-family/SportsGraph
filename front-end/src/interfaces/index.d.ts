@@ -18,6 +18,8 @@ export interface PlayersInfoResult {
   player_name: string;
   player_shirtnumber: string;
   nodeSize?: number;
+  player_enName?: string;
+  a_caps?: string;
 }
 
 export interface PlayersInfo extends CommonResponseResult {

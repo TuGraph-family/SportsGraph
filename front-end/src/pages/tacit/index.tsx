@@ -12,7 +12,7 @@ import { DEFAULT_FLAG } from "@/constant";
 import {
   GameInfoPlayerResult,
   PlayersInfoResult,
-  TeamTacitInfoResult
+  TeamTacitInfoResult,
 } from "@/interfaces";
 import { getGameInfo, getPlayersInfo, getTeamTacitInfo } from "@/services";
 import { parseSearch } from "@/utils";
@@ -37,19 +37,19 @@ const TacitPage: React.FC = () => {
     leftTeam: {
       name: "加载中...",
       flagUrl: DEFAULT_FLAG,
-      score: 0
+      score: 0,
     },
     rightTeam: {
       name: "加载中...",
       flagUrl: DEFAULT_FLAG,
-      score: 0
+      score: 0,
     },
     leftGraphData: { nodes: [], edges: [] },
     rightGraphData: { nodes: [], edges: [] },
     teamSide: "left",
     leftTacitValueList: [],
     rightTacitValueList: [],
-    playersInfo: []
+    playersInfo: [],
   });
   const {
     leftTeam,
@@ -59,7 +59,7 @@ const TacitPage: React.FC = () => {
     rightTacitValueList,
     leftGraphData,
     rightGraphData,
-    playersInfo
+    playersInfo,
   } = state;
   const isHome = teamSide === "left";
 
@@ -67,7 +67,7 @@ const TacitPage: React.FC = () => {
   const { loading: loadingGetGameInfo, run: runGetGameInfo } = useRequest(
     getGameInfo,
     {
-      manual: true
+      manual: true,
     }
   );
   const { run: runGetTeamTacitInfo, loading: loadingGetTeamTacitInfo } =
@@ -91,7 +91,7 @@ const TacitPage: React.FC = () => {
   const graphData = useMemo(() => {
     const data: GraphData = {
       nodes: [],
-      edges: []
+      edges: [],
     };
     const currentData = isHome ? leftGraphData : rightGraphData;
     const tacitValueList = isHome ? leftTacitValueList : rightTacitValueList;
@@ -101,7 +101,7 @@ const TacitPage: React.FC = () => {
         const playerInfo = playersInfo.find((item) => item.player_id === id);
         return {
           ...item,
-          ...playerInfo
+          ...playerInfo,
         };
       });
       data.edges = tacitValueList
@@ -116,7 +116,7 @@ const TacitPage: React.FC = () => {
             playerValue,
             stroke: isHome
               ? "linear-gradient(90deg, #80111D, #A0040D, #80111D)"
-              : "linear-gradient(#0F2EAB, rgba(20,60,219,0.9),#0F2EAB)"
+              : "linear-gradient(#0F2EAB, rgba(20,60,219,0.9),#0F2EAB)",
           };
         });
     }
@@ -128,7 +128,7 @@ const TacitPage: React.FC = () => {
     rightGraphData,
     leftTacitValueList,
     rightTacitValueList,
-    playersInfo
+    playersInfo,
   ]);
   const hasGraphData = useMemo(() => !!graphData.nodes?.length, [graphData]);
   useEffect(() => {
@@ -140,24 +140,24 @@ const TacitPage: React.FC = () => {
           team_a_country,
           team_a_national_flag,
           team_b_country,
-          team_b_national_flag
+          team_b_national_flag,
         } = data.resultSet?.[0] || {};
         setState((draft) => {
           draft.leftTeam = {
             name: team_a_country,
             flagUrl: team_a_national_flag,
-            score: parseInt(homeWinProbability)
+            score: parseInt(homeWinProbability),
           };
           draft.rightTeam = {
             name: team_b_country,
             flagUrl: team_b_national_flag,
-            score: parseInt(awayWinProbability)
+            score: parseInt(awayWinProbability),
           };
           draft.leftGraphData = {
-            nodes: data.playerAList
+            nodes: data.playerAList,
           };
           draft.rightGraphData = {
-            nodes: data.playerBList
+            nodes: data.playerBList,
           };
         });
       }

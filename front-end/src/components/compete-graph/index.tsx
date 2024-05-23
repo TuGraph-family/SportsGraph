@@ -1,6 +1,6 @@
 import { PlayersInfoResult } from "@/interfaces";
 import { Renderer } from "@antv/g-svg";
-import { Graph, GraphData } from "@antv/g6";
+import { Graph, GraphData, NodeData, NodeEvent } from "@antv/g6";
 import React, { useEffect } from "react";
 import { useImmer } from "use-immer";
 import PlayerNode from "../player-node";
@@ -9,6 +9,8 @@ import "./index.less";
 interface CompeteGraphProps {
   containerId: string;
   graphData: GraphData;
+  onClickNode: (nodeData: any) => void;
+  teamType?: "home" | "away";
 }
 
 const nodeSizeRatio = 0.3;
@@ -18,7 +20,8 @@ const zoomRatio = 0.004;
 
 const CompeteGraph: React.FC<CompeteGraphProps> = ({
   containerId,
-  graphData
+  graphData,
+  onClickNode,
 }) => {
   const [state, setState] = useImmer<{ graph?: Graph }>({});
   const { graph } = state;
@@ -48,9 +51,9 @@ const CompeteGraph: React.FC<CompeteGraphProps> = ({
               nodeSize = maxNodeSize;
             }
             return [nodeSize, nodeSize * 2];
-          }
-        }
-      }
+          },
+        },
+      },
       // layout: {
       //   type: "d3force",
       //   center: { x: 180, y: 70 },
@@ -96,6 +99,9 @@ const CompeteGraph: React.FC<CompeteGraphProps> = ({
       graph?.render();
       graph?.on("afterrender", () => {
         graph.fitView({ direction: "both", when: "overflow" });
+      });
+      graph?.on(`node:${NodeEvent.CLICK}`, (event: any) => {
+        onClickNode(graph.getNodeData(event?.target?.id));
       });
     }
   }, [graphData]);

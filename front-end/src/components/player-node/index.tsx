@@ -21,7 +21,7 @@ const PlayerNode: React.FC<PlayerNodeProps> = React.memo(({ playerInfo }) => {
     isTeamA,
     player_shirtnumber,
     player_name,
-    nodeSize = 40
+    nodeSize = 40,
   } = playerInfo;
   const mapWidth = nodeSize * ratio;
   const width =

@@ -3,9 +3,13 @@ import {
   PlayersInfo,
   TeamCompeteInfo,
   TeamTacitInfo,
-  VoteInfo
+  VoteInfo,
 } from "@/interfaces";
-import { gameInfoTranslator, getVoteInfoTranslator } from "@/translator";
+import {
+  gameInfoTranslator,
+  getVoteInfoTranslator,
+  playerTacitInfoTranslator,
+} from "@/translator";
 import { request } from "@umijs/max";
 
 const COMMOM_BODY = {
@@ -13,7 +17,7 @@ const COMMOM_BODY = {
   graphId: 2405,
   schemaEngineTypeEnum: "geamaker_geabase",
   limit: 1000,
-  replicaId: 1
+  replicaId: 1,
 };
 
 export const getHistoryGameList = (params: { skip: string; limit: string }) => {
@@ -25,16 +29,16 @@ export const getHistoryGameList = (params: { skip: string; limit: string }) => {
         {
           parameterName: "skip",
           valueType: "LONG",
-          parameterValue: skip
+          parameterValue: skip,
         },
         {
           parameterName: "limit",
           valueType: "LONG",
-          parameterValue: limit
-        }
+          parameterValue: limit,
+        },
       ],
-      ...COMMOM_BODY
-    }
+      ...COMMOM_BODY,
+    },
   });
 };
 
@@ -47,16 +51,16 @@ export const getFutureGameList = (params: { skip: string; limit: string }) => {
         {
           parameterName: "skip",
           valueType: "LONG",
-          parameterValue: skip
+          parameterValue: skip,
         },
         {
           parameterName: "limit",
           valueType: "LONG",
-          parameterValue: limit
-        }
+          parameterValue: limit,
+        },
       ],
-      ...COMMOM_BODY
-    }
+      ...COMMOM_BODY,
+    },
   });
 };
 
@@ -69,18 +73,18 @@ export const getGameVoteInfoById = (params: { id: string }) => {
         {
           parameterName: "id",
           valueType: "LONG",
-          parameterValue: id
-        }
+          parameterValue: id,
+        },
       ],
-      ...COMMOM_BODY
-    }
+      ...COMMOM_BODY,
+    },
   }).then((res) => getVoteInfoTranslator(res));
 };
 
 export const voteTeam = (params: { matchId: string; isHome: boolean }) => {
   return request<VoteInfo>("tugraph/api/graph/uefa/vote", {
     method: "PUT",
-    params: params
+    params: params,
   });
 };
 
@@ -98,16 +102,16 @@ export const getTeamTacitInfo = (params: {
           {
             parameterName: "id",
             parameterValue: id,
-            valueType: "LONG"
+            valueType: "LONG",
           },
           {
             parameterName: "isteama",
             parameterValue: isteama,
-            valueType: "LONG"
-          }
+            valueType: "LONG",
+          },
         ],
-        ...COMMOM_BODY
-      }
+        ...COMMOM_BODY,
+      },
     }
   );
 };
@@ -127,38 +131,54 @@ export const getTeamCompeteInfo = (params: {
           {
             parameterName: "id",
             parameterValue: id,
-            valueType: "LONG"
+            valueType: "LONG",
           },
           {
             parameterName: "teama",
             parameterValue: isHome ? "1" : "0",
-            valueType: "LONG"
+            valueType: "LONG",
           },
           {
             parameterName: "teamb",
             parameterValue: isHome ? "0" : "1",
-            valueType: "LONG"
-          }
+            valueType: "LONG",
+          },
         ],
-        ...COMMOM_BODY
-      }
+        ...COMMOM_BODY,
+      },
     }
   );
 };
-export const getPlayerTacitInfo = (params: { id: string }) => {
-  const { id } = params;
-  return request("/tugraph/api/graph/uefa/23/executeQueryTemplate", {
+export const getPlayerTacitInfo = (params: {
+  id: string;
+  isteama: string;
+  playerId: string;
+}) => {
+  const { id, isteama, playerId } = params;
+  return request("/tugraph/api/template/23/executeQueryTemplate", {
     method: "POST",
     data: {
       templateParameterList: [
         {
-          parameterName: "id",
+          parameterName: "matchid",
           parameterValue: id,
-          valueType: "LONG"
-        }
+          valueType: "LONG",
+        },
+        {
+          parameterName: "isteama",
+          parameterValue: isteama,
+          valueType: "LONG",
+        },
+        {
+          parameterName: "playerid",
+          parameterValue: playerId,
+          valueType: "LONG",
+        },
       ],
-      ...COMMOM_BODY
-    }
+      ...COMMOM_BODY,
+    },
+  }).then((data) => {
+    return playerTacitInfoTranslator(data);
   });
 };
 
@@ -185,11 +205,11 @@ export const getGameInfo = (params: { id: string }) => {
         {
           parameterName: "id",
           parameterValue: id,
-          valueType: "LONG"
-        }
+          valueType: "LONG",
+        },
       ],
-      ...COMMOM_BODY
-    }
+      ...COMMOM_BODY,
+    },
   }).then((data) => gameInfoTranslator(data));
 };
 
@@ -204,11 +224,11 @@ export const getPlayersInfo = (params: { id: string }) => {
           {
             parameterName: "id",
             parameterValue: id,
-            valueType: "LONG"
-          }
+            valueType: "LONG",
+          },
         ],
-        ...COMMOM_BODY
-      }
+        ...COMMOM_BODY,
+      },
     }
   );
 };

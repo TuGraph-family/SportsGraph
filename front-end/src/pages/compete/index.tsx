@@ -12,7 +12,7 @@ import { DEFAULT_FLAG } from "@/constant";
 import {
   GameInfoPlayerResult,
   PlayersInfoResult,
-  TeamCompeteInfoResult
+  TeamCompeteInfoResult,
 } from "@/interfaces";
 import { getGameInfo, getPlayersInfo, getTeamCompeteInfo } from "@/services";
 import { parseSearch } from "@/utils";
@@ -21,6 +21,7 @@ import { history, useRequest } from "@umijs/max";
 import React, { useEffect, useMemo } from "react";
 import { useImmer } from "use-immer";
 import "./index.less";
+import CompetePersonalModal from "./components/compete-personal";
 
 const winYRatio = 0.7;
 const loseYRatio = 0.5;
@@ -36,25 +37,31 @@ interface CompetePageState {
   rightCompeteData: Array<TeamCompeteInfoResult>;
   playersInfo: Array<PlayersInfoResult>;
   isHomeWin: boolean;
+  competePersonalVisible: boolean;
+  competePersonalParams:
+    | { id: string; isteama: string; playerId: string }
+    | undefined;
 }
 const CompetePage: React.FC = () => {
   const [state, setState] = useImmer<CompetePageState>({
     leftTeam: {
       name: "加载中...",
       flagUrl: DEFAULT_FLAG,
-      score: 0
+      score: 0,
     },
     rightTeam: {
       name: "加载中...",
       flagUrl: DEFAULT_FLAG,
-      score: 0
+      score: 0,
     },
     leftGraphData: { nodes: [], edges: [] },
     rightGraphData: { nodes: [], edges: [] },
     leftCompeteData: [],
     rightCompeteData: [],
     playersInfo: [],
-    isHomeWin: true
+    isHomeWin: true,
+    competePersonalVisible: false,
+    competePersonalParams: undefined,
   });
   const {
     leftTeam,
@@ -64,13 +71,15 @@ const CompetePage: React.FC = () => {
     playersInfo,
     leftCompeteData,
     rightCompeteData,
-    isHomeWin
+    isHomeWin,
+    competePersonalVisible,
+    competePersonalParams,
   } = state;
   const { id } = parseSearch(location.search) as any;
   const { loading: loadingGetGameInfo, run: runGetGameInfo } = useRequest(
     getGameInfo,
     {
-      manual: true
+      manual: true,
     }
   );
   const { run: runGetTeamcompeteInfo, loading: loadingGetTeamcompeteInfo } =
@@ -81,10 +90,26 @@ const CompetePage: React.FC = () => {
   const onPrev = () => {
     history.push(`/tacit?id=${id}`);
   };
+  const onClose = () => {
+    setState((draft) => {
+      draft.competePersonalVisible = false;
+    });
+  };
   const { run: runGetPlayersInfo, loading: loadingGetPlayersInfo } = useRequest(
     getPlayersInfo,
     { manual: true }
   );
+
+  const onClickNode = (nodeData: any) => {
+    setState((draft) => {
+      draft.competePersonalParams = {
+        id: id,
+        isteama: nodeData?.data?.isTeamA === "1" ? "0" : "1",
+        playerId: nodeData?.id,
+      };
+      draft.competePersonalVisible = true;
+    });
+  };
 
   const getNodes = (
     graphData: CompetePageState["leftGraphData"],
@@ -112,8 +137,8 @@ const CompetePage: React.FC = () => {
           y: !isWin
             ? mapY - container?.clientHeight! * 2
             : container?.clientHeight! - mapY + container?.clientHeight! * 2,
-          x: isWin ? mapX : mapX + 50
-        }
+          x: isWin ? mapX : mapX + 50,
+        },
       };
     });
     return nodes;
@@ -121,7 +146,7 @@ const CompetePage: React.FC = () => {
   const homeGraphData = useMemo(() => {
     const homeGraphData: GraphData = {
       nodes: [],
-      edges: []
+      edges: [],
     };
 
     if (
@@ -137,7 +162,7 @@ const CompetePage: React.FC = () => {
   const awayGraphData = useMemo(() => {
     const awayGraphData: GraphData = {
       nodes: [],
-      edges: []
+      edges: [],
     };
 
     if (
@@ -174,24 +199,24 @@ const CompetePage: React.FC = () => {
           team_a_country,
           team_a_national_flag,
           team_b_country,
-          team_b_national_flag
+          team_b_national_flag,
         } = data.resultSet?.[0] || {};
         setState((draft) => {
           draft.leftTeam = {
             name: team_a_country,
             flagUrl: team_a_national_flag,
-            score: parseInt(homeWinProbability)
+            score: parseInt(homeWinProbability),
           };
           draft.rightTeam = {
             name: team_b_country,
             flagUrl: team_b_national_flag,
-            score: parseInt(awayWinProbability)
+            score: parseInt(awayWinProbability),
           };
           draft.leftGraphData = {
-            nodes: data.playerAList
+            nodes: data.playerAList,
           };
           draft.rightGraphData = {
-            nodes: data.playerBList
+            nodes: data.playerBList,
           };
           draft.isHomeWin = homeWinProbability > awayWinProbability;
         });
@@ -216,7 +241,6 @@ const CompetePage: React.FC = () => {
       }
     });
   }, [id]);
-
   return (
     <div className="compete">
       {hasGraphData && (
@@ -248,14 +272,20 @@ const CompetePage: React.FC = () => {
         )}
 
         <FootballField lightNumber={2} startAnimate={hasGraphData} />
-        <div className="compete-graph-container">
+
+        <div
+          className="compete-graph-container"
+          style={competePersonalVisible ? { visibility: "hidden" } : {}}
+        >
           <CompeteGraph
             containerId="away-graph"
             graphData={isHomeWin ? awayGraphData : homeGraphData}
+            onClickNode={onClickNode}
           />
           <CompeteGraph
             containerId="home-graph"
             graphData={isHomeWin ? homeGraphData : awayGraphData}
+            onClickNode={onClickNode}
           />
         </div>
       </div>
@@ -279,6 +309,12 @@ const CompetePage: React.FC = () => {
           </div>
         )}
       </div>
+      <CompetePersonalModal
+        visible={competePersonalVisible}
+        onClose={onClose}
+        params={competePersonalParams}
+        allPlayer={playersInfo}
+      />
     </div>
   );
 };
