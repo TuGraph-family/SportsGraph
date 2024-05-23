@@ -5,7 +5,7 @@ import { Mask, Space } from "antd-mobile";
 import { CloseOutline } from "antd-mobile-icons";
 import PlayerNode from "@/components/player-node";
 import "./index.less";
-import PersonalTacitGraph from "@/components/tacit-graph-graph";
+import PersonalTacitGraph from "@/components/personal-tacit-graph";
 
 interface TacitGraphProps {
   personalTacitData: GraphData;

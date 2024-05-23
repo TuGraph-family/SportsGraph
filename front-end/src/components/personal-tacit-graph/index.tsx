@@ -1,26 +1,22 @@
 import { PlayersInfoResult } from "@/interfaces";
 import { Graph, GraphData } from "@antv/g6";
 import React, { useEffect } from "react";
-import { useImmer } from "use-immer";
 import { registerAnimateLine } from "../animate-line";
 import PlayerNode from "../player-node";
 
 registerAnimateLine();
 
-interface TacitGraphProps {
+interface PersonalTacitGraphProps {
   graphData: GraphData;
   containerId: string;
   style?: React.CSSProperties;
 }
 
-const PersonalTacitGraph: React.FC<TacitGraphProps> = ({
+const PersonalTacitGraph: React.FC<PersonalTacitGraphProps> = ({
   graphData,
   containerId,
   style,
 }) => {
-  const [state, setState] = useImmer<{ graph?: Graph }>({});
-  const { graph } = state;
-
   useEffect(() => {
     const container = document.getElementById(containerId);
     const zoomY = container?.clientHeight! * 0.002;
@@ -66,9 +62,6 @@ const PersonalTacitGraph: React.FC<TacitGraphProps> = ({
     });
     graph.render();
     graph.fitView();
-    setState((draft) => {
-      draft.graph = graph;
-    });
   }, []);
 
   return (
