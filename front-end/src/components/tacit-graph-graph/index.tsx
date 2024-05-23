@@ -11,19 +11,12 @@ interface TacitGraphProps {
   graphData: GraphData;
   containerId: string;
   style?: React.CSSProperties;
-  onNodeClick?: (
-    playerid: string,
-    playersInfo: Array<PlayersInfoResult>
-  ) => void;
-  playersInfo?: Array<PlayersInfoResult>;
 }
 
-const TacitGraph: React.FC<TacitGraphProps> = ({
+const PersonalTacitGraph: React.FC<TacitGraphProps> = ({
   graphData,
   containerId,
   style,
-  playersInfo,
-  onNodeClick,
 }) => {
   const [state, setState] = useImmer<{ graph?: Graph }>({});
   const { graph } = state;
@@ -33,7 +26,6 @@ const TacitGraph: React.FC<TacitGraphProps> = ({
     const zoomY = container?.clientHeight! * 0.002;
     const zoomX = container?.clientWidth! * 0.0028;
     const graph = new Graph({
-      // renderer: () => new Renderer(),
       background: "transparent",
       container: containerId,
       animation: true,
@@ -47,8 +39,8 @@ const TacitGraph: React.FC<TacitGraphProps> = ({
           component: (data: PlayersInfoResult) => (
             <PlayerNode playerInfo={data} />
           ),
-          size: [10, 45]
-        }
+          size: [20, 60],
+        },
       },
       edge: {
         type: "path-in-line",
@@ -71,29 +63,15 @@ const TacitGraph: React.FC<TacitGraphProps> = ({
         },
       },
     });
+    graph.render();
+    graph.fitView();
     setState((draft) => {
       draft.graph = graph;
     });
   }, []);
-  useEffect(() => {
-    if (graphData.nodes?.length && graph) {
-      graph.setData(graphData);
-      graph.render();
-      // graph?.on("afterrender", () => {
-      //   graph.fitView({ direction: "both", when: "overflow" });
-      // });
-    }
-  }, [graphData]);
-
-  useEffect(() => {
-    if (!onNodeClick) return;
-    graph?.on("node:click", (e) => {
-      onNodeClick?.(e.target.id, playersInfo!);
-    });
-  }, [playersInfo]);
 
   return (
-    <div className="tacit-graph">
+    <div className="personal-tacit-graph">
       <div
         id={containerId}
         style={{ width: "100%", height: "100%", ...style }}
@@ -102,4 +80,4 @@ const TacitGraph: React.FC<TacitGraphProps> = ({
   );
 };
 
-export default TacitGraph;
+export default PersonalTacitGraph;
