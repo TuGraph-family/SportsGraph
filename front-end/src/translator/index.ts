@@ -58,9 +58,9 @@ export const getVoteInfoTranslator = (res: any) => {
       voteInfo: {
         teamAVote,
         teamBVote,
-        totalVote
-      }
-    }
+        totalVote,
+      },
+    },
   };
 };
 
@@ -75,17 +75,14 @@ export const personalTacitTranslator = (
     edges: [],
   };
   const vw = innerWidth / 100;
-  const cx = (innerWidth - 15 * vw) / 2;
-  const cy = (125 * vw) / 2;
-
-  const neighborPoints = calculateNeighborPoints(cx, cy, 35 * vw, 10);
+  const neighborPoints = calculateNeighborPoints(150, 150, 35 * vw, 10);
   data.nodes = [
     {
       id: selectedPlayerInfo.player_id,
       ...selectedPlayerInfo,
       nodeSize: 240,
-      x: cx,
-      y: cy,
+      x: 150,
+      y: 150,
     },
     ...list.map((item, index: number) => {
       const { b_id } = item;

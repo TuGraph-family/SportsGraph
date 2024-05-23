@@ -1,7 +1,6 @@
 import { PlayersInfoResult } from "@/interfaces";
 import { GraphData } from "@antv/g6";
 import React from "react";
-import TacitGraph from "@/components/tacit-graph";
 import { Mask, Space } from "antd-mobile";
 import { CloseOutline } from "antd-mobile-icons";
 import PlayerNode from "@/components/player-node";
@@ -11,7 +10,6 @@ import PersonalTacitGraph from "@/components/tacit-graph-graph";
 interface TacitGraphProps {
   personalTacitData: GraphData;
   playerInfo?: PlayersInfoResult;
-  bestTacitPlayerInfo?: Record<string, string>;
   visible: boolean;
   setVisible: (val: boolean) => void;
 }
@@ -19,7 +17,6 @@ interface TacitGraphProps {
 const PersonalTacit: React.FC<TacitGraphProps> = ({
   personalTacitData,
   playerInfo,
-  bestTacitPlayerInfo,
   visible,
   setVisible,
 }) => {
@@ -48,9 +45,8 @@ const PersonalTacit: React.FC<TacitGraphProps> = ({
           </div>
         </Space>
         <div className="description">
-          {playerInfo?.player_name}与周围的球员默契度都不错，尤其是与
-          {bestTacitPlayerInfo?.player_name}的默契度达到
-          {bestTacitPlayerInfo?.playerValue}
+          {playerInfo?.player_name}
+          为国家队出战XX次，他与队友的默契程度通过历史上共同比赛的战绩计算得出
         </div>
       </div>
     </Mask>

@@ -42,7 +42,6 @@ const TacitPage: React.FC = () => {
     rightTacitValueList: Array<TeamTacitInfoResult>;
     playersInfo: Array<PlayersInfoResult>;
     playerInfo?: PlayersInfoResult;
-    bestTacitPlayerInfo?: Record<string, string>;
     personalTacitData: GraphData;
     visible: boolean;
   }>({
@@ -76,7 +75,6 @@ const TacitPage: React.FC = () => {
     playersInfo,
     playerInfo,
     personalTacitData,
-    bestTacitPlayerInfo,
     visible,
   } = state;
   const isHome = teamSide === "left";
@@ -125,15 +123,9 @@ const TacitPage: React.FC = () => {
         isHome
       );
 
-      const bestTacitPlayerInfo = {
-        playerValue: list[0]?.playerValue,
-        player_name: list[0]?.b_personName,
-      };
-
       setState((draft) => {
         draft.personalTacitData = data;
         draft.playerInfo = selectedPlayerInfo;
-        draft.bestTacitPlayerInfo = bestTacitPlayerInfo;
         draft.visible = true;
       });
     });
@@ -287,7 +279,6 @@ const TacitPage: React.FC = () => {
         <PersonalTacit
           personalTacitData={personalTacitData}
           playerInfo={playerInfo}
-          bestTacitPlayerInfo={bestTacitPlayerInfo}
           visible={visible}
           setVisible={setVisible}
         />

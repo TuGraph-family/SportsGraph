@@ -28,8 +28,9 @@ const PersonalTacitGraph: React.FC<TacitGraphProps> = ({
     const graph = new Graph({
       background: "transparent",
       container: containerId,
-      animation: true,
+      animation: false,
       data: graphData,
+      autoFit: "center",
       node: {
         type: "react",
         style: {
