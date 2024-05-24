@@ -166,8 +166,11 @@ export const personalTacitTranslator = (
     nodes: [],
     edges: [],
   };
+
+  const isTabletComputer = innerWidth >= 768;
   const vw = innerWidth / 100;
-  const neighborPoints = calculateNeighborPoints(150, 150, 35 * vw, 10);
+  const r = (isTabletComputer ? 15 : 35) * vw;
+  const neighborPoints = calculateNeighborPoints(150, 150, r, 10);
   data.nodes = [
     {
       id: selectedPlayerInfo.player_id,

@@ -6,10 +6,12 @@ import { CloseOutline } from "antd-mobile-icons";
 import PlayerNode from "@/components/player-node";
 import "./index.less";
 import PersonalTacitGraph from "@/components/personal-tacit-graph";
+import Loading from "@/components/loading";
 
 interface TacitGraphProps {
   personalTacitData: GraphData;
   playerInfo?: PlayersInfoResult;
+  loadingGetPlayerTacitInfo: boolean;
   visible: boolean;
   setVisible: (val: boolean) => void;
 }
@@ -17,6 +19,7 @@ interface TacitGraphProps {
 const PersonalTacit: React.FC<TacitGraphProps> = ({
   personalTacitData,
   playerInfo,
+  loadingGetPlayerTacitInfo,
   visible,
   setVisible,
 }) => {
@@ -26,7 +29,9 @@ const PersonalTacit: React.FC<TacitGraphProps> = ({
       visible={visible}
       destroyOnClose={true}
       onMaskClick={() => setVisible(false)}
+      className="personal-tacit"
     >
+      <Loading loading={loadingGetPlayerTacitInfo} />
       <div onClick={() => setVisible(false)} className="close">
         <CloseOutline color="#ddd" />
       </div>
