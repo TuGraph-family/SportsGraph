@@ -138,7 +138,7 @@ const TacitPage: React.FC = () => {
 
       setState((draft) => {
         draft.personalTacitData = data;
-        draft.playerInfo = selectedPlayerInfo;
+        draft.playerInfo = { ...selectedPlayerInfo!, caps: list[0]?.a_caps };
         draft.visible = true;
       });
     });

@@ -80,7 +80,7 @@ export const personalTacitTranslator = (
     {
       id: selectedPlayerInfo.player_id,
       ...selectedPlayerInfo,
-      nodeSize: 240,
+      nodeSize: 100,
       x: 150,
       y: 150,
     },
@@ -96,7 +96,7 @@ export const personalTacitTranslator = (
         isTeamA: "1",
         x: neighborPoint.x,
         y: neighborPoint.y,
-        nodeSize: 240,
+        nodeSize: 100,
         ...playerInfo,
       };
     }),

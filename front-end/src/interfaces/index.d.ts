@@ -18,6 +18,7 @@ export interface PlayersInfoResult {
   player_name: string;
   player_enName: string;
   player_shirtnumber: string;
+  caps?: string;
   playerValue?: string;
   nodeSize?: number;
 }
