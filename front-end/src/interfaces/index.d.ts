@@ -21,6 +21,8 @@ export interface PlayersInfoResult {
   caps?: string;
   playerValue?: string;
   nodeSize?: number;
+  player_enName?: string;
+  a_caps?: string;
 }
 
 export interface PlayersInfo extends CommonResponseResult {
@@ -89,6 +91,25 @@ export interface VoteInfo extends CommonResponseResult {
   };
 }
 
+export interface CompetePersonalInfo extends PlayersInfoResult {
+  a_personName: string;
+  src_id: string;
+  a_personEnName: string;
+  b_personEnName: string;
+  timee: string;
+  b_personName: string;
+  a_caps: string;
+  a_id: string;
+  b_id: string;
+  dst_id: string;
+  b_caps: string;
+  playerValue: string;
+  matchId: string;
+  reverse_direction_value: string;
+  x?: number;
+  y?: number;
+  nodeSize?: number;
+}
 export interface PersonalTacitInfoResult {
   value_rank: string;
   a_id: string;

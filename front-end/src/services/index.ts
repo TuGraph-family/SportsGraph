@@ -6,7 +6,11 @@ import {
   TeamTacitInfo,
   VoteInfo,
 } from "@/interfaces";
-import { gameInfoTranslator, getVoteInfoTranslator } from "@/translator";
+import {
+  gameInfoTranslator,
+  getVoteInfoTranslator,
+  playerTacitInfoTranslator,
+} from "@/translator";
 import { request } from "@umijs/max";
 import { uniqBy } from "lodash";
 
@@ -82,7 +86,7 @@ export const getGameVoteInfoById = (params: { id: string }) => {
 export const voteTeam = (params: { matchId: string; isHome: boolean }) => {
   return request<VoteInfo>("tugraph/api/graph/uefa/vote", {
     method: "PUT",
-    params: params
+    params: params,
   });
 };
 
@@ -175,6 +179,41 @@ export const getPlayerTacitInfo = (params: {
       ],
       ...COMMOM_BODY,
     },
+  }).then((data) => {
+    return playerTacitInfoTranslator(data);
+  });
+};
+
+export const getPlayerCompeteInfo = (params: {
+  id: string;
+  isteama: string;
+  playerId: string;
+}) => {
+  const { id, isteama, playerId } = params;
+  return request("/tugraph/api/template/39/executeQueryTemplate", {
+    method: "POST",
+    data: {
+      templateParameterList: [
+        {
+          parameterName: "matchid",
+          parameterValue: id,
+          valueType: "LONG",
+        },
+        {
+          parameterName: "isteama",
+          parameterValue: isteama,
+          valueType: "LONG",
+        },
+        {
+          parameterName: "playerid",
+          parameterValue: playerId,
+          valueType: "LONG",
+        },
+      ],
+      ...COMMOM_BODY,
+    },
+  }).then((data) => {
+    return playerTacitInfoTranslator(data);
   });
 };
 
@@ -243,16 +282,16 @@ export const getTeamPersonalTacitInfo = (params: {
           {
             parameterName: "id",
             parameterValue: id,
-            valueType: "LONG"
+            valueType: "LONG",
           },
           {
             parameterName: "isteama",
             parameterValue: isteama,
-            valueType: "LONG"
-          }
+            valueType: "LONG",
+          },
         ],
-        ...COMMOM_BODY
-      }
+        ...COMMOM_BODY,
+      },
     }
   );
 };
