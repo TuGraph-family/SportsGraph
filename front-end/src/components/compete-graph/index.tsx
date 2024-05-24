@@ -95,7 +95,6 @@ const CompeteGraph: React.FC<CompeteGraphProps> = ({
     });
   }, []);
 
-  console.log(graphData);
   useEffect(() => {
     if (graphData.nodes?.length) {
       graph?.setData(graphData);

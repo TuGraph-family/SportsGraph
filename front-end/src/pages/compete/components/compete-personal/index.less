@@ -18,31 +18,33 @@
 
   &-graph {
     position: relative;
-    height: 100%;
+    height: calc(100vh - 400px);
     width: 100%;
     flex: 1;
 
-    .compete-personal-graph {
+    .personal-graph {
       position: absolute;
       height: 100%;
       width: 100%;
       top: 30px;
       left: 0;
     }
+
+    #g-canvas-camera {
+      overflow: visible !important;
+    }
   }
 
   &-card {
     background: #0d1b32;
     border-radius: 8px;
-    width: 287px;
     min-height: 80px;
-    padding: 16px;
+    margin: 0 20px 48px 20px;
     font-size: 10px;
     color: #ffffff8f;
     font-weight: 500;
-    margin-bottom: 47px;
-    margin-top: 28px;
     position: relative;
+    padding: 16px;
 
     &-player {
       display: flex;
