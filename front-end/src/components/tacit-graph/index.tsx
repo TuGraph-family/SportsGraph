@@ -15,7 +15,6 @@ interface TacitGraphProps {
     playerid: string,
     playersInfo: Array<PlayersInfoResult>
   ) => void;
-  playersInfo?: Array<PlayersInfoResult>;
 }
 
 const nodeSizeRatio = 0.3;
@@ -26,7 +25,6 @@ const TacitGraph: React.FC<TacitGraphProps> = ({
   graphData,
   containerId,
   style,
-  playersInfo,
   onNodeClick,
 }) => {
   const [state, setState] = useImmer<{ graph?: Graph }>({});
@@ -59,8 +57,8 @@ const TacitGraph: React.FC<TacitGraphProps> = ({
               nodeSize = maxNodeSize;
             }
             return [nodeSize * 0.1, nodeSize * 1.2];
-          }
-        }
+          },
+        },
       },
       edge: {
         type: "path-in-line",
@@ -89,20 +87,23 @@ const TacitGraph: React.FC<TacitGraphProps> = ({
   }, []);
   useEffect(() => {
     if (graphData.nodes?.length && graph) {
-      graph.setData(graphData);
+      graph?.setData(graphData);
+      graph?.on("node:click", (e) => {
+        const playersInfo = graph.getNodeData();
+        onNodeClick?.(
+          e.target.id,
+          playersInfo as unknown as PlayersInfoResult[]
+        );
+      });
       graph.render();
       // graph?.on("afterrender", () => {
       //   graph.fitView({ direction: "both", when: "overflow" });
       // });
     }
+    return () => {
+      graph?.off("node:click");
+    };
   }, [graphData]);
-
-  useEffect(() => {
-    if (!onNodeClick) return;
-    graph?.on("node:click", (e) => {
-      onNodeClick?.(e.target.id, playersInfo!);
-    });
-  }, [playersInfo]);
 
   return (
     <div className="tacit-graph">

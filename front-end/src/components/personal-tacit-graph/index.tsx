@@ -22,9 +22,6 @@ const PersonalTacitGraph: React.FC<PersonalTacitGraphProps> = ({
   style,
 }) => {
   useEffect(() => {
-    const container = document.getElementById(containerId);
-    const zoomY = container?.clientHeight! * 0.002;
-    const zoomX = container?.clientWidth! * 0.0028;
     const graph = new Graph({
       background: "transparent",
       container: containerId,
@@ -34,8 +31,8 @@ const PersonalTacitGraph: React.FC<PersonalTacitGraphProps> = ({
       node: {
         type: "react",
         style: {
-          x: (d: any) => d.x * zoomX,
-          y: (d: any) => d.y * zoomY,
+          x: (d: any) => d.x,
+          y: (d: any) => d.y,
           fill: "transparent",
           component: (data: PlayersInfoResult) => (
             <PlayerNode playerInfo={data} />
@@ -48,7 +45,7 @@ const PersonalTacitGraph: React.FC<PersonalTacitGraphProps> = ({
               nodeSize = maxNodeSize;
             }
             return [nodeSize * 0.1, nodeSize * 1.2];
-          }
+          },
         },
       },
       edge: {

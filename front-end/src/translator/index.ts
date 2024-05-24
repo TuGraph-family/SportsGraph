@@ -167,15 +167,14 @@ export const personalTacitTranslator = (
     edges: [],
   };
 
-  const isTabletComputer = innerWidth >= 768;
   const vw = innerWidth / 100;
-  const r = (isTabletComputer ? 15 : 35) * vw;
+  const r = 35 * vw;
   const neighborPoints = calculateNeighborPoints(150, 150, r, 10);
   data.nodes = [
     {
       id: selectedPlayerInfo.player_id,
       ...selectedPlayerInfo,
-      nodeSize: 100,
+      nodeSize: 80,
       x: 150,
       y: 150,
     },
@@ -184,6 +183,7 @@ export const personalTacitTranslator = (
       const playerInfo = playersInfo.find((item) => item.player_id === b_id);
       const neighborPoint = neighborPoints[index];
       return {
+        ...playerInfo,
         id: item.b_id,
         player_id: item.b_id,
         player_enName: item.b_personEnName,
@@ -191,8 +191,7 @@ export const personalTacitTranslator = (
         isTeamA: "1",
         x: neighborPoint.x,
         y: neighborPoint.y,
-        nodeSize: 100,
-        ...playerInfo,
+        nodeSize: 80,
       };
     }),
   ];

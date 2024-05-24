@@ -102,9 +102,10 @@ const TacitPage: React.FC = () => {
     { manual: true }
   );
 
-  const { run: runGetPlayerTacitInfo,loading:loadingGetPlayerTacitInfo } = useRequest(getPlayerTacitInfo, {
-    manual: true,
-  });
+  const { run: runGetPlayerTacitInfo, loading: loadingGetPlayerTacitInfo } =
+    useRequest(getPlayerTacitInfo, {
+      manual: true,
+    });
 
   const {
     run: runGetTeamPersonalTacitInfo,
@@ -315,7 +316,6 @@ const TacitPage: React.FC = () => {
           style={{ opacity: visible ? 0 : 1 }}
           graphData={graphData}
           onNodeClick={onNodeClick}
-          playersInfo={playersInfo}
           containerId="home"
         />
       </div>
