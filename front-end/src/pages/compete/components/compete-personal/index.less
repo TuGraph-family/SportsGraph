@@ -1,14 +1,14 @@
 .compete-personal {
-  margin-top: 230px;
   width: 100vw;
-  height: calc(100vh - 230px);
+  height: 100vh;
   display: flex;
   align-items: center;
   flex-direction: column;
+  justify-content: flex-end;
 
   &-icon {
     position: absolute;
-    top: 240px;
+    top: 0px;
     right: 28px;
     width: 30px;
     z-index: 999;
@@ -18,18 +18,8 @@
 
   &-graph {
     position: relative;
-    height: calc(100vh - 400px);
     width: 100%;
-    flex: 1;
-
-    .personal-graph {
-      position: absolute;
-      height: 100%;
-      width: 100%;
-      top: 30px;
-      left: 0;
-    }
-
+    height: 50vh;
     #g-canvas-camera {
       overflow: visible !important;
     }
@@ -48,12 +38,12 @@
 
     &-player {
       display: flex;
-      align-self: center;
+      align-items: center;
       padding-bottom: 10px;
+      height: 30px;
 
       &-left {
         flex: 1;
-        height: 30px;
         width: 20%;
         padding-right: 5px;
       }

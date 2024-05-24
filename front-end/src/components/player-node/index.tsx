@@ -21,7 +21,7 @@ const PlayerNode: React.FC<PlayerNodeProps> = React.memo(({ playerInfo }) => {
     isTeamA,
     player_shirtnumber,
     player_name,
-    nodeSize = 40,
+    nodeSize = 40
   } = playerInfo;
   const mapWidth = nodeSize * ratio + 30;
   const width =
@@ -32,7 +32,7 @@ const PlayerNode: React.FC<PlayerNodeProps> = React.memo(({ playerInfo }) => {
     mapFontSize < maxShirtNumberFontSize ? mapFontSize : maxShirtNumberFontSize;
 
   return (
-    <div className="player-node">
+    <div className="player-node" style={{ minHeight: 60 }}>
       <div className={`shirt`} style={{ width, height: width - 3 }}>
         <img
           style={{ width }}
@@ -45,10 +45,10 @@ const PlayerNode: React.FC<PlayerNodeProps> = React.memo(({ playerInfo }) => {
         <div className="shirt-number" style={{ fontSize: shirtFontSize }}>
           {player_shirtnumber}
         </div>
-      </div>
-      <div className="label">
-        <div className="label-text" style={{ fontSize }}>
-          {player_name}
+        <div className="label">
+          <div className="label-text" style={{ fontSize }}>
+            {player_name}
+          </div>
         </div>
       </div>
     </div>

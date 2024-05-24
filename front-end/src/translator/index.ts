@@ -1,9 +1,5 @@
-import {
-  calculateAngleBetweenPoints,
-  calculateNeighborPoints,
-  uniqueArrayById,
-} from "@/utils";
-import { GameInfo, PlayersInfoResult, CompetePersonalInfo } from "@/interfaces";
+import { CompetePersonalInfo, GameInfo, PlayersInfoResult } from "@/interfaces";
+import { calculateAngleBetweenPoints, calculateNeighborPoints } from "@/utils";
 import { GraphData } from "@antv/g6";
 
 export const gameInfoTranslator = (res: any) => {
@@ -17,7 +13,7 @@ export const gameInfoTranslator = (res: any) => {
     players_A = "",
     players_B = "",
     position_A_xy = "",
-    position_B_xy = "",
+    position_B_xy = ""
   } = resultSet[0] || {};
   const playerAList = players_A.split(",");
   const playerBList = players_B.split(",");
@@ -32,7 +28,7 @@ export const gameInfoTranslator = (res: any) => {
         return {
           id,
           x: Number(x) * ratio,
-          y: Number(y) * ratio,
+          y: Number(y) * ratio
         };
       }),
       playerBList: playerBList.map((id: string, index: number) => {
@@ -40,10 +36,10 @@ export const gameInfoTranslator = (res: any) => {
         return {
           id,
           x: Number(x) * ratio,
-          y: Number(y) * ratio,
+          y: Number(y) * ratio
         };
-      }),
-    },
+      })
+    }
   } as GameInfo;
 };
 
@@ -61,9 +57,9 @@ export const getVoteInfoTranslator = (res: any) => {
       voteInfo: {
         teamAVote,
         teamBVote,
-        totalVote,
-      },
-    },
+        totalVote
+      }
+    }
   };
 };
 
@@ -79,14 +75,14 @@ export const playerTacitInfoTranslator = (res: any) => {
     const key = item.b_id;
     if (!tempMap[key]) {
       tempMap[key] = item;
-    } else {
-      if (
-        (tempMap[key].src_id === tempMap[key].a_id &&
-          item?.src_id !== item?.a_id) ||
-        (item?.src_id === item?.a_id &&
-          tempMap[key].src_id !== tempMap[key].a_id)
-      ) {
+      if (item.a_id !== item.src_id) {
         tempMap[key].reverse_direction_value = item.playerValue;
+      }
+    } else {
+      if (item.a_id !== item.src_id) {
+        tempMap[key].reverse_direction_value = item.playerValue;
+      } else {
+        tempMap[key].playerValue = item.playerValue;
       }
     }
   });
@@ -102,6 +98,7 @@ export const playerTacitInfoTranslator = (res: any) => {
     x: 180,
     y: 180,
     nodeSize: 100,
+    isCenter: true
   };
   // 计算周边点坐标
   const nodeXY = calculateNeighborPoints(
@@ -119,7 +116,7 @@ export const playerTacitInfoTranslator = (res: any) => {
       player_id: item?.b_id,
       player_enName: item.b_personEnName,
       ...nodeXY?.[index],
-      nodeSize: 100,
+      nodeSize: 100
     };
   });
 
@@ -139,20 +136,20 @@ export const playerTacitInfoTranslator = (res: any) => {
       target: item.b_id,
       playerValue: item.playerValue,
       deg: deg,
-      percentage: percentage,
+      percentage: percentage
     };
   });
-
+  console.log(competePlayerNode);
   return {
     ...res,
     data: {
       ...res?.data,
       competeInfo: {
         nodes: [competeCenterPlayer, ...competePlayerNode],
-        edges: competePlayerEdge,
+        edges: competePlayerEdge
       },
-      competeCenterPlayer,
-    },
+      competeCenterPlayer
+    }
   };
 };
 
@@ -164,7 +161,7 @@ export const personalTacitTranslator = (
 ) => {
   const data: GraphData = {
     nodes: [],
-    edges: [],
+    edges: []
   };
 
   const vw = innerWidth / 100;
@@ -176,7 +173,7 @@ export const personalTacitTranslator = (
       ...selectedPlayerInfo,
       nodeSize: 80,
       x: 150,
-      y: 150,
+      y: 150
     },
     ...list.map((item, index: number) => {
       const { b_id } = item;
@@ -188,12 +185,12 @@ export const personalTacitTranslator = (
         player_id: item.b_id,
         player_enName: item.b_personEnName,
         player_name: item.b_personName,
-        isTeamA: "1",
+        isTeamA: isHome ? "1" : "0",
         x: neighborPoint.x,
         y: neighborPoint.y,
-        nodeSize: 80,
+        nodeSize: 80
       };
-    }),
+    })
   ];
 
   data.edges = list.map((item) => {
@@ -204,7 +201,7 @@ export const personalTacitTranslator = (
       playerValue,
       stroke: isHome
         ? "linear-gradient(rgba(82, 9, 29, 1), rgba(159, 4, 13, 0.9), rgba(82, 9, 29, 1))"
-        : "linear-gradient(#0F2EAB, rgba(20,60,219,0.9),#0F2EAB)",
+        : "linear-gradient(#0F2EAB, rgba(20,60,219,0.9),#0F2EAB)"
     };
   });
   return data;

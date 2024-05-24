@@ -1,16 +1,16 @@
-import React, { useEffect, useMemo } from "react";
-import "./index.less";
-import { Mask } from "antd-mobile";
-import { useImmer } from "use-immer";
-import Loading from "@/components/loading";
-import { getPlayerCompeteInfo } from "@/services";
-import { useRequest } from "@umijs/max";
 import CompetePersonalGraph from "@/components/compete-personal-graph";
+import Loading from "@/components/loading";
 import PlayerNode from "@/components/player-node";
 import { PlayersInfoResult } from "@/interfaces";
-import { GraphData } from "@antv/g6";
-import { CloseOutline } from "antd-mobile-icons";
+import { getPlayerCompeteInfo } from "@/services";
 import { calculateNeighborPoints } from "@/utils";
+import { GraphData } from "@antv/g6";
+import { useRequest } from "@umijs/max";
+import { Mask } from "antd-mobile";
+import { CloseOutline } from "antd-mobile-icons";
+import React, { useEffect, useMemo } from "react";
+import { useImmer } from "use-immer";
+import "./index.less";
 
 interface CompetePersonalModalProps {
   visible: boolean;
@@ -29,14 +29,14 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
   visible,
   onClose,
   params,
-  allPlayer,
+  allPlayer
 }) => {
   const [state, setState] = useImmer<{
     competeCenterPlayer: PlayersInfoResult | undefined;
     competeGraphData: GraphData;
   }>({
     competeCenterPlayer: undefined,
-    competeGraphData: { nodes: [], edges: [] },
+    competeGraphData: { nodes: [], edges: [] }
   });
 
   const { competeCenterPlayer, competeGraphData } = state;
@@ -49,8 +49,8 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
     const nodeSize =
       ((radio - graphMinSize) / (graphMaxSize - graphMinSize)) * mappedValue;
     const centerXY = {
-      x: (container?.clientWidth! - centerOffsetX) / 2,
-      y: (container?.clientHeight! - centerOffsetY) / 2,
+      x: (container?.clientWidth! - centerOffsetX) / 2 + 11,
+      y: (container?.clientHeight! - centerOffsetY) / 2
     };
     const nodeXY = calculateNeighborPoints(
       centerXY?.x,
@@ -69,7 +69,7 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
           ...centerXY,
           player_shirtnumber: playerInfo?.player_shirtnumber,
           isTeamA: playerInfo?.isTeamA,
-          nodeSize,
+          nodeSize
         };
       } else {
         const playerInfo = allPlayer?.find((item) => {
@@ -81,7 +81,7 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
           ...nodeXY[nodeIndex - 1],
           player_shirtnumber: playerInfo?.player_shirtnumber,
           isTeamA: playerInfo?.isTeamA,
-          nodeSize,
+          nodeSize
         };
       }
     });
@@ -95,7 +95,7 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
         stroke:
           isTeamA === "1"
             ? `linear-gradient(${edge?.deg}deg,rgba(82, 9, 29, 1) 0%,rgba(159, 4, 13, 0.9) ${edge?.percentage}%,rgba(22, 119, 255, 1) ${edge?.percentage}%, rgba(21, 52, 90, 0.9) 100% )`
-            : `linear-gradient(${edge?.deg}deg,rgba(21, 52, 90, 0.9) 0%,rgba(22, 119, 255, 1) ${edge?.percentage}%,rgba(159, 4, 13, 0.9) ${edge?.percentage}%, rgba(82, 9, 29, 1) 100% )`,
+            : `linear-gradient(${edge?.deg}deg,rgba(21, 52, 90, 0.9) 0%,rgba(22, 119, 255, 1) ${edge?.percentage}%,rgba(159, 4, 13, 0.9) ${edge?.percentage}%, rgba(82, 9, 29, 1) 100% )`
       };
     });
     setState((draft) => {
@@ -115,17 +115,23 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
   }, [visible]);
 
   return (
-    <Mask visible={visible} onMaskClick={onClose} destroyOnClose>
+    <Mask
+      visible={visible}
+      onMaskClick={onClose}
+      destroyOnClose
+      color="#060c34b8"
+    >
       <div className={"compete-personal"}>
         <Loading loading={loadingGetPlayerTacitInfo} />
-        <div className="compete-personal-icon">
-          <CloseOutline onClick={onClose} />
-        </div>
+
         <div className="compete-personal-graph">
           <CompetePersonalGraph
             graphData={graphData}
             containerId="personal-graph"
           />
+          <div className="compete-personal-icon">
+            <CloseOutline onClick={onClose} />
+          </div>
         </div>
         {competeCenterPlayer ? (
           <div className="compete-personal-card">

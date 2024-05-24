@@ -1,17 +1,15 @@
+import PersonalTacitGraph from "@/components/personal-tacit-graph";
+import PlayerNode from "@/components/player-node";
 import { PlayersInfoResult } from "@/interfaces";
 import { GraphData } from "@antv/g6";
-import React from "react";
-import { Mask, Space } from "antd-mobile";
+import { Mask } from "antd-mobile";
 import { CloseOutline } from "antd-mobile-icons";
-import PlayerNode from "@/components/player-node";
+import React from "react";
 import "./index.less";
-import PersonalTacitGraph from "@/components/personal-tacit-graph";
-import Loading from "@/components/loading";
 
 interface TacitGraphProps {
   personalTacitData: GraphData;
   playerInfo?: PlayersInfoResult;
-  loadingGetPlayerTacitInfo: boolean;
   visible: boolean;
   setVisible: (val: boolean) => void;
 }
@@ -19,9 +17,8 @@ interface TacitGraphProps {
 const PersonalTacit: React.FC<TacitGraphProps> = ({
   personalTacitData,
   playerInfo,
-  loadingGetPlayerTacitInfo,
   visible,
-  setVisible,
+  setVisible
 }) => {
   return (
     <Mask
@@ -31,27 +28,27 @@ const PersonalTacit: React.FC<TacitGraphProps> = ({
       onMaskClick={() => setVisible(false)}
     >
       <div className="personal-tacit">
-        <Loading loading={loadingGetPlayerTacitInfo} />
-        <div onClick={() => setVisible(false)} className="close">
-          <CloseOutline color="#ddd" />
+        <div className="personal-graph">
+          <PersonalTacitGraph
+            containerId="personalTacit"
+            graphData={personalTacitData}
+          />
+          <div onClick={() => setVisible(false)} className="close">
+            <CloseOutline color="#ddd" />
+          </div>
         </div>
-        <PersonalTacitGraph
-          containerId="personalTacit"
-          graphData={personalTacitData}
-        />
+
         {playerInfo && (
           <div className="player-info">
-            <Space>
-              <div className="icon">
-                <PlayerNode playerInfo={{ ...playerInfo!, nodeSize: 40 }} />
-              </div>
+            <div className="player">
+              <PlayerNode playerInfo={{ ...playerInfo!, nodeSize: 20 }} />
               <div style={{ marginTop: 14 }}>
                 <div className="player-name">{playerInfo?.player_name}</div>
                 <div className="player-en-name">
                   {playerInfo?.player_enName}
                 </div>
               </div>
-            </Space>
+            </div>
             <div className="description">
               {playerInfo?.player_name}
               为国家队出战{playerInfo?.caps}

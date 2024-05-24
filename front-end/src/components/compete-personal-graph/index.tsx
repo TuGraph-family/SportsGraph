@@ -2,8 +2,8 @@ import { PlayersInfoResult } from "@/interfaces";
 import { Graph, GraphData, NodeEvent } from "@antv/g6";
 import React, { useEffect } from "react";
 import { useImmer } from "use-immer";
-import PlayerNode from "../player-node";
 import { registerAnimateLine } from "../animate-line";
+import PlayerNode from "../player-node";
 
 registerAnimateLine();
 
@@ -18,7 +18,7 @@ const CompetePersonalGraph: React.FC<CompetePersonalGraphProps> = ({
   graphData,
   containerId,
   onClickNode,
-  style,
+  style
 }) => {
   const [state, setState] = useImmer<{ graph?: Graph }>({});
   const { graph } = state;
@@ -28,7 +28,6 @@ const CompetePersonalGraph: React.FC<CompetePersonalGraphProps> = ({
       background: "transparent",
       container: containerId,
       data: graphData,
-      autoFit: { type: "center", animation: true },
       zoom: 0.9,
       node: {
         type: "react",
@@ -39,8 +38,8 @@ const CompetePersonalGraph: React.FC<CompetePersonalGraphProps> = ({
           component: (data: PlayersInfoResult) => (
             <PlayerNode playerInfo={data} />
           ),
-          size: [10, 70],
-        },
+          size: (d: any) => (d.isCenter ? [40, 70] : [10, 50])
+        }
       },
       edge: {
         type: "path-in-line",
@@ -52,14 +51,14 @@ const CompetePersonalGraph: React.FC<CompetePersonalGraphProps> = ({
           haloStrokeWidth: 5,
           haloLineWidth: 5,
           haloShadowColor: "#fff",
-          haloShadowBlur: 20,
+          haloShadowBlur: 20
         },
         animation: {
           // disable default enter and exit animation
           enter: false,
-          exit: false,
-        },
-      },
+          exit: false
+        }
+      }
     });
     setState((draft) => {
       draft.graph = graph;
