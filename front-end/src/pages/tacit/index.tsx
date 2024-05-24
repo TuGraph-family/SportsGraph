@@ -120,7 +120,6 @@ const TacitPage: React.FC = () => {
       (item) => item.player_id === playerid
     );
     const isteama = selectedPlayerInfo?.isTeamA || "1";
-
     runGetPlayerTacitInfo({ id, isteama, playerid }).then((res) => {
       const list = res?.resultSet?.sort(
         (a: Record<string, string>, b: Record<string, string>) =>

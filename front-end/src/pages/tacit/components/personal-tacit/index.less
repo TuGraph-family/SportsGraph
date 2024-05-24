@@ -60,4 +60,18 @@
 
 
   }
+
+  .player-info::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    z-index: 10;
+    background: linear-gradient(90deg,
+        #ffffff00 3%,
+        #ffffff 52%,
+        #ffffff00 100%);
+  }
 }
