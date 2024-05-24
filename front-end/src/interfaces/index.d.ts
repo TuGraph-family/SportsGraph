@@ -16,7 +16,10 @@ export interface PlayersInfoResult {
   isTeamA: string;
   player_id: string;
   player_name: string;
+  player_enName: string;
   player_shirtnumber: string;
+  caps?: string;
+  playerValue?: string;
   nodeSize?: number;
   player_enName?: string;
   a_caps?: string;

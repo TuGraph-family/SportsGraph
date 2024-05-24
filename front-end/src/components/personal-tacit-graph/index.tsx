@@ -1,47 +1,36 @@
 import { PlayersInfoResult } from "@/interfaces";
 import { Graph, GraphData } from "@antv/g6";
 import React, { useEffect } from "react";
-import { useImmer } from "use-immer";
 import { registerAnimateLine } from "../animate-line";
 import PlayerNode from "../player-node";
 
 registerAnimateLine();
 
-interface TacitGraphProps {
+interface PersonalTacitGraphProps {
   graphData: GraphData;
   containerId: string;
   style?: React.CSSProperties;
-  onNodeClick?: (
-    playerid: string,
-    playersInfo: Array<PlayersInfoResult>
-  ) => void;
-  playersInfo?: Array<PlayersInfoResult>;
 }
 
 const nodeSizeRatio = 0.3;
 const minNodeSize = 60;
 const maxNodeSize = 70;
 
-const TacitGraph: React.FC<TacitGraphProps> = ({
+const PersonalTacitGraph: React.FC<PersonalTacitGraphProps> = ({
   graphData,
   containerId,
   style,
-  playersInfo,
-  onNodeClick,
 }) => {
-  const [state, setState] = useImmer<{ graph?: Graph }>({});
-  const { graph } = state;
-
   useEffect(() => {
     const container = document.getElementById(containerId);
-    const zoomY = container?.clientHeight! * 0.0022;
+    const zoomY = container?.clientHeight! * 0.002;
     const zoomX = container?.clientWidth! * 0.0028;
     const graph = new Graph({
       background: "transparent",
       container: containerId,
-      animation: true,
+      animation: false,
       data: graphData,
-      zoom: 0.9,
+      autoFit: "center",
       node: {
         type: "react",
         style: {
@@ -60,7 +49,7 @@ const TacitGraph: React.FC<TacitGraphProps> = ({
             }
             return [nodeSize * 0.1, nodeSize * 1.2];
           }
-        }
+        },
       },
       edge: {
         type: "path-in-line",
@@ -83,29 +72,12 @@ const TacitGraph: React.FC<TacitGraphProps> = ({
         },
       },
     });
-    setState((draft) => {
-      draft.graph = graph;
-    });
+    graph.render();
+    graph.fitView();
   }, []);
-  useEffect(() => {
-    if (graphData.nodes?.length && graph) {
-      graph.setData(graphData);
-      graph.render();
-      // graph?.on("afterrender", () => {
-      //   graph.fitView({ direction: "both", when: "overflow" });
-      // });
-    }
-  }, [graphData]);
-
-  useEffect(() => {
-    if (!onNodeClick) return;
-    graph?.on("node:click", (e) => {
-      onNodeClick?.(e.target.id, playersInfo!);
-    });
-  }, [playersInfo]);
 
   return (
-    <div className="tacit-graph">
+    <div className="personal-tacit-graph">
       <div
         id={containerId}
         style={{ width: "100%", height: "100%", ...style }}
@@ -114,4 +86,4 @@ const TacitGraph: React.FC<TacitGraphProps> = ({
   );
 };
 
-export default TacitGraph;
+export default PersonalTacitGraph;

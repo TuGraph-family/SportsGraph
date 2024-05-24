@@ -12,6 +12,7 @@ import {
   playerTacitInfoTranslator,
 } from "@/translator";
 import { request } from "@umijs/max";
+import { uniqBy } from "lodash";
 
 const COMMOM_BODY = {
   deployEnv: "ONLINE_PRODUCTION",
@@ -153,9 +154,9 @@ export const getTeamCompeteInfo = (params: {
 export const getPlayerTacitInfo = (params: {
   id: string;
   isteama: string;
-  playerId: string;
+  playerid: string;
 }) => {
-  const { id, isteama, playerId } = params;
+  const { id, isteama, playerid } = params;
   return request("/tugraph/api/template/23/executeQueryTemplate", {
     method: "POST",
     data: {
@@ -172,7 +173,7 @@ export const getPlayerTacitInfo = (params: {
         },
         {
           parameterName: "playerid",
-          parameterValue: playerId,
+          parameterValue: playerid,
           valueType: "LONG",
         },
       ],
@@ -281,16 +282,16 @@ export const getTeamPersonalTacitInfo = (params: {
           {
             parameterName: "id",
             parameterValue: id,
-            valueType: "LONG"
+            valueType: "LONG",
           },
           {
             parameterName: "isteama",
             parameterValue: isteama,
-            valueType: "LONG"
-          }
+            valueType: "LONG",
+          },
         ],
-        ...COMMOM_BODY
-      }
+        ...COMMOM_BODY,
+      },
     }
   );
 };
