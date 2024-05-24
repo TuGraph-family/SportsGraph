@@ -2,6 +2,7 @@ import {
   GameInfo,
   PlayersInfo,
   TeamCompeteInfo,
+  TeamPersonalTacitInfo,
   TeamTacitInfo,
   VoteInfo,
 } from "@/interfaces";
@@ -91,7 +92,7 @@ export const getTeamTacitInfo = (params: {
 }) => {
   const { id, isteama } = params;
   return request<TeamTacitInfo>(
-    "/tugraph/api/graph/uefa/22/executeQueryTemplate",
+    "/tugraph/api/graph/uefa/38/executeQueryTemplate",
     {
       method: "POST",
       data: {
@@ -224,6 +225,34 @@ export const getPlayersInfo = (params: { id: string }) => {
         ],
         ...COMMOM_BODY,
       },
+    }
+  );
+};
+
+export const getTeamPersonalTacitInfo = (params: {
+  id: string;
+  isteama: "0" | "1";
+}) => {
+  const { id, isteama } = params;
+  return request<TeamPersonalTacitInfo>(
+    "/tugraph/api/graph/uefa/37/executeQueryTemplate",
+    {
+      method: "POST",
+      data: {
+        templateParameterList: [
+          {
+            parameterName: "id",
+            parameterValue: id,
+            valueType: "LONG"
+          },
+          {
+            parameterName: "isteama",
+            parameterValue: isteama,
+            valueType: "LONG"
+          }
+        ],
+        ...COMMOM_BODY
+      }
     }
   );
 };

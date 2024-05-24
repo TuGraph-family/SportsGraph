@@ -6,47 +6,47 @@ import IconFont from "../icon-font";
 import "./index.less";
 
 interface ColorfulTeamteamProps {
-  leftTeam: { name: string; flagUrl: string; score: number };
-  rightTeam: { name: string; flagUrl: string; score: number };
-  onTeamClick?: (itemInfo: { side: "left" | "right" }) => void;
+  homeTeam: { name: string; flagUrl: string; score: number };
+  awayTeam: { name: string; flagUrl: string; score: number };
+  onTeamClick?: (itemInfo: { side: "home" | "away" }) => void;
   title: string;
   showActive?: boolean;
 }
 
 const ColorfulTeamTeam: React.FC<ColorfulTeamteamProps> = ({
-  leftTeam,
-  rightTeam,
+  homeTeam,
+  awayTeam,
   title,
   onTeamClick,
   showActive
 }) => {
-  const [state, setState] = useImmer<{ activeTeam: "left" | "right" }>({
-    activeTeam: "left"
+  const [state, setState] = useImmer<{ activeTeam: "home" | "away" }>({
+    activeTeam: "home"
   });
   const { activeTeam } = state;
-  const isLeftWin = leftTeam.score > rightTeam.score;
+  const isLeftWin = homeTeam.score > awayTeam.score;
   const onLeftClick = () => {
-    onTeamClick?.({ side: "left", ...leftTeam });
+    onTeamClick?.({ side: "home", ...homeTeam });
     setState((draft) => {
-      draft.activeTeam = "left";
+      draft.activeTeam = "home";
     });
   };
   const onRightClick = () => {
-    onTeamClick?.({ side: "right", ...rightTeam });
+    onTeamClick?.({ side: "away", ...awayTeam });
     setState((draft) => {
-      draft.activeTeam = "right";
+      draft.activeTeam = "away";
     });
   };
   return (
     <div className={`colorful-team-team ${showActive ? "active" : "inactive"}`}>
       <div
-        className={`left ${activeTeam === "left" ? "active" : "inactive"}`}
+        className={`home ${activeTeam === "home" ? "active" : "inactive"}`}
         onClick={onLeftClick}
       >
         <div className="info">
           <div className="circle">
             <ProgressCircle
-              percent={leftTeam.score}
+              percent={homeTeam.score}
               style={{
                 "--size": "36px",
                 "--fill-color": "rgba(255,255,255, 0.8)",
@@ -58,8 +58,8 @@ const ColorfulTeamTeam: React.FC<ColorfulTeamteamProps> = ({
           </div>
 
           <div className="flag">
-            <img src={leftTeam.flagUrl} />
-            <div className="name">{leftTeam.name}</div>
+            <img src={homeTeam.flagUrl} />
+            <div className="name">{homeTeam.name}</div>
             {showActive && (
               <div className="arrow">
                 <IconFont type="euro-icon-a-jiantouhong" />
@@ -72,13 +72,13 @@ const ColorfulTeamTeam: React.FC<ColorfulTeamteamProps> = ({
         <ColorfulButton>{title}</ColorfulButton>
       </div>
       <div
-        className={`right ${activeTeam === "right" ? "active" : "inactive"}`}
+        className={`away ${activeTeam === "away" ? "active" : "inactive"}`}
         onClick={onRightClick}
       >
         <div className="info">
           <div className="flag">
-            <img src={rightTeam.flagUrl} />
-            <div className="name">{rightTeam.name}</div>
+            <img src={awayTeam.flagUrl} />
+            <div className="name">{awayTeam.name}</div>
             {showActive && (
               <div className="arrow">
                 <IconFont type="euro-icon-a-jiantoulan" />
@@ -87,7 +87,7 @@ const ColorfulTeamTeam: React.FC<ColorfulTeamteamProps> = ({
           </div>
           <div className="circle">
             <ProgressCircle
-              percent={rightTeam.score}
+              percent={awayTeam.score}
               style={{
                 "--size": "36px",
                 "--fill-color": "rgba(255,255,255, 0.8)",

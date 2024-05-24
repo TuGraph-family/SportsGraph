@@ -87,3 +87,14 @@ export interface VoteInfo extends CommonResponseResult {
     resultSet: Array<VoteInfoResult>;
   };
 }
+
+export interface PersonalTacitInfoResult {
+  value_rank: string;
+  a_id: string;
+}
+
+export interface TeamPersonalTacitInfo extends CommonResponseResult {
+  data: {
+    resultSet: Array<PersonalTacitInfoResult>;
+  };
+}
