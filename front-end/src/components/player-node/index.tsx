@@ -23,13 +23,14 @@ const PlayerNode: React.FC<PlayerNodeProps> = React.memo(({ playerInfo }) => {
     player_name,
     nodeSize = 40,
   } = playerInfo;
-  const mapWidth = nodeSize * ratio;
+  const mapWidth = nodeSize * ratio + 30;
   const width =
     mapWidth < minWidth ? minWidth : mapWidth > maxWidth ? maxWidth : mapWidth;
   const mapFontSize = width * fontSizeRatio;
   const fontSize = mapFontSize < maxFontSize ? mapFontSize : maxFontSize;
   const shirtFontSize =
     mapFontSize < maxShirtNumberFontSize ? mapFontSize : maxShirtNumberFontSize;
+
   return (
     <div className="player-node">
       <div className={`shirt`} style={{ width, height: width - 3 }}>

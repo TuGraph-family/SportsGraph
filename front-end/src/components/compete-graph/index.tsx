@@ -52,6 +52,9 @@ const CompeteGraph: React.FC<CompeteGraphProps> = ({
             }
             return [nodeSize, nodeSize * 2];
           },
+          zIndex: (d: any) => {
+            return d.data.zIndex;
+          },
         },
       },
       // layout: {

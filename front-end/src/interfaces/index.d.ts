@@ -107,3 +107,13 @@ export interface CompetePersonalInfo extends PlayersInfoResult {
   y?: number;
   nodeSize?: number;
 }
+export interface PersonalTacitInfoResult {
+  value_rank: string;
+  a_id: string;
+}
+
+export interface TeamPersonalTacitInfo extends CommonResponseResult {
+  data: {
+    resultSet: Array<PersonalTacitInfoResult>;
+  };
+}
