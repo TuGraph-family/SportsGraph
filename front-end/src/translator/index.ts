@@ -101,7 +101,7 @@ export const playerTacitInfoTranslator = (res: any) => {
     player_enName: resultSet[0].a_personEnName,
     x: 180,
     y: 180,
-    nodeSize: 300,
+    nodeSize: 100,
   };
   // 计算周边点坐标
   const nodeXY = calculateNeighborPoints(
@@ -119,7 +119,7 @@ export const playerTacitInfoTranslator = (res: any) => {
       player_id: item?.b_id,
       player_enName: item.b_personEnName,
       ...nodeXY?.[index],
-      nodeSize: 300,
+      nodeSize: 100,
     };
   });
 

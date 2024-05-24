@@ -10,6 +10,8 @@ import PlayerNode from "@/components/player-node";
 import { PlayersInfoResult } from "@/interfaces";
 import { GraphData } from "@antv/g6";
 import { CloseOutline } from "antd-mobile-icons";
+import { calculateNeighborPoints } from "@/utils";
+
 interface CompetePersonalModalProps {
   visible: boolean;
   onClose: () => void;
@@ -17,6 +19,12 @@ interface CompetePersonalModalProps {
   allPlayer: Array<PlayersInfoResult>;
 }
 
+const centerOffsetX = 40;
+const centerOffsetY = 70;
+const graphMinSize = 200;
+const graphMaxSize = 480;
+const mappedValue = 150;
+const radioOffset = 25;
 const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
   visible,
   onClose,
@@ -35,13 +43,22 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
   const { run: runGetPlayerTacitInfo, loading: loadingGetPlayerTacitInfo } =
     useRequest(getPlayerCompeteInfo, { manual: true });
 
-  const onClickNode = (node: PlayersInfoResult) => {
-    setState((draft) => {
-      draft.competeCenterPlayer = node;
-    });
-  };
-
   const graphData = useMemo(() => {
+    const container = document.getElementById("personal-graph");
+    const radio = Math.min(container?.clientWidth!, container?.clientHeight!);
+    const nodeSize =
+      ((radio - graphMinSize) / (graphMaxSize - graphMinSize)) * mappedValue;
+    const centerXY = {
+      x: (container?.clientWidth! - centerOffsetX) / 2,
+      y: (container?.clientHeight! - centerOffsetY) / 2,
+    };
+    const nodeXY = calculateNeighborPoints(
+      centerXY?.x,
+      centerXY.y,
+      radio / 2 - radioOffset,
+      competeGraphData?.nodes?.length ? competeGraphData?.nodes?.length - 1 : 1
+    );
+    let nodeIndex = 0;
     const newNodes = competeGraphData?.nodes?.map((node) => {
       if (node?.id === node?.a_id) {
         const playerInfo = allPlayer?.find((item) => {
@@ -49,17 +66,22 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
         });
         return {
           ...node,
+          ...centerXY,
           player_shirtnumber: playerInfo?.player_shirtnumber,
           isTeamA: playerInfo?.isTeamA,
+          nodeSize,
         };
       } else {
         const playerInfo = allPlayer?.find((item) => {
           return item.player_id === node.b_id;
         });
+        nodeIndex += 1;
         return {
           ...node,
+          ...nodeXY[nodeIndex - 1],
           player_shirtnumber: playerInfo?.player_shirtnumber,
           isTeamA: playerInfo?.isTeamA,
+          nodeSize,
         };
       }
     });
@@ -67,7 +89,14 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
       const isTeamA = allPlayer?.find((item) => {
         return item.player_id === edge.source;
       })?.isTeamA;
-      return { ...edge, isTeamA: isTeamA };
+      return {
+        ...edge,
+        isTeamA: isTeamA,
+        stroke:
+          isTeamA === "1"
+            ? `linear-gradient(${edge?.deg}deg,rgba(82, 9, 29, 1) 0%,rgba(159, 4, 13, 0.9) ${edge?.percentage}%,rgba(22, 119, 255, 1) ${edge?.percentage}%, rgba(21, 52, 90, 0.9) 100% )`
+            : `linear-gradient(${edge?.deg}deg,rgba(21, 52, 90, 0.9) 0%,rgba(22, 119, 255, 1) ${edge?.percentage}%,rgba(159, 4, 13, 0.9) ${edge?.percentage}%, rgba(82, 9, 29, 1) 100% )`,
+      };
     });
     setState((draft) => {
       draft.competeCenterPlayer = newNodes?.[0] as unknown as PlayersInfoResult;
@@ -95,8 +124,7 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
         <div className="compete-personal-graph">
           <CompetePersonalGraph
             graphData={graphData}
-            containerId="personal"
-            // onClickNode={onClickNode}
+            containerId="personal-graph"
           />
         </div>
         {competeCenterPlayer ? (

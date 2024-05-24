@@ -3,7 +3,9 @@ import { Graph, GraphData, NodeEvent } from "@antv/g6";
 import React, { useEffect } from "react";
 import { useImmer } from "use-immer";
 import PlayerNode from "../player-node";
-import CompeteEdge from "../compete-edge";
+import { registerAnimateLine } from "../animate-line";
+
+registerAnimateLine();
 
 interface CompetePersonalGraphProps {
   graphData: GraphData;
@@ -26,6 +28,8 @@ const CompetePersonalGraph: React.FC<CompetePersonalGraphProps> = ({
       background: "transparent",
       container: containerId,
       data: graphData,
+      autoFit: { type: "center", animation: true },
+      zoom: 0.9,
       node: {
         type: "react",
         style: {
@@ -35,23 +39,25 @@ const CompetePersonalGraph: React.FC<CompetePersonalGraphProps> = ({
           component: (data: PlayersInfoResult) => (
             <PlayerNode playerInfo={data} />
           ),
-          size: [50, 90],
+          size: [10, 70],
         },
       },
       edge: {
+        type: "path-in-line",
         style: {
-          stroke: (d: any) => {
-            const { isTeamA, deg, percentage } = d;
-            return isTeamA === "1"
-              ? `linear-gradient(${deg}deg,rgba(82, 9, 29, 1) 0%,rgba(159, 4, 13, 0.9) ${percentage}%,rgba(22, 119, 255, 1) ${percentage}%, rgba(21, 52, 90, 0.9) 100% )`
-              : `linear-gradient(${deg}deg,rgba(21, 52, 90, 0.9) 0%,rgba(22, 119, 255, 1) ${percentage}%,rgba(159, 4, 13, 0.9) ${percentage}%, rgba(82, 9, 29, 1) 100% )`;
-          },
+          stroke: (d: any) => d.stroke,
           lineWidth: 7,
           halo: true,
           haloStroke: "#fff",
-          haloStrokeWidth: (d) => Number(d.playerValue),
-          haloLineWidth: (d) => Number(d.playerValue) + 2,
+          haloStrokeWidth: 5,
+          haloLineWidth: 5,
+          haloShadowColor: "#fff",
           haloShadowBlur: 20,
+        },
+        animation: {
+          // disable default enter and exit animation
+          enter: false,
+          exit: false,
         },
       },
     });
@@ -67,21 +73,9 @@ const CompetePersonalGraph: React.FC<CompetePersonalGraphProps> = ({
         onClickNode?.(graph.getNodeData(event?.target?.id));
       });
       graph.render();
-      graph?.on("afterrender", () => {
-        graph.fitView();
-      });
     }
     return () => graph?.destroy();
   }, [graphData]);
-
-  // useEffect(() => {
-  //   const c = document.getElementById(containerId);
-  //   c?.addEventListener("reset", () => {
-  //     console.log("323");
-  //     graph?.fitView({ direction: "both", when: "overflow" });
-  //     graph?.render();
-  //   });
-  // }, [graph, containerId]);
 
   return (
     <div className="compete-personal-graph">
