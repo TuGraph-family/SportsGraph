@@ -182,6 +182,39 @@ export const getPlayerTacitInfo = (params: {
   });
 };
 
+export const getPlayerCompeteInfo = (params: {
+  id: string;
+  isteama: string;
+  playerId: string;
+}) => {
+  const { id, isteama, playerId } = params;
+  return request("/tugraph/api/template/39/executeQueryTemplate", {
+    method: "POST",
+    data: {
+      templateParameterList: [
+        {
+          parameterName: "matchid",
+          parameterValue: id,
+          valueType: "LONG",
+        },
+        {
+          parameterName: "isteama",
+          parameterValue: isteama,
+          valueType: "LONG",
+        },
+        {
+          parameterName: "playerid",
+          parameterValue: playerId,
+          valueType: "LONG",
+        },
+      ],
+      ...COMMOM_BODY,
+    },
+  }).then((data) => {
+    return playerTacitInfoTranslator(data);
+  });
+};
+
 export const login = () => {
   return request("/tugraph/api/login/auth_free").then((res) => {
     const date = new Date();

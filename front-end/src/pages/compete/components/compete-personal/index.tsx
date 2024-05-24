@@ -3,7 +3,7 @@ import "./index.less";
 import { Mask } from "antd-mobile";
 import { useImmer } from "use-immer";
 import Loading from "@/components/loading";
-import { getPlayerTacitInfo } from "@/services";
+import { getPlayerCompeteInfo } from "@/services";
 import { useRequest } from "@umijs/max";
 import CompetePersonalGraph from "@/components/compete-personal-graph";
 import PlayerNode from "@/components/player-node";
@@ -33,7 +33,7 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
 
   const { competeCenterPlayer, competeGraphData } = state;
   const { run: runGetPlayerTacitInfo, loading: loadingGetPlayerTacitInfo } =
-    useRequest(getPlayerTacitInfo, { manual: true });
+    useRequest(getPlayerCompeteInfo, { manual: true });
 
   const onClickNode = (node: PlayersInfoResult) => {
     setState((draft) => {

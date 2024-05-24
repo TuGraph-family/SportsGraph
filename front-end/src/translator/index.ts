@@ -1,4 +1,4 @@
-import { GameInfo } from "@/interfaces";
+import { CompetePersonalInfo, GameInfo } from "@/interfaces";
 import {
   calculateAngleBetweenPoints,
   calculateNeighborPoints,
@@ -72,7 +72,25 @@ export const playerTacitInfoTranslator = (res: any) => {
   }
 
   const { resultSet = [] } = res.data;
-
+  // 根据b_id，获取两个对抗值playerValue为中心对抗外围，reverse_direction_value为外围对抗中心
+  let tempMap: any = {};
+  resultSet.forEach((item: CompetePersonalInfo) => {
+    const key = item.b_id;
+    if (!tempMap[key]) {
+      tempMap[key] = item;
+    } else {
+      if (
+        (tempMap[key].src_id === tempMap[key].a_id &&
+          item?.src_id !== item?.a_id) ||
+        (item?.src_id === item?.a_id &&
+          tempMap[key].src_id !== tempMap[key].a_id)
+      ) {
+        tempMap[key].reverse_direction_value = item.playerValue;
+      }
+    }
+  });
+  const uniqueResultSet = Object.values(tempMap) as Array<CompetePersonalInfo>;
+  // 中心点
   const competeCenterPlayer = {
     ...(resultSet[0] || {}),
     id: resultSet[0]?.a_id,
@@ -84,13 +102,14 @@ export const playerTacitInfoTranslator = (res: any) => {
     y: 180,
     nodeSize: 300,
   };
-  const uniqueResultSet = uniqueArrayById(resultSet, "b_id");
+  // 计算周边点坐标
   const nodeXY = calculateNeighborPoints(
     180,
     180,
     170,
     uniqueResultSet?.length
   );
+  // 向周边点内加坐标
   const competePlayerNode = uniqueResultSet?.map((item, index) => {
     return {
       ...item,
@@ -104,11 +123,15 @@ export const playerTacitInfoTranslator = (res: any) => {
   });
 
   const competePlayerEdge = competePlayerNode?.map((item) => {
-    const percentage = (item.playerValue / 30) * 100;
+    const { playerValue, reverse_direction_value } = item;
+    const percentage =
+      (Number(playerValue) /
+        (Number(playerValue) + Number(reverse_direction_value))) *
+      100;
     const targetNode = competePlayerNode?.find((node) => node.id === item.b_id);
     const deg = calculateAngleBetweenPoints(
       { x: competeCenterPlayer?.x, y: competeCenterPlayer?.y },
-      { x: targetNode?.x, y: targetNode?.y }
+      { x: targetNode?.x as number, y: targetNode?.y as number }
     );
     return {
       source: item.a_id,
