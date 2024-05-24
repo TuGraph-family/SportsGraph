@@ -13,13 +13,14 @@ import {
   GameInfoPlayerResult,
   PersonalTacitInfoResult,
   PlayersInfoResult,
-  TeamTacitInfoResult
+  TeamTacitInfoResult,
 } from "@/interfaces";
 import {
   getGameInfo,
+  getPlayerTacitInfo,
   getPlayersInfo,
+  getTeamTacitInfo,
   getTeamPersonalTacitInfo,
-  getTeamTacitInfo
 } from "@/services";
 import { parseSearch } from "@/utils";
 import { Edge, GraphData } from "@antv/g6";
@@ -28,6 +29,9 @@ import React, { useEffect, useMemo } from "react";
 import { history } from "umi";
 import { useImmer } from "use-immer";
 import "./index.less";
+
+import { personalTacitTranslator } from "@/translator";
+import PersonalTacit from "./components/personal-tacit";
 
 const TacitPage: React.FC = () => {
   const [state, setState] = useImmer<{
@@ -39,18 +43,21 @@ const TacitPage: React.FC = () => {
     homeTacitValueList: Array<TeamTacitInfoResult>;
     awayTacitValueList: Array<TeamTacitInfoResult>;
     playersInfo: Array<PlayersInfoResult>;
+    playerInfo?: PlayersInfoResult;
+    personalTacitData: GraphData;
+    visible: boolean;
     homePersonalTacitList: Array<PersonalTacitInfoResult>;
     awayPersonalTacitList: Array<PersonalTacitInfoResult>;
   }>({
     homeTeam: {
       name: "加载中...",
       flagUrl: DEFAULT_FLAG,
-      score: 0
+      score: 0,
     },
     awayTeam: {
       name: "加载中...",
       flagUrl: DEFAULT_FLAG,
-      score: 0
+      score: 0,
     },
     homeGraphData: { nodes: [], edges: [] },
     awayGraphData: { nodes: [], edges: [] },
@@ -59,7 +66,9 @@ const TacitPage: React.FC = () => {
     awayTacitValueList: [],
     playersInfo: [],
     homePersonalTacitList: [],
-    awayPersonalTacitList: []
+    awayPersonalTacitList: [],
+    personalTacitData: {},
+    visible: false,
   });
   const {
     homeTeam,
@@ -69,9 +78,12 @@ const TacitPage: React.FC = () => {
     awayTacitValueList,
     homeGraphData,
     awayGraphData,
-    playersInfo,
     homePersonalTacitList,
-    awayPersonalTacitList
+    awayPersonalTacitList,
+    playersInfo,
+    playerInfo,
+    personalTacitData,
+    visible,
   } = state;
   const isHome = teamSide === "home";
 
@@ -79,7 +91,7 @@ const TacitPage: React.FC = () => {
   const { loading: loadingGetGameInfo, run: runGetGameInfo } = useRequest(
     getGameInfo,
     {
-      manual: true
+      manual: true,
     }
   );
   const { run: runGetTeamTacitInfo, loading: loadingGetTeamTacitInfo } =
@@ -90,10 +102,47 @@ const TacitPage: React.FC = () => {
     { manual: true }
   );
 
+  const { run: runGetPlayerTacitInfo } = useRequest(getPlayerTacitInfo, {
+    manual: true,
+  });
+
   const {
     run: runGetTeamPersonalTacitInfo,
-    loading: loadingGetTeamPersonalTacitInfo
+    loading: loadingGetTeamPersonalTacitInfo,
   } = useRequest(getTeamPersonalTacitInfo, { manual: true });
+
+  const onNodeClick = (
+    playerid: string,
+    playersInfo: Array<PlayersInfoResult>
+  ) => {
+    const selectedPlayerInfo = playersInfo.find(
+      (item) => item.player_id === playerid
+    );
+    const isteama = selectedPlayerInfo?.isTeamA || "1";
+
+    runGetPlayerTacitInfo({ id, isteama, playerid }).then((res) => {
+      const list = res?.resultSet?.sort(
+        (a: Record<string, string>, b: Record<string, string>) =>
+          Number(b.playerValue) - Number(a.playerValue)
+      );
+
+      if (!list.length) return;
+      const isHome = isteama === "1";
+
+      const data = personalTacitTranslator(
+        list,
+        selectedPlayerInfo!,
+        playersInfo,
+        isHome
+      );
+
+      setState((draft) => {
+        draft.personalTacitData = data;
+        draft.playerInfo = selectedPlayerInfo;
+        draft.visible = true;
+      });
+    });
+  };
 
   const onNext = () => {
     history.push(`/compete?id=${id}`);
@@ -106,10 +155,16 @@ const TacitPage: React.FC = () => {
       draft.teamSide = params.side;
     });
   };
+  const setVisible = (val: boolean) => {
+    setState((draft) => {
+      draft.visible = val;
+    });
+  };
+
   const graphData = useMemo(() => {
     const data: GraphData = {
       nodes: [],
-      edges: []
+      edges: [],
     };
     const currentData = isHome ? homeGraphData : awayGraphData;
     const tacitValueList = isHome ? homeTacitValueList : awayTacitValueList;
@@ -123,7 +178,7 @@ const TacitPage: React.FC = () => {
         return {
           ...item,
           ...playerInfo,
-          nodeSize: Number(playerTacitInfo?.value_rank || 200)
+          nodeSize: Number(playerTacitInfo?.value_rank || 200),
         };
       });
       data.edges = tacitValueList.map((item) => {
@@ -134,7 +189,7 @@ const TacitPage: React.FC = () => {
           playerValue,
           stroke: isHome
             ? "linear-gradient(90deg, #80111D, #A0040D, #80111D)"
-            : "linear-gradient(#0F2EAB, rgba(20,60,219,0.9),#0F2EAB)"
+            : "linear-gradient(#0F2EAB, rgba(20,60,219,0.9),#0F2EAB)",
         };
       });
     }
@@ -148,7 +203,7 @@ const TacitPage: React.FC = () => {
     awayTacitValueList,
     playersInfo,
     homePersonalTacitList,
-    awayPersonalTacitList
+    awayPersonalTacitList,
   ]);
   const hasGraphData = useMemo(() => !!graphData.nodes?.length, [graphData]);
   useEffect(() => {
@@ -160,24 +215,24 @@ const TacitPage: React.FC = () => {
           team_a_country,
           team_a_national_flag,
           team_b_country,
-          team_b_national_flag
+          team_b_national_flag,
         } = data.resultSet?.[0] || {};
         setState((draft) => {
           draft.homeTeam = {
             name: team_a_country,
             flagUrl: team_a_national_flag,
-            score: parseInt(homeWinProbability)
+            score: parseInt(homeWinProbability),
           };
           draft.awayTeam = {
             name: team_b_country,
             flagUrl: team_b_national_flag,
-            score: parseInt(awayWinProbability)
+            score: parseInt(awayWinProbability),
           };
           draft.homeGraphData = {
-            nodes: data.playerAList
+            nodes: data.playerAList,
           };
           draft.awayGraphData = {
-            nodes: data.playerBList
+            nodes: data.playerBList,
           };
         });
       }
@@ -249,7 +304,19 @@ const TacitPage: React.FC = () => {
           </div>
         )}
         <FootballField startAnimate={hasGraphData} />
-        <TacitGraph graphData={graphData} containerId="home" />
+        <PersonalTacit
+          personalTacitData={personalTacitData}
+          playerInfo={playerInfo}
+          visible={visible}
+          setVisible={setVisible}
+        />
+        <TacitGraph
+          style={{ opacity: visible ? 0 : 1 }}
+          graphData={graphData}
+          onNodeClick={onNodeClick}
+          playersInfo={playersInfo}
+          containerId="home"
+        />
       </div>
 
       <div className="footer">
