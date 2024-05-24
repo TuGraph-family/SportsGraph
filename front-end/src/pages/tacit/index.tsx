@@ -102,9 +102,10 @@ const TacitPage: React.FC = () => {
     { manual: true }
   );
 
-  const { run: runGetPlayerTacitInfo,loading:loadingGetPlayerTacitInfo } = useRequest(getPlayerTacitInfo, {
-    manual: true,
-  });
+  const { run: runGetPlayerTacitInfo, loading: loadingGetPlayerTacitInfo } =
+    useRequest(getPlayerTacitInfo, {
+      manual: true,
+    });
 
   const {
     run: runGetTeamPersonalTacitInfo,
@@ -119,7 +120,6 @@ const TacitPage: React.FC = () => {
       (item) => item.player_id === playerid
     );
     const isteama = selectedPlayerInfo?.isTeamA || "1";
-
     runGetPlayerTacitInfo({ id, isteama, playerid }).then((res) => {
       const list = res?.resultSet?.sort(
         (a: Record<string, string>, b: Record<string, string>) =>
@@ -315,7 +315,6 @@ const TacitPage: React.FC = () => {
           style={{ opacity: visible ? 0 : 1 }}
           graphData={graphData}
           onNodeClick={onNodeClick}
-          playersInfo={playersInfo}
           containerId="home"
         />
       </div>
