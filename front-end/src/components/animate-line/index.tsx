@@ -4,10 +4,13 @@ class PathInLine extends Line {
   onCreate() {
     const shape: any = this.shapeMap.key;
     const length = shape.getTotalLength();
-    shape.animate([{ lineDash: [0, length] }, { lineDash: [length, 0] }], {
-      duration: 500,
-      fill: "both"
-    });
+    shape.animate(
+      [{ lineDash: [0, length + 10] }, { lineDash: [10 + length, 0] }],
+      {
+        duration: 500,
+        fill: "both"
+      }
+    );
   }
 }
 export const registerAnimateLine = () => {

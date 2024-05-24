@@ -36,9 +36,9 @@ const HomePage: React.FC = () => {
     });
   }, []);
   return (
-    <div className="home">
+    <div className="home-page">
       <Loading loading={loadingGetFutureGameList} />
-      <div className="home-top">
+      <div className="home-page-top">
         <TitleDesc title="智猜足球" desc="用图智能找出比赛中的关键组合" />
         <Swiper
           loop
@@ -65,7 +65,7 @@ const HomePage: React.FC = () => {
             const votePercent = (teamAVote / voteCount) * 100;
             return (
               <Swiper.Item key={index}>
-                <div className="home-top-game">
+                <div className="home-page-top-game">
                   <div className="center-bg">
                     <TopBg />
                   </div>
@@ -115,8 +115,8 @@ const HomePage: React.FC = () => {
                   </div>
                   <div className="center-vote">
                     <Vote
-                      team1={{ name: team_a_country, id: "" }}
-                      team2={{ name: team_b_country, id: "" }}
+                      team1={{ name: team_a_country, isHome: true }}
+                      team2={{ name: team_b_country, isHome: false }}
                       count={voteCount}
                       percent={votePercent}
                     />
@@ -127,7 +127,7 @@ const HomePage: React.FC = () => {
           })}
         </Swiper>
       </div>
-      <div className="home-list">
+      <div className="home-page-list">
         <Tabs>
           <Tabs.Tab title="历史预测" key="history">
             <ScheduleList

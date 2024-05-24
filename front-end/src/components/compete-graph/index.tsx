@@ -48,6 +48,9 @@ const CompeteGraph: React.FC<CompeteGraphProps> = ({
               nodeSize = maxNodeSize;
             }
             return [nodeSize, nodeSize * 2];
+          },
+          zIndex: (d: any) => {
+            return d.data.zIndex;
           }
         }
       }

@@ -13,6 +13,10 @@ interface TacitGraphProps {
   style?: React.CSSProperties;
 }
 
+const nodeSizeRatio = 0.3;
+const minNodeSize = 60;
+const maxNodeSize = 70;
+
 const TacitGraph: React.FC<TacitGraphProps> = ({
   graphData,
   containerId,
@@ -22,14 +26,14 @@ const TacitGraph: React.FC<TacitGraphProps> = ({
   const { graph } = state;
   useEffect(() => {
     const container = document.getElementById(containerId);
-    const zoomY = container?.clientHeight! * 0.002;
+    const zoomY = container?.clientHeight! * 0.0022;
     const zoomX = container?.clientWidth! * 0.0028;
     const graph = new Graph({
-      // renderer: () => new Renderer(),
       background: "transparent",
       container: containerId,
       animation: true,
       data: graphData,
+      zoom: 0.9,
       node: {
         type: "react",
         style: {
@@ -39,7 +43,15 @@ const TacitGraph: React.FC<TacitGraphProps> = ({
           component: (data: PlayersInfoResult) => (
             <PlayerNode playerInfo={data} />
           ),
-          size: [10, 45]
+          size: (d: any) => {
+            let nodeSize = d.nodeSize * nodeSizeRatio;
+            if (nodeSize < minNodeSize) {
+              nodeSize = minNodeSize;
+            } else if (nodeSize > maxNodeSize) {
+              nodeSize = maxNodeSize;
+            }
+            return [nodeSize * 0.1, nodeSize * 1.2];
+          }
         }
       },
       edge: {

@@ -23,7 +23,7 @@ import { useImmer } from "use-immer";
 import "./index.less";
 
 const winYRatio = 0.7;
-const loseYRatio = 0.5;
+const loseYRatio = 0.55;
 
 const winXRatio = 1;
 const loseXRatio = 0.7;
@@ -112,7 +112,8 @@ const CompetePage: React.FC = () => {
           y: !isWin
             ? mapY - container?.clientHeight! * 2
             : container?.clientHeight! - mapY + container?.clientHeight! * 2,
-          x: isWin ? mapX : mapX + 50
+          x: isWin ? mapX : mapX + 50,
+          zIndex: isWin ? 0 : y
         }
       };
     });
@@ -230,8 +231,8 @@ const CompetePage: React.FC = () => {
       </div>
       <div className="compete-team">
         <ColorfulTeamTeam
-          leftTeam={leftTeam!}
-          rightTeam={rightTeam!}
+          homeTeam={leftTeam!}
+          awayTeam={rightTeam!}
           title="对抗值"
         />
       </div>
