@@ -102,7 +102,7 @@ const TacitPage: React.FC = () => {
     { manual: true }
   );
 
-  const { run: runGetPlayerTacitInfo } = useRequest(getPlayerTacitInfo, {
+  const { run: runGetPlayerTacitInfo,loading:loadingGetPlayerTacitInfo } = useRequest(getPlayerTacitInfo, {
     manual: true,
   });
 
@@ -309,6 +309,7 @@ const TacitPage: React.FC = () => {
           playerInfo={playerInfo}
           visible={visible}
           setVisible={setVisible}
+          loadingGetPlayerTacitInfo={loadingGetPlayerTacitInfo}
         />
         <TacitGraph
           style={{ opacity: visible ? 0 : 1 }}
