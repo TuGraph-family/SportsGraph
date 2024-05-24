@@ -1,6 +1,6 @@
 import { PlayersInfoResult } from "@/interfaces";
 import { Renderer } from "@antv/g-svg";
-import { Graph, GraphData, NodeData, NodeEvent } from "@antv/g6";
+import { Graph, GraphData, NodeEvent } from "@antv/g6";
 import React, { useEffect } from "react";
 import { useImmer } from "use-immer";
 import PlayerNode from "../player-node";
@@ -21,7 +21,7 @@ const zoomRatio = 0.004;
 const CompeteGraph: React.FC<CompeteGraphProps> = ({
   containerId,
   graphData,
-  onClickNode,
+  onClickNode
 }) => {
   const [state, setState] = useImmer<{ graph?: Graph }>({});
   const { graph } = state;
@@ -50,13 +50,13 @@ const CompeteGraph: React.FC<CompeteGraphProps> = ({
             } else if (nodeSize > maxNodeSize) {
               nodeSize = maxNodeSize;
             }
-            return [nodeSize, nodeSize * 2];
+            return [nodeSize, nodeSize * 1.2];
           },
           zIndex: (d: any) => {
             return d.data.zIndex;
-          },
-        },
-      },
+          }
+        }
+      }
       // layout: {
       //   type: "d3force",
       //   center: { x: 180, y: 70 },
