@@ -4,10 +4,12 @@
   height: 100vh;
   flex-direction: column;
   justify-content: flex-end;
+
   .personal-graph {
     position: relative;
     height: 50vh;
     width: 100%;
+
     .close {
       position: absolute;
       right: 30px;
@@ -20,6 +22,7 @@
   .personal-tacit-graph {
     width: 100%;
     height: 100%;
+
     #g-canvas-camera {
       overflow: visible !important;
     }
@@ -37,9 +40,11 @@
     flex-direction: column;
 
     .player {
+      margin-top: 8px;
       display: flex;
       align-items: center;
       width: 100%;
+
       .player-node {
         width: 20%;
       }
@@ -49,7 +54,7 @@
       font-size: 10px;
       color: #ffffff8f;
       font-weight: 500;
-      margin-bottom: 6px;
+      margin-bottom: 2px;
     }
 
     .player-en-name {
@@ -59,7 +64,7 @@
     }
 
     .description {
-      margin: 0 16px 0;
+      margin: 4px 16px 0;
       font-size: 14px;
       color: #ffffff;
       line-height: 20px;
@@ -77,11 +82,10 @@
     right: 0;
     height: 2px;
     z-index: 10;
-    background: linear-gradient(
-      90deg,
-      #ffffff00 3%,
-      #ffffff 52%,
-      #ffffff00 100%
-    );
+    background: linear-gradient(90deg,
+        #ffffff00 3%,
+        #ffffff 52%,
+        #ffffff00 100%);
+    opacity: 0.72;
   }
 }

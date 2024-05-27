@@ -18,7 +18,7 @@ import "./index.less";
 
 const HomePage: React.FC = () => {
   const [state, setState] = useImmer<{ futureList: any[] }>({
-    futureList: [{}]
+    futureList: [{}],
   });
   const { futureList } = state;
   const { run: runGetFutureGameList, loading: loadingGetFutureGameList } =
@@ -26,7 +26,7 @@ const HomePage: React.FC = () => {
   useEffect(() => {
     runGetFutureGameList({
       skip: "0",
-      limit: "4"
+      limit: "4",
     }).then((data) => {
       if (data) {
         setState((draft) => {
@@ -46,7 +46,7 @@ const HomePage: React.FC = () => {
             console.log(i, "onIndexChange1");
           }}
           indicatorProps={{
-            color: "white"
+            color: "white",
           }}
         >
           {futureList.map((item, index) => {
@@ -59,8 +59,9 @@ const HomePage: React.FC = () => {
               teamAVote,
               teamBVote,
               awayWinProbability,
-              homeWinProbability
+              homeWinProbability,
             } = item;
+
             const voteCount = Number(teamAVote) + Number(teamBVote);
             const votePercent = (teamAVote / voteCount) * 100;
             return (
@@ -73,11 +74,11 @@ const HomePage: React.FC = () => {
                     <Teamteam
                       leftTeam={{
                         name: team_a_country,
-                        flagUrl: team_a_national_flag
+                        flagUrl: team_a_national_flag,
                       }}
                       rightTeam={{
                         name: team_b_country,
-                        flagUrl: team_b_national_flag
+                        flagUrl: team_b_national_flag,
                       }}
                     />
                   </div>
@@ -115,10 +116,13 @@ const HomePage: React.FC = () => {
                   </div>
                   <div className="center-vote">
                     <Vote
-                      team1={{ name: team_a_country, isHome: true }}
-                      team2={{ name: team_b_country, isHome: false }}
+                      team1={{ name: team_a_country, isHome: true,teamAVote,
+                        teamBVote, }}
+                      team2={{ name: team_b_country, isHome: false,teamAVote,
+                        teamBVote, }}
                       count={voteCount}
                       percent={votePercent}
+                      matchId={matchId}
                     />
                   </div>
                 </div>
@@ -134,7 +138,7 @@ const HomePage: React.FC = () => {
               service={({ pageNum, pageSize }) =>
                 getHistoryGameList({
                   skip: `${(pageNum - 1) * pageSize}`,
-                  limit: `${pageSize}`
+                  limit: `${pageSize}`,
                 })
               }
             />
@@ -144,7 +148,7 @@ const HomePage: React.FC = () => {
               service={({ pageNum, pageSize }) =>
                 getFutureGameList({
                   skip: `${(pageNum - 1) * pageSize}`,
-                  limit: `${pageSize}`
+                  limit: `${pageSize}`,
                 })
               }
             />

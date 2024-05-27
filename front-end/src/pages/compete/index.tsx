@@ -12,7 +12,7 @@ import { DEFAULT_FLAG } from "@/constant";
 import {
   GameInfoPlayerResult,
   PlayersInfoResult,
-  TeamCompeteInfoResult
+  TeamCompeteInfoResult,
 } from "@/interfaces";
 import { getGameInfo, getPlayersInfo, getTeamCompeteInfo } from "@/services";
 import { parseSearch } from "@/utils";
@@ -47,12 +47,12 @@ const CompetePage: React.FC = () => {
     leftTeam: {
       name: "加载中...",
       flagUrl: DEFAULT_FLAG,
-      score: 0
+      score: 0,
     },
     rightTeam: {
       name: "加载中...",
       flagUrl: DEFAULT_FLAG,
-      score: 0
+      score: 0,
     },
     leftGraphData: { nodes: [], edges: [] },
     rightGraphData: { nodes: [], edges: [] },
@@ -61,7 +61,7 @@ const CompetePage: React.FC = () => {
     playersInfo: [],
     isHomeWin: true,
     competePersonalVisible: false,
-    competePersonalParams: undefined
+    competePersonalParams: undefined,
   });
   const {
     leftTeam,
@@ -73,13 +73,13 @@ const CompetePage: React.FC = () => {
     rightCompeteData,
     isHomeWin,
     competePersonalVisible,
-    competePersonalParams
+    competePersonalParams,
   } = state;
   const { id } = parseSearch(location.search) as any;
   const { loading: loadingGetGameInfo, run: runGetGameInfo } = useRequest(
     getGameInfo,
     {
-      manual: true
+      manual: true,
     }
   );
   const { run: runGetTeamcompeteInfo, loading: loadingGetTeamcompeteInfo } =
@@ -105,7 +105,7 @@ const CompetePage: React.FC = () => {
       draft.competePersonalParams = {
         id: id,
         isteama: nodeData?.data?.isTeamA === "1" ? "0" : "1",
-        playerId: nodeData?.id
+        playerId: nodeData?.id,
       };
       draft.competePersonalVisible = true;
     });
@@ -138,8 +138,8 @@ const CompetePage: React.FC = () => {
             ? mapY - container?.clientHeight! * 2
             : container?.clientHeight! - mapY + container?.clientHeight! * 2,
           x: isWin ? mapX : mapX + 50,
-          zIndex: isWin ? 0 : y
-        }
+          zIndex: isWin ? 0 : y,
+        },
       };
     });
     return nodes;
@@ -147,7 +147,7 @@ const CompetePage: React.FC = () => {
   const homeGraphData = useMemo(() => {
     const homeGraphData: GraphData = {
       nodes: [],
-      edges: []
+      edges: [],
     };
 
     if (
@@ -163,7 +163,7 @@ const CompetePage: React.FC = () => {
   const awayGraphData = useMemo(() => {
     const awayGraphData: GraphData = {
       nodes: [],
-      edges: []
+      edges: [],
     };
 
     if (
@@ -200,24 +200,24 @@ const CompetePage: React.FC = () => {
           team_a_country,
           team_a_national_flag,
           team_b_country,
-          team_b_national_flag
+          team_b_national_flag,
         } = data.resultSet?.[0] || {};
         setState((draft) => {
           draft.leftTeam = {
             name: team_a_country,
             flagUrl: team_a_national_flag,
-            score: parseInt(homeWinProbability)
+            score: parseInt(homeWinProbability),
           };
           draft.rightTeam = {
             name: team_b_country,
             flagUrl: team_b_national_flag,
-            score: parseInt(awayWinProbability)
+            score: parseInt(awayWinProbability),
           };
           draft.leftGraphData = {
-            nodes: data.playerAList
+            nodes: data.playerAList,
           };
           draft.rightGraphData = {
-            nodes: data.playerBList
+            nodes: data.playerBList,
           };
           draft.isHomeWin = homeWinProbability > awayWinProbability;
         });
@@ -251,7 +251,10 @@ const CompetePage: React.FC = () => {
       )}
       <Loading loading={loading} />
       <div className="compete-title">
-        <TitleDesc title="看双方对抗程度" desc="综合历史比赛、AI、大数据得出" />
+        <TitleDesc
+          title="看双方对抗程度"
+          desc="基于双方球员历史上共同比赛的胜负情况计算得出"
+        />
       </div>
       <div className="compete-team">
         <ColorfulTeamTeam
@@ -296,7 +299,7 @@ const CompetePage: React.FC = () => {
           <Button onClick={onPrev} color="default">
             上一页 <IconFont type="euro-icon-xiayiye1" />
           </Button>
-          <Button onClick={onNext} color="primary">
+          <Button className="next-page" onClick={onNext} color="primary">
             下一页 <IconFont type="euro-icon-xiayiye1" />
           </Button>
         </div>
@@ -304,7 +307,7 @@ const CompetePage: React.FC = () => {
           <div className="tooltip">
             <Tooltip>
               <SplitText id="text">
-                球衣越大，表明球员抵抗对手的能力越强。整体阵型越大，表明整体对抗度越强。
+                球衣越大，球员抵抗对手的能力越强。阵型占地越大，队伍的抵抗力越强。
               </SplitText>
             </Tooltip>
           </div>

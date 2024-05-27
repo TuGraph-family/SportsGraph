@@ -83,7 +83,12 @@ export const getGameVoteInfoById = (params: { id: string }) => {
   }).then((res) => getVoteInfoTranslator(res));
 };
 
-export const voteTeam = (params: { matchId: string; isHome: boolean }) => {
+export const voteTeam = (params: {
+  matchId: string;
+  isHome: boolean;
+  sourceTeamAVote: number;
+  sourceTeamBVote: number;
+}) => {
   return request<VoteInfo>("tugraph/api/graph/uefa/vote", {
     method: "PUT",
     params: params,

@@ -22,12 +22,13 @@ const ResultPage: React.FC = () => {
     voteInfo?: VoteInfoResult;
     isDownloading: boolean;
   }>({
-    isDownloading: false
+    isDownloading: false,
   });
   const { gameInfo, voteInfo, isDownloading } = state;
   const { teamAVote = 0, teamBVote = 0, totalVote = 0 } = voteInfo || {};
-  const voteCount = teamAVote + teamAVote;
-  const votePercent = teamAVote / voteCount;
+  const voteCount = teamAVote + teamBVote;
+  const votePercent = (teamAVote / voteCount) * 100;
+
   const { id } = parseSearch(location.search) as any;
   const {
     homeWinProbability = "0",
@@ -35,14 +36,14 @@ const ResultPage: React.FC = () => {
     team_a_national_flag,
     team_b_national_flag,
     team_a_country,
-    team_b_country
+    team_b_country,
   } = gameInfo || {};
   const isHomeWin = homeWinProbability > awayWinProbability;
 
   const { loading: loadingGetGameInfo, run: runGetGameInfo } = useRequest(
     getGameInfo,
     {
-      manual: true
+      manual: true,
     }
   );
   const { run: runGetGameVoteInfoById, loading: loadingGetGameVoteInfoById } =
@@ -85,8 +86,8 @@ const ResultPage: React.FC = () => {
       <div className="result" id="result">
         <div className="result-title">
           <TitleDesc
-            title="这场比赛 AI 更看好"
-            desc="综合历史比赛、AI、大数据得出"
+            title="这场比赛更有实力的是"
+            desc="基于历史比赛采用图计算技术分析得出"
           />
         </div>
         <div className="result-team">
@@ -124,8 +125,18 @@ const ResultPage: React.FC = () => {
           </div>
           <div className="center-vote">
             <Vote
-              team1={{ name: team_a_country || "", isHome: true }}
-              team2={{ name: team_b_country || "", isHome: false }}
+              team1={{
+                name: team_a_country || "",
+                isHome: true,
+                teamAVote,
+                teamBVote,
+              }}
+              team2={{
+                name: team_b_country || "",
+                isHome: false,
+                teamAVote,
+                teamBVote,
+              }}
               percent={votePercent}
               count={totalVote}
             />
@@ -143,7 +154,7 @@ const ResultPage: React.FC = () => {
         <Button onClick={onSavePic}>
           上一页 <IconFont type="euro-icon-xiayiye1" />
         </Button>
-        <Button onClick={jumpToHome} color="primary">
+        <Button className="more-schedule" onClick={jumpToHome} color="primary">
           更多赛程 <IconFont type="euro-icon-xiayiye1" />
         </Button>
       </div>

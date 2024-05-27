@@ -6,12 +6,14 @@
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center top;
+
   &-top {
     display: flex;
     align-items: center;
     flex-direction: column;
     padding-top: 92px;
     position: relative;
+
     &::before {
       position: absolute;
       left: 0;
@@ -22,6 +24,7 @@
       display: block;
       content: "";
     }
+
     &::after {
       content: "";
       bottom: 0;
@@ -30,60 +33,76 @@
       position: absolute;
       width: 100%;
       display: block;
+      pointer-events: none;
     }
+
     &-game {
       display: flex;
       align-items: center;
       width: 100%;
       flex-direction: column;
-      padding-bottom: 70px;
-      margin-top: 37px;
+      padding-bottom: 53px;
+      margin-top: 20px;
       position: relative;
 
       .center-bg {
         position: absolute;
         top: 15px;
       }
+
       .center-predict,
       .center-vote {
         color: #fff;
         z-index: 1;
       }
+
       .center-team {
         width: 100%;
         margin-bottom: 30px;
       }
+
       .center-predict {
         display: flex;
         margin-bottom: 20px;
+
         .predict-left,
         .predict-right {
           display: flex;
           align-items: flex-end;
         }
+
         .predict-number {
           font-family: "DingTalk-JinBuTi";
           font-size: 48px;
         }
+
         .predict-left {
           color: #fc4951;
         }
+
         .predict-right {
           color: #34b4fc;
         }
+
         .percent {
           font-size: 16px;
           font-weight: 700;
           margin-bottom: 10px;
         }
+
         .predict-vs {
           display: flex;
           align-items: center;
         }
       }
+
       .center-to-analysis {
         margin-bottom: 16px;
       }
     }
+  }
+
+  &-list {
+    margin-top: 16px;
   }
 }
