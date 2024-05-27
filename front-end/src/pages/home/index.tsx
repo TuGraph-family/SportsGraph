@@ -39,7 +39,7 @@ const HomePage: React.FC = () => {
     <div className="home-page">
       <Loading loading={loadingGetFutureGameList} />
       <div className="home-page-top">
-        <TitleDesc title="智猜足球" desc="用图智能找出比赛中的关键组合" />
+        <TitleDesc title="智猜足球" desc="智能图计算技术找出比赛中的关键组合" />
         <Swiper
           loop
           onIndexChange={(i) => {

@@ -6,6 +6,7 @@ import { useImmer } from "use-immer";
 import Slider from "../slider";
 import TriangleButton from "../triangle-button";
 import "./index.less";
+import { Toast } from "antd-mobile";
 
 interface VoteProps {
   team1: {
@@ -57,11 +58,19 @@ const Vote: React.FC<VoteProps> = ({
       isHome,
       sourceTeamAVote: teamAVote,
       sourceTeamBVote: teamBVote,
-    }).then(() => {
-      setState((draft) => {
-        draft.hasVoted = true;
-        draft.growingSide = growingSide;
-      });
+    }).then((res) => {
+      console.log({ res });
+      if (res.voteResult === "1") {
+        setState((draft) => {
+          draft.hasVoted = true;
+          draft.growingSide = growingSide;
+        });
+      } else {
+        Toast.show({
+          content: "数据异常，请稍后再试。",
+          position: "top",
+        });
+      }
     });
   };
   return (

@@ -12,7 +12,6 @@ import {
   playerTacitInfoTranslator,
 } from "@/translator";
 import { request } from "@umijs/max";
-import { uniqBy } from "lodash";
 
 const COMMOM_BODY = {
   deployEnv: "ONLINE_PRODUCTION",

@@ -88,6 +88,7 @@ export interface VoteInfoResult {
 export interface VoteInfo extends CommonResponseResult {
   data: {
     resultSet: Array<VoteInfoResult>;
+    voteResult: string;
   };
 }
 
