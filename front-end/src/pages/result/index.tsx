@@ -22,7 +22,7 @@ const ResultPage: React.FC = () => {
     voteInfo?: VoteInfoResult;
     isDownloading: boolean;
   }>({
-    isDownloading: false
+    isDownloading: false,
   });
   const { gameInfo, voteInfo, isDownloading } = state;
   const { teamAVote = 0, teamBVote = 0, totalVote = 0 } = voteInfo || {};
@@ -35,14 +35,14 @@ const ResultPage: React.FC = () => {
     team_a_national_flag,
     team_b_national_flag,
     team_a_country,
-    team_b_country
+    team_b_country,
   } = gameInfo || {};
   const isHomeWin = homeWinProbability > awayWinProbability;
 
   const { loading: loadingGetGameInfo, run: runGetGameInfo } = useRequest(
     getGameInfo,
     {
-      manual: true
+      manual: true,
     }
   );
   const { run: runGetGameVoteInfoById, loading: loadingGetGameVoteInfoById } =
@@ -86,7 +86,7 @@ const ResultPage: React.FC = () => {
         <div className="result-title">
           <TitleDesc
             title="这场比赛 AI 更看好"
-            desc="综合历史比赛、AI、大数据得出"
+            desc="基于历史比赛采用图计算技术分析得出"
           />
         </div>
         <div className="result-team">

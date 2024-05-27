@@ -18,7 +18,7 @@ import "./index.less";
 
 const HomePage: React.FC = () => {
   const [state, setState] = useImmer<{ futureList: any[] }>({
-    futureList: [{}]
+    futureList: [{}],
   });
   const { futureList } = state;
   const { run: runGetFutureGameList, loading: loadingGetFutureGameList } =
@@ -26,7 +26,7 @@ const HomePage: React.FC = () => {
   useEffect(() => {
     runGetFutureGameList({
       skip: "0",
-      limit: "4"
+      limit: "4",
     }).then((data) => {
       if (data) {
         setState((draft) => {
@@ -39,14 +39,14 @@ const HomePage: React.FC = () => {
     <div className="home-page">
       <Loading loading={loadingGetFutureGameList} />
       <div className="home-page-top">
-        <TitleDesc title="智猜足球" desc="用图智能找出比赛中的关键组合" />
+        <TitleDesc title="智猜足球" desc="智能图计算技术找出比赛中的关键组" />
         <Swiper
           loop
           onIndexChange={(i) => {
             console.log(i, "onIndexChange1");
           }}
           indicatorProps={{
-            color: "white"
+            color: "white",
           }}
         >
           {futureList.map((item, index) => {
@@ -59,7 +59,7 @@ const HomePage: React.FC = () => {
               teamAVote,
               teamBVote,
               awayWinProbability,
-              homeWinProbability
+              homeWinProbability,
             } = item;
             const voteCount = Number(teamAVote) + Number(teamBVote);
             const votePercent = (teamAVote / voteCount) * 100;
@@ -73,11 +73,11 @@ const HomePage: React.FC = () => {
                     <Teamteam
                       leftTeam={{
                         name: team_a_country,
-                        flagUrl: team_a_national_flag
+                        flagUrl: team_a_national_flag,
                       }}
                       rightTeam={{
                         name: team_b_country,
-                        flagUrl: team_b_national_flag
+                        flagUrl: team_b_national_flag,
                       }}
                     />
                   </div>
@@ -134,7 +134,7 @@ const HomePage: React.FC = () => {
               service={({ pageNum, pageSize }) =>
                 getHistoryGameList({
                   skip: `${(pageNum - 1) * pageSize}`,
-                  limit: `${pageSize}`
+                  limit: `${pageSize}`,
                 })
               }
             />
@@ -144,7 +144,7 @@ const HomePage: React.FC = () => {
               service={({ pageNum, pageSize }) =>
                 getFutureGameList({
                   skip: `${(pageNum - 1) * pageSize}`,
-                  limit: `${pageSize}`
+                  limit: `${pageSize}`,
                 })
               }
             />
