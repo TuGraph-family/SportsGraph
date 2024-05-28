@@ -26,9 +26,10 @@ const ResultPage: React.FC = () => {
     isDownloading: false,
   });
   const { gameInfo, voteInfo, isDownloading } = state;
-  const { teamAVote = 0, teamBVote = 0, totalVote = 0 } = voteInfo || {};
-  const voteCount = teamAVote + teamAVote;
-  const votePercent = teamAVote / voteCount;
+  const { teamAVote = 0, teamBVote = 0, totalVote = 0, isEnd } = voteInfo || {};
+  const voteCount = teamAVote + teamBVote;
+  const votePercent = (teamAVote / voteCount) * 100;
+
   const { id } = parseSearch(location.search) as any;
   const {
     homeWinProbability = "0",
@@ -87,7 +88,7 @@ const ResultPage: React.FC = () => {
         <HomeIcon />
         <div className="result-title">
           <TitleDesc
-            title="这场比赛 AI 更看好"
+            title="这场比赛更有实力的是"
             desc="基于历史比赛采用图计算技术分析得出"
           />
         </div>
@@ -126,10 +127,21 @@ const ResultPage: React.FC = () => {
           </div>
           <div className="center-vote">
             <Vote
-              team1={{ name: team_a_country || "", isHome: true }}
-              team2={{ name: team_b_country || "", isHome: false }}
+              team1={{
+                name: team_a_country || "",
+                isHome: true,
+                teamAVote,
+                teamBVote,
+              }}
+              team2={{
+                name: team_b_country || "",
+                isHome: false,
+                teamAVote,
+                teamBVote,
+              }}
               percent={votePercent}
               count={totalVote}
+              isEnd={isEnd}
             />
           </div>
           <div className="qrcode">
@@ -145,7 +157,7 @@ const ResultPage: React.FC = () => {
         <Button onClick={onSavePic}>
           上一页 <IconFont type="euro-icon-xiayiye1" />
         </Button>
-        <Button onClick={jumpToHome} color="primary">
+        <Button className="highlight" onClick={jumpToHome} color="primary">
           更多赛程 <IconFont type="euro-icon-xiayiye1" />
         </Button>
       </div>

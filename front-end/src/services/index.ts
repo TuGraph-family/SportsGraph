@@ -12,7 +12,6 @@ import {
   playerTacitInfoTranslator,
 } from "@/translator";
 import { request } from "@umijs/max";
-import { uniqBy } from "lodash";
 
 const COMMOM_BODY = {
   deployEnv: "ONLINE_PRODUCTION",
@@ -83,7 +82,12 @@ export const getGameVoteInfoById = (params: { id: string }) => {
   }).then((res) => getVoteInfoTranslator(res));
 };
 
-export const voteTeam = (params: { matchId: string; isHome: boolean }) => {
+export const voteTeam = (params: {
+  matchId: string;
+  isHome: boolean;
+  sourceTeamAVote: number;
+  sourceTeamBVote: number;
+}) => {
   return request<VoteInfo>("tugraph/api/graph/uefa/vote", {
     method: "PUT",
     params: params,

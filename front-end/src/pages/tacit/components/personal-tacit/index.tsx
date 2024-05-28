@@ -18,7 +18,7 @@ const PersonalTacit: React.FC<TacitGraphProps> = ({
   personalTacitData,
   playerInfo,
   visible,
-  setVisible
+  setVisible,
 }) => {
   return (
     <Mask
@@ -34,7 +34,7 @@ const PersonalTacit: React.FC<TacitGraphProps> = ({
             graphData={personalTacitData}
           />
           <div onClick={() => setVisible(false)} className="close">
-            <CloseOutline color="#ddd" />
+            <CloseOutline color="#fff" />
           </div>
         </div>
 
@@ -42,7 +42,7 @@ const PersonalTacit: React.FC<TacitGraphProps> = ({
           <div className="player-info">
             <div className="player">
               <PlayerNode playerInfo={{ ...playerInfo!, nodeSize: 20 }} />
-              <div style={{ marginTop: 14 }}>
+              <div>
                 <div className="player-name">{playerInfo?.player_name}</div>
                 <div className="player-en-name">
                   {playerInfo?.player_enName}
@@ -52,7 +52,7 @@ const PersonalTacit: React.FC<TacitGraphProps> = ({
             <div className="description">
               {playerInfo?.player_name}
               为国家队出战{playerInfo?.caps}
-              次，他与队友的默契程度通过历史上共同比赛的战绩计算得出
+              次，他与队友的默契程度通过历史上共同比赛的战绩计算得出。
             </div>
           </div>
         )}
