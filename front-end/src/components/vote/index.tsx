@@ -1,12 +1,11 @@
 import { voteTeam } from "@/services";
 import { parseSearch } from "@/utils";
 import { useRequest } from "@umijs/max";
-import React, { useMemo } from "react";
+import React from "react";
 import { useImmer } from "use-immer";
 import Slider from "../slider";
 import TriangleButton from "../triangle-button";
 import "./index.less";
-import { Toast } from "antd-mobile";
 
 interface VoteProps {
   team1: {
