@@ -156,7 +156,7 @@ const ResultPage: React.FC = () => {
         <Button onClick={onSavePic}>
           上一页 <IconFont type="euro-icon-xiayiye1" />
         </Button>
-        <Button className="more-schedule" onClick={jumpToHome} color="primary">
+        <Button className="highlight" onClick={jumpToHome} color="primary">
           更多赛程 <IconFont type="euro-icon-xiayiye1" />
         </Button>
       </div>

@@ -6,21 +6,35 @@
   .adm-button {
     border: none;
     font-size: 14px;
-    background-image: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 1) 0%,
-      rgba(204, 204, 204, 1) 100%
-    );
+    background-image: linear-gradient(180deg,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(204, 204, 204, 1) 100%);
   }
+
   .adm-button.adm-button-primary {
-    background-image: linear-gradient(
-      110deg,
-      rgba(22, 119, 255, 1) 6%,
-      rgba(20, 60, 219, 1) 94%
-    );
+    background-image: linear-gradient(110deg,
+        rgba(22, 119, 255, 1) 6%,
+        rgba(20, 60, 219, 1) 94%);
   }
-  .adm-button > span {
+
+  .adm-button>span {
     transform: skew(10deg);
     display: inline-block;
+  }
+
+  .highlight::before {
+    content: "";
+    position: absolute;
+    top: 1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    z-index: 10;
+    border: none;
+    background: linear-gradient(90deg,
+        #1677ff 3%,
+        #ffffff 52%,
+        #1677ff 100%);
+    opacity: 0.8;
   }
 }

@@ -327,7 +327,7 @@ const TacitPage: React.FC = () => {
           <Button onClick={onPrev} color="default">
             上一页 <IconFont type="euro-icon-xiayiye1" />
           </Button>
-          <Button className="next-page" onClick={onNext} color="primary">
+          <Button className="highlight" onClick={onNext} color="primary">
             下一页 <IconFont type="euro-icon-xiayiye1" />
           </Button>
         </div>
