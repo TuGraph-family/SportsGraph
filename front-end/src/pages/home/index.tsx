@@ -15,7 +15,8 @@ import { history } from "umi";
 import { useImmer } from "use-immer";
 import ScheduleList from "./components/schedule-list";
 import "./index.less";
-import TechnicalPrinciples from "@/components/technical-principles";
+import TechnicalPrinciples from "@/pages/home/components/technical-principles";
+import InstructionsForUse from "./components/instructions-for-use";
 
 const HomePage: React.FC = () => {
   const [state, setState] = useImmer<{ futureList: any[] }>({
@@ -167,6 +168,7 @@ const HomePage: React.FC = () => {
           </Tabs.Tab>
         </Tabs>
       </div>
+      <InstructionsForUse />
     </div>
   );
 };

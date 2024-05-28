@@ -1,8 +1,8 @@
 @font-face {
   font-family: "euro-iconfont"; /* Project id 4528397 */
-  src: url('iconfont.woff2?t=1715935670929') format('woff2'),
-       url('iconfont.woff?t=1715935670929') format('woff'),
-       url('iconfont.ttf?t=1715935670929') format('truetype');
+  src: url('iconfont.woff2?t=1716884890955') format('woff2'),
+       url('iconfont.woff?t=1716884890955') format('woff'),
+       url('iconfont.ttf?t=1716884890955') format('truetype');
 }
 
 .euro-iconfont {
@@ -11,6 +11,10 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.euro-icon-fanhuishouye:before {
+  content: "\e63a";
 }
 
 .euro-icon-xiayiye1:before {

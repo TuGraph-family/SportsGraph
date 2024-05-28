@@ -17,7 +17,6 @@ const TechnicalPrinciples: React.FC<TechnicalPrinciplesProps> = ({
   const { visible } = state;
 
   const onShow = () => {
-    console.log(11111, 111);
     setState((draft) => {
       draft.visible = true;
     });
