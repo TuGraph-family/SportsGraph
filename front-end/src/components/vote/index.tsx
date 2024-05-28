@@ -6,7 +6,6 @@ import { useImmer } from "use-immer";
 import Slider from "../slider";
 import TriangleButton from "../triangle-button";
 import "./index.less";
-import { Toast } from "antd-mobile";
 
 interface VoteProps {
   team1: {
@@ -24,6 +23,7 @@ interface VoteProps {
   percent: number;
   count: number;
   matchId?: string;
+  isEnd?: boolean;
 }
 
 const Vote: React.FC<VoteProps> = ({
@@ -32,6 +32,7 @@ const Vote: React.FC<VoteProps> = ({
   team2,
   percent,
   matchId,
+  isEnd,
 }) => {
   const [state, setState] = useImmer<{
     hasVoted: boolean;
@@ -41,8 +42,8 @@ const Vote: React.FC<VoteProps> = ({
   }>({
     hasVoted: false,
     growingSide: "left",
-    voteCount: count,
-    votePercent: percent,
+    voteCount: 0,
+    votePercent: 0,
   });
   const { hasVoted, growingSide, voteCount, votePercent } = state;
   const { id = matchId } = parseSearch(location.search) as any;
@@ -79,20 +80,18 @@ const Vote: React.FC<VoteProps> = ({
           draft.voteCount = newCount;
           draft.votePercent = newPercent;
         });
-      } else {
-        Toast.show({
-          content: "数据异常，请稍后再试。",
-          position: "top",
-        });
       }
     });
   };
+
+  const newCount = voteCount || count;
+  const newPercent = votePercent || percent;
   return (
     <div className="vote">
       <div className="vote-text">你认为谁会获胜，为TA投票吧~</div>
-      {hasVoted ? (
+      {hasVoted || isEnd ? (
         <Slider
-          value={hasVoted ? votePercent : 50}
+          value={hasVoted ? newPercent : 50}
           id="slider"
           growingSide={growingSide}
         />
@@ -112,9 +111,9 @@ const Vote: React.FC<VoteProps> = ({
         </div>
       )}
       <div
-        style={{ opacity: hasVoted ? 1 : 0 }}
+        style={{ opacity: hasVoted || isEnd ? 1 : 0 }}
         className="vote-count"
-      >{`${voteCount}人已参与投票`}</div>
+      >{`${newCount}人已参与投票`}</div>
     </div>
   );
 };
