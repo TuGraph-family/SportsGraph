@@ -44,7 +44,7 @@ const HomePage: React.FC = () => {
           title="智猜足球"
           desc={
             <>
-              智能图计算技术找出比赛中的关键组
+              智能图计算技术找出比赛中的关键组合
               <TechnicalPrinciples
                 iconStyle={{
                   fontSize: 10,
