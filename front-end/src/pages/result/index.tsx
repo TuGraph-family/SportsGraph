@@ -25,7 +25,7 @@ const ResultPage: React.FC = () => {
     isDownloading: false,
   });
   const { gameInfo, voteInfo, isDownloading } = state;
-  const { teamAVote = 0, teamBVote = 0, totalVote = 0 } = voteInfo || {};
+  const { teamAVote = 0, teamBVote = 0, totalVote = 0, isEnd } = voteInfo || {};
   const voteCount = teamAVote + teamBVote;
   const votePercent = (teamAVote / voteCount) * 100;
 
@@ -123,25 +123,27 @@ const ResultPage: React.FC = () => {
               <div className="percent">%</div>
             </div>
           </div>
-          <div className="center-vote">
-            <Vote
-              team1={{
-                name: team_a_country || "",
-                isHome: true,
-                teamAVote,
-                teamBVote,
-              }}
-              team2={{
-                name: team_b_country || "",
-                isHome: false,
-                teamAVote,
-                teamBVote,
-              }}
-              percent={votePercent}
-              count={totalVote}
-            />
-          </div>
-          <div className="qrcode">
+          {isEnd && (
+            <div className="center-vote">
+              <Vote
+                team1={{
+                  name: team_a_country || "",
+                  isHome: true,
+                  teamAVote,
+                  teamBVote,
+                }}
+                team2={{
+                  name: team_b_country || "",
+                  isHome: false,
+                  teamAVote,
+                  teamBVote,
+                }}
+                percent={votePercent}
+                count={totalVote}
+              />
+            </div>
+          )}
+          <div style={{ marginTop: isEnd ? 20 : 40 }} className="qrcode">
             <img src="https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*90-3SpclRKcAAAAAAAAAAAAADsvfAQ/original" />
           </div>
           <div className="qrcode-text">截图分享给好友,一起猜猜猜~</div>

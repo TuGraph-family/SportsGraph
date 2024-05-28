@@ -83,6 +83,7 @@ export interface VoteInfoResult {
   teamAVote: number;
   teamBVote: number;
   totalVote: number;
+  isEnd?: boolean;
 }
 
 export interface VoteInfo extends CommonResponseResult {
