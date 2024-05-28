@@ -307,7 +307,8 @@ const CompetePage: React.FC = () => {
           <div className="tooltip">
             <Tooltip>
               <SplitText id="text">
-                球衣越大，球员抵抗对手的能力越强。阵型占地越大，队伍的抵抗力越强。
+                球衣越大，球员抵抗对手的能力越强；
+                阵型占地越大，队伍的抵抗力越强。
               </SplitText>
             </Tooltip>
           </div>

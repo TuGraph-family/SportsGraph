@@ -335,8 +335,9 @@ const TacitPage: React.FC = () => {
           <div className="tooltip">
             <Tooltip>
               <SplitText id="tacit-text">
-                球衣越大，个人与全体队友的默契度越高；
-                连线越粗，两名球员间的默契度越高。
+                {`球衣越大，个人与全体队友的默契度越高；
+                连线越粗，两名球员间的默契度越高。 ${hasGraphData ? "" : "(示意阵型，待根据本场比赛阵容信息确定)"}
+               `}
               </SplitText>
             </Tooltip>
           </div>

@@ -1,9 +1,9 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import "./index.less";
 
 interface TitleDescProps {
   title?: string;
-  desc?: string;
+  desc?: ReactNode | string;
 }
 
 const TitleDesc: React.FC<TitleDescProps> = ({ title, desc }) => {
