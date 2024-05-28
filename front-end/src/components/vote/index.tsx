@@ -36,11 +36,15 @@ const Vote: React.FC<VoteProps> = ({
   const [state, setState] = useImmer<{
     hasVoted: boolean;
     growingSide: "left" | "right";
+    voteCount: number;
+    votePercent: number;
   }>({
     hasVoted: false,
     growingSide: "left",
+    voteCount: count,
+    votePercent: percent,
   });
-  const { hasVoted, growingSide } = state;
+  const { hasVoted, growingSide, voteCount, votePercent } = state;
   const { id = matchId } = parseSearch(location.search) as any;
 
   const { run: runVoteTeam, loading: loadingVoteTeam } = useRequest(voteTeam, {
@@ -52,18 +56,28 @@ const Vote: React.FC<VoteProps> = ({
     teamAVote: number;
     teamBVote: number;
   }) => {
-    const { isHome, growingSide, teamAVote, teamBVote } = params;
+    const {
+      isHome,
+      growingSide,
+      teamAVote: sourceTeamAVote,
+      teamBVote: sourceTeamBVote,
+    } = params;
     runVoteTeam({
       matchId: id,
       isHome,
-      sourceTeamAVote: teamAVote,
-      sourceTeamBVote: teamBVote,
+      sourceTeamAVote,
+      sourceTeamBVote,
     }).then((res) => {
-      console.log({ res });
       if (res.voteResult === "1") {
+        const teamAVote = Number(res.teamAVote);
+        const teamBVote = Number(res.teamBVote);
+        const newCount = teamAVote + teamBVote;
+        const newPercent = (teamAVote / newCount) * 100;
         setState((draft) => {
           draft.hasVoted = true;
           draft.growingSide = growingSide;
+          draft.voteCount = newCount;
+          draft.votePercent = newPercent;
         });
       } else {
         Toast.show({
@@ -78,7 +92,7 @@ const Vote: React.FC<VoteProps> = ({
       <div className="vote-text">你认为谁会获胜，为TA投票吧~</div>
       {hasVoted ? (
         <Slider
-          value={hasVoted ? percent : 50}
+          value={hasVoted ? votePercent : 50}
           id="slider"
           growingSide={growingSide}
         />
@@ -100,7 +114,7 @@ const Vote: React.FC<VoteProps> = ({
       <div
         style={{ opacity: hasVoted ? 1 : 0 }}
         className="vote-count"
-      >{`${count}人已参与投票`}</div>
+      >{`${voteCount}人已参与投票`}</div>
     </div>
   );
 };
