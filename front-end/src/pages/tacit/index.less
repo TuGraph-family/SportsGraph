@@ -11,10 +11,12 @@
   background-color: #020d2e;
   background-position: top center;
   background-repeat: no-repeat;
+
   &-title {
     margin-top: 57px;
     margin-bottom: 25px;
   }
+
   &-team {
     width: 100%;
   }
@@ -33,19 +35,24 @@
       width: 100%;
       bottom: 40px;
     }
-    .sg-btn + .sg-btn {
+
+    .sg-btn+.sg-btn {
       margin-left: 20px;
     }
+
     .adm-button {
       width: 130px;
       height: 42px;
     }
+
     .anticon {
       font-size: 10px;
     }
+
     .tooltip {
       text-align: center;
       margin: 0 20px 20px 20px;
+
       .sg-tooltip {
         padding-bottom: 30px;
         height: 0px;
@@ -53,13 +60,30 @@
         animation: tooltip 0.2s ease forwards;
         animation-delay: 1.3s;
       }
+
       @keyframes tooltip {
         100% {
           height: 100%;
         }
       }
     }
+
+    .tooltip::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      z-index: 10;
+      background: linear-gradient(90deg,
+          #ffffff00 3%,
+          #ffffff 52%,
+          #ffffff00 100%);
+      opacity: 0.72;
+    }
   }
+
   .light {
     position: absolute;
     z-index: 2;
@@ -67,6 +91,7 @@
     top: 0px;
     margin-left: -70px;
   }
+
   .light-left {
     position: absolute;
     z-index: 2;
@@ -74,6 +99,7 @@
     top: 0px;
     transform: rotateZ(-50deg);
   }
+
   .tacit-playground {
     position: relative;
     flex: 1;

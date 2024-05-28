@@ -83,11 +83,15 @@ export interface VoteInfoResult {
   teamAVote: number;
   teamBVote: number;
   totalVote: number;
+  isEnd?: boolean;
 }
 
 export interface VoteInfo extends CommonResponseResult {
   data: {
     resultSet: Array<VoteInfoResult>;
+    voteResult: string;
+    teamAVote: string;
+    teamBVote: string;
   };
 }
 

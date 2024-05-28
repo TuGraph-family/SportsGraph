@@ -44,7 +44,7 @@ const HomePage: React.FC = () => {
           title="智猜足球"
           desc={
             <>
-              智能图计算技术找出比赛中的关键组
+              智能图计算技术找出比赛中的关键组合
               <TechnicalPrinciples
                 iconStyle={{
                   fontSize: 10,
@@ -77,6 +77,7 @@ const HomePage: React.FC = () => {
               awayWinProbability,
               homeWinProbability,
             } = item;
+
             const voteCount = Number(teamAVote) + Number(teamBVote);
             const votePercent = (teamAVote / voteCount) * 100;
             return (
@@ -131,10 +132,13 @@ const HomePage: React.FC = () => {
                   </div>
                   <div className="center-vote">
                     <Vote
-                      team1={{ name: team_a_country, isHome: true }}
-                      team2={{ name: team_b_country, isHome: false }}
+                      team1={{ name: team_a_country, isHome: true,teamAVote,
+                        teamBVote, }}
+                      team2={{ name: team_b_country, isHome: false,teamAVote,
+                        teamBVote, }}
                       count={voteCount}
                       percent={votePercent}
+                      matchId={matchId}
                     />
                   </div>
                 </div>
