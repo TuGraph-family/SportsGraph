@@ -18,7 +18,7 @@ const CompetePersonalGraph: React.FC<CompetePersonalGraphProps> = ({
   graphData,
   containerId,
   onClickNode,
-  style
+  style,
 }) => {
   const [state, setState] = useImmer<{ graph?: Graph }>({});
   const { graph } = state;
@@ -38,8 +38,8 @@ const CompetePersonalGraph: React.FC<CompetePersonalGraphProps> = ({
           component: (data: PlayersInfoResult) => (
             <PlayerNode playerInfo={data} />
           ),
-          size: (d: any) => (d.isCenter ? [40, 70] : [10, 50])
-        }
+          size: (d: any) => [20, 50],
+        },
       },
       edge: {
         type: "path-in-line",
@@ -51,14 +51,14 @@ const CompetePersonalGraph: React.FC<CompetePersonalGraphProps> = ({
           haloStrokeWidth: 5,
           haloLineWidth: 5,
           haloShadowColor: "#fff",
-          haloShadowBlur: 20
+          haloShadowBlur: 20,
         },
         animation: {
           // disable default enter and exit animation
           enter: false,
-          exit: false
-        }
-      }
+          exit: false,
+        },
+      },
     });
     setState((draft) => {
       draft.graph = graph;

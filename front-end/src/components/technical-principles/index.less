@@ -6,7 +6,7 @@
     position: absolute;
     top: 25%;
     left: 0;
-    background: white;
+    background: #010e2d;
     border-radius: 16px;
     margin: 16px;
     padding: 16px;
@@ -14,19 +14,35 @@
     .title {
       font-size: 16px;
       font-family: AlimamaShuHeiTi;
-      font-weight: 700;
-      color: rgba(0, 0, 0, 0.8);
+      font-weight: 600;
+      color: #ffffff;
       padding-bottom: 8px;
       text-align: center;
     }
 
     p {
       text-indent: 2em;
-      font-size: 14px;
+      font-size: 12px;
+      color: #cfd1d8;
+      line-height: 20px;
       font-family: AlimamaShuHeiTi;
       background-clip: text;
-      font-weight: 500;
-      color: rgba(0, 0, 0, 0.8);
     }
+  }
+
+  .text-content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    z-index: 10;
+    background: linear-gradient(
+      90deg,
+      #ffffff00 3%,
+      #ffffff 52%,
+      #ffffff00 100%
+    );
   }
 }
