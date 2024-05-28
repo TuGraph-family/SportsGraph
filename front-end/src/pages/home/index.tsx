@@ -24,18 +24,34 @@ const HomePage: React.FC = () => {
   const { futureList } = state;
   const { run: runGetFutureGameList, loading: loadingGetFutureGameList } =
     useRequest(getFutureGameList, { manual: true });
+  const { run: runGetHistoryGameList, loading: loadingGetHistoryGameList } =
+    useRequest(getHistoryGameList, { manual: true });
   useEffect(() => {
     runGetFutureGameList({
       skip: "0",
       limit: "4",
     }).then((data) => {
       if (data) {
-        setState((draft) => {
-          draft.futureList = data.resultSet || [];
-        });
+        if (data.resultSet?.length) {
+          // 判断未来比赛列表是否为空，为空表示最后一场比赛已经结束
+          setState((draft) => {
+            draft.futureList = data.resultSet || [];
+          });
+        } else {
+          // 获取历史比赛的最近一场比赛来展示
+          runGetHistoryGameList({
+            skip: "0",
+            limit: "1",
+          }).then((res) => {
+            setState((draft) => {
+              draft.futureList = res.resultSet || [];
+            });
+          });
+        }
       }
     });
   }, []);
+
   return (
     <div className="home-page">
       <Loading loading={loadingGetFutureGameList} />
@@ -74,6 +90,7 @@ const HomePage: React.FC = () => {
               team_b_national_flag,
               teamAVote,
               teamBVote,
+              isEnd,
               awayWinProbability,
               homeWinProbability,
             } = item;
@@ -132,10 +149,19 @@ const HomePage: React.FC = () => {
                   </div>
                   <div className="center-vote">
                     <Vote
-                      team1={{ name: team_a_country, isHome: true,teamAVote,
-                        teamBVote, }}
-                      team2={{ name: team_b_country, isHome: false,teamAVote,
-                        teamBVote, }}
+                      team1={{
+                        name: team_a_country,
+                        isHome: true,
+                        teamAVote,
+                        teamBVote,
+                      }}
+                      team2={{
+                        name: team_b_country,
+                        isHome: false,
+                        teamAVote,
+                        teamBVote,
+                      }}
+                      isEnd={isEnd === "1"}
                       count={voteCount}
                       percent={votePercent}
                       matchId={matchId}

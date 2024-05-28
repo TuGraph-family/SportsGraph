@@ -49,7 +49,7 @@ export const getVoteInfoTranslator = (res: any) => {
   }
   const teamAVote = Number(res?.data?.resultSet?.[0]["n.teamAVote"]);
   const teamBVote = Number(res?.data?.resultSet?.[0]["n.teamBVote"]);
-  const isEnd = res?.data?.resultSet?.[0]["n.isEnd"] === "2";
+  const isEnd = res?.data?.resultSet?.[0]["n.isEnd"] === "1";
   const totalVote = teamAVote + teamBVote;
   return {
     ...res,
