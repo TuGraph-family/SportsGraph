@@ -4,13 +4,7 @@ import { QuestionCircleOutline } from "antd-mobile-icons";
 import { useImmer } from "use-immer";
 import "./index.less";
 
-interface TechnicalPrinciplesProps {
-  iconStyle?: React.CSSProperties;
-}
-
-const TechnicalPrinciples: React.FC<TechnicalPrinciplesProps> = ({
-  iconStyle,
-}) => {
+const TechnicalPrinciples = () => {
   const [state, setState] = useImmer<{ visible: boolean }>({
     visible: false,
   });
@@ -30,7 +24,10 @@ const TechnicalPrinciples: React.FC<TechnicalPrinciplesProps> = ({
 
   return (
     <>
-      <QuestionCircleOutline style={iconStyle} onClick={onShow} />
+      <QuestionCircleOutline
+        onClick={onShow}
+        className="technical-principles-icon"
+      />
       <Mask
         visible={visible}
         onMaskClick={onClose}

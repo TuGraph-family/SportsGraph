@@ -46,14 +46,7 @@ const HomePage: React.FC = () => {
           desc={
             <>
               智能图计算技术找出比赛中的关键组
-              <TechnicalPrinciples
-                iconStyle={{
-                  fontSize: 10,
-                  color: "#ffffff",
-                  fontWeight: 600,
-                  marginLeft: 4,
-                }}
-              />
+              <TechnicalPrinciples />
             </>
           }
         />
