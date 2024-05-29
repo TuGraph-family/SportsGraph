@@ -45,14 +45,14 @@ export const calculateAngleBetweenPoints = (
   point2: { x: number; y: number }
 ) => {
   // 计算向量的dx和dy
-  var dx = point2.x - point1.x;
-  var dy = point2.y - point1.y;
+  const dx = point2.x - point1.x;
+  const dy = point2.y - point1.y;
 
   // 使用Math.atan2()计算角度，结果是(-π, π]范围内的弧度值
-  var angleInRadians = Math.atan2(dy, dx);
+  const angleInRadians = Math.atan2(dy, dx);
 
   // 将弧度转换为度数，并根据需要调整正负
-  var angleInDegrees = angleInRadians * (180 / Math.PI);
+  const angleInDegrees = angleInRadians * (180 / Math.PI);
 
   return angleInDegrees;
 };

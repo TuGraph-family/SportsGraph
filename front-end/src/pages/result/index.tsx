@@ -15,6 +15,7 @@ import React, { useEffect } from "react";
 import { history } from "umi";
 import { useImmer } from "use-immer";
 import "./index.less";
+import HomeIcon from "@/components/home-icon";
 
 const ResultPage: React.FC = () => {
   const [state, setState] = useImmer<{
@@ -84,6 +85,7 @@ const ResultPage: React.FC = () => {
         }
       />
       <div className="result" id="result">
+        <HomeIcon />
         <div className="result-title">
           <TitleDesc
             title="这场比赛更有实力的是"

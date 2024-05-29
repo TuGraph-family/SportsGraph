@@ -141,7 +141,6 @@ export const playerTacitInfoTranslator = (res: any) => {
       percentage: percentage,
     };
   });
-  console.log(competePlayerNode);
   return {
     ...res,
     data: {

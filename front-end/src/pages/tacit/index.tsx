@@ -32,6 +32,7 @@ import "./index.less";
 
 import { personalTacitTranslator } from "@/translator";
 import PersonalTacit from "./components/personal-tacit";
+import HomeIcon from "@/components/home-icon";
 
 const TacitPage: React.FC = () => {
   const [state, setState] = useImmer<{
@@ -284,6 +285,7 @@ const TacitPage: React.FC = () => {
           loadingGetPlayerTacitInfo
         }
       />
+      <HomeIcon />
       <div className="tacit-title">
         <TitleDesc
           title="看队员默契程度"

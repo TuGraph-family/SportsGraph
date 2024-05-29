@@ -1,0 +1,64 @@
+.instructions-for-use {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+
+  .text-content {
+    position: relative;
+    background: #010e2d;
+    border-radius: 16px;
+    margin: 28px;
+    padding: 24px;
+
+    .title {
+      font-size: 16px;
+      font-family: AlimamaShuHeiTi;
+      font-weight: 600;
+      color: #ffffff;
+      padding-bottom: 8px;
+      text-align: center;
+    }
+
+    li {
+      font-size: 12px;
+      color: #cfd1d8;
+      line-height: 20px;
+      font-family: AlimamaShuHeiTi;
+      text-align: left;
+      margin-bottom: 8px;
+    }
+
+    .checkbox {
+      --icon-size: 16px;
+      --font-size: 12px;
+      --gap: 5px;
+      color: #cfd1d8;
+      padding-top: 24px;
+    }
+
+    .agree-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: 24px;
+      width: calc(100vw - 104px);
+    }
+  }
+
+  .text-content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    z-index: 10;
+    background: linear-gradient(
+      90deg,
+      #ffffff00 3%,
+      #ffffff 52%,
+      #ffffff00 100%
+    );
+  }
+}

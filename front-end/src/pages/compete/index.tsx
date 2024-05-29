@@ -22,7 +22,7 @@ import React, { useEffect, useMemo } from "react";
 import { useImmer } from "use-immer";
 import CompetePersonalModal from "./components/compete-personal";
 import "./index.less";
-
+import HomeIcon from "@/components/home-icon";
 const winYRatio = 0.65;
 const loseYRatio = 0.55;
 
@@ -250,6 +250,7 @@ const CompetePage: React.FC = () => {
         </div>
       )}
       <Loading loading={loading} />
+      <HomeIcon />
       <div className="compete-title">
         <TitleDesc
           title="看双方对抗程度"
@@ -293,7 +294,6 @@ const CompetePage: React.FC = () => {
           />
         </div>
       </div>
-
       <div className="footer">
         <div className="button">
           <Button onClick={onPrev} color="default">
