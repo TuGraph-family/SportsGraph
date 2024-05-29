@@ -24,10 +24,9 @@ const TechnicalPrinciples = () => {
 
   return (
     <>
-      <QuestionCircleOutline
-        onClick={onShow}
-        className="technical-principles-icon"
-      />
+      <div onClick={onShow} className="technical-principles-icon">
+        ?
+      </div>
       <Mask
         visible={visible}
         onMaskClick={onClose}
