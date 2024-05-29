@@ -15,7 +15,14 @@ const HomeIcon = () => {
       onBack={back}
       className="home-icon"
       backArrow={
-        <IconFont style={{ color: "#fdfefe" }} type="euro-icon-fanhuishouye" />
+        <>
+          <IconFont
+            style={{ color: "#fdfefe" }}
+            type="euro-icon-fanhuishouye"
+            className="icon"
+          />
+          <div className="home-text">首页</div>
+        </>
       }
     />
   );
