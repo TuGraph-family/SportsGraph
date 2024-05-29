@@ -147,7 +147,7 @@ const ResultPage: React.FC = () => {
           <div className="qrcode">
             <img src="https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*90-3SpclRKcAAAAAAAAAAAAADsvfAQ/original" />
           </div>
-          <div className="qrcode-text">截图分享给好友,一起猜猜猜~</div>
+          <div className="qrcode-text">截图分享给好友，一起猜猜猜~</div>
         </div>
         <div className="result-playground">
           <FootballField />
@@ -155,7 +155,7 @@ const ResultPage: React.FC = () => {
       </div>
       <div className="footer">
         <Button onClick={onSavePic}>
-          上一页 <IconFont type="euro-icon-xiayiye1" />
+          <IconFont type="euro-icon-xiayiye1" rotate={180} /> 上一页
         </Button>
         <Button className="highlight" onClick={jumpToHome} color="primary">
           更多赛程 <IconFont type="euro-icon-xiayiye1" />
