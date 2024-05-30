@@ -4,27 +4,34 @@
   position: relative;
   z-index: 1;
   height: 70px;
+
   .colorful-button-wrapper {
     margin-top: 8px;
   }
+
   &.active {
+
     .home,
     .away {
       filter: brightness(50%);
     }
+
     .home.active,
     .away.active {
       filter: brightness(100%);
     }
+
     .arrow {
       animation: arrow 1.5s ease infinite;
     }
   }
+
   .inactive {
     .arrow {
       animation: none;
     }
   }
+
   .home,
   .away {
     flex: 1;
@@ -40,35 +47,42 @@
       position: relative;
       justify-content: space-around;
       height: 46px;
+
       .flag {
         height: 100%;
         position: absolute;
         display: flex;
         flex-direction: column;
         align-items: center;
+
         img {
           height: 100%;
           border-radius: 50%;
         }
       }
     }
+
     .name {
       color: #fff;
       font-size: 13px;
       margin: 4px 0;
     }
+
     .arrow {
       font-size: 12px;
       opacity: 1;
       margin-top: -1px;
     }
+
     @keyframes arrow {
       0% {
         opacity: 0.5;
       }
+
       50% {
         opacity: 0;
       }
+
       100% {
         opacity: 1;
       }
@@ -80,14 +94,17 @@
       background-image: url("https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*l5ceTbZ89-gAAAAAAAAAAAAADsvfAQ/original");
 
       margin-right: 23px;
+
       .flag {
         right: -23px;
       }
     }
+
     .name {
       text-align: right;
     }
   }
+
   .away {
     .info {
       background-image: url("https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*CiIUS7FZEUcAAAAAAAAAAAAADsvfAQ/original");
@@ -98,16 +115,27 @@
       }
     }
   }
+
   .circle {
     font-size: 20px;
     color: rgba(255, 255, 255, 0.8);
     font-family: "DingTalk-JinBuTi";
     height: 36px;
     width: 36px;
+
+    img {
+      width: 45%;
+    }
+
     .adm-progress-circle {
       height: 36px;
       width: 36px;
     }
+
+    .adm-progress-circle-info {
+      top: calc(50% + 1px)
+    }
+
     .adm-progress-circle-track,
     .adm-progress-circle-fill {
       cx: 18px;

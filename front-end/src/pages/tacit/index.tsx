@@ -326,9 +326,9 @@ const TacitPage: React.FC = () => {
 
       <div className="footer">
         <div className="button">
-          <Button onClick={onPrev} className="up-page">
+        <Button onClick={onPrev} className="up-page">
+            <IconFont type="euro-icon-xiayiye1" rotate={180} />
             上一页
-            <IconFont type="euro-icon-xiayiye1" />
           </Button>
           <Button className="next-page" onClick={onNext}>
             下一页

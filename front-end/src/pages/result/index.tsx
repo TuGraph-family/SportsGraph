@@ -154,8 +154,9 @@ const ResultPage: React.FC = () => {
         </div>
       </div>
       <div className="footer">
-        <Button className="up-page" onClick={onSavePic}>
-          上一页 <IconFont type="euro-icon-xiayiye1" />
+        <Button onClick={onSavePic} className="up-page">
+          <IconFont type="euro-icon-xiayiye1" rotate={180} />
+          上一页
         </Button>
         <Button className="next-page" onClick={jumpToHome}>
           更多赛程 <IconFont type="euro-icon-xiayiye1" />

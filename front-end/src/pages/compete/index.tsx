@@ -296,8 +296,9 @@ const CompetePage: React.FC = () => {
       </div>
       <div className="footer">
         <div className="button">
-          <Button onClick={onPrev} className="up-page">
-            上一页 <IconFont type="euro-icon-xiayiye1" />
+        <Button onClick={onPrev} className="up-page">
+            <IconFont type="euro-icon-xiayiye1" rotate={180} />
+            上一页
           </Button>
           <Button onClick={onNext} className="next-page">
             下一页
