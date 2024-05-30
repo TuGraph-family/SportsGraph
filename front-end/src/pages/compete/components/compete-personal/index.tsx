@@ -29,14 +29,14 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
   visible,
   onClose,
   params,
-  allPlayer
+  allPlayer,
 }) => {
   const [state, setState] = useImmer<{
     competeCenterPlayer: PlayersInfoResult | undefined;
     competeGraphData: GraphData;
   }>({
     competeCenterPlayer: undefined,
-    competeGraphData: { nodes: [], edges: [] }
+    competeGraphData: { nodes: [], edges: [] },
   });
 
   const { competeCenterPlayer, competeGraphData } = state;
@@ -50,7 +50,7 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
       ((radio - graphMinSize) / (graphMaxSize - graphMinSize)) * mappedValue;
     const centerXY = {
       x: (container?.clientWidth! - centerOffsetX) / 2 - 10,
-      y: (container?.clientHeight! - centerOffsetY) / 2
+      y: (container?.clientHeight! - centerOffsetY) / 2,
     };
     const nodeXY = calculateNeighborPoints(
       centerXY?.x,
@@ -69,7 +69,7 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
           ...centerXY,
           player_shirtnumber: playerInfo?.player_shirtnumber,
           isTeamA: playerInfo?.isTeamA,
-          nodeSize
+          nodeSize,
         };
       } else {
         const playerInfo = allPlayer?.find((item) => {
@@ -81,7 +81,7 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
           ...nodeXY[nodeIndex - 1],
           player_shirtnumber: playerInfo?.player_shirtnumber,
           isTeamA: playerInfo?.isTeamA,
-          nodeSize
+          nodeSize,
         };
       }
     });
@@ -94,8 +94,8 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
         isTeamA: isTeamA,
         stroke:
           isTeamA === "1"
-            ? `linear-gradient(${edge?.deg}deg,rgba(82, 9, 29, 1) 0%,rgba(159, 4, 13, 0.9) ${edge?.percentage}%,rgba(22, 119, 255, 1) ${edge?.percentage}%, rgba(21, 52, 90, 0.9) 100% )`
-            : `linear-gradient(${edge?.deg}deg,rgba(22, 75, 145, 1) 0%,rgba(22, 119, 255, 1) ${edge?.percentage}%,rgba(159, 4, 13, 0.9) ${edge?.percentage}%, rgba(82, 9, 29, 1) 100% )`
+            ? `linear-gradient(${edge?.deg}deg,rgba(82, 9, 29, 1) 0%,rgba(159, 4, 13, 0.9) ${edge?.percentage}%,rgba(22, 119, 255, 1) ${edge?.percentage}%, rgba(22, 75, 146, 1) 100% )`
+            : `linear-gradient(${edge?.deg}deg,rgba(22, 75, 145, 1) 0%,rgba(22, 119, 255, 1) ${edge?.percentage}%,rgba(159, 4, 13, 0.9) ${edge?.percentage}%, rgba(82, 9, 29, 1) 100% )`,
       };
     });
     setState((draft) => {
