@@ -7,6 +7,7 @@ interface Props {
   className?: string;
   style?: Record<string, any>;
   disabled?: boolean;
+  isShowHighlightBorder?: boolean;
 }
 
 const Button: React.FC<Props> = ({
@@ -15,6 +16,7 @@ const Button: React.FC<Props> = ({
   onClick,
   style,
   disabled,
+  isShowHighlightBorder,
 }) => {
   return (
     <div
@@ -30,6 +32,7 @@ const Button: React.FC<Props> = ({
       >
         <span>{children}</span>
       </div>
+      {isShowHighlightBorder && <div className="highlight-border" />}
     </div>
   );
 };

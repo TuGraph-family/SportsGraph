@@ -296,11 +296,11 @@ const CompetePage: React.FC = () => {
       </div>
       <div className="footer">
         <div className="button">
-        <Button onClick={onPrev} className="up-page">
+        <Button isShowHighlightBorder onClick={onPrev} className="up-page">
             <IconFont type="euro-icon-xiayiye1" rotate={180} />
             上一页
           </Button>
-          <Button onClick={onNext} className="next-page">
+          <Button isShowHighlightBorder onClick={onNext} className="next-page">
             下一页
             <IconFont type="euro-icon-xiayiye1" />
           </Button>

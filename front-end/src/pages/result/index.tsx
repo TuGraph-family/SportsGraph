@@ -154,11 +154,15 @@ const ResultPage: React.FC = () => {
         </div>
       </div>
       <div className="footer">
-        <Button onClick={onSavePic} className="up-page">
+        <Button isShowHighlightBorder onClick={onSavePic} className="up-page">
           <IconFont type="euro-icon-xiayiye1" rotate={180} />
           上一页
         </Button>
-        <Button className="next-page" onClick={jumpToHome}>
+        <Button
+          isShowHighlightBorder
+          className="next-page"
+          onClick={jumpToHome}
+        >
           更多赛程 <IconFont type="euro-icon-xiayiye1" />
         </Button>
       </div>

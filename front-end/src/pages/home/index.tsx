@@ -150,11 +150,12 @@ const HomePage: React.FC = () => {
                   </div>
                   <div className="center-to-analysis">
                     <Button
+                      isShowHighlightBorder
                       className="view-analysis"
                       onClick={() => history.push(`/tacit?id=${matchId}`)}
                     >
-                        查看分析过程
-                        <IconFont type="euro-icon-xiayiye1" />
+                      查看分析过程
+                      <IconFont type="euro-icon-xiayiye1" />
                     </Button>
                   </div>
                   <div className="center-vote">
