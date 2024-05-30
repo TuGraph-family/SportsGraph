@@ -17,6 +17,7 @@ import ScheduleList from "./components/schedule-list";
 import "./index.less";
 import TechnicalPrinciples from "@/pages/home/components/technical-principles";
 import InstructionsForUse from "./components/instructions-for-use";
+import IconFont from "@/components/icon-font";
 
 const HomePage: React.FC = () => {
   const [state, setState] = useImmer<{ futureList: any[] }>({
@@ -61,7 +62,7 @@ const HomePage: React.FC = () => {
           title="智猜足球"
           desc={
             <>
-              智能图计算技术找出比赛中的关键组
+              智能图计算技术找出比赛中的关键组合
               <TechnicalPrinciples />
             </>
           }
@@ -73,6 +74,20 @@ const HomePage: React.FC = () => {
           }}
           indicatorProps={{
             color: "white",
+          }}
+          indicator={(total, current) => {
+            return (
+              <div className="indicator">
+                {new Array(total)
+                  ?.fill(total)
+                  ?.map((_, index) => (
+                    <div
+                      key={index}
+                      className={`indicator-item${index === current ? "-active" : ""}`}
+                    />
+                  ))}
+              </div>
+            );
           }}
         >
           {futureList.map((item, index) => {
@@ -135,10 +150,11 @@ const HomePage: React.FC = () => {
                   </div>
                   <div className="center-to-analysis">
                     <Button
-                      color="primary"
+                      className="view-analysis"
                       onClick={() => history.push(`/tacit?id=${matchId}`)}
                     >
-                      查看分析过程
+                        查看分析过程
+                        <IconFont type="euro-icon-xiayiye1" />
                     </Button>
                   </div>
                   <div className="center-vote">
@@ -169,7 +185,7 @@ const HomePage: React.FC = () => {
       </div>
       <div className="home-page-list">
         <Tabs>
-          <Tabs.Tab title="历史预测" key="history">
+          <Tabs.Tab title="历史赛程" key="history">
             <ScheduleList
               service={({ pageNum, pageSize }) =>
                 getHistoryGameList({

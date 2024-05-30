@@ -45,7 +45,9 @@ const ColorfulButton: React.FC<ColorfulButtonProps> = ({ children }) => {
         </g>
       </svg>
       <div className="colorful-button">
-        <div className="colorful-button-content">{children}</div>
+        <div className="colorful-button-content">
+          {children}
+          </div>
       </div>
 
       <svg

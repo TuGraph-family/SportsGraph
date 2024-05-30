@@ -57,7 +57,11 @@ const InstructionsForUse: React.FC<InstructionsForUseProps> = ({}) => {
           我已阅读、理解并同意接受本使用声明的条款。
         </Checkbox>
         <div className="agree-button">
-          <Button onClick={onContinue} color="primary" disabled={!agree}>
+          <Button
+            onClick={onContinue}
+            style={{ padding: "11px 19px 11px 18px" }}
+            disabled={!agree}
+          >
             好的，继续去看
           </Button>
         </div>

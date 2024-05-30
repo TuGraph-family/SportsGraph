@@ -326,11 +326,13 @@ const TacitPage: React.FC = () => {
 
       <div className="footer">
         <div className="button">
-          <Button onClick={onPrev} color="default">
-            上一页 <IconFont type="euro-icon-xiayiye1" />
+          <Button onClick={onPrev} className="up-page">
+            上一页
+            <IconFont type="euro-icon-xiayiye1" />
           </Button>
-          <Button className="highlight" onClick={onNext} color="primary">
-            下一页 <IconFont type="euro-icon-xiayiye1" />
+          <Button className="next-page" onClick={onNext}>
+            下一页
+            <IconFont type="euro-icon-xiayiye1" />
           </Button>
         </div>
         {hasGraphData && (

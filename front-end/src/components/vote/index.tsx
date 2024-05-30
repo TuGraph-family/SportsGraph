@@ -104,7 +104,7 @@ const Vote: React.FC<VoteProps> = ({
           </TriangleButton>
           <TriangleButton
             buttonType="right"
-            onClick={() => onVote({ ...team2, growingSide: "left" })}
+            onClick={() => onVote({ ...team2, growingSide: "right" })}
           >
             {team2.name}
           </TriangleButton>

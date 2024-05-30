@@ -22,7 +22,7 @@ const ScheduleList: React.FC<AsyncListProps> = (props) => {
             awayWinProbability,
             homeWinProbability,
             match_title,
-            startDate
+            startDate,
           } = item;
           return (
             <div className="game-card" key={matchId}>
@@ -57,7 +57,7 @@ const ScheduleList: React.FC<AsyncListProps> = (props) => {
                         style={{
                           "--fill-color": "#fc4951",
                           "--track-color": "#542B55",
-                          "--track-width": "4px"
+                          "--track-width": "4px",
                         }}
                       />
                     </div>
@@ -71,7 +71,7 @@ const ScheduleList: React.FC<AsyncListProps> = (props) => {
                           "--fill-color": "#1677ff",
                           "--track-color": "#0A3A8C",
                           "--track-width": "4px",
-                          transform: "rotateZ(180deg)"
+                          transform: "rotateZ(180deg)",
                         }}
                       />
                     </div>
@@ -83,7 +83,6 @@ const ScheduleList: React.FC<AsyncListProps> = (props) => {
               </div>
               <div className="to-progress">
                 <Button
-                  color="primary"
                   onClick={() => history.push(`/tacit?id=${matchId}`)}
                 >
                   查看分析过程

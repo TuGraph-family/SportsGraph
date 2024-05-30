@@ -296,11 +296,12 @@ const CompetePage: React.FC = () => {
       </div>
       <div className="footer">
         <div className="button">
-          <Button onClick={onPrev} color="default">
+          <Button onClick={onPrev} className="up-page">
             上一页 <IconFont type="euro-icon-xiayiye1" />
           </Button>
-          <Button className="highlight" onClick={onNext} color="primary">
-            下一页 <IconFont type="euro-icon-xiayiye1" />
+          <Button onClick={onNext} className="next-page">
+            下一页
+            <IconFont type="euro-icon-xiayiye1" />
           </Button>
         </div>
         {hasGraphData && (

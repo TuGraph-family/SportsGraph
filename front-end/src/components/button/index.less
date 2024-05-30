@@ -2,39 +2,97 @@
   transform: skew(-10deg);
   margin-top: -12px;
   display: inline-block;
+  position: relative;
 
-  .adm-button {
-    border: none;
-    font-size: 14px;
-    background-image: linear-gradient(180deg,
-        rgba(255, 255, 255, 1) 0%,
-        rgba(204, 204, 204, 1) 100%);
+
+  &-bg {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 115% 135%;
+    border-radius: 4px 2px 4px 3px;
+    cursor: pointer;
+    font-size: 12px;
+    color: #fff;
+    font-weight: 500;
+    padding: 6px 21px 6px 17px;
+    background-image: linear-gradient(106deg, #1677ff 6%, #143cdb 93%);
   }
 
-  .adm-button.adm-button-primary {
-    background-image: linear-gradient(110deg,
-        rgba(22, 119, 255, 1) 6%,
-        rgba(20, 60, 219, 1) 94%);
+  &-disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
   }
 
-  .adm-button>span {
+  &-bg>span {
     transform: skew(10deg);
     display: inline-block;
   }
 
-  .highlight::before {
+  .up-page {
+    font-size: 14px;
+    color: #000000A6;
+    font-weight: 600;
+    padding: 11px 40px 11px 42px;
+    background-image: url(https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*2pOeS79IOqQAAAAAAAAAAAAADsvfAQ/original);
+  }
+
+  .next-page {
+    font-size: 14px;
+    color: #fff;
+    font-weight: 600;
+    padding: 11px 40px 11px 42px;
+    background-image: url(https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*uPU8S7JQgqQAAAAAAAAAAAAADsvfAQ/original);
+  }
+
+  .view-analysis {
+    font-size: 14px;
+    color: #fff;
+    font-weight: 600;
+    padding: 7px 19px 7px 21px;
+    background-image: url(https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*jtC-Q5FTMooAAAAAAAAAAAAADsvfAQ/original);
+  }
+
+  .next-page::before,
+  .up-page::before {
     content: "";
     position: absolute;
-    top: 1px;
+    top: 0;
     left: 0;
-    right: 0;
-    height: 2px;
+    height: 1px;
+    width: 100%;
     z-index: 10;
     border: none;
     background: linear-gradient(90deg,
-        #1677ff 3%,
-        #ffffff 52%,
-        #1677ff 100%);
+        #ffffff00 0%,
+        #ffffff 50%,
+        #ffffff00 100%);
     opacity: 0.8;
+  }
+
+  .view-analysis-future::before {
+    content: '';
+    width: 66px;
+    height: 2px;
+    position: absolute;
+    top: 50%;
+    left: -66px;
+    background: linear-gradient(90deg,
+        #ffffff00 3%,
+        #d7d2d2 100%,
+      );
+    border: none;
+    opacity: 0.58;
+  }
+
+  .view-analysis-future::after {
+    content: '';
+    width: 66px;
+    height: 2px;
+    position: absolute;
+    top: 50%;
+    right: -66px;
+    background: linear-gradient(90deg, #d7d2d2 0%, #ffffff00 100%);
+    border: none;
+    opacity: 0.58;
   }
 }
