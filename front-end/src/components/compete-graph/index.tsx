@@ -1,6 +1,6 @@
 import { PlayersInfoResult } from "@/interfaces";
 import { Renderer } from "@antv/g-svg";
-import { Graph, GraphData, NodeEvent } from "@antv/g6";
+import { Graph, GraphData, IEvent, NodeEvent } from "@antv/g6";
 import React, { useEffect } from "react";
 import { useImmer } from "use-immer";
 import PlayerNode from "../player-node";
@@ -57,38 +57,6 @@ const CompeteGraph: React.FC<CompeteGraphProps> = ({
           }
         }
       }
-      // layout: {
-      //   type: "d3force",
-      //   center: { x: 180, y: 70 },
-      //   x: {
-      //     strength: 0.3
-      //   },
-      //   y: {
-      //     strength: 1
-      //   },
-      //   collide: {
-      //     iterations: 2,
-      //     radius: (d) => {
-      //       let nodeSize = d.data.nodeSize * nodeSizeRatio;
-      //       if (nodeSize < minNodeSize) {
-      //         nodeSize = minNodeSize;
-      //       } else if (nodeSize > maxNodeSize) {
-      //         nodeSize = maxNodeSize;
-      //       }
-      //       return nodeSize * 0.6;
-      //     }
-      //   },
-      //   nodeSize: (d) => {
-      //     let nodeSize = d.data.nodeSize * nodeSizeRatio;
-      //     if (nodeSize < minNodeSize) {
-      //       nodeSize = minNodeSize;
-      //     } else if (nodeSize > maxNodeSize) {
-      //       nodeSize = maxNodeSize;
-      //     }
-
-      //     return nodeSize * 1;
-      //   }
-      // }
     });
     setState((draft) => {
       draft.graph = graph;
@@ -96,15 +64,19 @@ const CompeteGraph: React.FC<CompeteGraphProps> = ({
   }, []);
 
   useEffect(() => {
-    if (graphData.nodes?.length) {
+    const handleNodeClick = (event: IEvent) => {
+      onClickNode(graph?.getNodeData(event?.target?.id));
+    };
+    if (graphData.nodes?.length && graph) {
       graph?.setData(graphData);
       graph?.render();
       graph?.on("afterrender", () => {
         graph.fitView({ direction: "both", when: "overflow" });
       });
-      graph?.on(`node:${NodeEvent.CLICK}`, (event: any) => {
-        onClickNode(graph.getNodeData(event?.target?.id));
-      });
+      graph?.on(`node:${NodeEvent.CLICK}`, handleNodeClick);
+      return () => {
+        graph.off("node:click", handleNodeClick);
+      };
     }
   }, [graphData]);
   return (

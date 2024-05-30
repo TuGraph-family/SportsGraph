@@ -86,22 +86,17 @@ const TacitGraph: React.FC<TacitGraphProps> = ({
     });
   }, []);
   useEffect(() => {
-    if (graphData.nodes?.length && graph) {
+    const handleNodeClick = (e) => {
+      const playersInfo = graph?.getNodeData();
+      onNodeClick?.(e.target.id, playersInfo as unknown as PlayersInfoResult[]);
+    };
+    if (graphData.nodes?.length) {
       graph?.setData(graphData);
-      graph?.on("node:click", (e) => {
-        const playersInfo = graph.getNodeData();
-        onNodeClick?.(
-          e.target.id,
-          playersInfo as unknown as PlayersInfoResult[]
-        );
-      });
-      graph.render();
-      // graph?.on("afterrender", () => {
-      //   graph.fitView({ direction: "both", when: "overflow" });
-      // });
+      graph?.on("node:click", handleNodeClick);
+      graph?.render();
     }
     return () => {
-      graph?.off("node:click");
+      graph?.off("node:click", handleNodeClick);
     };
   }, [graphData]);
 

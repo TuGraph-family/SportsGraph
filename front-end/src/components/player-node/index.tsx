@@ -23,7 +23,7 @@ const PlayerNode: React.FC<PlayerNodeProps> = React.memo(
       isTeamA,
       player_shirtnumber,
       player_name,
-      nodeSize = 40,
+      nodeSize = 40
     } = playerInfo;
     const mapWidth = nodeSize * ratio + 30;
     const width =
@@ -55,7 +55,7 @@ const PlayerNode: React.FC<PlayerNodeProps> = React.memo(
           </div>
           {showName && (
             <div className="label">
-              <div className="label-text" style={{ fontSize }}>
+              <div className="label-text" style={{ fontSize: 8 }}>
                 {player_name}
               </div>
             </div>
