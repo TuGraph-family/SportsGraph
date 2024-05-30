@@ -5,19 +5,22 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 
   .shirt {
-    width: 40px;
-    height: 40px;
+    /* px-to-viewport-ignore-next */
+    width: 60px;
+    /* px-to-viewport-ignore-next */
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    position: relative;
     z-index: 1;
 
     img {
-      width: 40px;
+      /* px-to-viewport-ignore-next */
+      width: 60px;
       position: absolute;
       left: 0;
       top: 0;
@@ -25,37 +28,40 @@
     &-number {
       color: #fff;
       font-family: "DingTalk-JinBuTi";
+      /* px-to-viewport-ignore-next */
       font-size: 10px;
-      top: 20px;
-      left: 15px;
       z-index: 1;
-      margin-top: 16px;
-      margin-left: -2px;
+      margin-top: 10px;
+      /* px-to-viewport-ignore-next */
+      margin-left: -3px;
     }
-    margin-bottom: 16px;
   }
   .label {
-    position: absolute;
-    bottom: -17px;
-    width: 60px;
-    height: 15px; /* px-to-viewport-ignore */
+    /* px-to-viewport-ignore-next */
+    width: 54px;
+    /* px-to-viewport-ignore-next */
+    height: 15px;
     line-height: 15px;
     color: #fff;
     font-size: 9px;
     background-image: url("https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*2-NzSbxbZosAAAAAAAAAAAAADsvfAQ/original");
     background-repeat: no-repeat;
-    background-size: 100% 15px;
+    /* px-to-viewport-ignore-next */
+    background-size: 54px 100%;
+    background-position: center;
     display: flex;
     justify-content: center;
     z-index: 10;
 
     &-text {
-      width: 45px;
+      width: 39px;
       overflow: hidden;
       text-overflow: ellipsis;
       font-family: "DingTalk-JinBuTi";
       white-space: nowrap;
       text-align: center;
+      /* px-to-viewport-ignore-next */
+      font-size: 8px;
     }
   }
 }

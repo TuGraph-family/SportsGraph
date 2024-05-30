@@ -1,6 +1,6 @@
 import { defineConfig } from "@umijs/max";
 // @ts-ignore
-import px2vw from "postcss-px-to-viewport";
+import px2vw from "@our-patches/postcss-px-to-viewport";
 
 export default defineConfig({
   routes: [
