@@ -64,6 +64,19 @@ const CompetePersonalGraph: React.FC<CompetePersonalGraphProps> = ({
           haloLineWidth: 6,
           haloShadowColor: "#fff",
           haloShadowBlur: 10,
+          labelPlacement: (d) => {
+            return Number(d.percentage) / 100;
+          },
+          labelOffsetX: 0,
+          label: true,
+          labelFontFamily: "euro-iconfont",
+          labelText: "❯❯❯❮❮❮",
+          labelAutoRotate: true,
+          labelFill: "#fff",
+          labelFontSize: 8,
+          labelFontWeight: 500,
+          labelOpacity: 0.6,
+          labelLineHeight: 11,
         },
         animation: {
           // disable default enter and exit animation
