@@ -4,9 +4,14 @@ import "./index.less";
 interface SplitTextProps {
   children: string;
   id: string;
+  delay?: number;
 }
 
-const SplitText: React.FC<SplitTextProps> = ({ children, id }) => {
+const SplitText: React.FC<SplitTextProps> = ({
+  children,
+  id,
+  delay = 2000
+}) => {
   let char = 0;
   useEffect(() => {
     setTimeout(() => {
@@ -34,7 +39,7 @@ const SplitText: React.FC<SplitTextProps> = ({ children, id }) => {
         };
         timer = setInterval(onTick, 50);
       }
-    }, 2000);
+    }, delay);
   }, []);
   return (
     <div id={id} className="sg-split-text">

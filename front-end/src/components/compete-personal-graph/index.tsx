@@ -23,7 +23,7 @@ const CompetePersonalGraph: React.FC<CompetePersonalGraphProps> = ({
   graphData,
   containerId,
   onClickNode,
-  style,
+  style
 }) => {
   const [state, setState] = useImmer<{ graph?: Graph }>({});
   const { graph } = state;
@@ -50,9 +50,12 @@ const CompetePersonalGraph: React.FC<CompetePersonalGraphProps> = ({
             } else if (nodeSize > maxNodeSize) {
               nodeSize = maxNodeSize;
             }
-            return [nodeSize * 0.1, nodeSize * 1.2];
+            return [nodeSize, nodeSize];
           },
-        },
+          ports: (d) => {
+            return [{ key: "center", placement: [0.5, 0.5] }];
+          }
+        }
       },
       edge: {
         type: "path-in-line",
@@ -64,14 +67,14 @@ const CompetePersonalGraph: React.FC<CompetePersonalGraphProps> = ({
           haloStrokeWidth: 5,
           haloLineWidth: 5,
           haloShadowColor: "#fff",
-          haloShadowBlur: 20,
+          haloShadowBlur: 20
         },
         animation: {
           // disable default enter and exit animation
           enter: false,
-          exit: false,
-        },
-      },
+          exit: false
+        }
+      }
     });
     setState((draft) => {
       draft.graph = graph;

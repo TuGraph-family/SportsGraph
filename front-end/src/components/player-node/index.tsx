@@ -5,12 +5,10 @@ import React from "react";
 import "./index.less";
 
 register(ExtensionCategory.NODE, "react", ReactNode);
-const minWidth = 30;
-const maxWidth = 60;
-const ratio = 0.2;
-const maxFontSize = 10;
-const fontSizeRatio = 0.2;
-const maxShirtNumberFontSize = 18;
+
+const ratio = 0.01;
+const minScale = 0.7;
+const maxScale = 1.1;
 
 interface PlayerNodeProps {
   playerInfo: PlayersInfoResult;
@@ -23,44 +21,35 @@ const PlayerNode: React.FC<PlayerNodeProps> = React.memo(
       isTeamA,
       player_shirtnumber,
       player_name,
-      nodeSize = 40
+      nodeSize = 60
     } = playerInfo;
-    const mapWidth = nodeSize * ratio + 30;
-    const width =
-      mapWidth < minWidth
-        ? minWidth
-        : mapWidth > maxWidth
-          ? maxWidth
-          : mapWidth;
-    const mapFontSize = width * fontSizeRatio;
-    const fontSize = mapFontSize < maxFontSize ? mapFontSize : maxFontSize;
-    const shirtFontSize =
-      mapFontSize < maxShirtNumberFontSize
-        ? mapFontSize
-        : maxShirtNumberFontSize;
+    const scale = ratio * nodeSize;
+    const realScale =
+      scale < minScale ? minScale : scale > maxScale ? maxScale : scale;
 
     return (
-      <div className="player-node" style={{ minHeight: 60 }}>
-        <div className={`shirt`} style={{ width, height: width - 3 }}>
+      <div className="player-node">
+        <div
+          className={`shirt`}
+          style={{
+            transform: `scale(${realScale})`,
+            transformOrigin: showName ? "bottom" : "top"
+          }}
+        >
           <img
-            style={{ width }}
             src={
               isTeamA === "1"
                 ? "https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*0oAaS42vqWcAAAAAAAAAAAAADsvfAQ/original"
                 : "https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*BYH5SauBNecAAAAAAAAAAAAADsvfAQ/original"
             }
           />
-          <div className="shirt-number" style={{ fontSize: shirtFontSize }}>
-            {player_shirtnumber}
-          </div>
-          {showName && (
-            <div className="label">
-              <div className="label-text" style={{ fontSize: 8 }}>
-                {player_name}
-              </div>
-            </div>
-          )}
+          <div className="shirt-number">{player_shirtnumber}</div>
         </div>
+        {showName && (
+          <div className="label">
+            <div className="label-text">{player_name}</div>
+          </div>
+        )}
       </div>
     );
   }

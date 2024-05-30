@@ -19,7 +19,7 @@ const maxNodeSize = 70;
 const PersonalTacitGraph: React.FC<PersonalTacitGraphProps> = ({
   graphData,
   containerId,
-  style,
+  style
 }) => {
   useEffect(() => {
     const graph = new Graph({
@@ -44,9 +44,12 @@ const PersonalTacitGraph: React.FC<PersonalTacitGraphProps> = ({
             } else if (nodeSize > maxNodeSize) {
               nodeSize = maxNodeSize;
             }
-            return [nodeSize * 0.1, nodeSize * 1.2];
+            return [nodeSize, nodeSize];
           },
-        },
+          ports: (d) => {
+            return [{ key: "center", placement: [0.5, 0.5] }];
+          }
+        }
       },
       edge: {
         type: "path-in-line",
@@ -60,14 +63,14 @@ const PersonalTacitGraph: React.FC<PersonalTacitGraphProps> = ({
           haloStrokeWidth: (d) => Number(d.playerValue),
           haloLineWidth: (d) => Number(d.playerValue) + 1,
           haloShadowColor: "#fff",
-          haloShadowBlur: 20,
+          haloShadowBlur: 20
         },
         animation: {
           // disable default enter and exit animation
           enter: false,
-          exit: false,
-        },
-      },
+          exit: false
+        }
+      }
     });
     graph.render();
     graph.fitView();
