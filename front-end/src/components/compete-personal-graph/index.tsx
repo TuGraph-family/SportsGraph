@@ -23,7 +23,7 @@ const CompetePersonalGraph: React.FC<CompetePersonalGraphProps> = ({
   graphData,
   containerId,
   onClickNode,
-  style
+  style,
 }) => {
   const [state, setState] = useImmer<{ graph?: Graph }>({});
   const { graph } = state;
@@ -54,8 +54,8 @@ const CompetePersonalGraph: React.FC<CompetePersonalGraphProps> = ({
           },
           ports: (d) => {
             return [{ key: "center", placement: [0.5, 0.5] }];
-          }
-        }
+          },
+        },
       },
       edge: {
         type: "path-in-line",
@@ -65,16 +65,29 @@ const CompetePersonalGraph: React.FC<CompetePersonalGraphProps> = ({
           halo: true,
           haloStroke: "#fff",
           haloStrokeWidth: 5,
-          haloLineWidth: 5,
+          haloLineWidth: 6,
           haloShadowColor: "#fff",
-          haloShadowBlur: 20
+          haloShadowBlur: 10,
+          labelPlacement: (d) => {
+            return Number(d.percentage) / 100;
+          },
+          labelOffsetX: 0,
+          label: true,
+          labelFontFamily: "euro-iconfont",
+          labelText: "❯❯❯❮❮❮",
+          labelAutoRotate: true,
+          labelFill: "#fff",
+          labelFontSize: 8,
+          labelFontWeight: 500,
+          labelOpacity: 0.6,
+          labelLineHeight: 11,
         },
         animation: {
           // disable default enter and exit animation
           enter: false,
-          exit: false
-        }
-      }
+          exit: false,
+        },
+      },
     });
     setState((draft) => {
       draft.graph = graph;
