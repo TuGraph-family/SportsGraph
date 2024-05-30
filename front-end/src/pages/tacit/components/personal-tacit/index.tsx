@@ -41,12 +41,15 @@ const PersonalTacit: React.FC<TacitGraphProps> = ({
         {playerInfo && (
           <div className="player-info">
             <div className="player">
-              <PlayerNode playerInfo={{ ...playerInfo!, nodeSize: 20 }} />
-              <div>
-                <div className="player-name">{playerInfo?.player_name}</div>
-                <div className="player-en-name">
-                  {playerInfo?.player_enName}
-                </div>
+              <div className="player-left">
+                <PlayerNode
+                  playerInfo={{ ...playerInfo!, nodeSize: 20 }}
+                  showName={false}
+                />
+              </div>
+              <div className="player-right">
+                <div className="name">{playerInfo?.player_name}</div>
+                <div className="en-name">{playerInfo?.player_enName}</div>
               </div>
             </div>
             <div className="description">

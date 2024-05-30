@@ -15,14 +15,14 @@
     border-radius: 12px;
     margin: 0 16px;
     background-image: radial-gradient(circle at 50% 0%, #1541a8, #0b286c);
+    position: relative;
 
     .title {
       display: flex;
       font-size: 12px;
-      margin-bottom: 10px;
-
+      margin-bottom: 13px;
       &-class {
-        color: #ffffffa6;
+        color: #bcc7e0;
         display: flex;
         align-items: center;
 
@@ -30,10 +30,13 @@
           content: "";
           display: block;
           height: 10px;
-          width: 1px;
-          background-color: #ffffffa6;
+          width: 1.5px;
+          background-color: #bcc7e0;
           margin: 0 6px;
         }
+      }
+      &-time {
+        color: #dbe2f1;
       }
     }
 
@@ -41,7 +44,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 13px;
+      margin-bottom: 14px;
       width: 100%;
       overflow: hidden;
 
@@ -58,24 +61,31 @@
 
         .game-country {
           text-align: right;
+          color: #dbe2f1;
         }
       }
 
       &-flag {
-        width: 32px;
+        width: 38px;
       }
 
       &-time {
-        background-color: #001444;
+        background-color: #09276f;
         border-radius: 13px;
         height: 26px;
-        padding: 0 8px;
+        padding: 0 12px;
         font-family: DingTalk-JinBuTi;
-        font-size: 12px;
+        font-size: 16px;
         line-height: 26px;
+        color: #fff;
+
+        &-colon {
+          padding: 0 6px;
+        }
       }
 
       &-country {
+        color: #dbe2f1;
         margin: 0 10px;
         font-size: 12px;
         flex: 1;
@@ -90,15 +100,18 @@
 
       &-text {
         display: flex;
-        align-items: flex-end;
+        align-items: center;
         font-size: 12px;
+        line-height: 17px;
         background-color: #001444;
-        padding: 15px 28px 19px;
+        padding: 9px 12px 14px;
 
         border-radius: 10px;
 
         .predict-percent {
           font-family: DingTalk-JinBuTi;
+          font-size: 14px;
+          line-height: 28px;
         }
 
         &-left,
@@ -113,12 +126,12 @@
         }
 
         &-right {
-          color: #34b4fc;
+          color: #1677ff;
           justify-content: flex-end;
         }
 
         &-result {
-          color: #ffffffd9;
+          color: #dbe2f1;
         }
       }
 
@@ -133,22 +146,25 @@
     .to-progress {
       text-align: center;
       margin-top: -22px;
-
       .adm-button {
         font-size: 12px;
       }
     }
   }
-
   .game-card::before {
     content: "";
+    background-image: linear-gradient(
+      90deg,
+      #ffffff00 3%,
+      #ffffff 51%,
+      #ffffff00 100%
+    );
+    opacity: 0.72;
+    height: 1.5px;
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 1.5px;
     z-index: 10;
-    background-image: linear-gradient(90deg, #ffffff00 3%, #ffffff 51%, #ffffff00 100%);
-    opacity: 0.72;
   }
 }

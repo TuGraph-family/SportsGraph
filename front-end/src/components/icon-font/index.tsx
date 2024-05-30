@@ -16,11 +16,17 @@ const IconFont: React.FC<IconFontProps> = (props) => {
       {...others}
       style={{
         ...style,
-        transform: rotate ? `rotate(${rotate}deg)` : undefined
+        transform: rotate ? `rotate(${rotate}deg)` : undefined,
       }}
       className="anticon"
     >
-      <svg className="icon" aria-hidden="true">
+      <svg
+        className="icon"
+        aria-hidden="true"
+        style={{
+          transform: rotate ? `rotate(${rotate}deg)` : undefined,
+        }}
+      >
         <use xlinkHref={`#${type}`}></use>
       </svg>
     </span>

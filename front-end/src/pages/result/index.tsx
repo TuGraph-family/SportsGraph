@@ -147,7 +147,7 @@ const ResultPage: React.FC = () => {
           <div className="qrcode">
             <img src="https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*90-3SpclRKcAAAAAAAAAAAAADsvfAQ/original" />
           </div>
-          <div className="qrcode-text">截图分享给好友,一起猜猜猜~</div>
+          <div className="qrcode-text">截图分享给好友，一起猜猜猜~</div>
         </div>
         <div className="result-playground">
           <FootballField />

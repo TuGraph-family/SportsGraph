@@ -54,7 +54,7 @@ const InstructionsForUse: React.FC<InstructionsForUseProps> = ({}) => {
           任何用户交互功能仅为增加互动性和娱乐性，与实际比赛无关。我们不承担任何因使用或无法使用本应用所引起的直接或间接损害。
         </li>
         <Checkbox block onChange={onChange} className="checkbox">
-          我已阅读、理解并同意接受本使用声明的条款。
+          我已阅读、理解并接受本使用声明的条款。
         </Checkbox>
         <div className="agree-button">
           <Button
