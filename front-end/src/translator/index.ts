@@ -99,7 +99,7 @@ export const playerTacitInfoTranslator = (res: any) => {
     player_enName: resultSet[0].a_personEnName,
     x: 180,
     y: 180,
-    nodeSize: 100,
+    nodeSize: 80,
     isCenter: true,
   };
   // 计算周边点坐标
@@ -118,7 +118,7 @@ export const playerTacitInfoTranslator = (res: any) => {
       player_id: item?.b_id,
       player_enName: item.b_personEnName,
       ...nodeXY?.[index],
-      nodeSize: 100,
+      nodeSize: 80,
     };
   });
 

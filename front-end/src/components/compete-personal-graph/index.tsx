@@ -27,7 +27,6 @@ const CompetePersonalGraph: React.FC<CompetePersonalGraphProps> = ({
 }) => {
   const [state, setState] = useImmer<{ graph?: Graph }>({});
   const { graph } = state;
-
   useEffect(() => {
     const graph = new Graph({
       background: "transparent",
@@ -62,9 +61,9 @@ const CompetePersonalGraph: React.FC<CompetePersonalGraphProps> = ({
           halo: true,
           haloStroke: "#fff",
           haloStrokeWidth: 5,
-          haloLineWidth: 5,
+          haloLineWidth: 6,
           haloShadowColor: "#fff",
-          haloShadowBlur: 20,
+          haloShadowBlur: 10,
         },
         animation: {
           // disable default enter and exit animation
