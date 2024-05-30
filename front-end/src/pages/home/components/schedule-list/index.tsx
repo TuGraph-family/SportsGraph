@@ -22,7 +22,7 @@ const ScheduleList: React.FC<AsyncListProps> = (props) => {
             awayWinProbability,
             homeWinProbability,
             match_title,
-            startDate
+            startDate,
           } = item;
           return (
             <div className="game-card" key={matchId}>
@@ -36,9 +36,15 @@ const ScheduleList: React.FC<AsyncListProps> = (props) => {
                   <div className="game-country">{team_a_country}</div>
                 </div>
                 <div className="game-time">
-                  {actualHomeScore === undefined
-                    ? "结果未出"
-                    : `${actualHomeScore} : ${actualAwayScore}`}
+                  {actualHomeScore === undefined ? (
+                    "结果未出"
+                  ) : (
+                    <>
+                      {actualHomeScore}
+                      <span className="game-time-colon">:</span>
+                      {actualAwayScore}
+                    </>
+                  )}
                 </div>
                 <div className="game-right">
                   <div className="game-country">{team_b_country}</div>
@@ -56,8 +62,8 @@ const ScheduleList: React.FC<AsyncListProps> = (props) => {
                         percent={homeWinProbability}
                         style={{
                           "--fill-color": "#fc4951",
-                          "--track-color": "#542B55",
-                          "--track-width": "4px"
+                          "--track-color": "#532A55",
+                          "--track-width": "4px",
                         }}
                       />
                     </div>
@@ -69,9 +75,9 @@ const ScheduleList: React.FC<AsyncListProps> = (props) => {
                         percent={awayWinProbability}
                         style={{
                           "--fill-color": "#1677ff",
-                          "--track-color": "#0A3A8C",
+                          "--track-color": "#09398B",
                           "--track-width": "4px",
-                          transform: "rotateZ(180deg)"
+                          transform: "rotateZ(180deg)",
                         }}
                       />
                     </div>

@@ -29,8 +29,6 @@
   }
 
   .player-info {
-    width: 335px;
-    height: 118px;
     background: #010e2d;
     border-radius: 8px;
     position: relative;
@@ -38,39 +36,53 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    padding: 14px 16px;
 
     .player {
-      margin-top: 8px;
       display: flex;
       align-items: center;
+      height: 30px;
       width: 100%;
 
-      .player-node {
+      .player-left {
+        flex: 1;
         width: 20%;
+        padding-right: 5px;
+        height: 38px !important;
+        display: flex;
+        align-items: center;
+
+        .player-node .shirt {
+          margin-bottom: 0 !important;
+        }
+      }
+
+      .player-right {
+        width: 80%;
+        .name {
+          font-size: 10px;
+          color: #ffffff8f;
+          font-weight: 500;
+          line-height: 14px;
+          margin-bottom: 2px;
+        }
+
+        .en-name {
+          font-size: 10px;
+          color: #ffffff8f;
+          line-height: 14px;
+        }
       }
     }
 
-    .player-name {
-      font-size: 10px;
-      color: #ffffff8f;
-      font-weight: 500;
-      margin-bottom: 2px;
-    }
-
-    .player-en-name {
-      font-size: 10px;
-      color: #ffffff8f;
-      flex: 1;
-    }
-
     .description {
-      margin: 4px 16px 0;
       font-size: 14px;
       color: #ffffff;
       line-height: 20px;
       text-align: center;
       font-weight: 600;
       opacity: 0.65;
+      margin-top: 14px;
     }
   }
 
@@ -82,10 +94,12 @@
     right: 0;
     height: 2px;
     z-index: 10;
-    background: linear-gradient(90deg,
-        #ffffff00 3%,
-        #ffffff 52%,
-        #ffffff00 100%);
+    background: linear-gradient(
+      90deg,
+      #ffffff00 3%,
+      #ffffff 52%,
+      #ffffff00 100%
+    );
     opacity: 0.72;
   }
 }

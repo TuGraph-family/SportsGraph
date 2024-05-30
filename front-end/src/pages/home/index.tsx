@@ -61,7 +61,7 @@ const HomePage: React.FC = () => {
           title="智猜足球"
           desc={
             <>
-              智能图计算技术找出比赛中的关键组
+              智能图计算技术找出比赛中的关键组合
               <TechnicalPrinciples />
             </>
           }
@@ -169,7 +169,7 @@ const HomePage: React.FC = () => {
       </div>
       <div className="home-page-list">
         <Tabs>
-          <Tabs.Tab title="历史预测" key="history">
+          <Tabs.Tab title="历史赛程" key="history">
             <ScheduleList
               service={({ pageNum, pageSize }) =>
                 getHistoryGameList({

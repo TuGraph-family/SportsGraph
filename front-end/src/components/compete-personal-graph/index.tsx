@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import { useImmer } from "use-immer";
 import { registerAnimateLine } from "../animate-line";
 import PlayerNode from "../player-node";
+import "./index.less";
 
 registerAnimateLine();
 
@@ -13,6 +14,10 @@ interface CompetePersonalGraphProps {
   onClickNode?: (nodeData: any) => void;
   style?: React.CSSProperties;
 }
+
+const nodeSizeRatio = 0.3;
+const minNodeSize = 60;
+const maxNodeSize = 70;
 
 const CompetePersonalGraph: React.FC<CompetePersonalGraphProps> = ({
   graphData,
@@ -38,7 +43,15 @@ const CompetePersonalGraph: React.FC<CompetePersonalGraphProps> = ({
           component: (data: PlayersInfoResult) => (
             <PlayerNode playerInfo={data} />
           ),
-          size: (d: any) => [20, 50],
+          size: (d: any) => {
+            let nodeSize = d.nodeSize * nodeSizeRatio;
+            if (nodeSize < minNodeSize) {
+              nodeSize = minNodeSize;
+            } else if (nodeSize > maxNodeSize) {
+              nodeSize = maxNodeSize;
+            }
+            return [nodeSize * 0.1, nodeSize * 1.2];
+          },
         },
       },
       edge: {
