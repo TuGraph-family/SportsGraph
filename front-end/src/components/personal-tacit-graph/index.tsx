@@ -55,15 +55,8 @@ const PersonalTacitGraph: React.FC<PersonalTacitGraphProps> = ({
           lineWidth: (d) => {
             return Number(d.playerValue);
           },
-          halo: true,
-          haloStroke: "#fff",
-          haloStrokeWidth: (d) => Number(d.playerValue),
-          haloLineWidth: (d) => Number(d.playerValue) + 1,
-          haloShadowColor: "#fff",
-          haloShadowBlur: 20,
         },
         animation: {
-          // disable default enter and exit animation
           enter: false,
           exit: false,
         },

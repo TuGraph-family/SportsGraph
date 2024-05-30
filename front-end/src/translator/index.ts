@@ -201,7 +201,7 @@ export const personalTacitTranslator = (
       target: b_id,
       playerValue,
       stroke: isHome
-        ? "linear-gradient(rgba(82, 9, 29, 1), rgba(159, 4, 13, 0.9), rgba(82, 9, 29, 1))"
+        ? "linear-gradient(#55091C 10%, #910510 25%, #910510B8 50%,#910510 75%, #55091C 90%)"
         : "linear-gradient(#0F2EAB, rgba(20,60,219,0.9),#0F2EAB)",
     };
   });
