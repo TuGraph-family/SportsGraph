@@ -111,6 +111,14 @@ const HomePage: React.FC = () => {
                 <div className="home-page-top-game">
                   <div className="center-bg">
                     <TopBg />
+                    {/* <img
+                      style={{
+                        width: "80vw",
+                        height: "80vw",
+                      }}
+                      src="https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*RDScRoqGbsAAAAAAAAAAAAAADsvfAQ/original)"
+                      alt=""
+                    /> */}
                   </div>
                   <div className="center-team">
                     <Teamteam
