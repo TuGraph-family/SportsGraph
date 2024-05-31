@@ -88,7 +88,11 @@ const Vote: React.FC<VoteProps> = ({
   const newPercent = votePercent || percent;
   return (
     <div className="vote">
-      <div className="vote-text">你认为谁会获胜，为TA投票吧~</div>
+      <div className="vote-text">
+        {hasVoted || isEnd
+          ? `${team1.name} : ${team2.name}`
+          : "你认为谁会获胜，为TA投票吧~"}
+      </div>
       {hasVoted || isEnd ? (
         <Slider
           value={hasVoted ? newPercent : 50}
