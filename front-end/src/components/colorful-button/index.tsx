@@ -45,6 +45,10 @@ const ColorfulButton: React.FC<ColorfulButtonProps> = ({ children }) => {
         </g>
       </svg>
       <div className="colorful-button">
+        <img
+          src="https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*ox1aRrL4cYEAAAAAAAAAAAAADsvfAQ/original"
+          alt=""
+        />
         <div className="colorful-button-content">{children}</div>
       </div>
 

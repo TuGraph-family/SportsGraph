@@ -18,6 +18,7 @@ import "./index.less";
 import TechnicalPrinciples from "@/pages/home/components/technical-principles";
 import InstructionsForUse from "./components/instructions-for-use";
 import { getDayOfWeek } from "@/utils";
+import IconFont from "@/components/icon-font";
 
 const HomePage: React.FC = () => {
   const [state, setState] = useImmer<{ futureList: any[] }>({
@@ -74,6 +75,20 @@ const HomePage: React.FC = () => {
           }}
           indicatorProps={{
             color: "white",
+          }}
+          indicator={(total, current) => {
+            return (
+              <div className="indicator">
+                {new Array(total)
+                  ?.fill(total)
+                  ?.map((_, index) => (
+                    <div
+                      key={index}
+                      className={`indicator-item${index === current ? "-active" : ""}`}
+                    />
+                  ))}
+              </div>
+            );
           }}
         >
           {futureList.map((item, index) => {
@@ -141,10 +156,12 @@ const HomePage: React.FC = () => {
                   </div>
                   <div className="center-to-analysis">
                     <Button
-                      color="primary"
+                      isShowHighlightBorder
+                      className="view-analysis"
                       onClick={() => history.push(`/tacit?id=${matchId}`)}
                     >
                       查看分析过程
+                      <IconFont type="euro-icon-xiayiye1" />
                     </Button>
                   </div>
                   <div className="center-vote">

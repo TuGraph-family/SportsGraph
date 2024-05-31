@@ -22,7 +22,7 @@ import {
   getTeamPersonalTacitInfo,
   getTeamTacitInfo,
 } from "@/services";
-import { parseSearch } from "@/utils";
+import { getTaticLineWidth, parseSearch } from "@/utils";
 import { Edge, GraphData } from "@antv/g6";
 import { useRequest } from "@umijs/max";
 import React, { useEffect, useMemo } from "react";
@@ -33,6 +33,7 @@ import "./index.less";
 import HomeIcon from "@/components/home-icon";
 import { personalTacitTranslator } from "@/translator";
 import PersonalTacit from "./components/personal-tacit";
+import Light from "@/components/light";
 
 const TacitPage: React.FC = () => {
   const [state, setState] = useImmer<{
@@ -169,6 +170,7 @@ const TacitPage: React.FC = () => {
     };
     const currentData = isHome ? homeGraphData : awayGraphData;
     const tacitValueList = isHome ? homeTacitValueList : awayTacitValueList;
+
     if (tacitValueList && currentData.nodes.length && playersInfo.length) {
       data.nodes = currentData.nodes?.map((item) => {
         const { id } = item;
@@ -187,7 +189,7 @@ const TacitPage: React.FC = () => {
         return {
           source: a_id,
           target: b_id,
-          playerValue,
+          playerValue: getTaticLineWidth(Number(playerValue)),
           stroke: isHome
             ? "linear-gradient(90deg, #80111D, #A0040D, #80111D)"
             : "linear-gradient(#0F2EAB, rgba(20,60,219,0.9),#0F2EAB)",
@@ -305,8 +307,8 @@ const TacitPage: React.FC = () => {
 
       <div className="tacit-playground">
         {hasGraphData && (
-          <div className="light-left">
-            <LightTop />
+          <div className={`light-${isHome ? "left" : "right"}`}>
+            <Light isLeft={isHome} />
           </div>
         )}
         <FootballField startAnimate={hasGraphData} />
@@ -326,10 +328,10 @@ const TacitPage: React.FC = () => {
 
       <div className="footer">
         <div className="button">
-          <Button onClick={onPrev} color="default">
+          <Button isShowHighlightBorder onClick={onPrev} className="up-page">
             <IconFont type="euro-icon-xiayiye1" rotate={180} /> 上一页
           </Button>
-          <Button className="highlight" onClick={onNext} color="primary">
+          <Button isShowHighlightBorder className="next-page" onClick={onNext}>
             下一页 <IconFont type="euro-icon-xiayiye1" />
           </Button>
         </div>

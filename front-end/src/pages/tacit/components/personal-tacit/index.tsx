@@ -6,6 +6,7 @@ import { Mask } from "antd-mobile";
 import { CloseOutline } from "antd-mobile-icons";
 import React from "react";
 import "./index.less";
+import IconFont from "@/components/icon-font";
 
 interface TacitGraphProps {
   personalTacitData: GraphData;
@@ -34,7 +35,7 @@ const PersonalTacit: React.FC<TacitGraphProps> = ({
             graphData={personalTacitData}
           />
           <div onClick={() => setVisible(false)} className="close">
-            <CloseOutline color="#fff" />
+            <IconFont type="euro-icon-danchuang-guanbi" style={{color:'#fff'}} />
           </div>
         </div>
 

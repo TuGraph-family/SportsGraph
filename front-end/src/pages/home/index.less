@@ -36,12 +36,33 @@
       pointer-events: none;
     }
 
+    .indicator {
+      display: flex;
+      justify-content: center;
+
+      .indicator-item {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: #ffffff80;
+        margin-right: 6px;
+      }
+
+      .indicator-item-active {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        margin-right: 6px;
+        background-color: #fff;
+      }
+    }
+
     &-game {
       display: flex;
       align-items: center;
       width: 100%;
       flex-direction: column;
-      padding-bottom: 60px;
+      padding-bottom: 42px;
       margin-top: 20px;
       position: relative;
 
@@ -58,6 +79,7 @@
 
       .center-team {
         width: 100%;
+        margin-bottom: 40px;
       }
 
       .center-time {
@@ -74,7 +96,7 @@
 
       .center-predict {
         display: flex;
-        margin-bottom: 20px;
+        margin-bottom: 16px;
 
         .predict-left,
         .predict-right {
@@ -88,11 +110,11 @@
         }
 
         .predict-left {
-          color: #fc4951;
+          color: #d84a50;
         }
 
         .predict-right {
-          color: #34b4fc;
+          color: #1677ff;
         }
 
         .percent {
@@ -109,11 +131,34 @@
 
       .center-to-analysis {
         margin-bottom: 16px;
+
+        .anticon {
+          font-size: 10px;
+          margin-left: 4px;
+        }
       }
     }
   }
 
   &-list {
     margin-top: 16px;
+
+    .adm-tabs-tab-line {
+      background-image: linear-gradient(to right, #1677ff, #143cdb);
+    }
+
+    .sg-tabs .adm-tabs-tab {
+      font-size: 16px;
+      color: #a7abb5;
+    }
+
+    .adm-tabs-tab-list {
+      margin: 0 50px;
+    }
+
+    .sg-tabs .adm-tabs-header .adm-tabs-tab-active {
+      font-size: 16px;
+      color: #d8d8d8;
+    }
   }
 }

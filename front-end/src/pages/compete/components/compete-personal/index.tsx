@@ -11,6 +11,7 @@ import { CloseOutline } from "antd-mobile-icons";
 import React, { useEffect, useMemo } from "react";
 import { useImmer } from "use-immer";
 import "./index.less";
+import IconFont from "@/components/icon-font";
 
 interface CompetePersonalModalProps {
   visible: boolean;
@@ -129,8 +130,8 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
             graphData={graphData}
             containerId="personal-graph"
           />
-          <div className="compete-personal-icon">
-            <CloseOutline onClick={onClose} />
+          <div onClick={onClose}  className="compete-personal-icon">
+            <IconFont type="euro-icon-danchuang-guanbi" style={{color:'#fff'}} />
           </div>
         </div>
         {competeCenterPlayer ? (

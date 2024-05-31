@@ -25,7 +25,7 @@ const TacitGraph: React.FC<TacitGraphProps> = ({
   graphData,
   containerId,
   style,
-  onNodeClick
+  onNodeClick,
 }) => {
   const [state, setState] = useImmer<{ graph?: Graph }>({});
   const { graph } = state;
@@ -64,8 +64,8 @@ const TacitGraph: React.FC<TacitGraphProps> = ({
           },
           ports: (d) => {
             return [{ key: "center", placement: [0.5, 0.5] }];
-          }
-        }
+          },
+        },
       },
       edge: {
         type: "path-in-line",
@@ -79,14 +79,14 @@ const TacitGraph: React.FC<TacitGraphProps> = ({
           haloStrokeWidth: (d) => Number(d.playerValue),
           haloLineWidth: (d) => Number(d.playerValue) + 1,
           haloShadowColor: "#fff",
-          haloShadowBlur: 20
+          haloShadowBlur: 20,
         },
         animation: {
           // disable default enter and exit animation
           enter: false,
-          exit: false
-        }
-      }
+          exit: false,
+        },
+      },
     });
     setState((draft) => {
       draft.graph = graph;

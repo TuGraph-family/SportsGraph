@@ -68,3 +68,9 @@ export const getDayOfWeek = (
     return days[dayOfWeek];
   } else return undefined;
 };
+export const getTaticLineWidth = (taticValue: number) => {
+  let lineWidth = (taticValue / 30) * 12;
+  if (lineWidth < 2) lineWidth = 2;
+  if (lineWidth > 12) lineWidth = 12;
+  return lineWidth;
+};

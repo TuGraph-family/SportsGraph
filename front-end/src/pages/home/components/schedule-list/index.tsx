@@ -3,6 +3,7 @@ import Button from "@/components/button";
 import { history } from "@umijs/max";
 import { ProgressBar } from "antd-mobile";
 import React from "react";
+import dayjs from "dayjs";
 import "./index.less";
 
 const ScheduleList: React.FC<AsyncListProps> = (props) => {
@@ -29,7 +30,7 @@ const ScheduleList: React.FC<AsyncListProps> = (props) => {
               <div className="title">
                 <div className="title-class">{match_title}</div>
                 <div className="title-time">
-                  {startDate.slice(5, -3)?.replace("-", ".")}
+                  {dayjs(startDate).format("MM.DD HH:mm")}
                 </div>
               </div>
               <div className="game">
@@ -39,7 +40,7 @@ const ScheduleList: React.FC<AsyncListProps> = (props) => {
                 </div>
                 <div className="game-time">
                   {actualHomeScore === undefined ? (
-                    "结果未出"
+                    <div style={{ fontSize: 14 }}>未开始</div>
                   ) : (
                     <>
                       {actualHomeScore}
@@ -90,10 +91,7 @@ const ScheduleList: React.FC<AsyncListProps> = (props) => {
                 </div>
               </div>
               <div className="to-progress">
-                <Button
-                  color="primary"
-                  onClick={() => history.push(`/tacit?id=${matchId}`)}
-                >
+                <Button onClick={() => history.push(`/tacit?id=${matchId}`)}>
                   查看分析过程
                 </Button>
               </div>
