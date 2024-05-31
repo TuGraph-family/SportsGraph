@@ -49,7 +49,7 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
     const nodeSize =
       ((radio - graphMinSize) / (graphMaxSize - graphMinSize)) * mappedValue;
     const centerXY = {
-      x: (container?.clientWidth! - centerOffsetX) / 2,
+      x: (container?.clientWidth! - centerOffsetX) / 2 - 10,
       y: (container?.clientHeight! - centerOffsetY) / 2,
     };
     const nodeXY = calculateNeighborPoints(
