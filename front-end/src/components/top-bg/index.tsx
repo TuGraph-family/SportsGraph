@@ -7,7 +7,7 @@ const TopBg: React.FC = () => {
         width: "90vw",
         height: "80vw",
       }}
-      src="https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*lDOLQIE3riEAAAAAAAAAAAAADsvfAQ/original)"
+      src="https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*86tDQYXdk-kAAAAAAAAAAAAADsvfAQ/original)"
       alt=""
     />
   );
