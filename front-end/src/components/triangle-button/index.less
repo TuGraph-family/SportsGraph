@@ -3,12 +3,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
   &.left {
-    background-color: #d84a50;
+    background-image: linear-gradient(to right, #d84a50ff, #ba4759);
     border-top-left-radius: 14px;
     border-bottom-left-radius: 14px;
     position: relative;
     margin-right: 10px;
+
     &::after {
       content: "";
       height: 0;
@@ -16,18 +18,21 @@
       display: inline-block;
       border-left: 10px solid transparent;
       border-right: 10px solid transparent;
-      border-top: 28px solid #d84a50; /* 设置为想要的颜色 */
+      border-top: 28px solid #ba4759;
+      /* 设置为想要的颜色 */
       position: absolute;
       right: -10px;
       top: 0px;
     }
   }
+
   &.right {
     background-color: #1677ff;
     border-top-right-radius: 14px;
     border-bottom-right-radius: 14px;
     position: relative;
     margin-left: 10px;
+
     &::before {
       content: "";
       height: 0;
@@ -35,7 +40,8 @@
       display: inline-block;
       border-left: 10px solid transparent;
       border-right: 10px solid transparent;
-      border-bottom: 28px solid #1677ff; /* 设置为想要的颜色 */
+      border-bottom: 28px solid #1677ff;
+      /* 设置为想要的颜色 */
       position: absolute;
       left: -10px;
       top: 0px;
