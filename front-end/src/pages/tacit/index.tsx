@@ -13,16 +13,16 @@ import {
   GameInfoPlayerResult,
   PersonalTacitInfoResult,
   PlayersInfoResult,
-  TeamTacitInfoResult
+  TeamTacitInfoResult,
 } from "@/interfaces";
 import {
   getGameInfo,
   getPlayerTacitInfo,
   getPlayersInfo,
   getTeamPersonalTacitInfo,
-  getTeamTacitInfo
+  getTeamTacitInfo,
 } from "@/services";
-import { parseSearch } from "@/utils";
+import { getTaticLineWidth, parseSearch } from "@/utils";
 import { Edge, GraphData } from "@antv/g6";
 import { useRequest } from "@umijs/max";
 import React, { useEffect, useMemo } from "react";
@@ -53,12 +53,12 @@ const TacitPage: React.FC = () => {
     homeTeam: {
       name: "加载中...",
       flagUrl: DEFAULT_FLAG,
-      score: 0
+      score: 0,
     },
     awayTeam: {
       name: "加载中...",
       flagUrl: DEFAULT_FLAG,
-      score: 0
+      score: 0,
     },
     homeGraphData: { nodes: [], edges: [] },
     awayGraphData: { nodes: [], edges: [] },
@@ -69,7 +69,7 @@ const TacitPage: React.FC = () => {
     homePersonalTacitList: [],
     awayPersonalTacitList: [],
     personalTacitData: {},
-    visible: false
+    visible: false,
   });
   const {
     homeTeam,
@@ -84,7 +84,7 @@ const TacitPage: React.FC = () => {
     playersInfo,
     playerInfo,
     personalTacitData,
-    visible
+    visible,
   } = state;
   const isHome = teamSide === "home";
 
@@ -92,7 +92,7 @@ const TacitPage: React.FC = () => {
   const { loading: loadingGetGameInfo, run: runGetGameInfo } = useRequest(
     getGameInfo,
     {
-      manual: true
+      manual: true,
     }
   );
   const { run: runGetTeamTacitInfo, loading: loadingGetTeamTacitInfo } =
@@ -105,13 +105,14 @@ const TacitPage: React.FC = () => {
 
   const { run: runGetPlayerTacitInfo, loading: loadingGetPlayerTacitInfo } =
     useRequest(getPlayerTacitInfo, {
-      manual: true
+      manual: true,
     });
 
   const {
     run: runGetTeamPersonalTacitInfo,
-    loading: loadingGetTeamPersonalTacitInfo
+    loading: loadingGetTeamPersonalTacitInfo,
   } = useRequest(getTeamPersonalTacitInfo, { manual: true });
+  
 
   const onNodeClick = (
     playerid: string,
@@ -165,10 +166,11 @@ const TacitPage: React.FC = () => {
   const graphData = useMemo(() => {
     const data: GraphData = {
       nodes: [],
-      edges: []
+      edges: [],
     };
     const currentData = isHome ? homeGraphData : awayGraphData;
     const tacitValueList = isHome ? homeTacitValueList : awayTacitValueList;
+    
     if (tacitValueList && currentData.nodes.length && playersInfo.length) {
       data.nodes = currentData.nodes?.map((item) => {
         const { id } = item;
@@ -179,7 +181,7 @@ const TacitPage: React.FC = () => {
         return {
           ...item,
           ...playerInfo,
-          nodeSize: Number(playerTacitInfo?.value_rank || 200)
+          nodeSize: Number(playerTacitInfo?.value_rank || 200),
         };
       });
       data.edges = tacitValueList.map((item) => {
@@ -187,10 +189,10 @@ const TacitPage: React.FC = () => {
         return {
           source: a_id,
           target: b_id,
-          playerValue,
+          playerValue:getTaticLineWidth(Number(playerValue)),
           stroke: isHome
             ? "linear-gradient(90deg, #80111D, #A0040D, #80111D)"
-            : "linear-gradient(#0F2EAB, rgba(20,60,219,0.9),#0F2EAB)"
+            : "linear-gradient(#0F2EAB, rgba(20,60,219,0.9),#0F2EAB)",
         };
       });
     }
@@ -204,7 +206,7 @@ const TacitPage: React.FC = () => {
     awayTacitValueList,
     playersInfo,
     homePersonalTacitList,
-    awayPersonalTacitList
+    awayPersonalTacitList,
   ]);
   const hasGraphData = useMemo(() => !!graphData.nodes?.length, [graphData]);
   useEffect(() => {
@@ -216,24 +218,24 @@ const TacitPage: React.FC = () => {
           team_a_country,
           team_a_national_flag,
           team_b_country,
-          team_b_national_flag
+          team_b_national_flag,
         } = data.resultSet?.[0] || {};
         setState((draft) => {
           draft.homeTeam = {
             name: team_a_country,
             flagUrl: team_a_national_flag,
-            score: parseInt(homeWinProbability)
+            score: parseInt(homeWinProbability),
           };
           draft.awayTeam = {
             name: team_b_country,
             flagUrl: team_b_national_flag,
-            score: parseInt(awayWinProbability)
+            score: parseInt(awayWinProbability),
           };
           draft.homeGraphData = {
-            nodes: data.playerAList
+            nodes: data.playerAList,
           };
           draft.awayGraphData = {
-            nodes: data.playerBList
+            nodes: data.playerBList,
           };
         });
       }

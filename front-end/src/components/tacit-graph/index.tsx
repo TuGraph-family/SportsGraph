@@ -64,8 +64,8 @@ const TacitGraph: React.FC<TacitGraphProps> = ({
           },
           ports: (d) => {
             return [{ key: "center", placement: [0.5, 0.5] }];
-          }
-        }
+          },
+        },
       },
       edge: {
         type: "path-in-line",

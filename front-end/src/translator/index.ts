@@ -1,5 +1,5 @@
 import { CompetePersonalInfo, GameInfo, PlayersInfoResult } from "@/interfaces";
-import { calculateAngleBetweenPoints, calculateNeighborPoints } from "@/utils";
+import { calculateAngleBetweenPoints, calculateNeighborPoints, getTaticLineWidth } from "@/utils";
 import { GraphData } from "@antv/g6";
 
 export const gameInfoTranslator = (res: any) => {
@@ -199,7 +199,7 @@ export const personalTacitTranslator = (
     return {
       source: a_id,
       target: b_id,
-      playerValue,
+      playerValue: getTaticLineWidth(Number(playerValue)),
       stroke: isHome
         ? "linear-gradient(#55091C 10%, #910510 25%, #910510B8 50%,#910510 75%, #55091C 90%)"
         : "linear-gradient(#0F2EAB, rgba(20,60,219,0.9),#0F2EAB)",
