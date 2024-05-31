@@ -1,5 +1,9 @@
 import { CompetePersonalInfo, GameInfo, PlayersInfoResult } from "@/interfaces";
-import { calculateAngleBetweenPoints, calculateNeighborPoints, getTaticLineWidth } from "@/utils";
+import {
+  calculateAngleBetweenPoints,
+  calculateNeighborPoints,
+  getTaticLineWidth,
+} from "@/utils";
 import { GraphData } from "@antv/g6";
 
 export const gameInfoTranslator = (res: any) => {
@@ -166,8 +170,12 @@ export const personalTacitTranslator = (
   };
 
   const vw = innerWidth / 100;
-  const r = 35 * vw;
+  const radio = Math.min(innerWidth, innerHeight / 2);
+
+  const r = radio / 2 - 25;
   const neighborPoints = calculateNeighborPoints(150, 150, r, 10);
+ 
+  
   data.nodes = [
     {
       id: selectedPlayerInfo.player_id,

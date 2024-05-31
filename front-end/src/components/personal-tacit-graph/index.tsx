@@ -28,6 +28,7 @@ const PersonalTacitGraph: React.FC<PersonalTacitGraphProps> = ({
       animation: false,
       data: graphData,
       autoFit: "center",
+      zoom: 0.9,
       node: {
         type: "react",
         style: {
