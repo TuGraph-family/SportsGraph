@@ -111,7 +111,7 @@ const HomePage: React.FC = () => {
                     />
                   </div>
                   <div className="center-time">
-                    {getDayOfWeek(startDate) || "- -"}{" "}
+                    {getDayOfWeek(startDate) || "- - "}
                     {startDate?.slice(5, -3)?.replace("-", ".") ||
                       "00.00 00:00"}
                   </div>

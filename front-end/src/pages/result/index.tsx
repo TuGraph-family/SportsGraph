@@ -106,7 +106,7 @@ const ResultPage: React.FC = () => {
             {isHomeWin ? team_a_country : team_b_country}
           </div>
           <div className="center-time">
-            {getDayOfWeek(startDate) || "- -"}{" "}
+            {getDayOfWeek(startDate) || "- - "}
             {startDate?.slice(5, -3)?.replace("-", ".") || "00.00 00:00"}
           </div>
           <div className="center-predict">
