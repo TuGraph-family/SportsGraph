@@ -28,7 +28,7 @@ const ScheduleList: React.FC<AsyncListProps> = (props) => {
             <div className="game-card" key={matchId}>
               <div className="title">
                 <div className="title-class">{match_title}</div>
-                <div className="title-time">{startDate}</div>
+                <div className="title-time">{startDate.slice(5, -3)}</div>
               </div>
               <div className="game">
                 <div className="game-left">
