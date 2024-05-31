@@ -9,7 +9,7 @@ import TopBg from "@/components/top-bg";
 import Vote from "@/components/vote";
 import { GameInfoResult, VoteInfoResult } from "@/interfaces";
 import { getGameInfo, getGameVoteInfoById } from "@/services";
-import { parseSearch } from "@/utils";
+import { getDayOfWeek, parseSearch } from "@/utils";
 import { useRequest } from "@umijs/max";
 import React, { useEffect } from "react";
 import { history } from "umi";
@@ -38,6 +38,7 @@ const ResultPage: React.FC = () => {
     team_b_national_flag,
     team_a_country,
     team_b_country,
+    startDate,
   } = gameInfo || {};
   const isHomeWin = homeWinProbability > awayWinProbability;
 
@@ -103,6 +104,10 @@ const ResultPage: React.FC = () => {
           </div>
           <div className="win-name">
             {isHomeWin ? team_a_country : team_b_country}
+          </div>
+          <div className="center-time">
+            {getDayOfWeek(startDate) || "- -"}{" "}
+            {startDate?.slice(5, -3)?.replace("-", ".") || "00.00 00:00"}
           </div>
           <div className="center-predict">
             <div className="predict-left">

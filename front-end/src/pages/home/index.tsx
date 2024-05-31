@@ -17,6 +17,7 @@ import ScheduleList from "./components/schedule-list";
 import "./index.less";
 import TechnicalPrinciples from "@/pages/home/components/technical-principles";
 import InstructionsForUse from "./components/instructions-for-use";
+import { getDayOfWeek } from "@/utils";
 
 const HomePage: React.FC = () => {
   const [state, setState] = useImmer<{ futureList: any[] }>({
@@ -87,8 +88,8 @@ const HomePage: React.FC = () => {
               isEnd,
               awayWinProbability,
               homeWinProbability,
+              startDate,
             } = item;
-
             const voteCount = Number(teamAVote) + Number(teamBVote);
             const votePercent = (teamAVote / voteCount) * 100;
             return (
@@ -108,6 +109,11 @@ const HomePage: React.FC = () => {
                         flagUrl: team_b_national_flag,
                       }}
                     />
+                  </div>
+                  <div className="center-time">
+                    {getDayOfWeek(startDate) || "- -"}{" "}
+                    {startDate?.slice(5, -3)?.replace("-", ".") ||
+                      "00.00 00:00"}
                   </div>
                   <div
                     className="center-predict"
