@@ -99,38 +99,35 @@
   }
 
   .light-left {
-    left: -70px;
-    transform: rotateZ(0deg);
+    left: -65px;
     animation: lightLeft 2s ease forwards;
     transform-origin: top left;
-    top: 240px;
+    top: 50px;
   }
 
   .light-right {
-    right: -5px;
-    transform: rotateZ(0);
-    animation: lightRight 1s ease forwards;
+    right: -65px;
+    animation: lightRight 2s ease forwards;
+    top: 50px;
   }
 
   @keyframes lightLeft {
     0% {
-      transform: rotateZ(50deg);
-      left: -150px;
+      transform: rotateZ(70deg);
     }
 
     100% {
-      transform: rotateZ(-50deg);
-      left: -70px;
+      transform: rotateZ(0deg);
     }
   }
 
   @keyframes lightRight {
     0% {
-      transform: rotateZ(0deg);
+      transform: rotateZ(-70deg);
     }
 
     100% {
-      transform: rotateZ(50deg);
+      transform: rotateZ(0deg);
     }
   }
 

@@ -33,6 +33,8 @@ import "./index.less";
 import HomeIcon from "@/components/home-icon";
 import { personalTacitTranslator } from "@/translator";
 import PersonalTacit from "./components/personal-tacit";
+import Light from "@/components/light";
+
 
 const TacitPage: React.FC = () => {
   const [state, setState] = useImmer<{
@@ -112,7 +114,6 @@ const TacitPage: React.FC = () => {
     run: runGetTeamPersonalTacitInfo,
     loading: loadingGetTeamPersonalTacitInfo,
   } = useRequest(getTeamPersonalTacitInfo, { manual: true });
-  
 
   const onNodeClick = (
     playerid: string,
@@ -170,7 +171,7 @@ const TacitPage: React.FC = () => {
     };
     const currentData = isHome ? homeGraphData : awayGraphData;
     const tacitValueList = isHome ? homeTacitValueList : awayTacitValueList;
-    
+
     if (tacitValueList && currentData.nodes.length && playersInfo.length) {
       data.nodes = currentData.nodes?.map((item) => {
         const { id } = item;
@@ -189,7 +190,7 @@ const TacitPage: React.FC = () => {
         return {
           source: a_id,
           target: b_id,
-          playerValue:getTaticLineWidth(Number(playerValue)),
+          playerValue: getTaticLineWidth(Number(playerValue)),
           stroke: isHome
             ? "linear-gradient(90deg, #80111D, #A0040D, #80111D)"
             : "linear-gradient(#0F2EAB, rgba(20,60,219,0.9),#0F2EAB)",
@@ -307,8 +308,8 @@ const TacitPage: React.FC = () => {
 
       <div className="tacit-playground">
         {hasGraphData && (
-          <div className="light-left">
-            <LightTop />
+          <div className={`light-${isHome ? "left" : "right"}`}>
+            <Light isLeft={isHome} />
           </div>
         )}
         <FootballField startAnimate={hasGraphData} />
