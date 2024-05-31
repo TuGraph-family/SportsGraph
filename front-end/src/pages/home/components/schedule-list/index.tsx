@@ -29,7 +29,9 @@ const ScheduleList: React.FC<AsyncListProps> = (props) => {
             <div className="game-card" key={matchId}>
               <div className="title">
                 <div className="title-class">{match_title}</div>
-                <div className="title-time">{dayjs(startDate).format('MM-DD HH:mm')}</div>
+                <div className="title-time">
+                  {dayjs(startDate).format("MM-DD HH:mm")}
+                </div>
               </div>
               <div className="game">
                 <div className="game-left">
@@ -38,7 +40,7 @@ const ScheduleList: React.FC<AsyncListProps> = (props) => {
                 </div>
                 <div className="game-time">
                   {actualHomeScore === undefined ? (
-                    "结果未出"
+                    <div style={{ fontSize: 14 }}>未开始</div>
                   ) : (
                     <>
                       {actualHomeScore}
