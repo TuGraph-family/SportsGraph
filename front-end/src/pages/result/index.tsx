@@ -2,7 +2,9 @@ import AnimateNumber from "@/components/animate-number";
 import Button from "@/components/button";
 import ColorfulButton from "@/components/colorful-button";
 import FootballField from "@/components/football-field";
+import HomeIcon from "@/components/home-icon";
 import IconFont from "@/components/icon-font";
+import LightTop from "@/components/light-top";
 import Loading from "@/components/loading";
 import TitleDesc from "@/components/title-desc";
 import TopBg from "@/components/top-bg";
@@ -14,8 +16,8 @@ import { useRequest } from "@umijs/max";
 import React, { useEffect } from "react";
 import { history } from "umi";
 import { useImmer } from "use-immer";
+import InstructionsForUse from "../home/components/instructions-for-use";
 import "./index.less";
-import HomeIcon from "@/components/home-icon";
 
 const ResultPage: React.FC = () => {
   const [state, setState] = useImmer<{
@@ -23,7 +25,7 @@ const ResultPage: React.FC = () => {
     voteInfo?: VoteInfoResult;
     isDownloading: boolean;
   }>({
-    isDownloading: false,
+    isDownloading: false
   });
   const { gameInfo, voteInfo, isDownloading } = state;
   const { teamAVote = 0, teamBVote = 0, totalVote = 0, isEnd } = voteInfo || {};
@@ -37,14 +39,14 @@ const ResultPage: React.FC = () => {
     team_a_national_flag,
     team_b_national_flag,
     team_a_country,
-    team_b_country,
+    team_b_country
   } = gameInfo || {};
   const isHomeWin = homeWinProbability > awayWinProbability;
 
   const { loading: loadingGetGameInfo, run: runGetGameInfo } = useRequest(
     getGameInfo,
     {
-      manual: true,
+      manual: true
     }
   );
   const { run: runGetGameVoteInfoById, loading: loadingGetGameVoteInfoById } =
@@ -53,14 +55,6 @@ const ResultPage: React.FC = () => {
     history.push("/");
   };
   const onSavePic = () => {
-    // setState((draft) => {
-    //   draft.isDownloading = true;
-    // });
-    // takeScreenshot("result").then(() => {
-    //   setState((draft) => {
-    //     draft.isDownloading = false;
-    //   });
-    // });
     history.push(`/compete?id=${id}`);
   };
   useEffect(() => {
@@ -79,11 +73,15 @@ const ResultPage: React.FC = () => {
   }, [id]);
   return (
     <div className="result-page">
+      <InstructionsForUse />
       <Loading
         loading={
           loadingGetGameInfo || loadingGetGameVoteInfoById || isDownloading
         }
       />
+      <div className="light">
+        <LightTop />
+      </div>
       <div className="result" id="result">
         <HomeIcon />
         <div className="result-title">
@@ -93,6 +91,13 @@ const ResultPage: React.FC = () => {
           />
         </div>
         <div className="result-team">
+          <div className="result-playground">
+            <FootballField
+              perspective="130vh"
+              worldWidth={120}
+              hasAnimation={false}
+            />
+          </div>
           <div className="team-bg">
             <TopBg />
           </div>
@@ -131,13 +136,13 @@ const ResultPage: React.FC = () => {
                 name: team_a_country || "",
                 isHome: true,
                 teamAVote,
-                teamBVote,
+                teamBVote
               }}
               team2={{
                 name: team_b_country || "",
                 isHome: false,
                 teamAVote,
-                teamBVote,
+                teamBVote
               }}
               percent={votePercent}
               count={totalVote}
@@ -149,22 +154,19 @@ const ResultPage: React.FC = () => {
           </div>
           <div className="qrcode-text">截图分享给好友，一起猜猜猜~</div>
         </div>
-        <div className="result-playground">
-          <FootballField />
+        <div className="footer">
+          <Button isShowHighlightBorder onClick={onSavePic} className="up-page">
+            <IconFont type="euro-icon-xiayiye1" rotate={180} />
+            上一页
+          </Button>
+          <Button
+            isShowHighlightBorder
+            className="next-page"
+            onClick={jumpToHome}
+          >
+            更多赛程 <IconFont type="euro-icon-xiayiye1" />
+          </Button>
         </div>
-      </div>
-      <div className="footer">
-        <Button isShowHighlightBorder onClick={onSavePic} className="up-page">
-          <IconFont type="euro-icon-xiayiye1" rotate={180} />
-          上一页
-        </Button>
-        <Button
-          isShowHighlightBorder
-          className="next-page"
-          onClick={jumpToHome}
-        >
-          更多赛程 <IconFont type="euro-icon-xiayiye1" />
-        </Button>
       </div>
     </div>
   );

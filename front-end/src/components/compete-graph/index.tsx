@@ -1,6 +1,5 @@
 import { PlayersInfoResult } from "@/interfaces";
-import { Renderer } from "@antv/g-svg";
-import { Graph, GraphData, IEvent, NodeEvent } from "@antv/g6";
+import { Graph, GraphData } from "@antv/g6";
 import React, { useEffect } from "react";
 import { useImmer } from "use-immer";
 import PlayerNode from "../player-node";
@@ -30,7 +29,7 @@ const CompeteGraph: React.FC<CompeteGraphProps> = ({
     const container = document.getElementById(containerId);
 
     const graph = new Graph({
-      renderer: () => new Renderer(),
+      // renderer: () => new Renderer(),
       background: "transparent",
       container: containerId,
       animation: true,
@@ -41,7 +40,18 @@ const CompeteGraph: React.FC<CompeteGraphProps> = ({
           x: (d: any) => d.data.x,
           y: (d: any) => d.data.y,
           component: (data: { data: PlayersInfoResult }) => (
-            <PlayerNode playerInfo={data.data} />
+            <PlayerNode
+              playerInfo={data.data}
+              onClick={() => onClickNode(data.data)}
+              animation={{
+                animationDelay: [
+                  `${data.data.animationDelay! + 1}s`,
+                  `${data.data.animationDelay! + 1}s`
+                ],
+                animationType: ["fade", "translate"],
+                animationDuration: ["1s", "0.4s"]
+              }}
+            />
           ),
           size: (d: any) => {
             let nodeSize = d.data.nodeSize * nodeSizeRatio;
@@ -64,19 +74,12 @@ const CompeteGraph: React.FC<CompeteGraphProps> = ({
   }, []);
 
   useEffect(() => {
-    const handleNodeClick = (event: IEvent) => {
-      onClickNode(graph?.getNodeData(event?.target?.id));
-    };
     if (graphData.nodes?.length && graph) {
       graph?.setData(graphData);
       graph?.render();
       graph?.on("afterrender", () => {
-        graph.fitView({ direction: "both", when: "overflow" });
+        graph.fitView({ direction: "both", when: "overflow" }, false);
       });
-      graph?.on(`node:${NodeEvent.CLICK}`, handleNodeClick);
-      return () => {
-        graph.off("node:click", handleNodeClick);
-      };
     }
   }, [graphData]);
   return (

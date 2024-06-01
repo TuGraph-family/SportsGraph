@@ -1,6 +1,6 @@
 .compete-personal {
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -21,9 +21,6 @@
     position: relative;
     width: 100%;
     height: 50vh;
-    #g-canvas-camera {
-      overflow: visible !important;
-    }
   }
 
   &-card {
@@ -99,5 +96,11 @@
       #ffffff00 100%
     );
     opacity: 0.72;
+  }
+}
+
+.personal-mask {
+  .adm-mask-content {
+    height: 100%;
   }
 }

@@ -4,7 +4,6 @@ import React, { useEffect } from "react";
 import { useImmer } from "use-immer";
 import { registerAnimateLine } from "../animate-line";
 import PlayerNode from "../player-node";
-import "./index.less";
 
 registerAnimateLine();
 

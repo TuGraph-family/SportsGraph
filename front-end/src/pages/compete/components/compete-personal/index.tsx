@@ -1,4 +1,5 @@
 import CompetePersonalGraph from "@/components/compete-personal-graph";
+import IconFont from "@/components/icon-font";
 import Loading from "@/components/loading";
 import PlayerNode from "@/components/player-node";
 import { PlayersInfoResult } from "@/interfaces";
@@ -7,11 +8,9 @@ import { calculateNeighborPoints } from "@/utils";
 import { GraphData } from "@antv/g6";
 import { useRequest } from "@umijs/max";
 import { Mask } from "antd-mobile";
-import { CloseOutline } from "antd-mobile-icons";
 import React, { useEffect, useMemo } from "react";
 import { useImmer } from "use-immer";
 import "./index.less";
-import IconFont from "@/components/icon-font";
 
 interface CompetePersonalModalProps {
   visible: boolean;
@@ -46,12 +45,12 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
 
   const graphData = useMemo(() => {
     const container = document.getElementById("personal-graph");
-    const radio = Math.min(container?.clientWidth!, container?.clientHeight!);
+    const radio = Math.min(container?.clientWidth!, container?.offsetHeight!);
     const nodeSize =
       ((radio - graphMinSize) / (graphMaxSize - graphMinSize)) * mappedValue;
     const centerXY = {
       x: (container?.clientWidth! - centerOffsetX) / 2 - 10,
-      y: (container?.clientHeight! - centerOffsetY) / 2
+      y: (container?.offsetHeight! - centerOffsetY) / 2
     };
     const nodeXY = calculateNeighborPoints(
       centerXY?.x,
@@ -60,6 +59,7 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
       competeGraphData?.nodes?.length ? competeGraphData?.nodes?.length - 1 : 1
     );
     let nodeIndex = 0;
+    console.log(competeGraphData);
     const newNodes = competeGraphData?.nodes?.map((node) => {
       if (node?.id === node?.a_id) {
         const playerInfo = allPlayer?.find((item) => {
@@ -121,6 +121,7 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
       onMaskClick={onClose}
       destroyOnClose
       color="#060c34b8"
+      className="personal-mask"
     >
       <div className={"compete-personal"}>
         <Loading loading={loadingGetPlayerTacitInfo} />
@@ -130,8 +131,11 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
             graphData={graphData}
             containerId="personal-graph"
           />
-          <div onClick={onClose}  className="compete-personal-icon">
-            <IconFont type="euro-icon-danchuang-guanbi" style={{color:'#fff'}} />
+          <div onClick={onClose} className="compete-personal-icon">
+            <IconFont
+              type="euro-icon-danchuang-guanbi"
+              style={{ color: "#fff" }}
+            />
           </div>
         </div>
         {competeCenterPlayer ? (

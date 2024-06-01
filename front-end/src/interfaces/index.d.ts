@@ -23,6 +23,7 @@ export interface PlayersInfoResult {
   nodeSize?: number;
   player_enName?: string;
   a_caps?: string;
+  animationDelay?: number;
 }
 
 export interface PlayersInfo extends CommonResponseResult {

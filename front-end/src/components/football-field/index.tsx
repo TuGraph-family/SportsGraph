@@ -3,21 +3,33 @@ import "./index.less";
 
 interface FootballFieldProps {
   lightNumber?: 1 | 2;
-  startAnimate?: boolean;
+  startLighting?: boolean;
+  perspective?: string;
+  worldWidth?: number;
+  hasAnimation?: boolean;
 }
 
 const FootballField: React.FC<FootballFieldProps> = ({
   lightNumber = 1,
-  startAnimate = false
+  startLighting = false,
+  perspective = "120vh",
+  worldWidth = 130,
+  hasAnimation = true
 }) => {
   return (
-    <div className="football-field">
-      <div className="js-stage stage texture">
-        <div className="js-world world">
+    <div className={`football-field ${hasAnimation ? "" : "hide-animation"}`}>
+      <div className="js-stage stage texture" style={{ perspective }}>
+        <div
+          className="js-world world"
+          style={{
+            width: `${worldWidth}vw`,
+            marginLeft: `-${worldWidth / 2}vw`
+          }}
+        >
           <div className="field field--alt"></div>
           <div className="field ground">
             <div className="field__texture field__texture--gradient">
-              {startAnimate && (
+              {startLighting && (
                 <>
                   {Array.from({ length: lightNumber }).map((_, index) => (
                     <div

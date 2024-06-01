@@ -1,12 +1,11 @@
+import IconFont from "@/components/icon-font";
 import PersonalTacitGraph from "@/components/personal-tacit-graph";
 import PlayerNode from "@/components/player-node";
 import { PlayersInfoResult } from "@/interfaces";
 import { GraphData } from "@antv/g6";
 import { Mask } from "antd-mobile";
-import { CloseOutline } from "antd-mobile-icons";
 import React from "react";
 import "./index.less";
-import IconFont from "@/components/icon-font";
 
 interface TacitGraphProps {
   personalTacitData: GraphData;
@@ -19,7 +18,7 @@ const PersonalTacit: React.FC<TacitGraphProps> = ({
   personalTacitData,
   playerInfo,
   visible,
-  setVisible,
+  setVisible
 }) => {
   return (
     <Mask
@@ -27,6 +26,7 @@ const PersonalTacit: React.FC<TacitGraphProps> = ({
       visible={visible}
       destroyOnClose={true}
       onMaskClick={() => setVisible(false)}
+      className="personal-mask"
     >
       <div className="personal-tacit">
         <div className="personal-graph">
@@ -35,7 +35,10 @@ const PersonalTacit: React.FC<TacitGraphProps> = ({
             graphData={personalTacitData}
           />
           <div onClick={() => setVisible(false)} className="close">
-            <IconFont type="euro-icon-danchuang-guanbi" style={{color:'#fff'}} />
+            <IconFont
+              type="euro-icon-danchuang-guanbi"
+              style={{ color: "#fff" }}
+            />
           </div>
         </div>
 

@@ -5,7 +5,41 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  &.fade {
+    opacity: 0;
+  }
+
+  @keyframes fade {
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes scale {
+    0% {
+      transform: scale(0.6);
+    }
+    25% {
+      transform: scale(1.1);
+    }
+
+    50% {
+      transform: scale(0.8);
+    }
+    75% {
+      transform: scale(1);
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes translate {
+    100% {
+      transform: translateY(0px);
+    }
+  }
 
   .shirt {
     /* px-to-viewport-ignore-next */
@@ -41,8 +75,10 @@
     width: 54px;
     /* px-to-viewport-ignore-next */
     height: 15px;
+    /* px-to-viewport-ignore-next */
     line-height: 15px;
     color: #fff;
+    /* px-to-viewport-ignore-next */
     font-size: 9px;
     background-image: url("https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*2-NzSbxbZosAAAAAAAAAAAAADsvfAQ/original");
     background-repeat: no-repeat;
@@ -54,6 +90,7 @@
     z-index: 10;
 
     &-text {
+      /* px-to-viewport-ignore-next */
       width: 39px;
       overflow: hidden;
       text-overflow: ellipsis;

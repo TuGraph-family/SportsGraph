@@ -2,8 +2,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  height: 100vh;
-  background-color: #000000;
+  height: 100%;
   width: 100vw;
   position: relative;
   background-image: url("https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*wW61RJ5rKvYAAAAAAAAAAAAADsvfAQ/original");
@@ -26,6 +25,7 @@
     z-index: 100;
     position: fixed;
     bottom: 0;
+    /* px-to-viewport-ignore-next */
     padding-bottom: 33px;
     width: 100%;
 
@@ -63,19 +63,22 @@
       right: 0;
       height: 1.5px;
       z-index: 10;
-      background: linear-gradient(90deg,
-          #ffffff00 3%,
-          #ffffff 52%,
-          #ffffff00 100%);
+      background: linear-gradient(
+        90deg,
+        #ffffff00 3%,
+        #ffffff 52%,
+        #ffffff00 100%
+      );
       opacity: 0.72;
     }
 
-    .sg-btn+.sg-btn {
+    .sg-btn + .sg-btn {
       margin-left: 20px;
     }
 
     .adm-button {
       width: 130px;
+      /* px-to-viewport-ignore-next */
       height: 42px;
     }
 
@@ -94,59 +97,60 @@
 
   .light-side {
     position: absolute;
-    top: 140px;
+    top: 35%;
     z-index: 1;
   }
 
   .light-left {
-    left: -65px;
+    left: -70px;
     animation: lightLeft 2s ease forwards;
     transform-origin: top left;
-    top: 50px;
+    transform: rotateZ(20deg);
   }
 
   .light-right {
-    right: -65px;
+    right: -70px;
     animation: lightRight 2s ease forwards;
-    top: 50px;
+    top: 35%;
+
+    transform: rotateZ(-20deg);
+    transform-origin: top right;
   }
 
   @keyframes lightLeft {
-    0% {
-      transform: rotateZ(70deg);
-    }
-
     100% {
-      transform: rotateZ(0deg);
+      transform: rotateZ(-50deg);
     }
   }
 
   @keyframes lightRight {
-    0% {
-      transform: rotateZ(-70deg);
-    }
-
     100% {
-      transform: rotateZ(0deg);
+      transform: rotateZ(50deg);
     }
   }
 
   .compete-playground {
     position: relative;
     flex: 1;
+    /* 考虑到安全区域的填充 */
+    padding-bottom: calc((60px + env(safe-area-inset-bottom)));
 
     .compete-graph-container {
+      box-sizing: border-box;
       position: absolute;
       width: 100%;
       top: -20px;
-      height: calc(100% - 120px);
-      z-index: 10000;
+      /* px-to-viewport-ignore-next */
+      height: calc(100% - 140px);
+      padding-bottom: env(safe-area-inset-bottom);
       left: 0;
       display: flex;
       flex-direction: column;
+      z-index: 9;
 
       .compete-graph {
         flex: 1;
+        z-index: 9;
       }
     }
   }

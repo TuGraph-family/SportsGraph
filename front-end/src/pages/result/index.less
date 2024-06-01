@@ -1,14 +1,25 @@
 .result-page {
   width: 100vw;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  padding-bottom: env(safe-area-inset-bottom);
+  box-sizing: border-box;
+
+  .light {
+    position: absolute;
+    z-index: 2;
+    left: 50%;
+    top: 0px;
+    margin-left: -70px;
+  }
 
   .footer {
     z-index: 100;
     width: 100%;
-    position: fixed;
-    bottom: 0;
-    padding-bottom: 33px;
     font-weight: 600;
     text-align: center;
+    margin-bottom: 33px;
 
     .sg-btn + .sg-btn {
       margin-left: 20px;
@@ -29,7 +40,7 @@
     align-items: center;
     flex-direction: column;
     overflow: hidden;
-    height: 100vh;
+    height: 100%;
     width: 100vw;
     position: relative;
     background-image: url("https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*wW61RJ5rKvYAAAAAAAAAAAAADsvfAQ/original");
@@ -37,14 +48,14 @@
     background-color: #020d2e;
     background-position: top center;
     background-repeat: no-repeat;
+    justify-content: space-between;
 
     #download {
       width: 100%;
     }
 
     &-title {
-      margin-top: 10vh;
-      margin-bottom: 12vh;
+      margin-top: 50px;
 
       .title-desc .title {
         font-size: 32px;
@@ -52,11 +63,12 @@
     }
 
     &-team {
+      margin-top: 50px;
       width: 100%;
       z-index: 1;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       position: relative;
       flex-direction: column;
 
@@ -101,14 +113,24 @@
           color: #fff;
           font-size: 16px;
           margin-top: 12px;
+          z-index: 1;
+        }
+      }
+
+      @media (max-width: 375px) {
+        .qrcode {
+          width: 60px;
+          height: 60px;
         }
       }
     }
 
     &-playground {
       position: absolute;
-      bottom: -10px;
-      height: 70vh;
+      top: 10px;
+      /* px-to-viewport-ignore-next */
+      height: calc(100%);
+      padding-bottom: 40px;
     }
 
     .center-predict {
