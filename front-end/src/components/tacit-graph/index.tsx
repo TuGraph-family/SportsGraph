@@ -90,13 +90,13 @@ const TacitGraph: React.FC<TacitGraphProps> = ({
           stroke: (d: any) => d.stroke,
           lineWidth: (d: any) => {
             return d.playerValue;
-          },
-          halo: true,
-          haloStroke: "#fff",
-          haloStrokeWidth: (d: any) => d.playerValue,
-          haloLineWidth: (d: any) => d.playerValue + 1,
-          haloShadowColor: "#fff",
-          haloShadowBlur: 20
+          }
+          // halo: true,
+          // haloStroke: "#fff",
+          // haloStrokeWidth: (d: any) => d.playerValue,
+          // haloLineWidth: (d: any) => d.playerValue + 1,
+          // haloShadowColor: "#fff",
+          // haloShadowBlur: 20
         },
         animation: {
           // disable default enter and exit animation
