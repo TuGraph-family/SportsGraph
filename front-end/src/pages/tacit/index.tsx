@@ -166,19 +166,22 @@ const TacitPage: React.FC = () => {
     const tacitValueList = isHome ? homeTacitValueList : awayTacitValueList;
 
     if (tacitValueList && currentData.nodes.length && playersInfo.length) {
-      data.nodes = currentData.nodes?.map((item) => {
-        const { id } = item;
-        const playerInfo = playersInfo.find((item) => item.player_id === id);
-        const playerTacitInfo = isHome
-          ? homePersonalTacitList.find((item) => item.a_id === id)
-          : awayPersonalTacitList.find((item) => item.a_id === id);
-        return {
-          ...item,
-          ...playerInfo,
-          nodeSize: Number(playerTacitInfo?.value_rank || 200),
-          animationDelay: Math.random()
-        };
-      });
+      data.nodes = currentData.nodes
+        ?.map((item) => {
+          const { id } = item;
+          const playerInfo = playersInfo.find((item) => item.player_id === id);
+          const playerTacitInfo = isHome
+            ? homePersonalTacitList.find((item) => item.a_id === id)
+            : awayPersonalTacitList.find((item) => item.a_id === id);
+          return {
+            ...item,
+            ...playerInfo,
+            nodeSize: Number(playerTacitInfo?.value_rank || 200),
+            animationDelay: Math.random() * 0.5
+          };
+        })
+        .sort((a, b) => b.nodeSize - a.nodeSize)
+        .map((item, index) => ({ ...item, isInTop: index < 3 }));
       data.edges = tacitValueList.map((item) => {
         const { a_id, b_id, playerValue } = item;
         const value = Number(playerValue) * 0.5;

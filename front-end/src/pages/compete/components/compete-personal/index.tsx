@@ -118,12 +118,11 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
   return (
     <Mask
       visible={visible}
-      onMaskClick={onClose}
       destroyOnClose
       color="#060c34b8"
       className="personal-mask"
     >
-      <div className={"compete-personal"}>
+      <div className={"compete-personal"} onClick={onClose}>
         <Loading loading={loadingGetPlayerTacitInfo} />
 
         <div className="compete-personal-graph">

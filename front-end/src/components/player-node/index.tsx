@@ -20,10 +20,20 @@ interface PlayerNodeProps {
     animationDuration?: string[];
   };
   scale?: number;
+  isActive?: boolean;
+  isGoalKeeper?: boolean;
 }
 
 const PlayerNode: React.FC<PlayerNodeProps> = React.memo(
-  ({ playerInfo, showName = true, onClick, animation, scale = 1 }) => {
+  ({
+    playerInfo,
+    showName = true,
+    onClick,
+    animation,
+    scale = 1,
+    isActive,
+    isGoalKeeper
+  }) => {
     const {
       animationDelay = [],
       animationType = [],
@@ -46,7 +56,7 @@ const PlayerNode: React.FC<PlayerNodeProps> = React.memo(
 
     return (
       <div
-        className={`player-node ${animation ? animationType.join(" ") : ""}`}
+        className={`player-node ${animation ? animationType.join(" ") : ""} ${isActive ? "active" : ""} `}
         onClick={() => onClick?.(playerInfo)}
         style={{
           animationDelay: `${animationDelay.join(",")}`,
@@ -62,11 +72,23 @@ const PlayerNode: React.FC<PlayerNodeProps> = React.memo(
             transformOrigin: showName ? "bottom" : "top"
           }}
         >
+          {isActive && (
+            <img
+              src={
+                "https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*N7fkTKjmv64AAAAAAAAAAAAADsvfAQ/original"
+              }
+              className="active-bg"
+            />
+          )}
           <img
             src={
               isTeamA === "1"
-                ? "https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*0oAaS42vqWcAAAAAAAAAAAAADsvfAQ/original"
-                : "https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*BYH5SauBNecAAAAAAAAAAAAADsvfAQ/original"
+                ? isGoalKeeper
+                  ? "https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*lbBjRJEnuc4AAAAAAAAAAAAADsvfAQ/original"
+                  : "https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*0oAaS42vqWcAAAAAAAAAAAAADsvfAQ/original"
+                : isGoalKeeper
+                  ? "https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*npULQol60WIAAAAAAAAAAAAADsvfAQ/original"
+                  : "https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*BYH5SauBNecAAAAAAAAAAAAADsvfAQ/original"
             }
           />
           <div className="shirt-number">{player_shirtnumber}</div>

@@ -20,15 +20,17 @@ const PersonalTacit: React.FC<TacitGraphProps> = ({
   visible,
   setVisible
 }) => {
+  const onClose = () => {
+    setVisible(false);
+  };
   return (
     <Mask
       color="#060c34b8"
       visible={visible}
       destroyOnClose={true}
-      onMaskClick={() => setVisible(false)}
       className="personal-mask"
     >
-      <div className="personal-tacit">
+      <div className="personal-tacit" onClick={onClose}>
         <div className="personal-graph">
           <PersonalTacitGraph
             containerId="personalTacit"

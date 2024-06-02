@@ -28,7 +28,7 @@ const winYRatio = 0.65;
 const loseYRatio = 0.55;
 
 const winXRatio = 1.1;
-const loseXRatio = 0.9;
+const loseXRatio = 0.8;
 interface CompetePageState {
   leftTeam?: { name: string; flagUrl: string; score: number };
   rightTeam?: { name: string; flagUrl: string; score: number };
@@ -120,30 +120,38 @@ const CompetePage: React.FC = () => {
     const container = document.getElementById("away-graph");
     const yRatio = isWin ? winYRatio : loseYRatio;
     const xRatio = isWin ? winXRatio : loseXRatio;
-    const nodes = graphData.nodes?.map((node) => {
-      const { id } = node;
-      const playerInfo = playersInfo.find((player) => player.player_id === id);
-      const playerCompeteInfo = competeData.find((item) => item.a_id === id);
-      const { y, x } = node;
-      const mapY = y * yRatio;
-      const mapX = x * xRatio;
-      const nodeSize = Number(playerCompeteInfo?.value_rank);
-      return {
-        id,
-        data: {
-          ...node,
-          ...playerInfo,
-          ...playerCompeteInfo,
-          nodeSize,
-          y: !isWin ? mapY : container?.offsetHeight! - mapY,
-          x: isWin
-            ? mapX + container?.offsetWidth! * 2
-            : mapX - container?.offsetWidth! * 2,
-          zIndex: isWin ? 0 : y,
-          animationDelay: Math.random()
-        }
-      };
-    });
+    const nodes = graphData.nodes
+      ?.map((node) => {
+        const { id } = node;
+        const playerInfo = playersInfo.find(
+          (player) => player.player_id === id
+        );
+        const playerCompeteInfo = competeData.find((item) => item.a_id === id);
+        const { y, x } = node;
+        const mapY = y * yRatio;
+        const mapX = x * xRatio;
+        const nodeSize = Number(playerCompeteInfo?.value_rank);
+        return {
+          id,
+          data: {
+            ...node,
+            ...playerInfo,
+            ...playerCompeteInfo,
+            nodeSize,
+            y: !isWin ? mapY : container?.offsetHeight! - mapY,
+            x: isWin
+              ? mapX + container?.offsetWidth! * 2
+              : mapX - container?.offsetWidth! * 2,
+            zIndex: isWin ? 0 : y,
+            animationDelay: Math.random() * 0.5
+          }
+        };
+      })
+      .sort((a, b) => b.data.nodeSize - a.data.nodeSize)
+      .map((item, index) => ({
+        ...item,
+        data: { ...item.data, isInTop: index < 3 }
+      }));
     return nodes;
   };
   const homeGraphData = useMemo(() => {

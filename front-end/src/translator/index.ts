@@ -1,49 +1,68 @@
 import { CompetePersonalInfo, GameInfo, PlayersInfoResult } from "@/interfaces";
-import {
-  calculateAngleBetweenPoints,
-  calculateNeighborPoints,
-  getTaticLineWidth,
-} from "@/utils";
+import { calculateAngleBetweenPoints, calculateNeighborPoints } from "@/utils";
 import { GraphData } from "@antv/g6";
+const ratio = 3.5;
+
+const getPlayerList = (playerList: string[], playerPositionList: string[]) => {
+  let minY = Infinity;
+  let goalkeeperId = "";
+  const list = playerList.map((id: string, index: number) => {
+    const [x, y] = playerPositionList[index].split(":");
+
+    if (+y < minY) {
+      minY = +y;
+      goalkeeperId = id;
+    }
+    return {
+      id,
+      x: Number(x) * ratio,
+      y: Number(y) * ratio
+    };
+  });
+  return {
+    playerList: list.map((item) => ({
+      ...item,
+      isGoalKeeper: +item.y === minY * ratio
+    })),
+    goalkeeperId
+  };
+};
 
 export const gameInfoTranslator = (res: any) => {
   if (!res) {
     return {} as GameInfo;
   }
 
-  const ratio = 3.5;
   const { resultSet = [] } = res.data;
   const {
     players_A = "",
     players_B = "",
     position_A_xy = "",
-    position_B_xy = "",
+    position_B_xy = ""
   } = resultSet[0] || {};
   const playerAList = players_A.split(",");
   const playerBList = players_B.split(",");
   const playerAPositionList = position_A_xy.split("|");
   const playerBPositionList = position_B_xy.split("|");
+
+  const { playerList: listA, goalkeeperId: goalkeeperAId } = getPlayerList(
+    playerAList,
+    playerAPositionList
+  );
+  const { playerList: listB, goalkeeperId: goalkeeperBId } = getPlayerList(
+    playerBList,
+    playerBPositionList
+  );
+
   return {
     ...res,
     data: {
       ...res.data,
-      playerAList: playerAList.map((id: string, index: number) => {
-        const [x, y] = playerAPositionList[index].split(":");
-        return {
-          id,
-          x: Number(x) * ratio,
-          y: Number(y) * ratio,
-        };
-      }),
-      playerBList: playerBList.map((id: string, index: number) => {
-        const [x, y] = playerBPositionList[index].split(":");
-        return {
-          id,
-          x: Number(x) * ratio,
-          y: Number(y) * ratio,
-        };
-      }),
-    },
+      playerAList: listA,
+      playerBList: listB,
+      goalkeeperAId,
+      goalkeeperBId
+    }
   } as GameInfo;
 };
 
@@ -63,9 +82,9 @@ export const getVoteInfoTranslator = (res: any) => {
         isEnd,
         teamAVote,
         teamBVote,
-        totalVote,
-      },
-    },
+        totalVote
+      }
+    }
   };
 };
 
@@ -104,7 +123,7 @@ export const playerTacitInfoTranslator = (res: any) => {
     x: 180,
     y: 180,
     nodeSize: 100,
-    isCenter: true,
+    isCenter: true
   };
   // 计算周边点坐标
   const nodeXY = calculateNeighborPoints(
@@ -122,7 +141,7 @@ export const playerTacitInfoTranslator = (res: any) => {
       player_id: item?.b_id,
       player_enName: item.b_personEnName,
       ...nodeXY?.[index],
-      nodeSize: 100,
+      nodeSize: 100
     };
   });
 
@@ -142,7 +161,7 @@ export const playerTacitInfoTranslator = (res: any) => {
       target: item.b_id,
       playerValue: item.playerValue,
       deg: deg,
-      percentage: percentage,
+      percentage: percentage
     };
   });
   return {
@@ -151,10 +170,10 @@ export const playerTacitInfoTranslator = (res: any) => {
       ...res?.data,
       competeInfo: {
         nodes: [competeCenterPlayer, ...competePlayerNode],
-        edges: competePlayerEdge,
+        edges: competePlayerEdge
       },
-      competeCenterPlayer,
-    },
+      competeCenterPlayer
+    }
   };
 };
 
@@ -166,7 +185,7 @@ export const personalTacitTranslator = (
 ) => {
   const data: GraphData = {
     nodes: [],
-    edges: [],
+    edges: []
   };
 
   const vw = innerWidth / 100;
@@ -174,15 +193,14 @@ export const personalTacitTranslator = (
 
   const r = radio / 2 - 25;
   const neighborPoints = calculateNeighborPoints(150, 150, r, 10);
- 
-  
+
   data.nodes = [
     {
       id: selectedPlayerInfo.player_id,
       ...selectedPlayerInfo,
       nodeSize: 80,
       x: 150,
-      y: 150,
+      y: 150
     },
     ...list.map((item, index: number) => {
       const { b_id } = item;
@@ -197,20 +215,21 @@ export const personalTacitTranslator = (
         isTeamA: isHome ? "1" : "0",
         x: neighborPoint.x,
         y: neighborPoint.y,
-        nodeSize: 80,
+        nodeSize: 80
       };
-    }),
+    })
   ];
 
   data.edges = list.map((item) => {
     const { a_id, b_id, playerValue } = item;
+    const value = Number(playerValue) * 0.5;
     return {
       source: a_id,
       target: b_id,
-      playerValue: getTaticLineWidth(Number(playerValue)),
+      playerValue: value,
       stroke: isHome
         ? "linear-gradient(#55091C 10%, #910510 25%, #910510B8 50%,#910510 75%, #55091C 90%)"
-        : "linear-gradient(#0F2EAB, rgba(20,60,219,0.9),#0F2EAB)",
+        : "linear-gradient(#0F2EAB, rgba(20,60,219,0.9),#0F2EAB)"
     };
   });
   return data;

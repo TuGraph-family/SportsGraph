@@ -8,6 +8,11 @@
   animation-duration: 0.5s;
   animation-timing-function: ease-in;
   animation-fill-mode: forwards;
+  &.active {
+    .label-text {
+      color: rgba(255, 188, 0, 1);
+    }
+  }
   &.fade {
     opacity: 0;
   }
@@ -51,6 +56,14 @@
     justify-content: center;
     position: relative;
     z-index: 1;
+    .active-bg {
+      position: absolute;
+      width: 115%;
+      /* px-to-viewport-ignore-next */
+      top: -15px;
+      /* px-to-viewport-ignore-next */
+      left: -3px;
+    }
 
     img {
       /* px-to-viewport-ignore-next */
