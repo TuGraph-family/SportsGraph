@@ -73,7 +73,6 @@ const TacitGraph: React.FC<TacitGraphProps> = ({
                   animationDuration: ["1.2s", "1s"]
                 }}
                 isActive={data.isInTop}
-                isGoalKeeper={data.isGoalKeeper}
               />
             </div>
           ),

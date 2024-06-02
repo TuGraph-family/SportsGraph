@@ -58,7 +58,7 @@ const PersonalTacitGraph: React.FC<PersonalTacitGraphProps> = ({
           stroke: (d: any) => d.stroke,
           lineWidth: (d) => {
             return Number(d.playerValue);
-          },
+          }
         },
         animation: {
           enter: false,

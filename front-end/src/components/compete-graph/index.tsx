@@ -52,7 +52,6 @@ const CompeteGraph: React.FC<CompeteGraphProps> = ({
                 animationDuration: ["1s", "0.4s"]
               }}
               isActive={data.data.isInTop}
-              isGoalKeeper={data.data.isGoalKeeper}
             />
           ),
           size: (d: any) => {

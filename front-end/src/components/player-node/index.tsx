@@ -21,7 +21,6 @@ interface PlayerNodeProps {
   };
   scale?: number;
   isActive?: boolean;
-  isGoalKeeper?: boolean;
 }
 
 const PlayerNode: React.FC<PlayerNodeProps> = React.memo(
@@ -31,8 +30,7 @@ const PlayerNode: React.FC<PlayerNodeProps> = React.memo(
     onClick,
     animation,
     scale = 1,
-    isActive,
-    isGoalKeeper
+    isActive
   }) => {
     const {
       animationDelay = [],
@@ -44,7 +42,8 @@ const PlayerNode: React.FC<PlayerNodeProps> = React.memo(
       isTeamA,
       player_shirtnumber,
       player_name,
-      nodeSize = 60
+      nodeSize = 60,
+      isGoalKeeper
     } = playerInfo;
     const shirtScale = ratio * nodeSize;
     const realShirtScale =

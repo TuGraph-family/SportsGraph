@@ -59,13 +59,14 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
       competeGraphData?.nodes?.length ? competeGraphData?.nodes?.length - 1 : 1
     );
     let nodeIndex = 0;
-    console.log(competeGraphData);
     const newNodes = competeGraphData?.nodes?.map((node) => {
+      // 中心球员
       if (node?.id === node?.a_id) {
         const playerInfo = allPlayer?.find((item) => {
           return item.player_id === node.a_id;
         });
         return {
+          ...params,
           ...node,
           ...centerXY,
           player_shirtnumber: playerInfo?.player_shirtnumber,
@@ -103,7 +104,7 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
       draft.competeCenterPlayer = newNodes?.[0] as unknown as PlayersInfoResult;
     });
     return { nodes: newNodes, edges: newEdges };
-  }, [competeGraphData, allPlayer]);
+  }, [competeGraphData, allPlayer, params]);
 
   useEffect(() => {
     if (visible && params) {
