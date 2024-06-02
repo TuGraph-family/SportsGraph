@@ -105,12 +105,7 @@ const CompetePage: React.FC = () => {
 
   const onClickNode = (nodeData: any) => {
     setState((draft) => {
-      draft.competePersonalParams = {
-        ...nodeData,
-        id: id,
-        isteama: nodeData?.isTeamA === "1" ? "0" : "1",
-        playerId: nodeData?.id
-      };
+      draft.competePersonalParams = nodeData;
       draft.competePersonalVisible = true;
     });
   };

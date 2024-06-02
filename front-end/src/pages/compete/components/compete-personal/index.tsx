@@ -4,7 +4,7 @@ import Loading from "@/components/loading";
 import PlayerNode from "@/components/player-node";
 import { PlayersInfoResult } from "@/interfaces";
 import { getPlayerCompeteInfo } from "@/services";
-import { calculateNeighborPoints } from "@/utils";
+import { calculateNeighborPoints, parseSearch } from "@/utils";
 import { GraphData } from "@antv/g6";
 import { useRequest } from "@umijs/max";
 import { Mask } from "antd-mobile";
@@ -31,6 +31,7 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
   params,
   allPlayer
 }) => {
+  const { id } = parseSearch(location.search) as any;
   const [state, setState] = useImmer<{
     competeCenterPlayer: PlayersInfoResult | undefined;
     competeGraphData: GraphData;
@@ -71,7 +72,8 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
           ...centerXY,
           player_shirtnumber: playerInfo?.player_shirtnumber,
           isTeamA: playerInfo?.isTeamA,
-          nodeSize
+          nodeSize,
+          isCenter: true
         };
       } else {
         const playerInfo = allPlayer?.find((item) => {
@@ -107,13 +109,21 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
     return { nodes: newNodes, edges: newEdges };
   }, [competeGraphData, allPlayer, params]);
 
+  const onNodeClick = (nodeInfo: any) => {
+    runGetPlayerTacitInfo({
+      id,
+      isteama: nodeInfo?.isTeamA === "1" ? "0" : "1",
+      playerId: nodeInfo?.id
+    }).then((data) => {
+      setState((draft) => {
+        draft.competeGraphData = data?.competeInfo;
+      });
+    });
+  };
+
   useEffect(() => {
     if (visible && params) {
-      runGetPlayerTacitInfo(params).then((data) => {
-        setState((draft) => {
-          draft.competeGraphData = data?.competeInfo;
-        });
-      });
+      onNodeClick(params);
     }
   }, [visible]);
 
@@ -124,13 +134,14 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
       color="#060c34b8"
       className="personal-mask"
     >
-      <div className={"compete-personal"} onClick={onClose}>
+      <div className={"compete-personal"}>
         <Loading loading={loadingGetPlayerTacitInfo} />
 
         <div className="compete-personal-graph">
           <CompetePersonalGraph
             graphData={graphData}
             containerId="personal-graph"
+            onClickNode={onNodeClick}
           />
           <div onClick={onClose} className="compete-personal-icon">
             <IconFont

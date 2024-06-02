@@ -12,13 +12,15 @@ interface TacitGraphProps {
   playerInfo?: PlayersInfoResult;
   visible: boolean;
   setVisible: (val: boolean) => void;
+  onNodeClick?: (playerid: string, playerInfo: PlayersInfoResult) => void;
 }
 
 const PersonalTacit: React.FC<TacitGraphProps> = ({
   personalTacitData,
   playerInfo,
   visible,
-  setVisible
+  setVisible,
+  onNodeClick
 }) => {
   const onClose = () => {
     setVisible(false);
@@ -30,13 +32,14 @@ const PersonalTacit: React.FC<TacitGraphProps> = ({
       destroyOnClose={true}
       className="personal-mask"
     >
-      <div className="personal-tacit" onClick={onClose}>
+      <div className="personal-tacit">
         <div className="personal-graph">
           <PersonalTacitGraph
             containerId="personalTacit"
             graphData={personalTacitData}
+            onNodeClick={onNodeClick}
           />
-          <div onClick={() => setVisible(false)} className="close">
+          <div onClick={onClose} className="close">
             <IconFont
               type="euro-icon-danchuang-guanbi"
               style={{ color: "#fff" }}

@@ -177,45 +177,60 @@ export const playerTacitInfoTranslator = (res: any) => {
   };
 };
 
+const centerOffsetX = 40;
+const centerOffsetY = 70;
+const graphMinSize = 200;
+const graphMaxSize = 480;
+const mappedValue = 150;
+const radioOffset = 25;
 export const personalTacitTranslator = (
   list: Record<string, any>[],
   selectedPlayerInfo: PlayersInfoResult,
-  playersInfo: Array<PlayersInfoResult>,
-  isHome: boolean
+  playersInfo: Array<PlayersInfoResult>
 ) => {
   const data: GraphData = {
     nodes: [],
     edges: []
   };
+  const container = document.getElementById("personalTacit");
+  const radio = Math.min(container?.clientWidth!, container?.offsetHeight!);
+  const nodeSize =
+    ((radio - graphMinSize) / (graphMaxSize - graphMinSize)) * mappedValue;
+  const centerXY = {
+    x: (container?.clientWidth! - centerOffsetX) / 2 - 10,
+    y: (container?.offsetHeight! - centerOffsetY) / 2
+  };
 
-  const vw = innerWidth / 100;
-  const radio = Math.min(innerWidth, innerHeight / 2);
-
-  const r = radio / 2 - 25;
-  const neighborPoints = calculateNeighborPoints(150, 150, r, 10);
+  const nodeXY = calculateNeighborPoints(
+    centerXY?.x,
+    centerXY.y,
+    radio / 2 - radioOffset,
+    10
+  );
 
   data.nodes = [
     {
       id: selectedPlayerInfo.player_id,
       ...selectedPlayerInfo,
-      nodeSize: 80,
-      x: 150,
-      y: 150
+      nodeSize,
+      x: centerXY.x,
+      y: centerXY.y,
+      isCenter: true
     },
     ...list.map((item, index: number) => {
       const { b_id } = item;
       const playerInfo = playersInfo.find((item) => item.player_id === b_id);
-      const neighborPoint = neighborPoints[index];
+      const neighborPoint = nodeXY[index];
       return {
         ...playerInfo,
         id: item.b_id,
         player_id: item.b_id,
         player_enName: item.b_personEnName,
         player_name: item.b_personName,
-        isTeamA: isHome ? "1" : "0",
+        isTeamA: selectedPlayerInfo.isTeamA,
         x: neighborPoint.x,
         y: neighborPoint.y,
-        nodeSize: 80
+        nodeSize
       };
     })
   ];
@@ -227,9 +242,10 @@ export const personalTacitTranslator = (
       source: a_id,
       target: b_id,
       playerValue: value,
-      stroke: isHome
-        ? "linear-gradient(#55091C 10%, #910510 25%, #910510B8 50%,#910510 75%, #55091C 90%)"
-        : "linear-gradient(#0F2EAB, rgba(20,60,219,0.9),#0F2EAB)"
+      stroke:
+        selectedPlayerInfo.isTeamA === "1"
+          ? "linear-gradient(#55091C 10%, #910510 25%, #910510B8 50%,#910510 75%, #55091C 90%)"
+          : "linear-gradient(#0F2EAB, rgba(20,60,219,0.9),#0F2EAB)"
     };
   });
   return data;

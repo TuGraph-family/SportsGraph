@@ -1,6 +1,7 @@
 import { PlayersInfoResult } from "@/interfaces";
 import { Graph, GraphData } from "@antv/g6";
 import React, { useEffect } from "react";
+import { useImmer } from "use-immer";
 import { registerAnimateLine } from "../animate-line";
 import PlayerNode from "../player-node";
 
@@ -10,6 +11,7 @@ interface PersonalTacitGraphProps {
   graphData: GraphData;
   containerId: string;
   style?: React.CSSProperties;
+  onNodeClick?: (playerid: string, playerInfo: PlayersInfoResult) => void;
 }
 
 const nodeSizeRatio = 0.3;
@@ -19,15 +21,16 @@ const maxNodeSize = 70;
 const PersonalTacitGraph: React.FC<PersonalTacitGraphProps> = ({
   graphData,
   containerId,
-  style
+  style,
+  onNodeClick
 }) => {
+  const [state, setState] = useImmer<{ graph?: Graph }>({});
+  const { graph } = state;
   useEffect(() => {
     const graph = new Graph({
       background: "transparent",
       container: containerId,
-      animation: false,
       data: graphData,
-      autoFit: "center",
       zoom: 0.9,
       node: {
         type: "react",
@@ -36,7 +39,10 @@ const PersonalTacitGraph: React.FC<PersonalTacitGraphProps> = ({
           y: (d: any) => d.y,
           fill: "transparent",
           component: (data: PlayersInfoResult) => (
-            <PlayerNode playerInfo={data} />
+            <PlayerNode
+              playerInfo={data}
+              onClick={() => onNodeClick?.(data.player_id, data)}
+            />
           ),
           size: (d: any) => {
             let nodeSize = d.nodeSize * nodeSizeRatio;
@@ -66,9 +72,16 @@ const PersonalTacitGraph: React.FC<PersonalTacitGraphProps> = ({
         }
       }
     });
-    graph.render();
-    graph.fitView();
+    setState((draft) => {
+      draft.graph = graph;
+    });
   }, []);
+  useEffect(() => {
+    if (graph) {
+      graph.setData(graphData);
+      graph.render();
+    }
+  }, [graphData]);
 
   return (
     <div className="personal-tacit-graph">

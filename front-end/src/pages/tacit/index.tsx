@@ -52,6 +52,7 @@ const TacitPage: React.FC = () => {
     visible: boolean;
     homePersonalTacitList: Array<PersonalTacitInfoResult>;
     awayPersonalTacitList: Array<PersonalTacitInfoResult>;
+    personalList: any;
   }>({
     homeTeam: {
       name: "加载中...",
@@ -72,7 +73,8 @@ const TacitPage: React.FC = () => {
     homePersonalTacitList: [],
     awayPersonalTacitList: [],
     personalTacitData: {},
-    visible: false
+    visible: false,
+    personalList: []
   });
   const {
     homeTeam,
@@ -86,8 +88,8 @@ const TacitPage: React.FC = () => {
     awayPersonalTacitList,
     playersInfo,
     playerInfo,
-    personalTacitData,
-    visible
+    visible,
+    personalList
   } = state;
   const isHome = teamSide === "home";
 
@@ -116,30 +118,37 @@ const TacitPage: React.FC = () => {
     loading: loadingGetTeamPersonalTacitInfo
   } = useRequest(getTeamPersonalTacitInfo, { manual: true });
 
-  const onNodeClick = (playerid: string, playerInfo: PlayersInfoResult) => {
-    const isteama = playerInfo?.isTeamA;
-    runGetPlayerTacitInfo({ id, isteama, playerid }).then((res) => {
-      const list = res?.resultSet?.sort(
-        (a: Record<string, string>, b: Record<string, string>) =>
-          Number(b.playerValue) - Number(a.playerValue)
-      );
-
-      if (!list.length) return;
-      const isHome = isteama === "1";
-
+  const personalGraphData = useMemo(() => {
+    if (playerInfo) {
       const data = personalTacitTranslator(
-        list,
-        playerInfo,
-        playersInfo,
-        isHome
+        personalList,
+        playerInfo!,
+        playersInfo
       );
+      return data;
+    }
+    return {};
+  }, [playersInfo, personalList]);
 
-      setState((draft) => {
-        draft.visible = true;
-        draft.personalTacitData = data;
-        draft.playerInfo = { ...playerInfo!, caps: list[0]?.a_caps };
-      });
+  const onNodeClick = (playerid: string, playerInfo: PlayersInfoResult) => {
+    setState((draft) => {
+      draft.visible = true;
     });
+    runGetPlayerTacitInfo({ id, isteama: playerInfo?.isTeamA, playerid }).then(
+      (res) => {
+        const list = res?.resultSet?.sort(
+          (a: Record<string, string>, b: Record<string, string>) =>
+            Number(b.playerValue) - Number(a.playerValue)
+        );
+
+        if (!list.length) return;
+
+        setState((draft) => {
+          draft.personalList = list;
+          draft.playerInfo = { ...playerInfo!, caps: list[0]?.a_caps };
+        });
+      }
+    );
   };
 
   const onNext = () => {
@@ -322,10 +331,11 @@ const TacitPage: React.FC = () => {
         ) : null}
         <FootballField startLighting={hasGraphData} />
         <PersonalTacit
-          personalTacitData={personalTacitData}
+          personalTacitData={personalGraphData}
           playerInfo={playerInfo}
           visible={visible}
           setVisible={setVisible}
+          onNodeClick={onNodeClick}
         />
         <TacitGraph
           style={{ opacity: visible ? 0 : 1 }}

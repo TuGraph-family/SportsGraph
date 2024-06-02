@@ -20,8 +20,8 @@ const LightLeft: React.FC = () => {
             y2="50%"
             id="light-left-linearGradient-1"
           >
-            <stop stop-color="#FFFFFF" offset="0%"></stop>
-            <stop stop-color="#FFFFFF" stop-opacity="0" offset="100%"></stop>
+            <stop stopColor="#FFFFFF" offset="0%"></stop>
+            <stop stopColor="#FFFFFF" stopOpacity="0" offset="100%"></stop>
           </linearGradient>
           <filter
             x="-13.7%"
@@ -43,8 +43,8 @@ const LightLeft: React.FC = () => {
             y2="50%"
             id="light-left-linearGradient-3"
           >
-            <stop stop-color="#FFFFFF" offset="0%"></stop>
-            <stop stop-color="#FFFFFF" stop-opacity="0" offset="100%"></stop>
+            <stop stopColor="#FFFFFF" offset="0%"></stop>
+            <stop stopColor="#FFFFFF" stopOpacity="0" offset="100%"></stop>
           </linearGradient>
           <filter
             x="-5.7%"
@@ -63,9 +63,9 @@ const LightLeft: React.FC = () => {
         <g
           id="light-left-设计稿"
           stroke="none"
-          stroke-width="1"
+          strokeWidth="1"
           fill="none"
-          fill-rule="evenodd"
+          fillRule="evenodd"
         >
           <g
             id="light-left-对抗度"

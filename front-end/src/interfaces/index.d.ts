@@ -26,6 +26,7 @@ export interface PlayersInfoResult {
   animationDelay?: number;
   isInTop?: boolean;
   isGoalKeeper?: boolean;
+  isCenter?: boolean;
 }
 
 export interface PlayersInfo extends CommonResponseResult {
