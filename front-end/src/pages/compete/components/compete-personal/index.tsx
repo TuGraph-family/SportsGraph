@@ -97,7 +97,8 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
         stroke:
           isTeamA === "1"
             ? `linear-gradient(${edge?.deg}deg,rgba(82, 9, 29, 1) 0%,rgba(159, 4, 13, 0.9) ${edge?.percentage}%,rgba(22, 119, 255, 1) ${edge?.percentage}%, rgba(21, 52, 90, 0.9) 100% )`
-            : `linear-gradient(${edge?.deg}deg,rgba(22, 75, 145, 1) 0%,rgba(22, 119, 255, 1) ${edge?.percentage}%,rgba(159, 4, 13, 0.9) ${edge?.percentage}%, rgba(82, 9, 29, 1) 100% )`
+            : `linear-gradient(${edge?.deg}deg,rgba(22, 75, 145, 1) 0%,rgba(22, 119, 255, 1) ${edge?.percentage}%,rgba(159, 4, 13, 0.9) ${edge?.percentage}%, rgba(82, 9, 29, 1) 100% )`,
+        percentage: edge.percentage
       };
     });
     setState((draft) => {

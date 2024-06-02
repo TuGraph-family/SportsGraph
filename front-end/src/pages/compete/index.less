@@ -103,30 +103,32 @@
 
   .light-left {
     /* px-to-viewport-ignore-next */
-    left: -70px;
+    left: -110px;
     animation: lightLeft 2s ease forwards;
-    transform-origin: top left;
-    transform: rotateZ(20deg);
+    transform-origin: top center;
+    transform: rotateZ(60deg);
+    top: calc(50% - 195px);
   }
 
   .light-right {
     /* px-to-viewport-ignore-next */
-    right: -85px;
+    right: -110px;
     animation: lightRight 2s ease forwards;
-    top: 37%;
-    transform: rotateZ(-20deg);
-    transform-origin: top right;
+    /* px-to-viewport-ignore-next */
+    top: calc(50% - 200px);
+    transform-origin: top center;
+    transform: rotateZ(-60deg);
   }
 
   @keyframes lightLeft {
     100% {
-      transform: rotateZ(-50deg);
+      transform: rotateZ(0deg);
     }
   }
 
   @keyframes lightRight {
     100% {
-      transform: rotateZ(50deg);
+      transform: rotateZ(0deg);
     }
   }
 

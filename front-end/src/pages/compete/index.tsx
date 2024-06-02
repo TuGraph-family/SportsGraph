@@ -4,6 +4,8 @@ import CompeteGraph from "@/components/compete-graph";
 import FootballField from "@/components/football-field";
 import HomeIcon from "@/components/home-icon";
 import IconFont from "@/components/icon-font";
+import LightLeft from "@/components/light-left";
+import LightRight from "@/components/light-right";
 import LightTop from "@/components/light-top";
 import Loading from "@/components/loading";
 import SplitText from "@/components/split-text";
@@ -280,10 +282,10 @@ const CompetePage: React.FC = () => {
         {hasGraphData && (
           <>
             <div className="light-side light-left">
-              <LightTop />
+              <LightLeft />
             </div>
             <div className="light-side light-right">
-              <LightTop />
+              <LightRight />
             </div>
           </>
         )}

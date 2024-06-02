@@ -83,13 +83,13 @@ const LightTop: React.FC = () => {
                 <g transform="translate(0, -44)">
                   <polygon
                     fill="url(#light-top-linearGradient-3)"
-                    opacity="0.9"
+                    opacity="0.6"
                     filter="url(#light-top-filter-4)"
                     points="51.3761468 6.99960923e-15 88.6238532 -1.93655855e-14 140 269 -2.2824355e-13 269"
                   ></polygon>
                   <rect
                     fill="url(#light-top-linearGradient-5)"
-                    opacity="0.8"
+                    opacity="0.6"
                     filter="url(#light-top-filter-6)"
                     transform="translate(63, 91) rotate(0) translate(-63, -91)"
                     x="64"
