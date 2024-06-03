@@ -27,13 +27,6 @@ import InstructionsForUse from "../home/components/instructions-for-use";
 import CompetePersonalModal from "./components/compete-personal";
 import "./index.less";
 
-window?.Tracert?.call?.("set", {
-  spmAPos: SPAPOS,
-  spmBPos: "b97705",
-  pathName: "对抗页"
-});
-window?.Tracert?.call?.("logPv");
-
 const winYRatio = 0.65;
 const loseYRatio = 0.55;
 
@@ -257,6 +250,13 @@ const CompetePage: React.FC = () => {
         });
       }
     });
+
+    window?.Tracert?.call?.("set", {
+      spmAPos: SPAPOS,
+      spmBPos: "b97705",
+      pathName: "对抗页"
+    });
+    window?.Tracert?.call?.("logPv");
   }, [id]);
   return (
     <div className="compete">

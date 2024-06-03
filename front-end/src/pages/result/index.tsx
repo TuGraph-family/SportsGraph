@@ -21,13 +21,6 @@ import InstructionsForUse from "../home/components/instructions-for-use";
 import "./index.less";
 import dayjs from "dayjs";
 
-window?.Tracert?.call?.("set", {
-  spmAPos: SPAPOS,
-  spmBPos: "b97707",
-  pathName: "结果页"
-});
-window?.Tracert?.call?.("logPv");
-
 const ResultPage: React.FC = () => {
   const [state, setState] = useImmer<{
     gameInfo?: GameInfoResult;
@@ -80,6 +73,12 @@ const ResultPage: React.FC = () => {
         draft.voteInfo = data?.voteInfo;
       });
     });
+    window?.Tracert?.call?.("set", {
+      spmAPos: SPAPOS,
+      spmBPos: "b97707",
+      pathName: "结果页"
+    });
+    window?.Tracert?.call?.("logPv");
   }, [id]);
   return (
     <div className="result-page">

@@ -23,13 +23,6 @@ import InstructionsForUse from "./components/instructions-for-use";
 import ScheduleList from "./components/schedule-list";
 import "./index.less";
 
-window?.Tracert?.call?.("set", {
-  spmAPos: SPAPOS,
-  spmBPos: "b97708",
-  pathName: "首页"
-});
-window?.Tracert?.call?.("logPv");
-
 const HomePage: React.FC = () => {
   const [state, setState] = useImmer<{ futureList: any[] }>({
     futureList: [{}]
@@ -63,6 +56,12 @@ const HomePage: React.FC = () => {
         }
       }
     });
+    window?.Tracert?.call?.("set", {
+      spmAPos: SPAPOS,
+      spmBPos: "b97708",
+      pathName: "首页"
+    });
+    window?.Tracert?.call?.("logPv");
   }, []);
 
   return (

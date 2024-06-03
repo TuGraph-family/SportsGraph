@@ -37,13 +37,6 @@ import { personalTacitTranslator } from "@/translator";
 import InstructionsForUse from "../home/components/instructions-for-use";
 import PersonalTacit from "./components/personal-tacit";
 
-window?.Tracert?.call?.("set", {
-  spmAPos: SPAPOS,
-  spmBPos: "b97706",
-  pathName: "默契页"
-});
-window?.Tracert?.call?.("logPv");
-
 const TacitPage: React.FC = () => {
   const [state, setState] = useImmer<{
     homeTeam?: { name: string; flagUrl: string; score: number };
@@ -286,6 +279,12 @@ const TacitPage: React.FC = () => {
         draft.awayPersonalTacitList = data.resultSet;
       });
     });
+    window?.Tracert?.call?.("set", {
+      spmAPos: SPAPOS,
+      spmBPos: "b97706",
+      pathName: "默契页"
+    });
+    window?.Tracert?.call?.("logPv");
   }, [id]);
 
   return (
