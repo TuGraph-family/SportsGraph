@@ -11,7 +11,7 @@ import Loading from "@/components/loading";
 import SplitText from "@/components/split-text";
 import TitleDesc from "@/components/title-desc";
 import Tooltip from "@/components/tooltip";
-import { DEFAULT_FLAG } from "@/constant";
+import { DEFAULT_FLAG, SPAPOS } from "@/constant";
 import {
   GameInfoPlayerResult,
   PlayersInfoResult,
@@ -26,6 +26,14 @@ import { useImmer } from "use-immer";
 import InstructionsForUse from "../home/components/instructions-for-use";
 import CompetePersonalModal from "./components/compete-personal";
 import "./index.less";
+
+window?.Tracert?.call?.("set", {
+  spmAPos: SPAPOS,
+  spmBPos: "b97705",
+  pathName: "对抗页"
+});
+window?.Tracert?.call?.("logPv");
+
 const winYRatio = 0.65;
 const loseYRatio = 0.55;
 

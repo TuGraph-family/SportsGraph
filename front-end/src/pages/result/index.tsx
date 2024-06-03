@@ -9,6 +9,7 @@ import Loading from "@/components/loading";
 import TitleDesc from "@/components/title-desc";
 import TopBg from "@/components/top-bg";
 import Vote from "@/components/vote";
+import { SPAPOS } from "@/constant";
 import { GameInfoResult, VoteInfoResult } from "@/interfaces";
 import { getGameInfo, getGameVoteInfoById } from "@/services";
 import { getDayOfWeek, parseSearch } from "@/utils";
@@ -19,6 +20,13 @@ import { useImmer } from "use-immer";
 import InstructionsForUse from "../home/components/instructions-for-use";
 import "./index.less";
 import dayjs from "dayjs";
+
+window?.Tracert?.call?.("set", {
+  spmAPos: SPAPOS,
+  spmBPos: "b97707",
+  pathName: "结果页"
+});
+window?.Tracert?.call?.("logPv");
 
 const ResultPage: React.FC = () => {
   const [state, setState] = useImmer<{

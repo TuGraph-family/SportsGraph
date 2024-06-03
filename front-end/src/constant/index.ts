@@ -9,5 +9,7 @@ export const STRENGTH_TEXT_SRC = {
   LOSE_ACTIVE:
     "https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*5JBnTp0LvAQAAAAAAAAAAAAADsvfAQ/original",
   LOSE_INACTIVE:
-    "https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*WLiJQJGwQW8AAAAAAAAAAAAADsvfAQ/original",
+    "https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*WLiJQJGwQW8AAAAAAAAAAAAADsvfAQ/original"
 };
+
+export const SPAPOS = "a4427";

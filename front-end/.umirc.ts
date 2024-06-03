@@ -8,7 +8,7 @@ export default defineConfig({
     { path: "/tacit", component: "tacit/" },
     { path: "/compete", component: "compete/" },
     { path: "/result", component: "result/" },
-    { path: "*", redirect: "/" },
+    { path: "*", redirect: "/" }
   ],
   npmClient: "npm",
   mfsu: {},
@@ -26,17 +26,17 @@ export default defineConfig({
       mediaQuery: false, // 是否在媒体查询的css代码中也进行转换，默认false
       replace: true, // 是否转换后直接更换属性值
       exclude: [/node_modules/], // 设置忽略文件，用正则做目录名匹配
-      landscape: false, // 是否处理横屏情况
-    }),
+      landscape: false // 是否处理横屏情况
+    })
   ],
   request: {
-    dataField: "data",
+    dataField: "data"
   },
   proxy: {
     "/tugraph/api": {
       target: "https://football.tugraph.tech",
-      changeOrigin: true,
-    },
+      changeOrigin: true
+    }
   },
   initialState: {},
   model: {},
@@ -44,7 +44,14 @@ export default defineConfig({
   metas: [
     {
       name: "viewport",
-      content: "width=device-width, initial-scale=1.0, viewport-fit=cover",
-    },
+      content: "width=device-width, initial-scale=1.0, viewport-fit=cover"
+    }
   ],
+  headScripts: [
+    {
+      src: "https://ur.alipay.com/tracert_a4427.js",
+      async: true,
+      crossorigin: "anonymous"
+    }
+  ]
 });
