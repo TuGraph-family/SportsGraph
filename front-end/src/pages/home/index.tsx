@@ -18,6 +18,7 @@ import "./index.less";
 import TechnicalPrinciples from "@/pages/home/components/technical-principles";
 import InstructionsForUse from "./components/instructions-for-use";
 import IconFont from "@/components/icon-font";
+import { BackTop } from "@/components/back-top";
 
 const HomePage: React.FC = () => {
   const [state, setState] = useImmer<{ futureList: any[] }>({
@@ -111,7 +112,6 @@ const HomePage: React.FC = () => {
                 <div className="home-page-top-game">
                   <div className="center-bg">
                     <TopBg />
-                    
                   </div>
                   <div className="center-team">
                     <Teamteam
@@ -210,6 +210,7 @@ const HomePage: React.FC = () => {
         </Tabs>
       </div>
       <InstructionsForUse />
+      <BackTop />
     </div>
   );
 };
