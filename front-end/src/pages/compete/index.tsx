@@ -15,7 +15,7 @@ import { DEFAULT_FLAG } from "@/constant";
 import {
   GameInfoPlayerResult,
   PlayersInfoResult,
-  TeamCompeteInfoResult
+  TeamCompeteInfoResult,
 } from "@/interfaces";
 import { getGameInfo, getPlayersInfo, getTeamCompeteInfo } from "@/services";
 import { parseSearch } from "@/utils";
@@ -50,12 +50,12 @@ const CompetePage: React.FC = () => {
     leftTeam: {
       name: "加载中...",
       flagUrl: DEFAULT_FLAG,
-      score: 0
+      score: 0,
     },
     rightTeam: {
       name: "加载中...",
       flagUrl: DEFAULT_FLAG,
-      score: 0
+      score: 0,
     },
     leftGraphData: { nodes: [], edges: [] },
     rightGraphData: { nodes: [], edges: [] },
@@ -64,7 +64,7 @@ const CompetePage: React.FC = () => {
     playersInfo: [],
     isHomeWin: true,
     competePersonalVisible: false,
-    competePersonalParams: undefined
+    competePersonalParams: undefined,
   });
   const {
     leftTeam,
@@ -76,13 +76,13 @@ const CompetePage: React.FC = () => {
     rightCompeteData,
     isHomeWin,
     competePersonalVisible,
-    competePersonalParams
+    competePersonalParams,
   } = state;
   const { id } = parseSearch(location.search) as any;
   const { loading: loadingGetGameInfo, run: runGetGameInfo } = useRequest(
     getGameInfo,
     {
-      manual: true
+      manual: true,
     }
   );
   const { run: runGetTeamcompeteInfo, loading: loadingGetTeamcompeteInfo } =
@@ -141,21 +141,21 @@ const CompetePage: React.FC = () => {
               ? mapX + container?.offsetWidth! * 2
               : mapX - container?.offsetWidth! * 2,
             zIndex: isWin ? 0 : y,
-            animationDelay: Math.random() * 0.5
-          }
+            animationDelay: Math.random() * 0.5,
+          },
         };
       })
       .sort((a, b) => b.data.nodeSize - a.data.nodeSize)
       .map((item, index) => ({
         ...item,
-        data: { ...item.data, isInTop: index < 3 }
+        data: { ...item.data, isInTop: index < 3 },
       }));
     return nodes;
   };
   const homeGraphData = useMemo(() => {
     const homeGraphData: GraphData = {
       nodes: [],
-      edges: []
+      edges: [],
     };
 
     if (
@@ -171,7 +171,7 @@ const CompetePage: React.FC = () => {
   const awayGraphData = useMemo(() => {
     const awayGraphData: GraphData = {
       nodes: [],
-      edges: []
+      edges: [],
     };
 
     if (
@@ -208,24 +208,24 @@ const CompetePage: React.FC = () => {
           team_a_country,
           team_a_national_flag,
           team_b_country,
-          team_b_national_flag
+          team_b_national_flag,
         } = data.resultSet?.[0] || {};
         setState((draft) => {
           draft.leftTeam = {
             name: team_a_country,
             flagUrl: team_a_national_flag,
-            score: parseInt(homeWinProbability)
+            score: parseInt(homeWinProbability),
           };
           draft.rightTeam = {
             name: team_b_country,
             flagUrl: team_b_national_flag,
-            score: parseInt(awayWinProbability)
+            score: parseInt(awayWinProbability),
           };
           draft.leftGraphData = {
-            nodes: data.playerAList
+            nodes: data.playerAList,
           };
           draft.rightGraphData = {
-            nodes: data.playerBList
+            nodes: data.playerBList,
           };
           draft.isHomeWin = homeWinProbability > awayWinProbability;
         });
@@ -306,12 +306,10 @@ const CompetePage: React.FC = () => {
       <div className="footer">
         <div className="button">
           <Button isShowHighlightBorder onClick={onPrev} className="up-page">
-            <IconFont type="euro-icon-xiayiye1" rotate={180} />
-            上一页
+            <IconFont type="euro-icon-xiayiye1" rotate={180} /> 上一页
           </Button>
           <Button isShowHighlightBorder onClick={onNext} className="next-page">
-            下一页
-            <IconFont type="euro-icon-xiayiye1" />
+            下一页 <IconFont type="euro-icon-xiayiye1" />
           </Button>
         </div>
         {hasGraphData && (

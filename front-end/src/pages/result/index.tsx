@@ -162,8 +162,7 @@ const ResultPage: React.FC = () => {
         </div>
         <div className="footer">
           <Button isShowHighlightBorder onClick={onSavePic} className="up-page">
-            <IconFont type="euro-icon-xiayiye1" rotate={180} />
-            上一页
+            <IconFont type="euro-icon-xiayiye1" rotate={180} /> 上一页
           </Button>
           <Button
             isShowHighlightBorder
