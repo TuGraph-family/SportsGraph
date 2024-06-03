@@ -35,6 +35,7 @@ import LightLeft from "@/components/light-left";
 import LightRight from "@/components/light-right";
 import { personalTacitTranslator } from "@/translator";
 import InstructionsForUse from "../home/components/instructions-for-use";
+import PersonalTacit from "./components/personal-tacit";
 
 const TacitPage: React.FC = () => {
   const [state, setState] = useImmer<{
