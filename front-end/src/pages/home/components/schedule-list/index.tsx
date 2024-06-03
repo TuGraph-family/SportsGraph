@@ -30,7 +30,7 @@ const ScheduleList: React.FC<AsyncListProps> = (props) => {
               <div className="title">
                 <div className="title-class">{match_title}</div>
                 <div className="title-time">
-                  {dayjs(startDate).format("MM-DD HH:mm")}
+                  {dayjs(startDate).format("MM.DD HH:mm")}
                 </div>
               </div>
               <div className="game">

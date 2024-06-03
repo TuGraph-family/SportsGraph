@@ -72,6 +72,7 @@ export interface GameInfoResult {
   team_a_national_flag: string;
   team_b_country: string;
   team_b_national_flag: string;
+  startDate?: string;
 }
 
 export interface GameInfo extends CommonResponseResult {

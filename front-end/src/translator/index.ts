@@ -16,15 +16,15 @@ const getPlayerList = (playerList: string[], playerPositionList: string[]) => {
     return {
       id,
       x: Number(x) * ratio,
-      y: Number(y) * ratio
+      y: Number(y) * ratio,
     };
   });
   return {
     playerList: list.map((item) => ({
       ...item,
-      isGoalKeeper: +item.y === minY * ratio
+      isGoalKeeper: +item.y === minY * ratio,
     })),
-    goalkeeperId
+    goalkeeperId,
   };
 };
 
@@ -38,7 +38,7 @@ export const gameInfoTranslator = (res: any) => {
     players_A = "",
     players_B = "",
     position_A_xy = "",
-    position_B_xy = ""
+    position_B_xy = "",
   } = resultSet[0] || {};
   const playerAList = players_A.split(",");
   const playerBList = players_B.split(",");
@@ -61,8 +61,8 @@ export const gameInfoTranslator = (res: any) => {
       playerAList: listA,
       playerBList: listB,
       goalkeeperAId,
-      goalkeeperBId
-    }
+      goalkeeperBId,
+    },
   } as GameInfo;
 };
 
@@ -82,9 +82,9 @@ export const getVoteInfoTranslator = (res: any) => {
         isEnd,
         teamAVote,
         teamBVote,
-        totalVote
-      }
-    }
+        totalVote,
+      },
+    },
   };
 };
 
@@ -122,8 +122,8 @@ export const playerTacitInfoTranslator = (res: any) => {
     player_enName: resultSet[0].a_personEnName,
     x: 180,
     y: 180,
-    nodeSize: 100,
-    isCenter: true
+    nodeSize: 80,
+    isCenter: true,
   };
   // 计算周边点坐标
   const nodeXY = calculateNeighborPoints(
@@ -141,7 +141,7 @@ export const playerTacitInfoTranslator = (res: any) => {
       player_id: item?.b_id,
       player_enName: item.b_personEnName,
       ...nodeXY?.[index],
-      nodeSize: 100
+      nodeSize: 80,
     };
   });
 
@@ -161,7 +161,7 @@ export const playerTacitInfoTranslator = (res: any) => {
       target: item.b_id,
       playerValue: item.playerValue,
       deg: deg,
-      percentage: percentage
+      percentage: percentage,
     };
   });
   return {
@@ -170,10 +170,10 @@ export const playerTacitInfoTranslator = (res: any) => {
       ...res?.data,
       competeInfo: {
         nodes: [competeCenterPlayer, ...competePlayerNode],
-        edges: competePlayerEdge
+        edges: competePlayerEdge,
       },
-      competeCenterPlayer
-    }
+      competeCenterPlayer,
+    },
   };
 };
 
@@ -190,7 +190,7 @@ export const personalTacitTranslator = (
 ) => {
   const data: GraphData = {
     nodes: [],
-    edges: []
+    edges: [],
   };
   const container = document.getElementById("personalTacit");
   const radio = Math.min(container?.clientWidth!, container?.offsetHeight!);
@@ -198,7 +198,7 @@ export const personalTacitTranslator = (
     ((radio - graphMinSize) / (graphMaxSize - graphMinSize)) * mappedValue;
   const centerXY = {
     x: (container?.clientWidth! - centerOffsetX) / 2 - 10,
-    y: (container?.offsetHeight! - centerOffsetY) / 2
+    y: (container?.offsetHeight! - centerOffsetY) / 2,
   };
 
   const nodeXY = calculateNeighborPoints(
@@ -215,7 +215,7 @@ export const personalTacitTranslator = (
       nodeSize,
       x: centerXY.x,
       y: centerXY.y,
-      isCenter: true
+      isCenter: true,
     },
     ...list.map((item, index: number) => {
       const { b_id } = item;
@@ -230,9 +230,9 @@ export const personalTacitTranslator = (
         isTeamA: selectedPlayerInfo.isTeamA,
         x: neighborPoint.x,
         y: neighborPoint.y,
-        nodeSize
+        nodeSize,
       };
-    })
+    }),
   ];
 
   data.edges = list.map((item) => {
@@ -245,7 +245,7 @@ export const personalTacitTranslator = (
       stroke:
         selectedPlayerInfo.isTeamA === "1"
           ? "linear-gradient(#55091C 10%, #910510 25%, #910510B8 50%,#910510 75%, #55091C 90%)"
-          : "linear-gradient(#0F2EAB, rgba(20,60,219,0.9),#0F2EAB)"
+          : "linear-gradient(#0F2EAB, rgba(20,60,219,0.9),#0F2EAB)",
     };
   });
   return data;

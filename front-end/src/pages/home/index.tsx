@@ -17,7 +17,9 @@ import ScheduleList from "./components/schedule-list";
 import "./index.less";
 import TechnicalPrinciples from "@/pages/home/components/technical-principles";
 import InstructionsForUse from "./components/instructions-for-use";
+import { getDayOfWeek } from "@/utils";
 import IconFont from "@/components/icon-font";
+import dayjs from "dayjs";
 import { BackTop } from "@/components/back-top";
 
 const HomePage: React.FC = () => {
@@ -103,8 +105,8 @@ const HomePage: React.FC = () => {
               isEnd,
               awayWinProbability,
               homeWinProbability,
+              startDate,
             } = item;
-
             const voteCount = Number(teamAVote) + Number(teamBVote);
             const votePercent = (teamAVote / voteCount) * 100;
             return (
@@ -124,6 +126,10 @@ const HomePage: React.FC = () => {
                         flagUrl: team_b_national_flag,
                       }}
                     />
+                  </div>
+                  <div className="center-time">
+                    {getDayOfWeek(startDate) || "- - "}
+                    {dayjs(startDate).format("MM.DD HH:mm")}
                   </div>
                   <div
                     className="center-predict"
