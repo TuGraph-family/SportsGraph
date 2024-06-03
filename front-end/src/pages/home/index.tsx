@@ -19,6 +19,7 @@ import TechnicalPrinciples from "@/pages/home/components/technical-principles";
 import InstructionsForUse from "./components/instructions-for-use";
 import { getDayOfWeek } from "@/utils";
 import IconFont from "@/components/icon-font";
+import dayjs from "dayjs";
 
 const HomePage: React.FC = () => {
   const [state, setState] = useImmer<{ futureList: any[] }>({
@@ -127,8 +128,7 @@ const HomePage: React.FC = () => {
                   </div>
                   <div className="center-time">
                     {getDayOfWeek(startDate) || "- - "}
-                    {startDate?.slice(5, -3)?.replace("-", ".") ||
-                      "00.00 00:00"}
+                    {dayjs(startDate).format("MM.DD HH:mm")}
                   </div>
                   <div
                     className="center-predict"

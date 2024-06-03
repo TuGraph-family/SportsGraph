@@ -2,7 +2,9 @@ import AnimateNumber from "@/components/animate-number";
 import Button from "@/components/button";
 import ColorfulButton from "@/components/colorful-button";
 import FootballField from "@/components/football-field";
+import HomeIcon from "@/components/home-icon";
 import IconFont from "@/components/icon-font";
+import LightTop from "@/components/light-top";
 import Loading from "@/components/loading";
 import TitleDesc from "@/components/title-desc";
 import TopBg from "@/components/top-bg";
@@ -14,8 +16,9 @@ import { useRequest } from "@umijs/max";
 import React, { useEffect } from "react";
 import { history } from "umi";
 import { useImmer } from "use-immer";
+import InstructionsForUse from "../home/components/instructions-for-use";
 import "./index.less";
-import HomeIcon from "@/components/home-icon";
+import dayjs from "dayjs";
 
 const ResultPage: React.FC = () => {
   const [state, setState] = useImmer<{
@@ -54,14 +57,6 @@ const ResultPage: React.FC = () => {
     history.push("/");
   };
   const onSavePic = () => {
-    // setState((draft) => {
-    //   draft.isDownloading = true;
-    // });
-    // takeScreenshot("result").then(() => {
-    //   setState((draft) => {
-    //     draft.isDownloading = false;
-    //   });
-    // });
     history.push(`/compete?id=${id}`);
   };
   useEffect(() => {
@@ -80,11 +75,15 @@ const ResultPage: React.FC = () => {
   }, [id]);
   return (
     <div className="result-page">
+      <InstructionsForUse />
       <Loading
         loading={
           loadingGetGameInfo || loadingGetGameVoteInfoById || isDownloading
         }
       />
+      <div className="light">
+        <LightTop />
+      </div>
       <div className="result" id="result">
         <HomeIcon />
         <div className="result-title">
@@ -94,6 +93,13 @@ const ResultPage: React.FC = () => {
           />
         </div>
         <div className="result-team">
+          <div className="result-playground">
+            <FootballField
+              perspective="130vh"
+              worldWidth={120}
+              hasAnimation={false}
+            />
+          </div>
           <div className="team-bg">
             <TopBg />
           </div>
@@ -107,7 +113,7 @@ const ResultPage: React.FC = () => {
           </div>
           <div className="center-time">
             {getDayOfWeek(startDate) || "- - "}
-            {startDate?.slice(5, -3)?.replace("-", ".") || "00.00 00:00"}
+            {dayjs(startDate).format("MM.DD HH:mm")}
           </div>
           <div className="center-predict">
             <div className="predict-left">
@@ -154,22 +160,19 @@ const ResultPage: React.FC = () => {
           </div>
           <div className="qrcode-text">截图分享给好友，一起猜猜猜~</div>
         </div>
-        <div className="result-playground">
-          <FootballField />
+        <div className="footer">
+          <Button isShowHighlightBorder onClick={onSavePic} className="up-page">
+            <IconFont type="euro-icon-xiayiye1" rotate={180} />
+            上一页
+          </Button>
+          <Button
+            isShowHighlightBorder
+            className="next-page"
+            onClick={jumpToHome}
+          >
+            更多赛程 <IconFont type="euro-icon-xiayiye1" />
+          </Button>
         </div>
-      </div>
-      <div className="footer">
-        <Button isShowHighlightBorder onClick={onSavePic} className="up-page">
-          <IconFont type="euro-icon-xiayiye1" rotate={180} />
-          上一页
-        </Button>
-        <Button
-          isShowHighlightBorder
-          className="next-page"
-          onClick={jumpToHome}
-        >
-          更多赛程 <IconFont type="euro-icon-xiayiye1" />
-        </Button>
       </div>
     </div>
   );

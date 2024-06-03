@@ -23,6 +23,10 @@ export interface PlayersInfoResult {
   nodeSize?: number;
   player_enName?: string;
   a_caps?: string;
+  animationDelay?: number;
+  isInTop?: boolean;
+  isGoalKeeper?: boolean;
+  isCenter?: boolean;
 }
 
 export interface PlayersInfo extends CommonResponseResult {
@@ -76,6 +80,8 @@ export interface GameInfo extends CommonResponseResult {
     playerAList: Array<GameInfoPlayerResult>;
     playerBList: Array<GameInfoPlayerResult>;
     resultSet: Array<GameInfoResult>;
+    goalkeeperAId: string;
+    goalkeeperBId: string;
   };
 }
 

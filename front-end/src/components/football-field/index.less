@@ -2,7 +2,12 @@
   height: 100%;
   position: relative;
   width: 100vw;
-  margin-top: -30px;
+  &.hide-animation {
+    .world {
+      animation: none;
+      transform: translateZ(-210px);
+    }
+  }
 
   @keyframes world {
     0% {
@@ -18,12 +23,11 @@
     width: 100%;
     height: 100%;
     perspective-origin: 50% -90vh;
-    perspective: 130vh;
     backface-visibility: hidden;
   }
   .world {
     position: absolute;
-    top: 130px;
+    top: 110px;
     left: 50%;
     margin-left: -65vw;
     width: 130vw;
@@ -33,6 +37,22 @@
     animation: world 1s ease forwards;
     backface-visibility: hidden;
   }
+  @media (max-width: 375px) {
+    .stage {
+      perspective-origin: 50% -100vh;
+    }
+    .world {
+      top: 160px;
+    }
+  }
+  @media (max-width: 680px) {
+    .world {
+      top: 160px;
+    }
+    .stage {
+      perspective-origin: 50% -100vh;
+    }
+  }
 
   .field {
     position: absolute;
@@ -40,12 +60,12 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #eee;
     transform: rotateX(90deg) translateZ(0);
     transform-origin: 50% 50%;
     box-sizing: content-box;
     backface-visibility: hidden;
     filter: brightness(60%) contrast(130%);
+    background-color: #3f6e08;
   }
   .field.ground::after {
     content: "";
@@ -82,23 +102,26 @@
   }
   .field__texture--gradient-b {
     z-index: 2;
-    width: 300px;
-    height: 250px;
-    border-radius: 150px;
-    filter: blur(50px) brightness(200%);
-    background-color: rgba(255, 183, 0, 0.6);
+    filter: blur(50px);
     transform: scale(0.1);
     opacity: 0;
-    animation: light 1s ease-in forwards;
+    animation: lightField 1s ease-in forwards;
     animation-delay: 0.5s;
   }
   .field__texture--gradient-b.small {
     width: 200px;
     height: 150px;
     border-radius: 100px;
-    background-color: rgba(255, 183, 0, 0.8);
+    background-color: rgba(246, 255, 0, 0.8);
   }
-  @keyframes light {
+  .field__texture--gradient-b.big {
+    border-radius: 150px;
+    width: 300px;
+    height: 250px;
+    background-color: rgba(246, 255, 0, 0.6);
+  }
+
+  @keyframes lightField {
     0% {
       transform: scale(0.1);
       opacity: 0;
@@ -109,13 +132,6 @@
     }
   }
 
-  .flipped .field__texture.field__texture--gradient {
-    opacity: 0;
-  }
-
-  .flipped .field__texture.field__texture--gradient-b {
-    opacity: 1;
-  }
   .texture .field__texture.field__texture--grass {
     background-image: url("https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*8KKxRJAy1boAAAAAAAAAAAAADsvfAQ/original");
     background-repeat: repeat;
@@ -235,7 +251,7 @@
   .field__line--mid {
     top: 50%;
     width: 92%;
-    left: 4%;
+    left: 4.8%;
     background-color: rgba(255, 255, 255, 0.5);
   }
   .field__line--circle {

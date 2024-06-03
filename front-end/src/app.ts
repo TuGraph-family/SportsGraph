@@ -1,5 +1,6 @@
 import type { RequestConfig } from "@umijs/max";
 import { login } from "./services";
+import { resetClientHeight } from "./utils/resizeClientHeight";
 
 export const request: RequestConfig = {
   timeout: 30000,
@@ -31,3 +32,5 @@ export async function getInitialState() {
   const initialData = await login();
   return initialData;
 }
+
+resetClientHeight();

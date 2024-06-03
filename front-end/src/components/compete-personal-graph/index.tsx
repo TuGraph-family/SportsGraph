@@ -1,10 +1,9 @@
 import { PlayersInfoResult } from "@/interfaces";
-import { Graph, GraphData, NodeEvent } from "@antv/g6";
+import { Graph, GraphData } from "@antv/g6";
 import React, { useEffect } from "react";
 import { useImmer } from "use-immer";
 import { registerAnimateLine } from "../animate-line";
 import PlayerNode from "../player-node";
-import "./index.less";
 
 registerAnimateLine();
 
@@ -32,7 +31,6 @@ const CompetePersonalGraph: React.FC<CompetePersonalGraphProps> = ({
     const graph = new Graph({
       background: "transparent",
       container: containerId,
-      data: graphData,
       zoom: 0.9,
       node: {
         type: "react",
@@ -41,7 +39,7 @@ const CompetePersonalGraph: React.FC<CompetePersonalGraphProps> = ({
           y: (d: any) => d.y,
           fill: "transparent",
           component: (data: PlayersInfoResult) => (
-            <PlayerNode playerInfo={data} />
+            <PlayerNode playerInfo={data} onClick={() => onClickNode?.(data)} />
           ),
           size: (d: any) => {
             let nodeSize = d.nodeSize * nodeSizeRatio;
@@ -97,12 +95,8 @@ const CompetePersonalGraph: React.FC<CompetePersonalGraphProps> = ({
   useEffect(() => {
     if (graphData.nodes?.length && graph) {
       graph.setData(graphData);
-      graph.on(`node:${NodeEvent.CLICK}`, (event: any) => {
-        onClickNode?.(graph.getNodeData(event?.target?.id));
-      });
       graph.render();
     }
-    return () => graph?.destroy();
   }, [graphData]);
 
   return (

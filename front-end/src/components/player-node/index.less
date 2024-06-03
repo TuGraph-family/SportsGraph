@@ -5,7 +5,46 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  &.active {
+    .label-text {
+      color: rgba(255, 188, 0, 1);
+    }
+  }
+  &.fade {
+    opacity: 0;
+  }
+
+  @keyframes fade {
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes scale {
+    0% {
+      transform: scale(0.6);
+    }
+    25% {
+      transform: scale(1.1);
+    }
+
+    50% {
+      transform: scale(0.8);
+    }
+    75% {
+      transform: scale(1);
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes translate {
+    100% {
+      transform: translateY(0px);
+    }
+  }
 
   .shirt {
     /* px-to-viewport-ignore-next */
@@ -17,6 +56,14 @@
     justify-content: center;
     position: relative;
     z-index: 1;
+    .active-bg {
+      position: absolute;
+      width: 115%;
+      /* px-to-viewport-ignore-next */
+      top: -15px;
+      /* px-to-viewport-ignore-next */
+      left: -3px;
+    }
 
     img {
       /* px-to-viewport-ignore-next */
@@ -29,11 +76,11 @@
       color: #fff;
       font-family: "DingTalk-JinBuTi";
       /* px-to-viewport-ignore-next */
-      font-size: 10px;
+      font-size: 12px;
       z-index: 1;
-      margin-top: 10px;
+      margin-top: 14px;
       /* px-to-viewport-ignore-next */
-      margin-left: -3px;
+      margin-left: -6px;
     }
   }
   .label {
@@ -41,8 +88,10 @@
     width: 54px;
     /* px-to-viewport-ignore-next */
     height: 15px;
+    /* px-to-viewport-ignore-next */
     line-height: 15px;
     color: #fff;
+    /* px-to-viewport-ignore-next */
     font-size: 9px;
     background-image: url("https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*2-NzSbxbZosAAAAAAAAAAAAADsvfAQ/original");
     background-repeat: no-repeat;
@@ -51,9 +100,10 @@
     background-position: center;
     display: flex;
     justify-content: center;
-    z-index: 10;
+    z-index: 2;
 
     &-text {
+      /* px-to-viewport-ignore-next */
       width: 39px;
       overflow: hidden;
       text-overflow: ellipsis;

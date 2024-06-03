@@ -1,10 +1,10 @@
+import { STRENGTH_TEXT_SRC } from "@/constant";
 import { ProgressCircle } from "antd-mobile";
 import React from "react";
 import { useImmer } from "use-immer";
 import ColorfulButton from "../colorful-button";
 import IconFont from "../icon-font";
 import "./index.less";
-import { STRENGTH_TEXT_SRC } from "@/constant";
 
 interface ColorfulTeamteamProps {
   homeTeam: { name: string; flagUrl: string; score: number };
@@ -19,10 +19,10 @@ const ColorfulTeamTeam: React.FC<ColorfulTeamteamProps> = ({
   awayTeam,
   title,
   onTeamClick,
-  showActive,
+  showActive
 }) => {
   const [state, setState] = useImmer<{ activeTeam: "home" | "away" }>({
-    activeTeam: "home",
+    activeTeam: "home"
   });
   const { activeTeam } = state;
   const isLeftWin = homeTeam.score > awayTeam.score;
@@ -51,13 +51,13 @@ const ColorfulTeamTeam: React.FC<ColorfulTeamteamProps> = ({
               style={{
                 "--size": "36px",
                 "--fill-color": "rgba(255,255,255, 0.8)",
-                "--track-color": "rgba(255,255,255, 0.3)",
+                "--track-color": "rgba(255,255,255, 0.3)"
               }}
             >
               <img
                 src={
                   STRENGTH_TEXT_SRC[
-                    `${isLeftWin ? "WIN" : "LOSE"}_${activeTeam === "home" ? "ACTIVE" : "INACTIVE"}`
+                    `${isLeftWin ? "WIN" : "LOSE"}_${showActive ? (activeTeam === "home" ? "ACTIVE" : "INACTIVE") : "ACTIVE"}`
                   ]
                 }
                 alt=""
@@ -99,14 +99,14 @@ const ColorfulTeamTeam: React.FC<ColorfulTeamteamProps> = ({
               style={{
                 "--size": "36px",
                 "--fill-color": "rgba(255,255,255, 0.8)",
-                "--track-color": "rgba(255,255,255, 0.3)",
+                "--track-color": "rgba(255,255,255, 0.3)"
               }}
             >
               <img
                 width="45%"
                 src={
                   STRENGTH_TEXT_SRC[
-                    `${isLeftWin ? "LOSE" : "WIN"}_${activeTeam === "away" ? "ACTIVE" : "INACTIVE"}`
+                    `${isLeftWin ? "LOSE" : "WIN"}_${showActive ? (activeTeam === "away" ? "ACTIVE" : "INACTIVE") : "ACTIVE"}`
                   ]
                 }
                 alt=""

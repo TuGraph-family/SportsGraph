@@ -9,9 +9,10 @@
     "start": "max dev"
   },
   "dependencies": {
+    "@antv/g-canvas": "^2.0.7",
     "@antv/g-svg": "^2.0.5",
-    "@antv/g6": "^5.0.0-beta.37",
-    "@antv/g6-extension-react": "^0.1.0",
+    "@antv/g6": "^5.0.0-beta.38",
+    "@antv/g6-extension-react": "^0.1.1",
     "@umijs/max": "^4.2.1",
     "amfe-flexible": "^2.2.1",
     "antd-mobile": "^5.36.0",

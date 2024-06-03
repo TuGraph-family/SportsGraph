@@ -22,7 +22,7 @@ import {
   getTeamPersonalTacitInfo,
   getTeamTacitInfo,
 } from "@/services";
-import { getTaticLineWidth, parseSearch } from "@/utils";
+import { parseSearch } from "@/utils";
 import { Edge, GraphData } from "@antv/g6";
 import { useRequest } from "@umijs/max";
 import React, { useEffect, useMemo } from "react";
@@ -31,9 +31,10 @@ import { useImmer } from "use-immer";
 import "./index.less";
 
 import HomeIcon from "@/components/home-icon";
+import LightLeft from "@/components/light-left";
+import LightRight from "@/components/light-right";
 import { personalTacitTranslator } from "@/translator";
-import PersonalTacit from "./components/personal-tacit";
-import Light from "@/components/light";
+import InstructionsForUse from "../home/components/instructions-for-use";
 
 const TacitPage: React.FC = () => {
   const [state, setState] = useImmer<{
@@ -50,6 +51,7 @@ const TacitPage: React.FC = () => {
     visible: boolean;
     homePersonalTacitList: Array<PersonalTacitInfoResult>;
     awayPersonalTacitList: Array<PersonalTacitInfoResult>;
+    personalList: any;
   }>({
     homeTeam: {
       name: "加载中...",
@@ -71,6 +73,7 @@ const TacitPage: React.FC = () => {
     awayPersonalTacitList: [],
     personalTacitData: {},
     visible: false,
+    personalList: [],
   });
   const {
     homeTeam,
@@ -84,8 +87,8 @@ const TacitPage: React.FC = () => {
     awayPersonalTacitList,
     playersInfo,
     playerInfo,
-    personalTacitData,
     visible,
+    personalList,
   } = state;
   const isHome = teamSide === "home";
 
@@ -114,36 +117,37 @@ const TacitPage: React.FC = () => {
     loading: loadingGetTeamPersonalTacitInfo,
   } = useRequest(getTeamPersonalTacitInfo, { manual: true });
 
-  const onNodeClick = (
-    playerid: string,
-    playersInfo: Array<PlayersInfoResult>
-  ) => {
-    const selectedPlayerInfo = playersInfo.find(
-      (item) => item.player_id === playerid
-    );
-    const isteama = selectedPlayerInfo?.isTeamA || "1";
-    runGetPlayerTacitInfo({ id, isteama, playerid }).then((res) => {
-      const list = res?.resultSet?.sort(
-        (a: Record<string, string>, b: Record<string, string>) =>
-          Number(b.playerValue) - Number(a.playerValue)
-      );
-
-      if (!list.length) return;
-      const isHome = isteama === "1";
-
+  const personalGraphData = useMemo(() => {
+    if (playerInfo) {
       const data = personalTacitTranslator(
-        list,
-        selectedPlayerInfo!,
-        playersInfo,
-        isHome
+        personalList,
+        playerInfo!,
+        playersInfo
       );
+      return data;
+    }
+    return {};
+  }, [playersInfo, personalList]);
 
-      setState((draft) => {
-        draft.visible = true;
-        draft.personalTacitData = data;
-        draft.playerInfo = { ...selectedPlayerInfo!, caps: list[0]?.a_caps };
-      });
+  const onNodeClick = (playerid: string, playerInfo: PlayersInfoResult) => {
+    setState((draft) => {
+      draft.visible = true;
     });
+    runGetPlayerTacitInfo({ id, isteama: playerInfo?.isTeamA, playerid }).then(
+      (res) => {
+        const list = res?.resultSet?.sort(
+          (a: Record<string, string>, b: Record<string, string>) =>
+            Number(b.playerValue) - Number(a.playerValue)
+        );
+
+        if (!list.length) return;
+
+        setState((draft) => {
+          draft.personalList = list;
+          draft.playerInfo = { ...playerInfo!, caps: list[0]?.a_caps };
+        });
+      }
+    );
   };
 
   const onNext = () => {
@@ -172,24 +176,30 @@ const TacitPage: React.FC = () => {
     const tacitValueList = isHome ? homeTacitValueList : awayTacitValueList;
 
     if (tacitValueList && currentData.nodes.length && playersInfo.length) {
-      data.nodes = currentData.nodes?.map((item) => {
-        const { id } = item;
-        const playerInfo = playersInfo.find((item) => item.player_id === id);
-        const playerTacitInfo = isHome
-          ? homePersonalTacitList.find((item) => item.a_id === id)
-          : awayPersonalTacitList.find((item) => item.a_id === id);
-        return {
-          ...item,
-          ...playerInfo,
-          nodeSize: Number(playerTacitInfo?.value_rank || 200),
-        };
-      });
+      data.nodes = currentData.nodes
+        ?.map((item) => {
+          const { id } = item;
+          const playerInfo = playersInfo.find((item) => item.player_id === id);
+          const playerTacitInfo = isHome
+            ? homePersonalTacitList.find((item) => item.a_id === id)
+            : awayPersonalTacitList.find((item) => item.a_id === id);
+          return {
+            ...item,
+            ...playerInfo,
+            nodeSize: Number(playerTacitInfo?.value_rank || 200),
+            animationDelay: Math.random() * 0.5,
+          };
+        })
+        .sort((a, b) => b.nodeSize - a.nodeSize)
+        .map((item, index) => ({ ...item, isInTop: index < 3 }));
       data.edges = tacitValueList.map((item) => {
         const { a_id, b_id, playerValue } = item;
+        const value = Number(playerValue) * 0.5;
+
         return {
           source: a_id,
           target: b_id,
-          playerValue: getTaticLineWidth(Number(playerValue)),
+          playerValue: value,
           stroke: isHome
             ? "linear-gradient(90deg, #80111D, #A0040D, #80111D)"
             : "linear-gradient(#0F2EAB, rgba(20,60,219,0.9),#0F2EAB)",
@@ -272,6 +282,7 @@ const TacitPage: React.FC = () => {
 
   return (
     <div className="tacit">
+      <InstructionsForUse />
       {hasGraphData && (
         <div className="light">
           <LightTop />
@@ -306,17 +317,24 @@ const TacitPage: React.FC = () => {
       </div>
 
       <div className="tacit-playground">
-        {hasGraphData && (
-          <div className={`light-${isHome ? "left" : "right"}`}>
-            <Light isLeft={isHome} />
-          </div>
-        )}
-        <FootballField startAnimate={hasGraphData} />
+        {hasGraphData ? (
+          isHome ? (
+            <div className="light-left">
+              <LightLeft />
+            </div>
+          ) : (
+            <div className="light-right">
+              <LightRight />
+            </div>
+          )
+        ) : null}
+        <FootballField startLighting={hasGraphData} />
         <PersonalTacit
-          personalTacitData={personalTacitData}
+          personalTacitData={personalGraphData}
           playerInfo={playerInfo}
           visible={visible}
           setVisible={setVisible}
+          onNodeClick={onNodeClick}
         />
         <TacitGraph
           style={{ opacity: visible ? 0 : 1 }}
