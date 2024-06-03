@@ -63,7 +63,15 @@ export const getDayOfWeek = (
   if (dateString) {
     const date = new Date(dateString);
     const dayOfWeek = date.getDay();
-    const days = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
+    const days = [
+      "周日 ",
+      "周一 ",
+      "周二 ",
+      "周三 ",
+      "周四 ",
+      "周五 ",
+      "周六 ",
+    ];
 
     return days[dayOfWeek];
   } else return undefined;
