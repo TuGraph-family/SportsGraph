@@ -20,6 +20,7 @@ import InstructionsForUse from "./components/instructions-for-use";
 import { getDayOfWeek } from "@/utils";
 import IconFont from "@/components/icon-font";
 import dayjs from "dayjs";
+import { BackTop } from "@/components/back-top";
 
 const HomePage: React.FC = () => {
   const [state, setState] = useImmer<{ futureList: any[] }>({
@@ -215,6 +216,7 @@ const HomePage: React.FC = () => {
         </Tabs>
       </div>
       <InstructionsForUse />
+      <BackTop />
     </div>
   );
 };

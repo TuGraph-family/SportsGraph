@@ -20,8 +20,10 @@ export const BackTop = () => {
     };
   }, []);
   const onBackTopClick = () => {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
+    window.scroll({
+      top: 0,
+      behavior: "smooth",
+    });
   };
   return (
     visible && (
