@@ -64,7 +64,13 @@ const PersonalTacitGraph: React.FC<PersonalTacitGraphProps> = ({
           stroke: (d: any) => d.stroke,
           lineWidth: (d) => {
             return Number(d.playerValue);
-          }
+          },
+          halo: true,
+          haloStroke: "#fff",
+          haloStrokeWidth: (d: any) => d.playerValue,
+          haloLineWidth: (d: any) => d.playerValue + 1,
+          haloShadowColor: "#fff",
+          haloShadowBlur: 20
         },
         animation: {
           enter: false,
