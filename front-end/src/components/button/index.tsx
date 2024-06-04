@@ -30,7 +30,7 @@ const Button: React.FC<Props> = ({
         style={style}
         className={`${className} sg-btn-bg ${disabled ? "sg-btn-disabled" : ""}`}
       >
-        <span>{children}</span>
+        <span className="btn-text">{children}</span>
       </div>
       {isShowHighlightBorder && <div className="highlight-border" />}
     </div>

@@ -4,7 +4,6 @@
   display: inline-block;
   position: relative;
 
-
   &-bg {
     background-repeat: no-repeat;
     background-position: center center;
@@ -18,19 +17,23 @@
     background-image: linear-gradient(106deg, #1677ff 6%, #143cdb 93%);
   }
 
+  .btn-text {
+    height: 100%;
+  }
+
   &-disabled {
     opacity: 0.4;
     cursor: not-allowed;
   }
 
-  &-bg>span {
+  &-bg > span {
     transform: skew(10deg);
     display: inline-block;
   }
 
   .up-page {
     font-size: 14px;
-    color: #000000A6;
+    color: #000000a6;
     font-weight: 600;
     padding: 11px 40px 11px 42px;
     background-image: url(https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*2pOeS79IOqQAAAAAAAAAAAAADsvfAQ/original);
@@ -60,30 +63,29 @@
     width: 100%;
     z-index: 10;
     border: none;
-    background: linear-gradient(90deg,
-        #ffffff00 0%,
-        #ffffff 50%,
-        #ffffff00 100%);
+    background: linear-gradient(
+      90deg,
+      #ffffff00 0%,
+      #ffffff 50%,
+      #ffffff00 100%
+    );
     opacity: 0.8;
   }
 
   .view-analysis::before {
-    content: '';
+    content: "";
     width: 66px;
     height: 2px;
     position: absolute;
     top: 50%;
     left: -66px;
-    background: linear-gradient(90deg,
-        #ffffff00 3%,
-        #d7d2d2 100%,
-      );
+    background: linear-gradient(90deg, #ffffff00 3%, #d7d2d2 100%);
     border: none;
     opacity: 0.58;
   }
 
   .view-analysis::after {
-    content: '';
+    content: "";
     width: 66px;
     height: 2px;
     position: absolute;

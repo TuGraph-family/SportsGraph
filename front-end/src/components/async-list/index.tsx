@@ -12,7 +12,7 @@ export interface AsyncListProps {
 const AsyncList: React.FC<AsyncListProps> = ({
   service,
   renderItem,
-  recordTransformer
+  recordTransformer,
 }) => {
   const [state, setState] = useImmer<{
     data: any[];
@@ -23,7 +23,7 @@ const AsyncList: React.FC<AsyncListProps> = ({
     data: [],
     hasMore: true,
     pageNum: 1,
-    pageSize: 10
+    pageSize: 10,
   });
   const { data, hasMore, pageNum, pageSize } = state;
 
@@ -52,7 +52,7 @@ const AsyncList: React.FC<AsyncListProps> = ({
           <List.Item key={index}>{renderItem?.(item)}</List.Item>
         ))}
       </List>
-      <InfiniteScroll loadMore={loadMore} hasMore={hasMore}>
+      <InfiniteScroll loadMore={loadMore} hasMore={hasMore} className="more">
         {hasMore ? (
           <>
             <span>加载中</span>
