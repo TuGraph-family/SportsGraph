@@ -8,7 +8,7 @@ import SplitText from "@/components/split-text";
 import TacitGraph from "@/components/tacit-graph";
 import TitleDesc from "@/components/title-desc";
 import Tooltip from "@/components/tooltip";
-import { DEFAULT_FLAG } from "@/constant";
+import { DEFAULT_FLAG, SPAPOS } from "@/constant";
 import {
   GameInfoPlayerResult,
   PersonalTacitInfoResult,
@@ -279,6 +279,12 @@ const TacitPage: React.FC = () => {
         draft.awayPersonalTacitList = data.resultSet;
       });
     });
+    window?.Tracert?.call?.("set", {
+      spmAPos: SPAPOS,
+      spmBPos: "b97706",
+      pathName: "默契页"
+    });
+    window?.Tracert?.call?.("logPv");
   }, [id]);
 
   return (

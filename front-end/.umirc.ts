@@ -47,4 +47,11 @@ export default defineConfig({
       content: "width=device-width, initial-scale=1.0, viewport-fit=cover",
     },
   ],
+  headScripts: [
+    {
+      src: "https://ur.alipay.com/tracert_a4427.js",
+      async: true,
+      crossorigin: "anonymous",
+    },
+  ],
 });
