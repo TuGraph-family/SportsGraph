@@ -161,7 +161,7 @@ export const getPlayerTacitInfo = (params: {
   playerid: string;
 }) => {
   const { id, isteama, playerid } = params;
-  return request("/tugraph/api/template/23/executeQueryTemplate", {
+  return request("/tugraph/api/graph/uefa/23/executeQueryTemplate", {
     method: "POST",
     data: {
       templateParameterList: [
@@ -194,7 +194,7 @@ export const getPlayerCompeteInfo = (params: {
   playerId: string;
 }) => {
   const { id, isteama, playerId } = params;
-  return request("/tugraph/api/template/39/executeQueryTemplate", {
+  return request("/tugraph/api/graph/uefa/39/executeQueryTemplate", {
     method: "POST",
     data: {
       templateParameterList: [
