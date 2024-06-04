@@ -5,6 +5,7 @@ import { ProgressBar } from "antd-mobile";
 import React from "react";
 import dayjs from "dayjs";
 import "./index.less";
+import { getDayOfWeek } from "@/utils";
 
 const ScheduleList: React.FC<AsyncListProps> = (props) => {
   return (
@@ -30,6 +31,7 @@ const ScheduleList: React.FC<AsyncListProps> = (props) => {
               <div className="title">
                 <div className="title-class">{match_title}</div>
                 <div className="title-time">
+                  {getDayOfWeek(startDate) || "- - "}
                   {dayjs(startDate).format("MM.DD HH:mm")}
                 </div>
               </div>
