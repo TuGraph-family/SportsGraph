@@ -36,8 +36,8 @@ const TechnicalPrinciples = () => {
         onMaskClick={onClose}
         className="technical-principles"
       >
-        <div className="text-content ">
-          <div className="title">技术原理</div>
+        <div className="text-content">
+          <div className="technical-title">技术原理</div>
           <p>
             想象你经常和别人踢足球，可每次组的队都不太一样。玩的久了大家发现，某几个人如果在同一个队，这个队经常能赢；有些人面对特定的对手，总能占上风。这就是我们“图计算”技术分析比赛的原理。
           </p>
