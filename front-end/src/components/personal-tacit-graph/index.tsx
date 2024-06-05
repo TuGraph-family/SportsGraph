@@ -41,6 +41,7 @@ const PersonalTacitGraph: React.FC<PersonalTacitGraphProps> = ({
           component: (data: PlayersInfoResult) => (
             <PlayerNode
               playerInfo={data}
+              dataAspm='c364605.d452408'
               onClick={() => onNodeClick?.(data.player_id, data)}
             />
           ),

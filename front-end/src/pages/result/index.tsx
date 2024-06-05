@@ -76,7 +76,7 @@ const ResultPage: React.FC = () => {
     window?.Tracert?.call?.("set", {
       spmAPos: SPAPOS,
       spmBPos: "b97707",
-      pathName: "结果页"
+      pathName: "结果页",
     });
     window?.Tracert?.call?.("logPv");
   }, [id]);
@@ -160,6 +160,7 @@ const ResultPage: React.FC = () => {
               percent={votePercent}
               count={totalVote}
               isEnd={isEnd}
+              dataAspm="c364608.d452416"
             />
           </div>
           <div className="qrcode">
@@ -171,13 +172,14 @@ const ResultPage: React.FC = () => {
           <Button isShowHighlightBorder onClick={onSavePic} className="up-page">
             <IconFont type="euro-icon-xiayiye1" rotate={180} /> 上一页
           </Button>
-          <Button
-            isShowHighlightBorder
-            className="next-page"
-            onClick={jumpToHome}
-          >
-            更多赛程 <IconFont type="euro-icon-xiayiye1" />
-          </Button>
+            <Button
+              isShowHighlightBorder
+              className="next-page"
+              onClick={jumpToHome}
+              dataAspm="c364608.d452417"
+            >
+              更多赛程 <IconFont type="euro-icon-xiayiye1" />
+            </Button>
         </div>
       </div>
     </div>

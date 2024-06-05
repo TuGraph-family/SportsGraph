@@ -2,16 +2,20 @@ import AsyncList, { AsyncListProps } from "@/components/async-list";
 import Button from "@/components/button";
 import { history } from "@umijs/max";
 import { ProgressBar } from "antd-mobile";
-import React from "react";
+import React, { useEffect } from "react";
 import dayjs from "dayjs";
 import "./index.less";
 
-const ScheduleList: React.FC<AsyncListProps> = (props) => {
+interface Props extends AsyncListProps {
+  scheduleType: string;
+}
+
+const ScheduleList: React.FC<Props> = (props) => {
   return (
     <div className="schedule-list">
       <AsyncList
         {...props}
-        renderItem={(item) => {
+        renderItem={(item, index) => {
           const {
             matchId,
             team_a_country,
@@ -26,7 +30,13 @@ const ScheduleList: React.FC<AsyncListProps> = (props) => {
             startDate,
           } = item;
           return (
-            <div className="game-card" key={matchId}>
+            <div
+              data-aspm="c364553"
+              data-aspm-expo
+              className="game-card"
+              data-aspm-param={`index=${index+1}^scheduleType=${props?.scheduleType}`}
+              key={matchId}
+            >
               <div className="title">
                 <div className="title-class">{match_title}</div>
                 <div className="title-time">
@@ -90,7 +100,7 @@ const ScheduleList: React.FC<AsyncListProps> = (props) => {
                   </div>
                 </div>
               </div>
-              <div className="to-progress">
+              <div data-aspm-click="c364553.d452320" className="to-progress">
                 <Button onClick={() => history.push(`/tacit?id=${matchId}`)}>
                   查看分析过程
                 </Button>

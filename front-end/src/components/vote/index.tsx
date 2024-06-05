@@ -23,6 +23,7 @@ interface VoteProps {
   percent: number;
   count: number;
   matchId?: string;
+  dataAspm?: string;
   isEnd?: boolean;
 }
 
@@ -32,6 +33,7 @@ const Vote: React.FC<VoteProps> = ({
   team2,
   percent,
   matchId,
+  dataAspm,
   isEnd,
 }) => {
   const [state, setState] = useImmer<{
@@ -102,11 +104,15 @@ const Vote: React.FC<VoteProps> = ({
       ) : (
         <div className="button">
           <TriangleButton
+            data-aspm-click={dataAspm}
+            data-aspm-param="teamSide=home"
             onClick={() => onVote({ ...team1, growingSide: "left" })}
           >
             {team1.name}
           </TriangleButton>
           <TriangleButton
+            data-aspm-click={dataAspm}
+            data-aspm-param="teamSide=away"
             buttonType="right"
             onClick={() => onVote({ ...team2, growingSide: "right" })}
           >

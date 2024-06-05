@@ -8,6 +8,7 @@ interface Props {
   style?: Record<string, any>;
   disabled?: boolean;
   isShowHighlightBorder?: boolean;
+  dataAspm?: string;
 }
 
 const Button: React.FC<Props> = ({
@@ -16,6 +17,7 @@ const Button: React.FC<Props> = ({
   onClick,
   style,
   disabled,
+  dataAspm,
   isShowHighlightBorder,
 }) => {
   return (
@@ -25,6 +27,7 @@ const Button: React.FC<Props> = ({
         onClick?.();
       }}
       className="sg-btn"
+      data-aspm-click={dataAspm}
     >
       <div
         style={style}

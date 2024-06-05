@@ -39,7 +39,11 @@ const CompetePersonalGraph: React.FC<CompetePersonalGraphProps> = ({
           y: (d: any) => d.y,
           fill: "transparent",
           component: (data: PlayersInfoResult) => (
-            <PlayerNode playerInfo={data} onClick={() => onClickNode?.(data)} />
+            <PlayerNode
+              dataAspm="c364607.d452412"
+              playerInfo={data}
+              onClick={() => onClickNode?.(data)}
+            />
           ),
           size: (d: any) => {
             let nodeSize = d.nodeSize * nodeSizeRatio;

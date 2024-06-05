@@ -254,7 +254,7 @@ const CompetePage: React.FC = () => {
     window?.Tracert?.call?.("set", {
       spmAPos: SPAPOS,
       spmBPos: "b97705",
-      pathName: "对抗页"
+      pathName: "对抗页",
     });
     window?.Tracert?.call?.("logPv");
   }, [id]);
@@ -316,7 +316,12 @@ const CompetePage: React.FC = () => {
           <Button isShowHighlightBorder onClick={onPrev} className="up-page">
             <IconFont type="euro-icon-xiayiye1" rotate={180} /> 上一页
           </Button>
-          <Button isShowHighlightBorder onClick={onNext} className="next-page">
+          <Button
+            dataAspm="c364607.d452413"
+            isShowHighlightBorder
+            onClick={onNext}
+            className="next-page"
+          >
             下一页 <IconFont type="euro-icon-xiayiye1" />
           </Button>
         </div>
