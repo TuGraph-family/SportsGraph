@@ -33,6 +33,9 @@ const HomePage: React.FC = () => {
   const { run: runGetHistoryGameList, loading: loadingGetHistoryGameList } =
     useRequest(getHistoryGameList, { manual: true });
 
+  const currentViewSchedule =
+    sessionStorage.getItem("currentViewSchedule") || "history";
+
   useEffect(() => {
     runGetFutureGameList({
       skip: "0",
@@ -75,7 +78,7 @@ const HomePage: React.FC = () => {
           desc={
             <>
               智能图计算技术找出比赛中的关键组合
-              <TechnicalPrinciples  />
+              <TechnicalPrinciples />
             </>
           }
         />
@@ -95,7 +98,7 @@ const HomePage: React.FC = () => {
                   ?.map((_, index) => (
                     <div
                       key={index}
-                      className={`indicator-item${index === current ? "-active" : ""}`}
+                      className={`indicator-item ${index === current ? "indicator-item-active" : ""}`}
                     />
                   ))}
               </div>
@@ -116,6 +119,7 @@ const HomePage: React.FC = () => {
               homeWinProbability,
               startDate,
             } = item;
+
             const voteCount = Number(teamAVote) + Number(teamBVote);
             const votePercent = (teamAVote / voteCount) * 100;
             return (
@@ -147,7 +151,7 @@ const HomePage: React.FC = () => {
                     <div className="predict-left">
                       <AnimateNumber
                         count={homeWinProbability}
-                        id="left"
+                        id={`left-${index}`}
                         className="predict-number"
                       />
                       <div className="percent">%</div>
@@ -158,7 +162,7 @@ const HomePage: React.FC = () => {
                     <div className="predict-right">
                       <AnimateNumber
                         count={awayWinProbability}
-                        id="right"
+                        id={`right-${index}`}
                         className="predict-number"
                       />
                       <div className="percent">%</div>
@@ -171,6 +175,10 @@ const HomePage: React.FC = () => {
                     <Button
                       isShowHighlightBorder
                       className="view-analysis"
+                      boxStyle={{
+                        marginTop: 0,
+                        display: "block",
+                      }}
                       onClick={() => history.push(`/tacit?id=${matchId}`)}
                     >
                       查看分析过程
@@ -205,7 +213,12 @@ const HomePage: React.FC = () => {
         </Swiper>
       </div>
       <div className="home-page-list">
-        <Tabs>
+        <Tabs
+          onChange={(val) => {
+            sessionStorage.setItem("currentViewSchedule", val)
+          }}
+          defaultActiveKey={currentViewSchedule}
+        >
           <Tabs.Tab title="历史赛程" key="history">
             <ScheduleList
               scheduleType="history"
@@ -217,7 +230,7 @@ const HomePage: React.FC = () => {
               }
             />
           </Tabs.Tab>
-          <Tabs.Tab title="更多赛程" key="future">
+          <Tabs.Tab title="未来赛程" key="future">
             <ScheduleList
               scheduleType="future"
               service={({ pageNum, pageSize }) =>

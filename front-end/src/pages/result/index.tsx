@@ -102,8 +102,8 @@ const ResultPage: React.FC = () => {
         <div className="result-team">
           <div className="result-playground">
             <FootballField
-              perspective="130vh"
-              worldWidth={120}
+              perspective="90vh"
+              worldWidth={140}
               hasAnimation={false}
             />
           </div>

@@ -3,9 +3,13 @@ import "./index.less";
 
 interface ColorfulButtonProps {
   children?: React.ReactNode;
+  type?: string;
 }
 
-const ColorfulButton: React.FC<ColorfulButtonProps> = ({ children }) => {
+const ColorfulButton: React.FC<ColorfulButtonProps> = ({
+  children,
+  type = "big",
+}) => {
   return (
     <div className="colorful-button-wrapper">
       <svg
@@ -44,7 +48,7 @@ const ColorfulButton: React.FC<ColorfulButtonProps> = ({ children }) => {
           </g>
         </g>
       </svg>
-      <div className="colorful-button">
+      <div className={`colorful-button ${type}`}>
         <img
           src="https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*ox1aRrL4cYEAAAAAAAAAAAAADsvfAQ/original"
           alt=""

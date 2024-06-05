@@ -47,7 +47,7 @@ const Vote: React.FC<VoteProps> = ({
     voteCount: 0,
     votePercent: 0,
   });
-  const { hasVoted, growingSide, voteCount, votePercent } = state;
+  const { hasVoted, voteCount, votePercent } = state;
   const { id = matchId } = parseSearch(location.search) as any;
 
   const { run: runVoteTeam, loading: loadingVoteTeam } = useRequest(voteTeam, {
@@ -95,13 +95,12 @@ const Vote: React.FC<VoteProps> = ({
           ? `${team1.name} : ${team2.name}`
           : "你认为谁会获胜，为TA投票吧~"}
       </div>
-      {hasVoted || isEnd ? (
-        <Slider
-          value={hasVoted ? newPercent : 50}
-          id="slider"
-          growingSide={growingSide}
-        />
-      ) : (
+      <Slider
+        isShow={hasVoted || isEnd}
+        value={hasVoted ? newPercent : 50}
+        id="slider"
+      />
+      {!(hasVoted || isEnd) && (
         <div className="button">
           <TriangleButton
             data-aspm-click={dataAspm}
@@ -120,6 +119,7 @@ const Vote: React.FC<VoteProps> = ({
           </TriangleButton>
         </div>
       )}
+
       <div
         style={{ opacity: hasVoted || isEnd ? 1 : 0 }}
         className="vote-count"

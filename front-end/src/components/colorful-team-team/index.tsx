@@ -46,7 +46,7 @@ const ColorfulTeamTeam: React.FC<ColorfulTeamteamProps> = ({
         className={`home ${activeTeam === "home" ? "active" : "inactive"}`}
         onClick={onLeftClick}
         data-aspm-click={dataAspm}
-        data-aspm-param='teamSide=home'
+        data-aspm-param="teamSide=home"
       >
         <div className="info">
           <div className="circle">
@@ -81,13 +81,13 @@ const ColorfulTeamTeam: React.FC<ColorfulTeamteamProps> = ({
         </div>
       </div>
       <div className="title">
-        <ColorfulButton>{title}</ColorfulButton>
+        <ColorfulButton type='small'>{title}</ColorfulButton>
       </div>
       <div
         className={`away ${activeTeam === "away" ? "active" : "inactive"}`}
         onClick={onRightClick}
         data-aspm-click={dataAspm}
-        data-aspm-param='teamSide=away'
+        data-aspm-param="teamSide=away"
       >
         <div className="info">
           <div className="flag">
