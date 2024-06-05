@@ -1,6 +1,5 @@
 import IconFont from "@/components/icon-font";
 import PersonalTacitGraph from "@/components/personal-tacit-graph";
-import PlayerNode from "@/components/player-node";
 import { PlayersInfoResult } from "@/interfaces";
 import { GraphData } from "@antv/g6";
 import { Mask } from "antd-mobile";
@@ -56,10 +55,20 @@ const PersonalTacit: React.FC<TacitGraphProps> = ({
           <div className="player-info">
             <div className="player">
               <div className="player-left">
-                <PlayerNode
-                  playerInfo={{ ...playerInfo!, nodeSize: 20 }}
-                  showName={false}
+                <img
+                  src={
+                    playerInfo?.isTeamA === "1"
+                      ? playerInfo?.isGoalKeeper
+                        ? "https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*lbBjRJEnuc4AAAAAAAAAAAAADsvfAQ/original"
+                        : "https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*0oAaS42vqWcAAAAAAAAAAAAADsvfAQ/original"
+                      : playerInfo?.isGoalKeeper
+                        ? "https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*npULQol60WIAAAAAAAAAAAAADsvfAQ/original"
+                        : "https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*BYH5SauBNecAAAAAAAAAAAAADsvfAQ/original"
+                  }
                 />
+                <div className="player_shirtNumber">
+                  {playerInfo?.player_shirtnumber}
+                </div>
               </div>
               <div className="player-right">
                 <div className="name">{playerInfo?.player_name}</div>

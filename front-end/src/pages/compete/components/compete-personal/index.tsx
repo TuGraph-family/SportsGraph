@@ -1,7 +1,6 @@
 import CompetePersonalGraph from "@/components/compete-personal-graph";
 import IconFont from "@/components/icon-font";
 import Loading from "@/components/loading";
-import PlayerNode from "@/components/player-node";
 import { PlayersInfoResult } from "@/interfaces";
 import { getPlayerCompeteInfo } from "@/services";
 import { calculateNeighborPoints, parseSearch } from "@/utils";
@@ -155,10 +154,20 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
           <div className="compete-personal-card">
             <div className="compete-personal-card-player">
               <div className="compete-personal-card-player-left">
-                <PlayerNode
-                  playerInfo={{ ...competeCenterPlayer, nodeSize: 20 }}
-                  showName={false}
+                <img
+                  src={
+                    competeCenterPlayer?.isTeamA === "1"
+                      ? competeCenterPlayer?.isGoalKeeper
+                        ? "https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*lbBjRJEnuc4AAAAAAAAAAAAADsvfAQ/original"
+                        : "https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*0oAaS42vqWcAAAAAAAAAAAAADsvfAQ/original"
+                      : competeCenterPlayer?.isGoalKeeper
+                        ? "https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*npULQol60WIAAAAAAAAAAAAADsvfAQ/original"
+                        : "https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*BYH5SauBNecAAAAAAAAAAAAADsvfAQ/original"
+                  }
                 />
+                <div className="player_shirtNumber">
+                  {competeCenterPlayer?.player_shirtnumber}
+                </div>
               </div>
               <div className="compete-personal-card-player-right">
                 <div className="name">{competeCenterPlayer?.player_name}</div>
