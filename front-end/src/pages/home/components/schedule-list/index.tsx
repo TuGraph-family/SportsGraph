@@ -1,12 +1,11 @@
 import AsyncList, { AsyncListProps } from "@/components/async-list";
 import Button from "@/components/button";
+import DateWeek from "@/components/date-week";
+import IconFont from "@/components/icon-font";
 import { history } from "@umijs/max";
 import { Popover, ProgressBar } from "antd-mobile";
 import React from "react";
-import IconFont from "@/components/icon-font";
-import dayjs from "dayjs";
 import "./index.less";
-import { getDayOfWeek } from "@/utils";
 
 interface Props extends AsyncListProps {
   scheduleType: string;
@@ -30,7 +29,7 @@ const ScheduleList: React.FC<Props> = (props) => {
             homeWinProbability,
             match_title,
             startDate,
-            freshnessOfLineup,
+            freshnessOfLineup
           } = item;
           return (
             <div
@@ -44,8 +43,7 @@ const ScheduleList: React.FC<Props> = (props) => {
                 <div className="title">
                   <div className="title-class">{match_title}</div>
                   <div className="title-time">
-                    {getDayOfWeek(startDate) || "- - "}
-                    {dayjs(startDate).format("MM.DD HH:mm")}
+                    <DateWeek fullDate={startDate} />
                   </div>
                 </div>
                 {freshnessOfLineup === "1" && (
@@ -66,7 +64,7 @@ const ScheduleList: React.FC<Props> = (props) => {
                         <IconFont
                           style={{
                             fontSize: 14,
-                            marginLeft: 3,
+                            marginLeft: 3
                           }}
                           type="euro-icon-wenhao-shuomingzhushi"
                         />
@@ -108,7 +106,7 @@ const ScheduleList: React.FC<Props> = (props) => {
                         style={{
                           "--fill-color": "#fc4951",
                           "--track-color": "#532A55",
-                          "--track-width": "4px",
+                          "--track-width": "4px"
                         }}
                       />
                     </div>
@@ -122,7 +120,7 @@ const ScheduleList: React.FC<Props> = (props) => {
                           "--fill-color": "#1677ff",
                           "--track-color": "#09398B",
                           "--track-width": "4px",
-                          transform: "rotateZ(180deg)",
+                          transform: "rotateZ(180deg)"
                         }}
                       />
                     </div>
