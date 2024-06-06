@@ -6,6 +6,7 @@ import React from "react";
 import IconFont from "@/components/icon-font";
 import dayjs from "dayjs";
 import "./index.less";
+import { getDayOfWeek } from "@/utils";
 
 interface Props extends AsyncListProps {
   scheduleType: string;
@@ -43,6 +44,7 @@ const ScheduleList: React.FC<Props> = (props) => {
                 <div className="title">
                   <div className="title-class">{match_title}</div>
                   <div className="title-time">
+                    {getDayOfWeek(startDate) || "- - "}
                     {dayjs(startDate).format("MM.DD HH:mm")}
                   </div>
                 </div>

@@ -19,10 +19,6 @@
     .away.active {
       filter: brightness(100%);
     }
-
-    .arrow {
-      animation: arrow 1.5s ease infinite;
-    }
   }
 
   .inactive {
@@ -45,7 +41,7 @@
       background-size: cover;
       position: relative;
       justify-content: space-around;
-      height: 46px;
+      height: 42px;
 
       .flag {
         height: 100%;
@@ -95,7 +91,8 @@
       margin-right: 23px;
 
       .flag {
-        right: -23px;
+        right: 0;
+        transform: translateX(50%);
       }
       .circle {
         margin-right: 10px;
@@ -113,7 +110,8 @@
       margin-left: 23px;
 
       .flag {
-        left: -23px;
+        left: 0;
+        transform: translateX(-50%);
       }
       .circle {
         margin-left: 10px;

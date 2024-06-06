@@ -41,7 +41,7 @@
       display: flex;
       justify-content: center;
 
-      .indicator-item+.indicator-item {
+      .indicator-item + .indicator-item {
         margin-left: 6px;
       }
 
@@ -132,6 +132,20 @@
         height: auto;
         margin-bottom: 16px;
 
+        .sg-btn-bg {
+          height: 24px !important;
+        }
+
+        .btn-text {
+          font-size: 14px;
+          color: #ffffff;
+          text-align: center;
+          font-weight: 600;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
         .anticon {
           font-size: 10px;
           margin-left: 4px;
@@ -150,6 +164,10 @@
     .sg-tabs .adm-tabs-tab {
       font-size: 16px;
       color: #a7abb5;
+    }
+
+    .sg-tabs .adm-tabs-header {
+      margin-bottom: 8px;
     }
 
     .adm-tabs-tab-list {

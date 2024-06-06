@@ -155,10 +155,7 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
           <div className="compete-personal-card">
             <div className="compete-personal-card-player">
               <div className="compete-personal-card-player-left">
-                <PlayerNode
-                  playerInfo={{ ...competeCenterPlayer, nodeSize: 20 }}
-                  showName={false}
-                />
+                <PlayerNode playerInfo={competeCenterPlayer} showName={false} />
               </div>
               <div className="compete-personal-card-player-right">
                 <div className="name">{competeCenterPlayer?.player_name}</div>
