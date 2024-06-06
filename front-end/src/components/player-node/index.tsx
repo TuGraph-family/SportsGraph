@@ -33,6 +33,7 @@ const PlayerNode: React.FC<PlayerNodeProps> = React.memo(
     scale = 1,
     dataAspm,
     isActive,
+    dataAspm,
   }) => {
     const {
       animationDelay = [],
