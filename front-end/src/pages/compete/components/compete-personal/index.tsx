@@ -10,6 +10,7 @@ import { Mask } from "antd-mobile";
 import React, { useEffect, useMemo } from "react";
 import { useImmer } from "use-immer";
 import "./index.less";
+import PlayerNode from "@/components/player-node";
 
 interface CompetePersonalModalProps {
   visible: boolean;
@@ -154,20 +155,7 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
           <div className="compete-personal-card">
             <div className="compete-personal-card-player">
               <div className="compete-personal-card-player-left">
-                <img
-                  src={
-                    competeCenterPlayer?.isTeamA === "1"
-                      ? competeCenterPlayer?.isGoalKeeper
-                        ? "https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*lbBjRJEnuc4AAAAAAAAAAAAADsvfAQ/original"
-                        : "https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*0oAaS42vqWcAAAAAAAAAAAAADsvfAQ/original"
-                      : competeCenterPlayer?.isGoalKeeper
-                        ? "https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*npULQol60WIAAAAAAAAAAAAADsvfAQ/original"
-                        : "https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*BYH5SauBNecAAAAAAAAAAAAADsvfAQ/original"
-                  }
-                />
-                <div className="player_shirtNumber">
-                  {competeCenterPlayer?.player_shirtnumber}
-                </div>
+                <PlayerNode playerInfo={competeCenterPlayer} showName={false} />
               </div>
               <div className="compete-personal-card-player-right">
                 <div className="name">{competeCenterPlayer?.player_name}</div>

@@ -71,7 +71,7 @@ const PlayerNode: React.FC<PlayerNodeProps> = React.memo(
         <div
           className={`shirt`}
           style={{
-            transform: `scale(${realShirtScale})`,
+            transform: `scale(${showName ? realShirtScale : "none"})`,
             transformOrigin: showName ? "bottom" : "top",
           }}
         >

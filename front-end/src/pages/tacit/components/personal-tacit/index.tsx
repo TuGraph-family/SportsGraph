@@ -5,6 +5,7 @@ import { GraphData } from "@antv/g6";
 import { Mask } from "antd-mobile";
 import React, { useEffect } from "react";
 import "./index.less";
+import PlayerNode from "@/components/player-node";
 
 interface TacitGraphProps {
   personalTacitData: GraphData;
@@ -55,20 +56,7 @@ const PersonalTacit: React.FC<TacitGraphProps> = ({
           <div className="player-info">
             <div className="player">
               <div className="player-left">
-                <img
-                  src={
-                    playerInfo?.isTeamA === "1"
-                      ? playerInfo?.isGoalKeeper
-                        ? "https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*lbBjRJEnuc4AAAAAAAAAAAAADsvfAQ/original"
-                        : "https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*0oAaS42vqWcAAAAAAAAAAAAADsvfAQ/original"
-                      : playerInfo?.isGoalKeeper
-                        ? "https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*npULQol60WIAAAAAAAAAAAAADsvfAQ/original"
-                        : "https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*BYH5SauBNecAAAAAAAAAAAAADsvfAQ/original"
-                  }
-                />
-                <div className="player_shirtNumber">
-                  {playerInfo?.player_shirtnumber}
-                </div>
+                <PlayerNode playerInfo={playerInfo} showName={false} />
               </div>
               <div className="player-right">
                 <div className="name">{playerInfo?.player_name}</div>
