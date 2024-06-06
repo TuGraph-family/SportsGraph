@@ -52,7 +52,7 @@ const AsyncList: React.FC<AsyncListProps> = ({
           <List.Item key={index}>{renderItem?.(item, index)}</List.Item>
         ))}
       </List>
-      <InfiniteScroll loadMore={loadMore} hasMore={hasMore}>
+      <InfiniteScroll loadMore={loadMore} hasMore={hasMore} className="more">
         {hasMore ? (
           <>
             <span>加载中</span>

@@ -137,6 +137,8 @@
     background-repeat: repeat;
     background-size: 74px 74px;
     background-position: -20px -20px;
+    /* px-to-viewport-ignore-next */
+    border-radius: 4px;
   }
 
   .field__side {
@@ -175,11 +177,12 @@
     width: 100%;
     height: 4px;
     z-index: 1;
+    height: 3.5px;
   }
   .field__line--goal {
     width: 16%;
     height: 6%;
-    border: solid 4px rgba(255, 255, 255, 0.5);
+    border: solid 3px rgba(255, 255, 255, 0.4);
     border-bottom: none;
     left: 0;
     right: 0;
@@ -189,7 +192,7 @@
   .field__line--goal--far {
     top: 4%;
     bottom: auto;
-    border: solid 4px rgba(255, 255, 255, 0.5);
+    border: solid 4px rgba(255, 255, 255, 0.4);
     border-top: none;
   }
   .field__line--penalty-arc {
@@ -210,7 +213,7 @@
     content: " ";
     display: block;
     border-radius: 50% 50% 0 0;
-    border: solid 4px rgba(255, 255, 255, 0.5);
+    border: solid 3px rgba(255, 255, 255, 0.4);
     border-bottom: none;
     box-sizing: border-box;
   }
@@ -221,14 +224,14 @@
   .field__line--penalty-arc--far:after {
     bottom: 75%;
     top: auto;
-    border: solid 4px rgba(255, 255, 255, 0.5);
+    border: solid 3px rgba(255, 255, 255, 0.4);
     border-top: none;
     border-radius: 0 0 50% 50%;
   }
   .field__line--penalty {
     width: 54%;
     height: 16.5%;
-    border: solid 4px rgba(255, 255, 255, 0.5);
+    border: solid 3px rgba(255, 255, 255, 0.4);
     border-bottom: none;
     left: 0;
     right: 0;
@@ -238,7 +241,7 @@
   .field__line--penalty--far {
     top: 4%;
     bottom: auto;
-    border: solid 4px rgba(255, 255, 255, 0.5);
+    border: solid 4px rgba(255, 255, 255, 0.4);
     border-top: none;
   }
   .field__line--outline {
@@ -251,8 +254,8 @@
   .field__line--mid {
     top: 50%;
     width: 92%;
-    left: 4.8%;
-    background-color: rgba(255, 255, 255, 0.5);
+    left: 4%;
+    background-color: rgba(255, 255, 255, 0.4);
   }
   .field__line--circle {
     width: 30%;
@@ -262,7 +265,7 @@
     right: 0;
     bottom: 0;
     margin: auto;
-    border: solid 4px rgba(255, 255, 255, 0.5);
+    border: solid 3.5px rgba(255, 255, 255, 0.4);
     border-radius: 50%;
   }
 }

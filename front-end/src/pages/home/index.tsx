@@ -182,7 +182,10 @@ const HomePage: React.FC = () => {
                       onClick={() => history.push(`/tacit?id=${matchId}`)}
                     >
                       查看分析过程
-                      <IconFont type="euro-icon-xiayiye1" />
+                      <IconFont
+                        type="euro-icon-xiayiye1"
+                        style={{ marginTop: 1 }}
+                      />
                     </Button>
                   </div>
                   <div className="center-vote">
@@ -215,7 +218,7 @@ const HomePage: React.FC = () => {
       <div className="home-page-list">
         <Tabs
           onChange={(val) => {
-            sessionStorage.setItem("currentViewSchedule", val)
+            sessionStorage.setItem("currentViewSchedule", val);
           }}
           defaultActiveKey={currentViewSchedule}
         >
