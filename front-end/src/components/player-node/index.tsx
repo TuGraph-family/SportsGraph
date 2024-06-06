@@ -20,6 +20,7 @@ interface PlayerNodeProps {
     animationDuration?: string[];
   };
   scale?: number;
+  dataAspm?: string;
   isActive?: boolean;
 }
 
@@ -55,6 +56,8 @@ const PlayerNode: React.FC<PlayerNodeProps> = React.memo(
 
     return (
       <div
+        data-aspm-click={dataAspm}
+        data-aspm-param={`playerNam=${player_name}`}
         className={`player-node ${animation ? animationType.join(" ") : ""} ${isActive ? "active" : ""} `}
         onClick={() => onClick?.(playerInfo)}
         style={{

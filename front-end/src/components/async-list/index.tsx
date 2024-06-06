@@ -5,7 +5,7 @@ import "./index.less";
 
 export interface AsyncListProps {
   service: (params: { pageNum: number; pageSize: number }) => Promise<any>;
-  renderItem?: (row: any) => React.ReactNode;
+  renderItem?: (row: any, index: number) => React.ReactNode;
   recordTransformer?: (record: any) => any;
 }
 
@@ -49,7 +49,7 @@ const AsyncList: React.FC<AsyncListProps> = ({
     <div className="sg-async-list">
       <List>
         {data.map((item, index) => (
-          <List.Item key={index}>{renderItem?.(item)}</List.Item>
+          <List.Item key={index}>{renderItem?.(item, index)}</List.Item>
         ))}
       </List>
       <InfiniteScroll loadMore={loadMore} hasMore={hasMore} className="more">

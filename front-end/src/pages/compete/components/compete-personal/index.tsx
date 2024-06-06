@@ -124,6 +124,7 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
   useEffect(() => {
     if (visible && params) {
       onNodeClick(params);
+      window.Tracert?.call?.("expo", "c364607.d452411");
     }
   }, [visible]);
 

@@ -320,6 +320,7 @@ const TacitPage: React.FC = () => {
           title="默契值"
           showActive
           onTeamClick={onTeamClick}
+          dataAspm="c364605.d452407"
         />
       </div>
 
@@ -356,7 +357,7 @@ const TacitPage: React.FC = () => {
           <Button isShowHighlightBorder onClick={onPrev} className="up-page">
             <IconFont type="euro-icon-xiayiye1" rotate={180} /> 上一页
           </Button>
-          <Button isShowHighlightBorder className="next-page" onClick={onNext}>
+          <Button dataAspm="c364605.d452439" isShowHighlightBorder className="next-page" onClick={onNext}>
             下一页 <IconFont type="euro-icon-xiayiye1" />
           </Button>
         </div>

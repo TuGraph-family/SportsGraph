@@ -11,6 +11,7 @@ interface ColorfulTeamteamProps {
   awayTeam: { name: string; flagUrl: string; score: number };
   onTeamClick?: (itemInfo: { side: "home" | "away" }) => void;
   title: string;
+  dataAspm?: string;
   showActive?: boolean;
 }
 
@@ -19,10 +20,11 @@ const ColorfulTeamTeam: React.FC<ColorfulTeamteamProps> = ({
   awayTeam,
   title,
   onTeamClick,
-  showActive
+  dataAspm,
+  showActive,
 }) => {
   const [state, setState] = useImmer<{ activeTeam: "home" | "away" }>({
-    activeTeam: "home"
+    activeTeam: "home",
   });
   const { activeTeam } = state;
   const isLeftWin = homeTeam.score > awayTeam.score;
@@ -43,6 +45,8 @@ const ColorfulTeamTeam: React.FC<ColorfulTeamteamProps> = ({
       <div
         className={`home ${activeTeam === "home" ? "active" : "inactive"}`}
         onClick={onLeftClick}
+        data-aspm-click={dataAspm}
+        data-aspm-param="teamSide=home"
       >
         <div className="info">
           <div className="circle">
@@ -51,7 +55,7 @@ const ColorfulTeamTeam: React.FC<ColorfulTeamteamProps> = ({
               style={{
                 "--size": "36px",
                 "--fill-color": "rgba(255,255,255, 0.8)",
-                "--track-color": "rgba(255,255,255, 0.3)"
+                "--track-color": "rgba(255,255,255, 0.3)",
               }}
             >
               <img
@@ -77,11 +81,13 @@ const ColorfulTeamTeam: React.FC<ColorfulTeamteamProps> = ({
         </div>
       </div>
       <div className="title">
-        <ColorfulButton>{title}</ColorfulButton>
+        <ColorfulButton type='small'>{title}</ColorfulButton>
       </div>
       <div
         className={`away ${activeTeam === "away" ? "active" : "inactive"}`}
         onClick={onRightClick}
+        data-aspm-click={dataAspm}
+        data-aspm-param="teamSide=away"
       >
         <div className="info">
           <div className="flag">
@@ -99,7 +105,7 @@ const ColorfulTeamTeam: React.FC<ColorfulTeamteamProps> = ({
               style={{
                 "--size": "36px",
                 "--fill-color": "rgba(255,255,255, 0.8)",
-                "--track-color": "rgba(255,255,255, 0.3)"
+                "--track-color": "rgba(255,255,255, 0.3)",
               }}
             >
               <img

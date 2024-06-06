@@ -5,17 +5,21 @@ interface Props {
   children: ReactNode;
   onClick: () => void;
   className?: string;
-  style?: Record<string, any>;
+  boxStyle?: Record<string, any>;
+  bodyStyle?: Record<string, any>;
   disabled?: boolean;
   isShowHighlightBorder?: boolean;
+  dataAspm?: string;
 }
 
 const Button: React.FC<Props> = ({
   className,
   children,
   onClick,
-  style,
+  boxStyle,
+  bodyStyle,
   disabled,
+  dataAspm,
   isShowHighlightBorder,
 }) => {
   return (
@@ -25,9 +29,11 @@ const Button: React.FC<Props> = ({
         onClick?.();
       }}
       className="sg-btn"
+      style={boxStyle}
+      data-aspm-click={dataAspm}
     >
       <div
-        style={style}
+        style={bodyStyle}
         className={`${className} sg-btn-bg ${disabled ? "sg-btn-disabled" : ""}`}
       >
         <span className="btn-text">{children}</span>

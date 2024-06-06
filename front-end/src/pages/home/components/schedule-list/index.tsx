@@ -1,18 +1,23 @@
 import AsyncList, { AsyncListProps } from "@/components/async-list";
 import Button from "@/components/button";
 import { history } from "@umijs/max";
-import { ProgressBar } from "antd-mobile";
+import { Popover, ProgressBar } from "antd-mobile";
 import React from "react";
+import IconFont from "@/components/icon-font";
 import dayjs from "dayjs";
 import "./index.less";
 import { getDayOfWeek } from "@/utils";
 
-const ScheduleList: React.FC<AsyncListProps> = (props) => {
+interface Props extends AsyncListProps {
+  scheduleType: string;
+}
+
+const ScheduleList: React.FC<Props> = (props) => {
   return (
     <div className="schedule-list">
       <AsyncList
         {...props}
-        renderItem={(item) => {
+        renderItem={(item, index) => {
           const {
             matchId,
             team_a_country,
@@ -25,15 +30,49 @@ const ScheduleList: React.FC<AsyncListProps> = (props) => {
             homeWinProbability,
             match_title,
             startDate,
+            freshnessOfLineup,
           } = item;
           return (
-            <div className="game-card" key={matchId}>
-              <div className="title">
-                <div className="title-class">{match_title}</div>
-                <div className="title-time">
-                  {getDayOfWeek(startDate) || "- - "}
-                  {dayjs(startDate).format("MM.DD HH:mm")}
+            <div
+              data-aspm="c364553"
+              data-aspm-expo
+              className="game-card"
+              data-aspm-param={`index=${index + 1}^scheduleType=${props?.scheduleType}`}
+              key={matchId}
+            >
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <div className="title">
+                  <div className="title-class">{match_title}</div>
+                  <div className="title-time">
+                    {dayjs(startDate).format("MM.DD HH:mm")}
+                  </div>
                 </div>
+                {freshnessOfLineup === "1" && (
+                  <div className="lineup-desc">
+                    <div>阵容说明</div>
+                    <div style={{ marginTop: 2 }}>
+                      <Popover
+                        getContainer={() =>
+                          document.getElementsByClassName("game-card")[
+                            index
+                          ] as HTMLElement
+                        }
+                        mode="dark"
+                        content="阵容尚未确定，图示为历史阵容，仅供参考"
+                        trigger="click"
+                        placement="bottom-start"
+                      >
+                        <IconFont
+                          style={{
+                            fontSize: 14,
+                            marginLeft: 3,
+                          }}
+                          type="euro-icon-wenhao-shuomingzhushi"
+                        />
+                      </Popover>
+                    </div>
+                  </div>
+                )}
               </div>
               <div className="game">
                 <div className="game-left">
@@ -92,8 +131,12 @@ const ScheduleList: React.FC<AsyncListProps> = (props) => {
                   </div>
                 </div>
               </div>
-              <div className="to-progress">
-                <Button onClick={() => history.push(`/tacit?id=${matchId}`)}>
+              <div data-aspm-click="c364553.d452320" className="to-progress">
+                <Button
+                  onClick={() => {
+                    history.push(`/tacit?id=${matchId}`);
+                  }}
+                >
                   查看分析过程
                 </Button>
               </div>

@@ -24,7 +24,11 @@ const TechnicalPrinciples = () => {
 
   return (
     <>
-      <div onClick={onShow} className="technical-principles-icon">
+      <div
+        data-aspm-click="c364602.d452405"
+        onClick={onShow}
+        className="technical-principles-icon"
+      >
         ?
       </div>
       <Mask
