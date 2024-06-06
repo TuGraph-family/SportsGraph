@@ -31,7 +31,6 @@ const PlayerNode: React.FC<PlayerNodeProps> = React.memo(
     onClick,
     animation,
     scale = 1,
-    dataAspm,
     isActive,
     dataAspm,
   }) => {

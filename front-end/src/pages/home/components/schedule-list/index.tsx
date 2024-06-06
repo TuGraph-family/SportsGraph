@@ -6,6 +6,7 @@ import React from "react";
 import IconFont from "@/components/icon-font";
 import dayjs from "dayjs";
 import "./index.less";
+import { getDayOfWeek } from "@/utils";
 
 interface Props extends AsyncListProps {
   scheduleType: string;
