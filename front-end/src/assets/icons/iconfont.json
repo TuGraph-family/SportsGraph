@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "40620555",
+      "name": "问号-说明注释",
+      "font_class": "wenhao-shuomingzhushi",
+      "unicode": "e63e",
+      "unicode_decimal": 58942
+    },
+    {
       "icon_id": "40542947",
       "name": "弹窗-关闭",
       "font_class": "danchuang-guanbi",

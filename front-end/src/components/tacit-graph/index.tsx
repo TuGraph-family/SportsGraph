@@ -67,6 +67,7 @@ const TacitGraph: React.FC<TacitGraphProps> = ({
               <PlayerNode
                 playerInfo={data}
                 onClick={() => onNodeClick?.(data.player_id, data)}
+                dataAspm='c364605.d452408'
                 animation={{
                   animationDelay: [`${data.animationDelay!}s`],
                   animationType: ["fade", "translate"],

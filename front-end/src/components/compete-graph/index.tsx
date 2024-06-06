@@ -20,7 +20,7 @@ const zoomRatio = 0.004;
 const CompeteGraph: React.FC<CompeteGraphProps> = ({
   containerId,
   graphData,
-  onClickNode
+  onClickNode,
 }) => {
   const [state, setState] = useImmer<{ graph?: Graph }>({});
   const { graph } = state;
@@ -41,15 +41,16 @@ const CompeteGraph: React.FC<CompeteGraphProps> = ({
           y: (d: any) => d.data.y,
           component: (data: { data: PlayersInfoResult }) => (
             <PlayerNode
+              dataAspm="c364607.d452412"
               playerInfo={data.data}
               onClick={() => onClickNode(data.data)}
               animation={{
                 animationDelay: [
                   `${data.data.animationDelay! + 1}s`,
-                  `${data.data.animationDelay! + 1}s`
+                  `${data.data.animationDelay! + 1}s`,
                 ],
                 animationType: ["fade", "translate"],
-                animationDuration: ["1s", "0.4s"]
+                animationDuration: ["1s", "0.4s"],
               }}
               isActive={data.data.isInTop}
             />
@@ -65,9 +66,9 @@ const CompeteGraph: React.FC<CompeteGraphProps> = ({
           },
           zIndex: (d: any) => {
             return d.data.zIndex;
-          }
-        }
-      }
+          },
+        },
+      },
     });
     setState((draft) => {
       draft.graph = graph;

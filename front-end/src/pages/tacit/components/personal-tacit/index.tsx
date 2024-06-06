@@ -4,7 +4,7 @@ import PlayerNode from "@/components/player-node";
 import { PlayersInfoResult } from "@/interfaces";
 import { GraphData } from "@antv/g6";
 import { Mask } from "antd-mobile";
-import React from "react";
+import React, { useEffect } from "react";
 import "./index.less";
 
 interface TacitGraphProps {
@@ -20,11 +20,16 @@ const PersonalTacit: React.FC<TacitGraphProps> = ({
   playerInfo,
   visible,
   setVisible,
-  onNodeClick
+  onNodeClick,
 }) => {
   const onClose = () => {
     setVisible(false);
   };
+  useEffect(() => {
+    if (visible) {
+      window.Tracert?.call?.("expo", "c364605.d452406");
+    }
+  }, [visible]);
   return (
     <Mask
       color="#060c34b8"

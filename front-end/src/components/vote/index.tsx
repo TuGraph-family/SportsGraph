@@ -23,6 +23,7 @@ interface VoteProps {
   percent: number;
   count: number;
   matchId?: string;
+  dataAspm?: string;
   isEnd?: boolean;
 }
 
@@ -32,6 +33,7 @@ const Vote: React.FC<VoteProps> = ({
   team2,
   percent,
   matchId,
+  dataAspm,
   isEnd,
 }) => {
   const [state, setState] = useImmer<{
@@ -45,7 +47,7 @@ const Vote: React.FC<VoteProps> = ({
     voteCount: 0,
     votePercent: 0,
   });
-  const { hasVoted, growingSide, voteCount, votePercent } = state;
+  const { hasVoted, voteCount, votePercent } = state;
   const { id = matchId } = parseSearch(location.search) as any;
 
   const { run: runVoteTeam, loading: loadingVoteTeam } = useRequest(voteTeam, {
@@ -93,20 +95,23 @@ const Vote: React.FC<VoteProps> = ({
           ? `${team1.name} : ${team2.name}`
           : "你认为谁会获胜，为TA投票吧~"}
       </div>
-      {hasVoted || isEnd ? (
-        <Slider
-          value={hasVoted ? newPercent : 50}
-          id="slider"
-          growingSide={growingSide}
-        />
-      ) : (
+      <Slider
+        isShow={hasVoted || isEnd}
+        value={hasVoted ? newPercent : 50}
+        id="slider"
+      />
+      {!(hasVoted || isEnd) && (
         <div className="button">
           <TriangleButton
+            data-aspm-click={dataAspm}
+            data-aspm-param="teamSide=home"
             onClick={() => onVote({ ...team1, growingSide: "left" })}
           >
             {team1.name}
           </TriangleButton>
           <TriangleButton
+            data-aspm-click={dataAspm}
+            data-aspm-param="teamSide=away"
             buttonType="right"
             onClick={() => onVote({ ...team2, growingSide: "right" })}
           >
@@ -114,6 +119,7 @@ const Vote: React.FC<VoteProps> = ({
           </TriangleButton>
         </div>
       )}
+
       <div
         style={{ opacity: hasVoted || isEnd ? 1 : 0 }}
         className="vote-count"

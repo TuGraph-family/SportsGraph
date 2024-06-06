@@ -20,6 +20,7 @@ interface PlayerNodeProps {
     animationDuration?: string[];
   };
   scale?: number;
+  dataAspm?: string;
   isActive?: boolean;
 }
 
@@ -30,12 +31,13 @@ const PlayerNode: React.FC<PlayerNodeProps> = React.memo(
     onClick,
     animation,
     scale = 1,
-    isActive
+    dataAspm,
+    isActive,
   }) => {
     const {
       animationDelay = [],
       animationType = [],
-      animationDuration = []
+      animationDuration = [],
     } = animation || {};
 
     const {
@@ -43,7 +45,7 @@ const PlayerNode: React.FC<PlayerNodeProps> = React.memo(
       player_shirtnumber,
       player_name,
       nodeSize = 60,
-      isGoalKeeper
+      isGoalKeeper,
     } = playerInfo;
     const shirtScale = ratio * nodeSize;
     const realShirtScale =
@@ -55,20 +57,22 @@ const PlayerNode: React.FC<PlayerNodeProps> = React.memo(
 
     return (
       <div
+        data-aspm-click={dataAspm}
+        data-aspm-param={`playerNam=${player_name}`}
         className={`player-node ${animation ? animationType.join(" ") : ""} ${isActive ? "active" : ""} `}
         onClick={() => onClick?.(playerInfo)}
         style={{
           animationDelay: `${animationDelay.join(",")}`,
           animationName: animationType.join(","),
           animationDuration: animationDuration.join(","),
-          transform: `scale(${scale}) ${animationType.includes("translate") ? "translateY(10px)" : ""}`
+          transform: `scale(${scale}) ${animationType.includes("translate") ? "translateY(10px)" : ""}`,
         }}
       >
         <div
           className={`shirt`}
           style={{
             transform: `scale(${realShirtScale})`,
-            transformOrigin: showName ? "bottom" : "top"
+            transformOrigin: showName ? "bottom" : "top",
           }}
         >
           {isActive && (

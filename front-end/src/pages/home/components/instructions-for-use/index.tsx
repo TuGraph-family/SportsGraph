@@ -59,7 +59,7 @@ const InstructionsForUse: React.FC<InstructionsForUseProps> = ({}) => {
         <div className="agree-button">
           <Button
             onClick={onContinue}
-            style={{ padding: "11px 19px 11px 18px" }}
+            bodyStyle={{ padding: "11px 19px 11px 18px" }}
             disabled={!agree}
           >
             好的，继续去看
