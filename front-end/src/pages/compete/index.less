@@ -94,6 +94,9 @@
     left: 50%;
     top: 0px;
     margin-left: -70px;
+    .light-top{
+      animation-delay: 2s;
+    }
   }
 
   .light-side {
@@ -105,7 +108,7 @@
   .light-left {
     /* px-to-viewport-ignore-next */
     left: -110px;
-    animation: lightLeft 2s ease forwards;
+    animation: lightLeft 1s ease 2s forwards;
     transform-origin: top center;
     transform: rotateZ(60deg);
     top: calc(50% - 195px);
@@ -114,7 +117,7 @@
   .light-right {
     /* px-to-viewport-ignore-next */
     right: -110px;
-    animation: lightRight 2s ease forwards;
+    animation: lightRight 1s ease 2s forwards;
     /* px-to-viewport-ignore-next */
     top: calc(50% - 200px);
     transform-origin: top center;

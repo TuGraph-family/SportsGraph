@@ -282,7 +282,7 @@ const TacitPage: React.FC = () => {
     window?.Tracert?.call?.("set", {
       spmAPos: SPAPOS,
       spmBPos: "b97706",
-      pathName: "默契页"
+      pathName: "默契页",
     });
     window?.Tracert?.call?.("logPv");
   }, [id]);
@@ -357,7 +357,12 @@ const TacitPage: React.FC = () => {
           <Button isShowHighlightBorder onClick={onPrev} className="up-page">
             <IconFont type="euro-icon-xiayiye1" rotate={180} /> 上一页
           </Button>
-          <Button dataAspm="c364605.d452439" isShowHighlightBorder className="next-page" onClick={onNext}>
+          <Button
+            dataAspm="c364605.d452439"
+            isShowHighlightBorder
+            className="next-page"
+            onClick={onNext}
+          >
             下一页 <IconFont type="euro-icon-xiayiye1" />
           </Button>
         </div>
