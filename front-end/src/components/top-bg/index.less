@@ -1,0 +1,82 @@
+.top-bg {
+  .animation
+    (@name, @duration:1s, @delay:0, @ease:linear, @iterations:infinite, @endState:normal) {
+    animation: @name @duration @ease @iterations @endState;
+    .delay(@delay);
+  }
+
+  .delay (@delay) {
+    animation-delay: @delay;
+  }
+  .arrow {
+    opacity: 0;
+  }
+
+  #red1 {
+    transform: translate(-100px, 0px) rotate(45deg)
+      translate(-11.0122px, -11.0122px);
+    .animation(translate, 1.2s, "ease-in");
+  }
+  #red2 {
+    transform: translate(-100px, 0px) rotate(45deg)
+      translate(-11.0122px, -11.0122px);
+    .animation(translate1, 1.2s, "ease-in");
+  }
+
+  #blue1 {
+    transform: translate(271.3883px, 41.0122px) scale(-1, 1) rotate(45deg)
+      translate(-131.3883px, -41.0122px);
+    .animation(translate2, 1.2s, "ease-in");
+  }
+  #blue2 {
+    transform: translate(277.468px, 41.0122px) scale(-1, 1) rotate(45deg)
+      translate(-137.468px, -41.0122px);
+    .animation(translate3, 1.2s, "ease-in");
+  }
+
+  @keyframes translate {
+    70% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0.5;
+
+      transform: translate(41.0122px, 41.0122px) rotate(45deg)
+        translate(-41.0122px, -41.0122px);
+    }
+  }
+
+  @keyframes translate1 {
+    70% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0.5;
+
+      transform: translate(35.468px, 41.0122px) rotate(45deg)
+        translate(-35.468px, -41.0122px);
+    }
+  }
+
+  @keyframes translate2 {
+    70% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0.5;
+      transform: translate(131.3883px, 41.0122px) scale(-1, 1) rotate(45deg)
+        translate(-131.3883px, -41.0122px);
+    }
+  }
+
+  @keyframes translate3 {
+    70% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0.5;
+      transform: translate(137.468px, 41.0122px) scale(-1, 1) rotate(45deg)
+        translate(-137.468px, -41.0122px);
+    }
+  }
+}
