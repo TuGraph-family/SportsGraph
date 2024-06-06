@@ -30,12 +30,12 @@ const PlayerNode: React.FC<PlayerNodeProps> = React.memo(
     onClick,
     animation,
     scale = 1,
-    isActive
+    isActive,
   }) => {
     const {
       animationDelay = [],
       animationType = [],
-      animationDuration = []
+      animationDuration = [],
     } = animation || {};
 
     const {
@@ -43,7 +43,7 @@ const PlayerNode: React.FC<PlayerNodeProps> = React.memo(
       player_shirtnumber,
       player_name,
       nodeSize = 60,
-      isGoalKeeper
+      isGoalKeeper,
     } = playerInfo;
     const shirtScale = ratio * nodeSize;
     const realShirtScale =
@@ -61,14 +61,14 @@ const PlayerNode: React.FC<PlayerNodeProps> = React.memo(
           animationDelay: `${animationDelay.join(",")}`,
           animationName: animationType.join(","),
           animationDuration: animationDuration.join(","),
-          transform: `scale(${scale}) ${animationType.includes("translate") ? "translateY(10px)" : ""}`
+          transform: `scale(${scale}) ${animationType.includes("translate") ? "translateY(10px)" : ""}`,
         }}
       >
         <div
           className={`shirt`}
           style={{
-            transform: `scale(${realShirtScale})`,
-            transformOrigin: showName ? "bottom" : "top"
+            transform: `scale(${showName ? realShirtScale : "none"})`,
+            transformOrigin: showName ? "bottom" : "top",
           }}
         >
           {isActive && (
