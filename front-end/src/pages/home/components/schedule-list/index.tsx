@@ -6,7 +6,6 @@ import React from "react";
 import IconFont from "@/components/icon-font";
 import dayjs from "dayjs";
 import "./index.less";
-import { getDayOfWeek } from "@/utils";
 
 interface Props extends AsyncListProps {
   scheduleType: string;
@@ -36,7 +35,7 @@ const ScheduleList: React.FC<Props> = (props) => {
             <div
               data-aspm="c364553"
               data-aspm-expo
-              className="game-card"
+              className={`game-card game-card-${props?.scheduleType}`}
               data-aspm-param={`index=${index + 1}^scheduleType=${props?.scheduleType}`}
               key={matchId}
             >
@@ -53,9 +52,9 @@ const ScheduleList: React.FC<Props> = (props) => {
                     <div style={{ marginTop: 2 }}>
                       <Popover
                         getContainer={() =>
-                          document.getElementsByClassName("game-card")[
-                            index
-                          ] as HTMLElement
+                          document.getElementsByClassName(
+                            `game-card-${props?.scheduleType}`
+                          )[index] as HTMLElement
                         }
                         mode="dark"
                         content="阵容尚未确定，图示为历史阵容，仅供参考"
