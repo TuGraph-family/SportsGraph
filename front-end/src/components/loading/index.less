@@ -41,17 +41,10 @@
 
   .animation
     (@name, @duration:1s, @delay:0, @ease:linear, @iterations:infinite, @endState:normal) {
-    -webkit-animation: @name @duration @ease @iterations @endState;
-    -moz-animation: @name @duration @ease @iterations @endState;
-    -ms-animation: @name @duration @ease @iterations @endState;
-    animation: @name @duration @ease @iterations @endState;
     .delay(@delay);
   }
 
   .delay (@delay) {
-    -webkit-animation-delay: @delay;
-    -moz-animation-delay: @delay;
-    -o-animation-delay: @delay;
     animation-delay: @delay;
   }
 

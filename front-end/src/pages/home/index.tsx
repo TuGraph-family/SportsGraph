@@ -2,6 +2,7 @@ import AnimateNumber from "@/components/animate-number";
 import { BackTop } from "@/components/back-top";
 import Button from "@/components/button";
 import ColorfulButton from "@/components/colorful-button";
+import DateWeek from "@/components/date-week";
 import IconFont from "@/components/icon-font";
 import Loading from "@/components/loading";
 import Tabs from "@/components/tabs";
@@ -12,10 +13,8 @@ import Vote from "@/components/vote";
 import { SPAPOS } from "@/constant";
 import TechnicalPrinciples from "@/pages/home/components/technical-principles";
 import { getFutureGameList, getHistoryGameList } from "@/services";
-import { getDayOfWeek } from "@/utils";
 import { useRequest } from "@umijs/max";
 import { Swiper } from "antd-mobile";
-import dayjs from "dayjs";
 import { useEffect } from "react";
 import { history } from "umi";
 import { useImmer } from "use-immer";
@@ -25,7 +24,7 @@ import "./index.less";
 
 const HomePage: React.FC = () => {
   const [state, setState] = useImmer<{ futureList: any[] }>({
-    futureList: [{}],
+    futureList: [{}]
   });
   const { futureList } = state;
   const { run: runGetFutureGameList, loading: loadingGetFutureGameList } =
@@ -39,7 +38,7 @@ const HomePage: React.FC = () => {
   useEffect(() => {
     runGetFutureGameList({
       skip: "0",
-      limit: "4",
+      limit: "4"
     }).then((data) => {
       if (data) {
         if (data.resultSet?.length) {
@@ -51,7 +50,7 @@ const HomePage: React.FC = () => {
           // 获取历史比赛的最近一场比赛来展示
           runGetHistoryGameList({
             skip: "0",
-            limit: "1",
+            limit: "1"
           }).then((res) => {
             setState((draft) => {
               draft.futureList = res.resultSet || [];
@@ -64,7 +63,7 @@ const HomePage: React.FC = () => {
       spmAPos: SPAPOS,
       spmBPos: "b97708",
       pathName: "首页",
-      autoExpo: true,
+      autoExpo: true
     });
     window?.Tracert?.call?.("logPv");
   }, []);
@@ -88,7 +87,7 @@ const HomePage: React.FC = () => {
             console.log(i, "onIndexChange1");
           }}
           indicatorProps={{
-            color: "white",
+            color: "white"
           }}
           indicator={(total, current) => {
             return (
@@ -117,7 +116,7 @@ const HomePage: React.FC = () => {
               isEnd,
               awayWinProbability,
               homeWinProbability,
-              startDate,
+              startDate
             } = item;
 
             const voteCount = Number(teamAVote) + Number(teamBVote);
@@ -132,17 +131,16 @@ const HomePage: React.FC = () => {
                     <Teamteam
                       leftTeam={{
                         name: team_a_country,
-                        flagUrl: team_a_national_flag,
+                        flagUrl: team_a_national_flag
                       }}
                       rightTeam={{
                         name: team_b_country,
-                        flagUrl: team_b_national_flag,
+                        flagUrl: team_b_national_flag
                       }}
                     />
                   </div>
                   <div className="center-time">
-                    {getDayOfWeek(startDate) || "- - "}
-                    {dayjs(startDate).format("MM.DD HH:mm")}
+                    <DateWeek fullDate={startDate} />
                   </div>
                   <div
                     className="center-predict"
@@ -177,7 +175,7 @@ const HomePage: React.FC = () => {
                       className="view-analysis"
                       boxStyle={{
                         marginTop: 0,
-                        display: "block",
+                        display: "block"
                       }}
                       onClick={() => history.push(`/tacit?id=${matchId}`)}
                     >
@@ -194,13 +192,13 @@ const HomePage: React.FC = () => {
                         name: team_a_country,
                         isHome: true,
                         teamAVote,
-                        teamBVote,
+                        teamBVote
                       }}
                       team2={{
                         name: team_b_country,
                         isHome: false,
                         teamAVote,
-                        teamBVote,
+                        teamBVote
                       }}
                       isEnd={isEnd === "1"}
                       count={voteCount}
@@ -228,7 +226,7 @@ const HomePage: React.FC = () => {
               service={({ pageNum, pageSize }) =>
                 getHistoryGameList({
                   skip: `${(pageNum - 1) * pageSize}`,
-                  limit: `${pageSize}`,
+                  limit: `${pageSize}`
                 })
               }
             />
@@ -239,7 +237,7 @@ const HomePage: React.FC = () => {
               service={({ pageNum, pageSize }) =>
                 getFutureGameList({
                   skip: `${(pageNum - 1) * pageSize}`,
-                  limit: `${pageSize}`,
+                  limit: `${pageSize}`
                 })
               }
             />

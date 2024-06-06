@@ -1,6 +1,7 @@
 import AnimateNumber from "@/components/animate-number";
 import Button from "@/components/button";
 import ColorfulButton from "@/components/colorful-button";
+import DateWeek from "@/components/date-week";
 import FootballField from "@/components/football-field";
 import HomeIcon from "@/components/home-icon";
 import IconFont from "@/components/icon-font";
@@ -12,14 +13,13 @@ import Vote from "@/components/vote";
 import { SPAPOS } from "@/constant";
 import { GameInfoResult, VoteInfoResult } from "@/interfaces";
 import { getGameInfo, getGameVoteInfoById } from "@/services";
-import { getDayOfWeek, parseSearch } from "@/utils";
+import { parseSearch } from "@/utils";
 import { useRequest } from "@umijs/max";
 import React, { useEffect } from "react";
 import { history } from "umi";
 import { useImmer } from "use-immer";
 import InstructionsForUse from "../home/components/instructions-for-use";
 import "./index.less";
-import dayjs from "dayjs";
 
 const ResultPage: React.FC = () => {
   const [state, setState] = useImmer<{
@@ -27,7 +27,7 @@ const ResultPage: React.FC = () => {
     voteInfo?: VoteInfoResult;
     isDownloading: boolean;
   }>({
-    isDownloading: false,
+    isDownloading: false
   });
   const { gameInfo, voteInfo, isDownloading } = state;
   const { teamAVote = 0, teamBVote = 0, totalVote = 0, isEnd } = voteInfo || {};
@@ -42,14 +42,14 @@ const ResultPage: React.FC = () => {
     team_b_national_flag,
     team_a_country,
     team_b_country,
-    startDate,
+    startDate
   } = gameInfo || {};
   const isHomeWin = homeWinProbability > awayWinProbability;
 
   const { loading: loadingGetGameInfo, run: runGetGameInfo } = useRequest(
     getGameInfo,
     {
-      manual: true,
+      manual: true
     }
   );
   const { run: runGetGameVoteInfoById, loading: loadingGetGameVoteInfoById } =
@@ -76,7 +76,7 @@ const ResultPage: React.FC = () => {
     window?.Tracert?.call?.("set", {
       spmAPos: SPAPOS,
       spmBPos: "b97707",
-      pathName: "结果页",
+      pathName: "结果页"
     });
     window?.Tracert?.call?.("logPv");
   }, [id]);
@@ -119,8 +119,7 @@ const ResultPage: React.FC = () => {
             {isHomeWin ? team_a_country : team_b_country}
           </div>
           <div className="center-time">
-            {getDayOfWeek(startDate) || "- - "}
-            {dayjs(startDate).format("MM.DD HH:mm")}
+            <DateWeek fullDate={startDate} />
           </div>
           <div className="center-predict">
             <div className="predict-left">
@@ -149,13 +148,13 @@ const ResultPage: React.FC = () => {
                 name: team_a_country || "",
                 isHome: true,
                 teamAVote,
-                teamBVote,
+                teamBVote
               }}
               team2={{
                 name: team_b_country || "",
                 isHome: false,
                 teamAVote,
-                teamBVote,
+                teamBVote
               }}
               percent={votePercent}
               count={totalVote}
@@ -172,14 +171,14 @@ const ResultPage: React.FC = () => {
           <Button isShowHighlightBorder onClick={onSavePic} className="up-page">
             <IconFont type="euro-icon-xiayiye1" rotate={180} /> 上一页
           </Button>
-            <Button
-              isShowHighlightBorder
-              className="next-page"
-              onClick={jumpToHome}
-              dataAspm="c364608.d452417"
-            >
-              更多赛程 <IconFont type="euro-icon-xiayiye1" />
-            </Button>
+          <Button
+            isShowHighlightBorder
+            className="next-page"
+            onClick={jumpToHome}
+            dataAspm="c364608.d452417"
+          >
+            更多赛程 <IconFont type="euro-icon-xiayiye1" />
+          </Button>
         </div>
       </div>
     </div>
