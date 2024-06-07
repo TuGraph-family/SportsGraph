@@ -2,6 +2,7 @@
   height: 100%;
   position: relative;
   width: 100vw;
+
   &.hide-animation {
     .world {
       animation: none;
@@ -25,6 +26,7 @@
     perspective-origin: 50% -90vh;
     backface-visibility: hidden;
   }
+
   .world {
     position: absolute;
     top: 110px;
@@ -37,18 +39,22 @@
     animation: world 1s ease forwards;
     backface-visibility: hidden;
   }
+
   @media (max-width: 375px) {
     .stage {
       perspective-origin: 50% -100vh;
     }
+
     .world {
       top: 160px;
     }
   }
+
   @media (max-width: 680px) {
     .world {
       top: 160px;
     }
+
     .stage {
       perspective-origin: 50% -100vh;
     }
@@ -67,6 +73,7 @@
     filter: brightness(60%) contrast(130%);
     background-color: #3f6e08;
   }
+
   .field.ground::after {
     content: "";
     display: block;
@@ -78,6 +85,7 @@
     width: 100%;
     filter: brightness(200%);
   }
+
   .field--alt {
     display: block;
     width: 80%;
@@ -87,11 +95,13 @@
     opacity: 0.3;
     box-shadow: 0 0 40px 30px #000;
   }
+
   .field__texture {
     width: 100%;
     height: 100%;
     position: absolute;
   }
+
   .field__texture.field__texture--gradient {
     background: rgba(62, 113, 0, 0.2);
     z-index: 1;
@@ -100,13 +110,15 @@
     justify-content: space-around;
     flex-direction: column;
   }
+
   .field__texture--gradient-b {
     z-index: 2;
     filter: blur(50px);
     transform: scale(0.1);
     opacity: 0;
-    
+
   }
+
   .field__texture--gradient-b.small {
     width: 200px;
     height: 150px;
@@ -114,6 +126,7 @@
     background-color: rgba(246, 255, 0, 0.8);
     animation: lightField 1s ease-in 1.7s forwards;
   }
+
   .field__texture--gradient-b.big {
     border-radius: 150px;
     width: 300px;
@@ -127,9 +140,47 @@
       transform: scale(0.1);
       opacity: 0;
     }
+
     100% {
       transform: scale(1);
       opacity: 1;
+    }
+  }
+
+  .field__texture--shadow {
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .field__texture--shadow-a {
+    opacity: 0;
+    width: 100%;
+    height: 150px;
+    clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
+    animation: shadow 1s ease-in 2.2s forwards;
+    margin-bottom: 10px;
+  }
+
+  .field__texture--shadow-b {
+    opacity: 0;
+    width: 100%;
+    height: 150px;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    animation: shadow 1s ease-in 2.2s forwards;
+    margin-top: 10px;
+  }
+
+  @keyframes shadow {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+      margin: 0;
     }
   }
 
@@ -152,6 +203,7 @@
     transform-origin: 50% 50%;
     background-color: #f7f7f7;
   }
+
   .texture .field__side {
     background-color: #000;
   }
@@ -165,10 +217,12 @@
     transform-origin: 100% 50%;
     transform: rotateX(90deg) rotateY(-90deg) translateZ(0);
   }
+
   .field__side.field__side--right {
     left: auto;
     right: 0;
   }
+
   .field__side.field__side--back {
     transform: rotateX(180deg) translateZ(420px);
   }
@@ -180,6 +234,7 @@
     z-index: 1;
     height: 3.5px;
   }
+
   .field__line--goal {
     width: 16%;
     height: 6%;
@@ -190,12 +245,14 @@
     margin: auto;
     bottom: 3%;
   }
+
   .field__line--goal--far {
     top: 4%;
     bottom: auto;
     border: solid 4px rgba(255, 255, 255, 0.4);
     border-top: none;
   }
+
   .field__line--penalty-arc {
     width: 20%;
     height: 20%;
@@ -205,6 +262,7 @@
     right: 0;
     margin: auto;
   }
+
   .field__line--penalty-arc:after {
     position: absolute;
     top: 75%;
@@ -218,10 +276,12 @@
     border-bottom: none;
     box-sizing: border-box;
   }
+
   .field__line--penalty-arc--far {
     bottom: auto;
     top: 21%;
   }
+
   .field__line--penalty-arc--far:after {
     bottom: 75%;
     top: auto;
@@ -229,6 +289,7 @@
     border-top: none;
     border-radius: 0 0 50% 50%;
   }
+
   .field__line--penalty {
     width: 54%;
     height: 16.5%;
@@ -239,12 +300,14 @@
     margin: auto;
     bottom: 3%;
   }
+
   .field__line--penalty--far {
     top: 4%;
     bottom: auto;
     border: solid 4px rgba(255, 255, 255, 0.4);
     border-top: none;
   }
+
   .field__line--outline {
     width: 92%;
     height: 92%;
@@ -255,12 +318,14 @@
     border-bottom: solid 3px rgba(255, 255, 255, 0.4);
     border-left: solid 4px rgba(255, 255, 255, 0.4);
   }
+
   .field__line--mid {
     top: 50%;
     width: 92%;
     left: 4%;
     background-color: rgba(255, 255, 255, 0.4);
   }
+
   .field__line--circle {
     width: 30%;
     height: 20%;
