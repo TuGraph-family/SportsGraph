@@ -40,7 +40,6 @@ export default defineConfig({
   },
   initialState: {},
   model: {},
-  jsMinifier: "terser",
   metas: [
     {
       name: "viewport",
@@ -48,10 +47,12 @@ export default defineConfig({
     }
   ],
   headScripts: [
+    "https://polyfill.alicdn.com/v3/polyfill.js",
     {
       src: "https://ur.alipay.com/tracert_a4427.js",
       async: true,
       crossorigin: "anonymous"
     }
-  ]
+  ],
+  legacy: {}
 });

@@ -1,4 +1,5 @@
 import type { RequestConfig } from "@umijs/max";
+import "proxy-polyfill/proxy.min.js";
 import { login } from "./services";
 import { resetClientHeight } from "./utils/resizeClientHeight";
 

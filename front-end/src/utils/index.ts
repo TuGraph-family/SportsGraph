@@ -24,22 +24,6 @@ export const calculateNeighborPoints = (
   return points;
 };
 
-export const uniqueArrayById = (arr: Array<any>, Key: string) => {
-  /**
-   * 使用Set数据结构来存储已经遇到的id值，确保唯一性。
-   * Map用于保持元素插入顺序（ES6中的Set会自动去重，但不保证顺序），
-   * 而对于对象数组去重同时需保持原数组中对象的顺序，故采用此方法。
-   */
-  const seen = new Map();
-  return arr.filter((item) => {
-    if (!seen.has(item[Key])) {
-      seen.set(item[Key], item);
-      return true;
-    }
-    return false;
-  });
-};
-
 export const calculateAngleBetweenPoints = (
   point1: { x: number; y: number },
   point2: { x: number; y: number }
@@ -70,7 +54,7 @@ export const getDayOfWeek = (
       "周三 ",
       "周四 ",
       "周五 ",
-      "周六 ",
+      "周六 "
     ];
 
     return days[dayOfWeek];

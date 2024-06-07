@@ -5,11 +5,13 @@ const TopBg: React.FC = () => {
   return (
     <div className="top-bg">
       <svg
-        width="90vw"
         viewBox="0 0 335 310.089613"
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
+        style={{
+          width: "90vw"
+        }}
       >
         <title>编组 2</title>
         <defs>
