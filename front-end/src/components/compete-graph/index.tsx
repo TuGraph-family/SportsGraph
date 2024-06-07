@@ -53,6 +53,7 @@ const CompeteGraph: React.FC<CompeteGraphProps> = ({
                 animationDuration: ["1s", "0.4s"],
               }}
               isActive={data.data.isInTop}
+              isCompete={true}
             />
           ),
           size: (d: any) => {
