@@ -17,6 +17,11 @@
       opacity: 1;
     }
   }
+  .top-bg {
+    svg {
+      width: 100% !important;
+    }
+  }
 
   .footer {
     z-index: 100;
@@ -25,7 +30,7 @@
     text-align: center;
     margin-bottom: 33px;
 
-    .sg-btn+.sg-btn {
+    .sg-btn + .sg-btn {
       margin-left: 20px;
     }
 
@@ -59,8 +64,7 @@
     }
 
     &-title {
-      margin-top: 100px;
-
+      margin-top: 15%;
       .title-desc .title {
         font-size: 32px;
       }
@@ -78,6 +82,7 @@
       .team-bg {
         position: absolute;
         top: 0;
+        width: 90%;
       }
 
       .win-flag {
@@ -112,13 +117,12 @@
       }
 
       .qrcode {
-        width: 94px;
-        height: 94px;
+        width: 20%;
+        height: 20%;
         background-color: #fff;
         border-radius: 8px;
         padding: 10px;
         z-index: 1;
-        margin-top: 20px;
 
         img {
           width: 100%;
@@ -136,10 +140,9 @@
 
     &-playground {
       position: absolute;
-      top: 145px;
+      top: 30%;
       /* px-to-viewport-ignore-next */
       height: calc(100%);
-      padding-bottom: 40px;
     }
 
     .center-predict {
