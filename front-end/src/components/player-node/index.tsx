@@ -22,6 +22,7 @@ interface PlayerNodeProps {
   scale?: number;
   dataAspm?: string;
   isActive?: boolean;
+  isCompete?: boolean;
 }
 
 const PlayerNode: React.FC<PlayerNodeProps> = React.memo(
@@ -33,6 +34,7 @@ const PlayerNode: React.FC<PlayerNodeProps> = React.memo(
     scale = 1,
     dataAspm,
     isActive,
+    isCompete = false,
   }) => {
     const {
       animationDelay = [],
@@ -100,6 +102,11 @@ const PlayerNode: React.FC<PlayerNodeProps> = React.memo(
           <div className="label">
             <div className="label-text">{player_name}</div>
           </div>
+        )}
+        {isCompete && (
+          <div
+            className={`player-node-circle ${isTeamA === "1" ? "red-background" : "blue-background "}`}
+          />
         )}
       </div>
     );
