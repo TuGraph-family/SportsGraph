@@ -7,6 +7,8 @@ interface FootballFieldProps {
   perspective?: string;
   worldWidth?: number;
   hasAnimation?: boolean;
+  isHomeWin?: boolean;
+  hasShadow?: boolean;
 }
 
 const FootballField: React.FC<FootballFieldProps> = ({
@@ -14,7 +16,9 @@ const FootballField: React.FC<FootballFieldProps> = ({
   startLighting = false,
   perspective = "120vh",
   worldWidth = 130,
-  hasAnimation = true
+  hasAnimation = true,
+  hasShadow,
+  isHomeWin,
 }) => {
   return (
     <div className={`football-field ${hasAnimation ? "" : "hide-animation"}`}>
@@ -23,7 +27,7 @@ const FootballField: React.FC<FootballFieldProps> = ({
           className="js-world world"
           style={{
             width: `${worldWidth}vw`,
-            marginLeft: `-${worldWidth / 2}vw`
+            marginLeft: `-${worldWidth / 2}vw`,
           }}
         >
           <div className="field field--alt"></div>
@@ -42,6 +46,23 @@ const FootballField: React.FC<FootballFieldProps> = ({
                 </>
               )}
             </div>
+            {hasShadow && (
+              <div className="field__texture field__texture--shadow">
+                <div
+                  style={{
+                    backgroundImage: `linear-gradient(to top, ${isHomeWin ? "#143CDB80, #143CDB00" : "#D84A5080, #D84A5000"})`,
+                  }}
+                  className={`field__texture--shadow-a`}
+                ></div>
+                <div
+                  style={{
+                    backgroundImage: `linear-gradient(to bottom, ${isHomeWin ? "#D84A5080, #D84A5000" : "#143CDB80, #143CDB00"})`,
+                  }}
+                  className={`field__texture--shadow-b`}
+                ></div>
+              </div>
+            )}
+
             <div className="field__texture field__texture--grass"></div>
             <div className="field__line field__line--goal"></div>
             <div className="field__line field__line--goal field__line--goal--far"></div>

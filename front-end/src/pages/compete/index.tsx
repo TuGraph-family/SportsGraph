@@ -258,6 +258,7 @@ const CompetePage: React.FC = () => {
     });
     window?.Tracert?.call?.("logPv");
   }, [id]);
+
   return (
     <div className="compete">
       <InstructionsForUse />
@@ -293,7 +294,12 @@ const CompetePage: React.FC = () => {
           </>
         )}
 
-        <FootballField lightNumber={2} startLighting={hasGraphData} />
+        <FootballField
+          hasShadow
+          isHomeWin={isHomeWin}
+          lightNumber={2}
+          startLighting={hasGraphData}
+        />
 
         <div
           className="compete-graph-container"
