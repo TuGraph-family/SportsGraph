@@ -15,8 +15,6 @@ interface TacitGraphProps {
 }
 
 const nodeSizeRatio = 0.3;
-const minNodeSize = 60;
-const maxNodeSize = 70;
 
 const TacitGraph: React.FC<TacitGraphProps> = ({
   graphData,
@@ -35,15 +33,6 @@ const TacitGraph: React.FC<TacitGraphProps> = ({
     const zoomX = container?.clientWidth! * 0.0024;
     const scale = container?.offsetHeight! * 0.002;
 
-    const getNodeSize = (d: any) => {
-      let nodeSize = d.nodeSize * nodeSizeRatio;
-      if (nodeSize < minNodeSize) {
-        nodeSize = minNodeSize;
-      } else if (nodeSize > maxNodeSize) {
-        nodeSize = maxNodeSize;
-      }
-      return nodeSize;
-    };
     const graph = new Graph({
       background: "transparent",
       container: containerId,
@@ -67,7 +56,7 @@ const TacitGraph: React.FC<TacitGraphProps> = ({
               <PlayerNode
                 playerInfo={data}
                 onClick={() => onNodeClick?.(data.player_id, data)}
-                dataAspm='c364605.d452408'
+                dataAspm="c364605.d452408"
                 animation={{
                   animationDelay: [`${data.animationDelay!}s`],
                   animationType: ["fade", "translate"],
@@ -77,10 +66,7 @@ const TacitGraph: React.FC<TacitGraphProps> = ({
               />
             </div>
           ),
-          size: (d: any) => {
-            const nodeSize = getNodeSize(d);
-            return [nodeSize, nodeSize];
-          },
+          size: [60, 60],
           ports: () => {
             return [{ key: "center", placement: [0.5, 0.5] }];
           }

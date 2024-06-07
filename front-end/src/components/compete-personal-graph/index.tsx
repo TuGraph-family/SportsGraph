@@ -15,14 +15,12 @@ interface CompetePersonalGraphProps {
 }
 
 const nodeSizeRatio = 0.3;
-const minNodeSize = 60;
-const maxNodeSize = 70;
 
 const CompetePersonalGraph: React.FC<CompetePersonalGraphProps> = ({
   graphData,
   containerId,
   onClickNode,
-  style,
+  style
 }) => {
   const [state, setState] = useImmer<{ graph?: Graph }>({});
   const { graph } = state;
@@ -45,19 +43,11 @@ const CompetePersonalGraph: React.FC<CompetePersonalGraphProps> = ({
               onClick={() => onClickNode?.(data)}
             />
           ),
-          size: (d: any) => {
-            let nodeSize = d.nodeSize * nodeSizeRatio;
-            if (nodeSize < minNodeSize) {
-              nodeSize = minNodeSize;
-            } else if (nodeSize > maxNodeSize) {
-              nodeSize = maxNodeSize;
-            }
-            return [nodeSize, nodeSize];
-          },
-          ports: (d) => {
+          size: [60, 60],
+          ports: () => {
             return [{ key: "center", placement: [0.5, 0.5] }];
-          },
-        },
+          }
+        }
       },
       edge: {
         type: "path-in-line",
@@ -82,14 +72,14 @@ const CompetePersonalGraph: React.FC<CompetePersonalGraphProps> = ({
           labelFontSize: 8,
           labelFontWeight: 500,
           labelOpacity: 0.6,
-          labelLineHeight: 11,
+          labelLineHeight: 11
         },
         animation: {
           // disable default enter and exit animation
           enter: false,
-          exit: false,
-        },
-      },
+          exit: false
+        }
+      }
     });
     setState((draft) => {
       draft.graph = graph;

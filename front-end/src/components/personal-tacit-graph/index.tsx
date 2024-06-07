@@ -15,8 +15,6 @@ interface PersonalTacitGraphProps {
 }
 
 const nodeSizeRatio = 0.3;
-const minNodeSize = 60;
-const maxNodeSize = 70;
 
 const PersonalTacitGraph: React.FC<PersonalTacitGraphProps> = ({
   graphData,
@@ -41,19 +39,11 @@ const PersonalTacitGraph: React.FC<PersonalTacitGraphProps> = ({
           component: (data: PlayersInfoResult) => (
             <PlayerNode
               playerInfo={data}
-              dataAspm='c364605.d452408'
+              dataAspm="c364605.d452408"
               onClick={() => onNodeClick?.(data.player_id, data)}
             />
           ),
-          size: (d: any) => {
-            let nodeSize = d.nodeSize * nodeSizeRatio;
-            if (nodeSize < minNodeSize) {
-              nodeSize = minNodeSize;
-            } else if (nodeSize > maxNodeSize) {
-              nodeSize = maxNodeSize;
-            }
-            return [nodeSize, nodeSize];
-          },
+          size: [60, 60],
           ports: (d) => {
             return [{ key: "center", placement: [0.5, 0.5] }];
           }
