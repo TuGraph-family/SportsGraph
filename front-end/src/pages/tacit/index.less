@@ -13,7 +13,9 @@
   background-repeat: no-repeat;
 
   &-title {
+    /* px-to-viewport-ignore-next */
     margin-top: 57px;
+    /* px-to-viewport-ignore-next */
     margin-bottom: 25px;
 
     .title {
@@ -45,11 +47,12 @@
       text-align: center;
       position: absolute;
       width: 100%;
+      /* px-to-viewport-ignore-next */
       bottom: 40px;
       z-index: 110;
     }
 
-    .sg-btn+.sg-btn {
+    .sg-btn + .sg-btn {
       margin-left: 20px;
     }
 
@@ -59,13 +62,11 @@
       height: 42px;
     }
 
-    .anticon {
-      font-size: 10px;
-    }
-
     .tooltip {
       text-align: center;
+      /* px-to-viewport-ignore-next */
       margin: 0 20px 20px 20px;
+      /* px-to-viewport-ignore-next */
       height: 70px;
       backdrop-filter: blur(10px);
 
@@ -84,10 +85,12 @@
       right: 0;
       height: 2px;
       z-index: 10;
-      background: linear-gradient(90deg,
-          #ffffff00 3%,
-          #ffffff 52%,
-          #ffffff00 100%);
+      background: linear-gradient(
+        90deg,
+        #ffffff00 3%,
+        #ffffff 52%,
+        #ffffff00 100%
+      );
       opacity: 0.72;
     }
   }

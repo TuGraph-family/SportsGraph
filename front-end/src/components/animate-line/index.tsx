@@ -15,7 +15,7 @@ class DelayPathInLine extends Line {
 class PathInLine extends Line {
   onCreate() {
     // const edgeInfo = this.attributes.context?.graph.getEdgeData(this.id);
-    // const { percentage} = edgeInfo || {}
+    // const { percentage } = edgeInfo || {};
     const shape: any = this.shapeMap.key;
     const length = shape.getTotalLength();
     shape.animate([{ lineDash: [0, length] }, { lineDash: [length, 0] }], {

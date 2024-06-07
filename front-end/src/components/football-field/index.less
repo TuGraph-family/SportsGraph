@@ -23,12 +23,13 @@
   .stage {
     width: 100%;
     height: 100%;
-    perspective-origin: 50% -90vh;
+    perspective-origin: 50% -140%;
     backface-visibility: hidden;
   }
 
   .world {
     position: absolute;
+    /* px-to-viewport-ignore-next */
     top: 110px;
     left: 50%;
     margin-left: -65vw;
@@ -116,7 +117,6 @@
     filter: blur(50px);
     transform: scale(0.1);
     opacity: 0;
-
   }
 
   .field__texture--gradient-b.small {

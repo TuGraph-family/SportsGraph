@@ -54,5 +54,5 @@ export default defineConfig({
       crossorigin: "anonymous"
     }
   ],
-  legacy: {}
+  esbuildMinifyIIFE: true
 });
