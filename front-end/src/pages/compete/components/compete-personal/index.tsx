@@ -17,6 +17,8 @@ interface CompetePersonalModalProps {
   onClose: () => void;
   params: { id: string; isteama: string; playerId: string } | undefined;
   allPlayer: Array<PlayersInfoResult>;
+  goalkeeperAId?: string;
+  goalkeeperBId?: string;
 }
 
 const centerOffsetX = 40;
@@ -30,6 +32,8 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
   onClose,
   params,
   allPlayer,
+  goalkeeperAId,
+  goalkeeperBId,
 }) => {
   const { id } = parseSearch(location.search) as any;
   const [state, setState] = useImmer<{
@@ -72,6 +76,9 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
           ...centerXY,
           player_shirtnumber: playerInfo?.player_shirtnumber,
           isTeamA: playerInfo?.isTeamA,
+          isGoalKeeper: [goalkeeperAId, goalkeeperBId].includes(
+            playerInfo?.player_id
+          ),
           nodeSize,
           isCenter: true,
         };
@@ -85,6 +92,9 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
           ...nodeXY[nodeIndex - 1],
           player_shirtnumber: playerInfo?.player_shirtnumber,
           isTeamA: playerInfo?.isTeamA,
+          isGoalKeeper: [goalkeeperAId, goalkeeperBId].includes(
+            playerInfo?.player_id
+          ),
           nodeSize,
         };
       }
