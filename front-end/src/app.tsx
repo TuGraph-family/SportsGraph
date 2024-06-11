@@ -1,5 +1,7 @@
 import type { RequestConfig } from "@umijs/max";
 import "proxy-polyfill/proxy.min.js";
+import React from "react";
+import ErrorBoundary from "./components/error-boundary";
 import { login } from "./services";
 import { resetClientHeight } from "./utils/resizeClientHeight";
 
@@ -35,3 +37,7 @@ export async function getInitialState() {
 }
 
 resetClientHeight();
+
+export function rootContainer(container: JSX.Element) {
+  return React.createElement(ErrorBoundary, null, container);
+}

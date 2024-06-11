@@ -39,11 +39,6 @@
     background-clip: text;
   }
 
-  .animation
-    (@name, @duration:1s, @delay:0, @ease:linear, @iterations:infinite, @endState:normal) {
-    .delay(@delay);
-  }
-
   .delay (@delay) {
     animation-delay: @delay;
   }
@@ -52,36 +47,33 @@
     width: @xy;
     height: @xy;
   }
-
-  .gradient (@deg:90deg, @color1:#161616, @color2:#000) {
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@color1', endColorstr='@color2');
-    background-image: -webkit-linear-gradient(@deg, @color1 25%, @color2);
-    background-image: -moz-linear-gradient(@deg, @color1 25%, @color2);
-  }
-  .arrow {
+  .loading-arrow {
     opacity: 1;
-    .animation(pulse);
+    animation-name: loading-pulse;
+    animation-timing-function: linear;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
   }
-  #red1 {
+  #loading-red1 {
     .delay(0.3s);
   }
-  #red2 {
+  #loading-red2 {
     .delay(0.2s);
   }
-  #red3 {
+  #loading-red3 {
     .delay(0.1s);
   }
-  #blue1 {
+  #loading-blue1 {
     .delay(0.3s);
   }
-  #blue2 {
+  #loading-blue2 {
     .delay(0.2s);
   }
-  #blue3 {
+  #loading-blue3 {
     .delay(0.1s);
   }
 
-  @keyframes pulse {
+  @keyframes loading-pulse {
     from {
       opacity: 0.1;
     }

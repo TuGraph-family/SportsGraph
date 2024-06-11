@@ -95,34 +95,37 @@ const Loading: React.FC<LoadingProps> = ({ loading }) => {
               fill="none"
               fillRule="evenodd"
             >
-              <g id="首页/有预测备份-3" transform="translate(-137, -324)">
+              <g
+                id="loading-首页/有预测备份-3"
+                transform="translate(-137, -324)"
+              >
                 <g
-                  id="act_popovers_-loading@2x"
+                  id="loading-act_popovers_-loading@2x"
                   transform="translate(138, 324)"
                 >
-                  <mask id="mask-2" fill="white">
+                  <mask id="loading-mask-2" fill="white">
                     <use xlinkHref="#loading-path-1"></use>
                   </mask>
-                  <g id="矩形"></g>
-                  <g id="蒙版" mask="url(#mask-2)">
+                  <g id="loading-矩形"></g>
+                  <g id="loading-蒙版" mask="url(#mask-2)">
                     <g transform="translate(-1, 0)">
                       <g
-                        id="编组"
+                        id="loading-编组"
                         strokeWidth="1"
                         fill="none"
                         fillRule="evenodd"
                       >
                         <polygon
-                          id="red1"
-                          className="arrow"
+                          id="loading-red1"
+                          className="loading-arrow"
                           fill="url(#loading-linearGradient-3)"
                           fillRule="nonzero"
                           transform="translate(24.0416, 24.0416) rotate(45) translate(-24.0416, -24.0416)"
                           points="41.0416306 7.04163056 41.0416306 41.0416306 37.6973683 41.0416306 37.6972605 10.3857851 7.04163056 10.3858929 7.04163056 7.04163056"
                         ></polygon>
                         <polygon
-                          id="blue1"
-                          className="arrow"
+                          id="loading-blue1"
+                          className="loading-arrow"
                           fill="url(#loading-linearGradient-4)"
                           fillRule="nonzero"
                           transform="translate(76.0416, 24.0416) scale(-1, 1) rotate(45) translate(-76.0416, -24.0416)"
@@ -130,8 +133,8 @@ const Loading: React.FC<LoadingProps> = ({ loading }) => {
                         ></polygon>
                       </g>
                       <polygon
-                        id="red2"
-                        className="arrow"
+                        id="loading-red2"
+                        className="loading-arrow"
                         fill="url(#loading-linearGradient-5)"
                         fillRule="nonzero"
                         opacity="0.65"
@@ -139,8 +142,8 @@ const Loading: React.FC<LoadingProps> = ({ loading }) => {
                         points="30.5918831 15.0416306 30.5918831 35.0416306 27.1633117 35.0416306 27.1632903 18.4700915 10.5918831 18.470202 10.5918831 15.0416306"
                       ></polygon>
                       <polygon
-                        id="blue2"
-                        className="arrow"
+                        id="loading-blue2"
+                        className="loading-arrow"
                         fill="url(#loading-linearGradient-6)"
                         fillRule="nonzero"
                         opacity="0.65"
@@ -148,8 +151,8 @@ const Loading: React.FC<LoadingProps> = ({ loading }) => {
                         points="88.5918831 15.0416306 88.5918831 35.0416306 85.1633117 35.0416306 85.1632903 18.4700915 68.5918831 18.470202 68.5918831 15.0416306"
                       ></polygon>
                       <polygon
-                        id="red3"
-                        className="arrow"
+                        id="loading-red3"
+                        className="loading-arrow"
                         fill="url(#loading-linearGradient-7)"
                         fillRule="nonzero"
                         opacity="0.36"
@@ -157,8 +160,8 @@ const Loading: React.FC<LoadingProps> = ({ loading }) => {
                         points="20.0416306 19.491378 20.0416306 32.491378 16.6503262 32.491378 16.650146 22.8825731 7.04163056 22.8826824 7.04163056 19.491378"
                       ></polygon>
                       <polygon
-                        id="blue3"
-                        className="arrow"
+                        id="loading-blue3"
+                        className="loading-arrow"
                         fill="url(#loading-linearGradient-8)"
                         fillRule="nonzero"
                         opacity="0.36"

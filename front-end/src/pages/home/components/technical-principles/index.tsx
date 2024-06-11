@@ -1,12 +1,10 @@
-import React from "react";
 import { Mask } from "antd-mobile";
-import { QuestionCircleOutline } from "antd-mobile-icons";
 import { useImmer } from "use-immer";
 import "./index.less";
 
 const TechnicalPrinciples = () => {
   const [state, setState] = useImmer<{ visible: boolean }>({
-    visible: false,
+    visible: false
   });
   const { visible } = state;
 
