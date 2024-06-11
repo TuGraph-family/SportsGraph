@@ -177,7 +177,7 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
             <div className="compete-personal-card-desc">
               {competeCenterPlayer?.player_name}为国家队出战
               {competeCenterPlayer?.a_caps}
-              次。他与对手的对抗程度通过历史上共同比赛的战绩计算得出。
+              次。他与对手间连线的颜色分段比例表示两人对抗的强弱程度。
             </div>
           </div>
         ) : null}

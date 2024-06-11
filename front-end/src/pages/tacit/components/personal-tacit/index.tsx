@@ -65,8 +65,8 @@ const PersonalTacit: React.FC<TacitGraphProps> = ({
             </div>
             <div className="description">
               {playerInfo?.player_name}
-              为国家队出战{playerInfo?.caps}
-              次，他与队友的默契程度通过历史上共同比赛的战绩计算得出。
+              为国家队出战{playerInfo?.caps}次
+              。他与队友的连线越粗，默契程度越高。
             </div>
           </div>
         )}
