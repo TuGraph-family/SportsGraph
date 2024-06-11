@@ -54,5 +54,6 @@ export default defineConfig({
       crossorigin: "anonymous"
     }
   ],
-  esbuildMinifyIIFE: true
+  esbuildMinifyIIFE: true,
+  title: "智猜足球"
 });
