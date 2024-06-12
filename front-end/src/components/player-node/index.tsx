@@ -80,7 +80,7 @@ const PlayerNode: React.FC<PlayerNodeProps> = React.memo(
           {isActive && (
             <img
               src={
-                "https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*N7fkTKjmv64AAAAAAAAAAAAADsvfAQ/original"
+                "https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*5L89QLE33pAAAAAAAAAAAAAADsvfAQ/original"
               }
               className="active-bg"
             />
