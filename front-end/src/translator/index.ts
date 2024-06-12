@@ -147,10 +147,13 @@ export const playerTacitInfoTranslator = (res: any) => {
 
   const competePlayerEdge = competePlayerNode?.map((item) => {
     const { playerValue, reverse_direction_value } = item;
-    const percentage =
-      (Number(playerValue) /
-        (Number(playerValue) + Number(reverse_direction_value))) *
-      100;
+    let percentage = 50;
+    if (playerValue || reverse_direction_value) {
+      percentage =
+        (Number(playerValue) /
+          (Number(playerValue) + Number(reverse_direction_value))) *
+        100;
+    }
     const targetNode = competePlayerNode?.find((node) => node.id === item.b_id);
     const deg = calculateAngleBetweenPoints(
       { x: competeCenterPlayer?.x, y: competeCenterPlayer?.y },
