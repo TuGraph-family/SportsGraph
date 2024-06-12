@@ -145,7 +145,6 @@ const CompetePage: React.FC = () => {
             x: isWin
               ? mapX + container?.offsetWidth! * 2
               : mapX - container?.offsetWidth! * 2,
-            zIndex: isWin ? 0 : y,
             animationDelay: Math.random() * 0.5,
           },
         };
@@ -154,7 +153,8 @@ const CompetePage: React.FC = () => {
       .map((item, index) => ({
         ...item,
         data: { ...item.data, isInTop: index < 3 },
-      }));
+      }))
+      .sort((a, b) => b.data.y - a.data.y);
     return nodes;
   };
   const homeGraphData = useMemo(() => {
