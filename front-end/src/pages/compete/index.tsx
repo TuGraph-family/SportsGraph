@@ -271,7 +271,7 @@ const CompetePage: React.FC = () => {
       <HomeIcon />
       <div className="compete-title">
         <TitleDesc
-          title="看双方对抗程度"
+          title="双方对抗程度"
           desc="基于双方球员历史上共同比赛的胜负情况计算得出"
         />
       </div>

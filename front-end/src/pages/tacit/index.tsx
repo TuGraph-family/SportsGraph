@@ -308,7 +308,7 @@ const TacitPage: React.FC = () => {
       <HomeIcon />
       <div className="tacit-title">
         <TitleDesc
-          title="看队员默契程度"
+          title="队员默契程度"
           desc="基于几名球员历史上共同比赛的胜负情况计算得出"
         />
       </div>
