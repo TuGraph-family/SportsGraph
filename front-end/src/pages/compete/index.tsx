@@ -45,6 +45,8 @@ interface CompetePageState {
   competePersonalParams:
     | { id: string; isteama: string; playerId: string }
     | undefined;
+  goalkeeperAId?: string;
+  goalkeeperBId?: string;
 }
 const CompetePage: React.FC = () => {
   const [state, setState] = useImmer<CompetePageState>({
@@ -78,6 +80,8 @@ const CompetePage: React.FC = () => {
     isHomeWin,
     competePersonalVisible,
     competePersonalParams,
+    goalkeeperAId,
+    goalkeeperBId,
   } = state;
   const { id } = parseSearch(location.search) as any;
   const { loading: loadingGetGameInfo, run: runGetGameInfo } = useRequest(
@@ -141,7 +145,6 @@ const CompetePage: React.FC = () => {
             x: isWin
               ? mapX + container?.offsetWidth! * 2
               : mapX - container?.offsetWidth! * 2,
-            zIndex: isWin ? 0 : y,
             animationDelay: Math.random() * 0.5,
           },
         };
@@ -150,7 +153,8 @@ const CompetePage: React.FC = () => {
       .map((item, index) => ({
         ...item,
         data: { ...item.data, isInTop: index < 3 },
-      }));
+      }))
+      .sort((a, b) => b.data.y - a.data.y);
     return nodes;
   };
   const homeGraphData = useMemo(() => {
@@ -229,6 +233,8 @@ const CompetePage: React.FC = () => {
             nodes: data.playerBList,
           };
           draft.isHomeWin = homeWinProbability > awayWinProbability;
+          draft.goalkeeperAId = data.goalkeeperAId;
+          draft.goalkeeperBId = data.goalkeeperBId;
         });
       }
     });
@@ -349,6 +355,8 @@ const CompetePage: React.FC = () => {
         onClose={onClose}
         params={competePersonalParams}
         allPlayer={playersInfo}
+        goalkeeperAId={goalkeeperAId}
+        goalkeeperBId={goalkeeperBId}
       />
     </div>
   );

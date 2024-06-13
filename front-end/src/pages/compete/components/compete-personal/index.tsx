@@ -17,6 +17,8 @@ interface CompetePersonalModalProps {
   onClose: () => void;
   params: { id: string; isteama: string; playerId: string } | undefined;
   allPlayer: Array<PlayersInfoResult>;
+  goalkeeperAId?: string;
+  goalkeeperBId?: string;
 }
 
 const centerOffsetX = 40;
@@ -30,6 +32,8 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
   onClose,
   params,
   allPlayer,
+  goalkeeperAId,
+  goalkeeperBId,
 }) => {
   const { id } = parseSearch(location.search) as any;
   const [state, setState] = useImmer<{
@@ -72,6 +76,9 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
           ...centerXY,
           player_shirtnumber: playerInfo?.player_shirtnumber,
           isTeamA: playerInfo?.isTeamA,
+          isGoalKeeper: [goalkeeperAId, goalkeeperBId].includes(
+            playerInfo?.player_id
+          ),
           nodeSize,
           isCenter: true,
         };
@@ -85,6 +92,9 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
           ...nodeXY[nodeIndex - 1],
           player_shirtnumber: playerInfo?.player_shirtnumber,
           isTeamA: playerInfo?.isTeamA,
+          isGoalKeeper: [goalkeeperAId, goalkeeperBId].includes(
+            playerInfo?.player_id
+          ),
           nodeSize,
         };
       }
@@ -167,7 +177,7 @@ const CompetePersonalModal: React.FC<CompetePersonalModalProps> = ({
             <div className="compete-personal-card-desc">
               {competeCenterPlayer?.player_name}为国家队出战
               {competeCenterPlayer?.a_caps}
-              次。他与对手的对抗程度通过历史上共同比赛的战绩计算得出。
+              次。他与对手间连线的颜色分段比例表示两人对抗的强弱程度。
             </div>
           </div>
         ) : null}
