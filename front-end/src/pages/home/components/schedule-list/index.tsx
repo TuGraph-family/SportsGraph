@@ -29,7 +29,7 @@ const ScheduleList: React.FC<Props> = (props) => {
             homeWinProbability,
             match_title,
             startDate,
-            freshnessOfLineup
+            freshnessOfLineup,
           } = item;
           return (
             <div
@@ -57,14 +57,14 @@ const ScheduleList: React.FC<Props> = (props) => {
                           )[index] as HTMLElement
                         }
                         mode="dark"
-                        content="阵容尚未确定，图示为历史阵容，仅供参考"
+                        content="图示为历史阵容，分析结果可能随阵容更新而调整"
                         trigger="click"
                         placement="bottom-start"
                       >
                         <IconFont
                           style={{
                             fontSize: 14,
-                            marginLeft: 3
+                            marginLeft: 3,
                           }}
                           type="euro-icon-wenhao-shuomingzhushi"
                         />
@@ -106,7 +106,7 @@ const ScheduleList: React.FC<Props> = (props) => {
                         style={{
                           "--fill-color": "#fc4951",
                           "--track-color": "#532A55",
-                          "--track-width": "4px"
+                          "--track-width": "4px",
                         }}
                       />
                     </div>
@@ -120,7 +120,7 @@ const ScheduleList: React.FC<Props> = (props) => {
                           "--fill-color": "#1677ff",
                           "--track-color": "#09398B",
                           "--track-width": "4px",
-                          transform: "rotateZ(180deg)"
+                          transform: "rotateZ(180deg)",
                         }}
                       />
                     </div>

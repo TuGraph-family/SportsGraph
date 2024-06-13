@@ -372,7 +372,7 @@ const TacitPage: React.FC = () => {
               <SplitText id="tacit-text1">
                 {`球衣越大，个人与全体队友的默契度越高，`}
               </SplitText>
-              <SplitText id="tacit-tex2" delay={3200}>
+              <SplitText id="tacit-tex2" delay={2000}>
                 {`连线越粗，两名球员间的默契度越高。 ${hasGraphData ? "" : "(示意阵型，待根据本场比赛阵容信息确定)"} `}
               </SplitText>
             </Tooltip>

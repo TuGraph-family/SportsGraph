@@ -337,7 +337,7 @@ const CompetePage: React.FC = () => {
               <SplitText id="compete-text1">
                 球衣越大，球员抵抗对手的能力越强，
               </SplitText>
-              <SplitText id="compete-text2" delay={3200}>
+              <SplitText id="compete-text2" delay={2000}>
                 阵型占地越大，队伍的抵抗力越强。
               </SplitText>
             </Tooltip>
