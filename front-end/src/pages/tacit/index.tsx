@@ -308,7 +308,7 @@ const TacitPage: React.FC = () => {
       <HomeIcon />
       <div className="tacit-title">
         <TitleDesc
-          title="看队员默契程度"
+          title="队员默契程度"
           desc="基于几名球员历史上共同比赛的胜负情况计算得出"
         />
       </div>
@@ -372,7 +372,7 @@ const TacitPage: React.FC = () => {
               <SplitText id="tacit-text1">
                 {`球衣越大，个人与全体队友的默契度越高，`}
               </SplitText>
-              <SplitText id="tacit-tex2" delay={3200}>
+              <SplitText id="tacit-tex2" delay={2000}>
                 {`连线越粗，两名球员间的默契度越高。 ${hasGraphData ? "" : "(示意阵型，待根据本场比赛阵容信息确定)"} `}
               </SplitText>
             </Tooltip>

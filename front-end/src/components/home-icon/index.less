@@ -1,6 +1,7 @@
 .home-icon {
   width: calc(100vw - 32px);
-  padding: 0 16px;
+  padding-left: 16px;
+  padding-right: 0;
   position: fixed;
   top: 12px;
   color: #ffffffd9;
@@ -22,5 +23,24 @@
     text-align: center;
     font-weight: 500;
     margin-top: -2px;
+  }
+
+  .tu-graph {
+    position: absolute;
+    right: -14px;
+    top: 8.5px;
+    background-image: linear-gradient(180deg, #ffffff15 0%, #cccccc15 100%);
+    border-radius: 14px 0 0 14px;
+    box-shadow: 0px 2px 4px 0px rgba(69, 69, 69, 0.1);
+    height: 12px;
+    padding: 9px 12px 7px;
+    display: flex;
+    align-items: center;
+    font-size: 8px;
+
+    .icon {
+      font-size: 8px !important;
+      height: 12px !important;
+    }
   }
 }

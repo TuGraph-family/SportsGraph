@@ -43,8 +43,8 @@ const CompeteGraph: React.FC<CompeteGraphProps> = ({
               onClick={() => onClickNode(data.data)}
               animation={{
                 animationDelay: [
-                  `${data.data.animationDelay! + 1}s`,
-                  `${data.data.animationDelay! + 1}s`,
+                  `${data.data.animationDelay! + 0.5}s`,
+                  `${data.data.animationDelay! + 0.5}s`,
                 ],
                 animationType: ["fade", "translate"],
                 animationDuration: ["1s", "0.4s"],

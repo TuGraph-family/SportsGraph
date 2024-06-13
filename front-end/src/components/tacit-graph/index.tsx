@@ -20,7 +20,7 @@ const TacitGraph: React.FC<TacitGraphProps> = ({
   graphData,
   containerId,
   style,
-  onNodeClick
+  onNodeClick,
 }) => {
   const [state, setState] = useImmer<{ graph?: Graph; isInitialized: boolean }>(
     { isInitialized: false }
@@ -50,7 +50,7 @@ const TacitGraph: React.FC<TacitGraphProps> = ({
               style={{
                 transform: `scale(${scale})`,
                 width: "100%",
-                height: "100%"
+                height: "100%",
               }}
             >
               <PlayerNode
@@ -58,9 +58,9 @@ const TacitGraph: React.FC<TacitGraphProps> = ({
                 onClick={() => onNodeClick?.(data.player_id, data)}
                 dataAspm="c364605.d452408"
                 animation={{
-                  animationDelay: [`${data.animationDelay!}s`],
+                  animationDelay: [`${data.animationDelay! + 1}s`],
                   animationType: ["fade", "translate"],
-                  animationDuration: ["1.2s", "1s"]
+                  animationDuration: ["1s", "0.4s"],
                 }}
                 isActive={data.isInTop}
               />
@@ -69,8 +69,8 @@ const TacitGraph: React.FC<TacitGraphProps> = ({
           size: [60, 60],
           ports: () => {
             return [{ key: "center", placement: [0.5, 0.5] }];
-          }
-        }
+          },
+        },
       },
       edge: {
         type: "delay-path-in-line",
@@ -78,7 +78,7 @@ const TacitGraph: React.FC<TacitGraphProps> = ({
           stroke: (d: any) => d.stroke,
           lineWidth: (d: any) => {
             return d.playerValue;
-          }
+          },
           // halo: true,
           // haloStroke: "#fff",
           // haloStrokeWidth: (d: any) => d.playerValue,
@@ -89,9 +89,9 @@ const TacitGraph: React.FC<TacitGraphProps> = ({
         animation: {
           // disable default enter and exit animation
           enter: false,
-          exit: false
-        }
-      }
+          exit: false,
+        },
+      },
     });
     setState((draft) => {
       draft.graph = graph;
