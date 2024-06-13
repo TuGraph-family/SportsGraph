@@ -27,7 +27,7 @@ const ResultPage: React.FC = () => {
     voteInfo?: VoteInfoResult;
     isDownloading: boolean;
   }>({
-    isDownloading: false
+    isDownloading: false,
   });
   const { gameInfo, voteInfo, isDownloading } = state;
   const { teamAVote = 0, teamBVote = 0, totalVote = 0, isEnd } = voteInfo || {};
@@ -42,14 +42,14 @@ const ResultPage: React.FC = () => {
     team_b_national_flag,
     team_a_country,
     team_b_country,
-    startDate
+    startDate,
   } = gameInfo || {};
   const isHomeWin = homeWinProbability > awayWinProbability;
 
   const { loading: loadingGetGameInfo, run: runGetGameInfo } = useRequest(
     getGameInfo,
     {
-      manual: true
+      manual: true,
     }
   );
   const { run: runGetGameVoteInfoById, loading: loadingGetGameVoteInfoById } =
@@ -76,7 +76,7 @@ const ResultPage: React.FC = () => {
     window?.Tracert?.call?.("set", {
       spmAPos: SPAPOS,
       spmBPos: "b97707",
-      pathName: "结果页"
+      pathName: "结果页",
     });
     window?.Tracert?.call?.("logPv");
   }, [id]);
@@ -92,7 +92,7 @@ const ResultPage: React.FC = () => {
         <LightTop />
       </div>
       <div className="result" id="result">
-        <HomeIcon />
+        <HomeIcon hasRight={false} />
         <div className="result-title">
           <TitleDesc
             title="这场比赛更有实力的是"
@@ -148,13 +148,13 @@ const ResultPage: React.FC = () => {
                 name: team_a_country || "",
                 isHome: true,
                 teamAVote,
-                teamBVote
+                teamBVote,
               }}
               team2={{
                 name: team_b_country || "",
                 isHome: false,
                 teamAVote,
-                teamBVote
+                teamBVote,
               }}
               percent={votePercent}
               count={totalVote}
@@ -166,7 +166,27 @@ const ResultPage: React.FC = () => {
             <img src="https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*90-3SpclRKcAAAAAAAAAAAAADsvfAQ/original" />
           </div>
           <div className="qrcode-text">截图分享给好友，一起猜猜猜~</div>
+          <div className="powered">
+            Powered by
+            <a href="https://www.tugraph.tech/">
+              <img
+                src="https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*Jn6RRITUcW0AAAAAAAAAAAAADsvfAQ/original"
+                alt=""
+              />
+              <IconFont type="euro-icon-xiayiye1" style={{ color: "#fff" }} />
+            </a>
+            ｜
+            <a href="https://antv.antgroup.com/">
+              <img
+                src="https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*QJj1S6F2K1cAAAAAAAAAAAAADsvfAQ/original"
+                alt=""
+              />
+              AntV
+              <IconFont type="euro-icon-xiayiye1" style={{ color: "#fff" }} />
+            </a>
+          </div>
         </div>
+
         <div className="footer">
           <Button isShowHighlightBorder onClick={onSavePic} className="up-page">
             <IconFont type="euro-icon-xiayiye1" rotate={180} /> 上一页

@@ -10,7 +10,7 @@ interface SplitTextProps {
 const SplitText: React.FC<SplitTextProps> = ({
   children,
   id,
-  delay = 2000
+  delay = 1000,
 }) => {
   let char = 0;
   useEffect(() => {

@@ -94,24 +94,6 @@ export const playerTacitInfoTranslator = (res: any) => {
   }
 
   const { resultSet = [] } = res.data;
-  // 根据b_id，获取两个对抗值playerValue为中心对抗外围，reverse_direction_value为外围对抗中心
-  let tempMap: any = {};
-  resultSet.forEach((item: CompetePersonalInfo) => {
-    const key = item.b_id;
-    if (!tempMap[key]) {
-      tempMap[key] = item;
-      if (item.a_id !== item.src_id) {
-        tempMap[key].reverse_direction_value = item.playerValue;
-      }
-    } else {
-      if (item.a_id !== item.src_id) {
-        tempMap[key].reverse_direction_value = item.playerValue;
-      } else {
-        tempMap[key].playerValue = item.playerValue;
-      }
-    }
-  });
-  const uniqueResultSet = Object.values(tempMap) as Array<CompetePersonalInfo>;
   // 中心点
   const competeCenterPlayer = {
     ...(resultSet[0] || {}),
@@ -126,44 +108,56 @@ export const playerTacitInfoTranslator = (res: any) => {
     isCenter: true,
   };
   // 计算周边点坐标
-  const nodeXY = calculateNeighborPoints(
-    180,
-    180,
-    170,
-    uniqueResultSet?.length
-  );
+  const nodeXY = calculateNeighborPoints(180, 180, 170, resultSet?.length);
   // 向周边点内加坐标
-  const competePlayerNode = uniqueResultSet?.map((item, index) => {
-    return {
-      ...item,
-      id: item?.b_id,
-      player_name: item.b_personName,
-      player_id: item?.b_id,
-      player_enName: item.b_personEnName,
-      ...nodeXY?.[index],
-      nodeSize: 80,
-    };
-  });
-
-  const competePlayerEdge = competePlayerNode?.map((item) => {
-    const { playerValue, reverse_direction_value } = item;
-    const percentage =
-      (Number(playerValue) /
-        (Number(playerValue) + Number(reverse_direction_value))) *
-      100;
-    const targetNode = competePlayerNode?.find((node) => node.id === item.b_id);
-    const deg = calculateAngleBetweenPoints(
-      { x: competeCenterPlayer?.x, y: competeCenterPlayer?.y },
-      { x: targetNode?.x as number, y: targetNode?.y as number }
-    );
-    return {
-      source: item.a_id,
-      target: item.b_id,
-      playerValue: item.playerValue,
-      deg: deg,
-      percentage: percentage,
-    };
-  });
+  const competePlayerNode = resultSet?.map(
+    (
+      item: { b_id: any; b_personName: any; b_personEnName: any },
+      index: number
+    ) => {
+      return {
+        ...item,
+        id: item?.b_id,
+        player_name: item.b_personName,
+        player_id: item?.b_id,
+        player_enName: item.b_personEnName,
+        ...nodeXY?.[index],
+        nodeSize: 80,
+      };
+    }
+  );
+  const competePlayerEdge = competePlayerNode?.map(
+    (item: {
+      b_id?: any;
+      a_id?: any;
+      playerValue?: any;
+      a_playerValue?: any;
+      b_playerValue?: any;
+    }) => {
+      const { a_playerValue, b_playerValue } = item;
+      let percentage = 50;
+      if (a_playerValue || b_playerValue) {
+        percentage =
+          (Number(a_playerValue) /
+            (Number(b_playerValue) + Number(a_playerValue))) *
+          100;
+      }
+      const targetNode = competePlayerNode?.find(
+        (node: { id: any }) => node.id === item.b_id
+      );
+      const deg = calculateAngleBetweenPoints(
+        { x: competeCenterPlayer?.x, y: competeCenterPlayer?.y },
+        { x: targetNode?.x as number, y: targetNode?.y as number }
+      );
+      return {
+        source: item.a_id,
+        target: item.b_id,
+        playerValue: item.playerValue,
+        deg: deg,
+        percentage: percentage,
+      };
+    }
+  );
   return {
     ...res,
     data: {
