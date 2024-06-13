@@ -4,7 +4,7 @@ import { history } from "umi";
 import "./index.less";
 import IconFont from "../icon-font";
 
-const HomeIcon = () => {
+const HomeIcon: React.FC<{ hasRight?: boolean }> = ({ hasRight = true }) => {
   const back = () => {
     history.push("/");
   };
@@ -24,13 +24,15 @@ const HomeIcon = () => {
         </>
       }
       right={
-        <a className="tu-graph" href="https://www.tugraph.tech/">
-          <img
-            src="https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*Jn6RRITUcW0AAAAAAAAAAAAADsvfAQ/original"
-            alt=""
-          />
-          <IconFont type="euro-icon-xiayiye1" />
-        </a>
+        hasRight ? (
+          <a className="tu-graph" href="https://www.tugraph.tech/">
+            <img
+              src="https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*Jn6RRITUcW0AAAAAAAAAAAAADsvfAQ/original"
+              alt=""
+            />
+            <IconFont type="euro-icon-xiayiye1" />
+          </a>
+        ) : null
       }
     />
   );
