@@ -20,6 +20,7 @@ import { history } from "umi";
 import { useImmer } from "use-immer";
 import InstructionsForUse from "../home/components/instructions-for-use";
 import "./index.less";
+import Powered from "@/components/powered";
 
 const ResultPage: React.FC = () => {
   const [state, setState] = useImmer<{
@@ -166,23 +167,7 @@ const ResultPage: React.FC = () => {
             <img src="https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*90-3SpclRKcAAAAAAAAAAAAADsvfAQ/original" />
           </div>
           <div className="qrcode-text">截图分享给好友，一起猜猜猜~</div>
-          <div className="powered">
-            Powered by
-            <a>
-              <img
-                src="https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*Jn6RRITUcW0AAAAAAAAAAAAADsvfAQ/original"
-                alt=""
-              />
-            </a>
-            ｜
-            <a>
-              <img
-                src="https://mdn.alipayobjects.com/huamei_92awrc/afts/img/A*QJj1S6F2K1cAAAAAAAAAAAAADsvfAQ/original"
-                alt=""
-              />
-              AntV
-            </a>
-          </div>
+          <Powered />
         </div>
 
         <div className="footer">
