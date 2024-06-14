@@ -15,7 +15,7 @@ import { DEFAULT_FLAG, SPAPOS } from "@/constant";
 import {
   GameInfoPlayerResult,
   PlayersInfoResult,
-  TeamCompeteInfoResult,
+  TeamCompeteInfoResult
 } from "@/interfaces";
 import { getGameInfo, getPlayersInfo, getTeamCompeteInfo } from "@/services";
 import { parseSearch } from "@/utils";
@@ -30,8 +30,8 @@ import "./index.less";
 const winYRatio = 0.65;
 const loseYRatio = 0.55;
 
-const winXRatio = 1.1;
-const loseXRatio = 0.8;
+const winXRatio = 1.25;
+const loseXRatio = 0.75;
 interface CompetePageState {
   leftTeam?: { name: string; flagUrl: string; score: number };
   rightTeam?: { name: string; flagUrl: string; score: number };
@@ -53,12 +53,12 @@ const CompetePage: React.FC = () => {
     leftTeam: {
       name: "加载中...",
       flagUrl: DEFAULT_FLAG,
-      score: 0,
+      score: 0
     },
     rightTeam: {
       name: "加载中...",
       flagUrl: DEFAULT_FLAG,
-      score: 0,
+      score: 0
     },
     leftGraphData: { nodes: [], edges: [] },
     rightGraphData: { nodes: [], edges: [] },
@@ -67,7 +67,7 @@ const CompetePage: React.FC = () => {
     playersInfo: [],
     isHomeWin: true,
     competePersonalVisible: false,
-    competePersonalParams: undefined,
+    competePersonalParams: undefined
   });
   const {
     leftTeam,
@@ -81,13 +81,13 @@ const CompetePage: React.FC = () => {
     competePersonalVisible,
     competePersonalParams,
     goalkeeperAId,
-    goalkeeperBId,
+    goalkeeperBId
   } = state;
   const { id } = parseSearch(location.search) as any;
   const { loading: loadingGetGameInfo, run: runGetGameInfo } = useRequest(
     getGameInfo,
     {
-      manual: true,
+      manual: true
     }
   );
   const { run: runGetTeamcompeteInfo, loading: loadingGetTeamcompeteInfo } =
@@ -145,14 +145,14 @@ const CompetePage: React.FC = () => {
             x: isWin
               ? mapX + container?.offsetWidth! * 2
               : mapX - container?.offsetWidth! * 2,
-            animationDelay: Math.random() * 0.5,
-          },
+            animationDelay: Math.random() * 0.5
+          }
         };
       })
       .sort((a, b) => b.data.nodeSize - a.data.nodeSize)
       .map((item, index) => ({
         ...item,
-        data: { ...item.data, isInTop: index < 3 },
+        data: { ...item.data, isInTop: index < 3 }
       }))
       .sort((a, b) => b.data.y - a.data.y);
     return nodes;
@@ -160,7 +160,7 @@ const CompetePage: React.FC = () => {
   const homeGraphData = useMemo(() => {
     const homeGraphData: GraphData = {
       nodes: [],
-      edges: [],
+      edges: []
     };
 
     if (
@@ -176,7 +176,7 @@ const CompetePage: React.FC = () => {
   const awayGraphData = useMemo(() => {
     const awayGraphData: GraphData = {
       nodes: [],
-      edges: [],
+      edges: []
     };
 
     if (
@@ -213,24 +213,24 @@ const CompetePage: React.FC = () => {
           team_a_country,
           team_a_national_flag,
           team_b_country,
-          team_b_national_flag,
+          team_b_national_flag
         } = data.resultSet?.[0] || {};
         setState((draft) => {
           draft.leftTeam = {
             name: team_a_country,
             flagUrl: team_a_national_flag,
-            score: parseInt(homeWinProbability),
+            score: parseInt(homeWinProbability)
           };
           draft.rightTeam = {
             name: team_b_country,
             flagUrl: team_b_national_flag,
-            score: parseInt(awayWinProbability),
+            score: parseInt(awayWinProbability)
           };
           draft.leftGraphData = {
-            nodes: data.playerAList,
+            nodes: data.playerAList
           };
           draft.rightGraphData = {
-            nodes: data.playerBList,
+            nodes: data.playerBList
           };
           draft.isHomeWin = homeWinProbability > awayWinProbability;
           draft.goalkeeperAId = data.goalkeeperAId;
@@ -260,7 +260,7 @@ const CompetePage: React.FC = () => {
     window?.Tracert?.call?.("set", {
       spmAPos: SPAPOS,
       spmBPos: "b97705",
-      pathName: "对抗页",
+      pathName: "对抗页"
     });
     window?.Tracert?.call?.("logPv");
   }, [id]);
