@@ -21,6 +21,7 @@ import { useImmer } from "use-immer";
 import InstructionsForUse from "./components/instructions-for-use";
 import ScheduleList from "./components/schedule-list";
 import "./index.less";
+import Powered from "@/components/powered";
 
 const HomePage: React.FC = () => {
   const [state, setState] = useImmer<{ futureList: any[] }>({
@@ -75,10 +76,10 @@ const HomePage: React.FC = () => {
         <TitleDesc
           title="智猜足球"
           desc={
-            <>
-              用图 TuGraph 找出比赛中的关键组合
+            <div className="sub-title">
+              <Powered />
               <TechnicalPrinciples />
-            </>
+            </div>
           }
         />
         <Swiper
