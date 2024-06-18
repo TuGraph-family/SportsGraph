@@ -88,6 +88,7 @@ const Vote: React.FC<VoteProps> = ({
 
   const newCount = voteCount || count;
   const newPercent = votePercent || percent;
+
   return (
     <div className="vote">
       <div className="vote-text">
@@ -97,7 +98,7 @@ const Vote: React.FC<VoteProps> = ({
       </div>
       <Slider
         isShow={hasVoted || isEnd}
-        value={hasVoted ? newPercent : 50}
+        value={hasVoted || isEnd ? newPercent : 50}
         id="slider"
       />
       {!(hasVoted || isEnd) && (
